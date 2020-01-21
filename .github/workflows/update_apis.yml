@@ -14,5 +14,7 @@ jobs:
       - uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.julia-version }}
+      - name: LoadPath
+        run: julia -e 'print(LOAD_PATH)'
       - name: ParseMetadata
         run: julia --project -e 'using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
