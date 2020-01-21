@@ -1,7 +1,7 @@
 name: AWSMetadata
 
-# Change this to daily in prod
-on: [push]
+# Change this to daily cron in prod
+# on: [push]
 
 jobs:
   AWSCorePrototype:
