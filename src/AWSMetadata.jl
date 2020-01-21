@@ -19,7 +19,7 @@ function parse_aws_metadata()
     # - Only support the latest API version, need to add another filter!(files)
     # - Generate high-level wrapper for each service
     # - Only regenerate API definitions for services which have changed
-    metadata = JSON.parsefile("metadata.json", dicttype=OrderedDict)
+    metadata = JSON.parsefile("src/metadata.json", dicttype=OrderedDict)
     headers = ["User-Agent" => "JuliaCloud/AWSCore.jl"]
     url = "https://api.github.com/repos/aws/aws-sdk-js/contents/apis"
     req = HTTP.get(url, headers)
@@ -58,7 +58,7 @@ function parse_aws_metadata()
         # service, just the ones that change
         _generate_low_level_wrapper(files)
         _generate_high_level_wrapper(files)
-        open("metadata.json", "w") do f
+        open("src/metadata.json", "w") do f
             print(f, json(OrderedDict(metadata), 2))
         end
     end
@@ -73,14 +73,14 @@ function _generate_low_level_wrapper(services)
     template = """
     module AWSCorePrototypeServices
 
-    include("AWSCorePrototype.jl")
+    include("../AWSCorePrototype.jl")
 
     $(join(service_definitions, "\n"))
 
     end
     """
 
-    open("AWSCorePrototypeServices.jl", "w") do f
+    open("src/AWSCorePrototypeServices.jl", "w") do f
         print(f, template)
     end
 end
@@ -165,7 +165,7 @@ function _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
         push!(function_definitions, definition)
     end
 
-    open("services/$service_name.jl", "w") do f
+    open("src/services/$service_name.jl", "w") do f
         println(f, "module aws_$service_name")
         println(f, "include(\"AWSCorePrototypeServices.jl\")")
         println(f, "using .AWSCorePrototypeServices: $service_name\n")
@@ -195,7 +195,4 @@ function _generate_high_level_wrapper(services)
         end
     end
 end
-
-parse_aws_metadata()
-
 end
