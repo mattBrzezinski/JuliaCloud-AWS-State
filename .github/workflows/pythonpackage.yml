@@ -19,4 +19,4 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Test with pytest
       run: |
-        print("Hello World")
+      print("Hello World")
