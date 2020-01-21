@@ -58,7 +58,7 @@ function parse_aws_metadata()
         # Should move this generation to _process_service() so we don't regenerate for every
         # service, just the ones that change
         _generate_low_level_wrapper(files)
-        _generate_high_level_wrapper(files)
+        #_generate_high_level_wrapper(files)
         open(metadata_path, "w") do f
             print(f, json(OrderedDict(metadata), 2))
         end
