@@ -1,0 +1,22 @@
+name: AWSMetadata
+
+on: [push]
+
+jobs:
+  CompatHelper:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        julia-version: [1.3.0]
+        julia-arch: [x86]
+        os: [ubuntu-latest]
+    steps:
+      - uses: julia-actions/setup-julia@latest
+        with:
+          version: ${{ matrix.julia-version }}
+      - name: AWSCorePrototype
+        run: julia --project -e 'using AWSCorePrototype'
+      - name: CompatHelper.main()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: julia -e 'using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
