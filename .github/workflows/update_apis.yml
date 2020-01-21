@@ -14,8 +14,6 @@ jobs:
       - uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.julia-version }}
-      - name: AWSCorePrototype
-        run: julia --project -e 'using AWSCorePrototype'
       - name: ParseMetadata
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
