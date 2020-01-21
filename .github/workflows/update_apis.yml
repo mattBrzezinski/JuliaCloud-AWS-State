@@ -14,7 +14,5 @@ jobs:
       - uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.julia-version }}
-      - name: LoadPath
-        run: julia -e 'print(LOAD_PATH)'
-      - name: ParseMetadata
-        run: sudo julia -e 'import Pkg; Pkg.add(Pkg.PackageSpec(url="https://github.com/mattBrzezinski/JuliaCloud-AWS-State.git")); using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
+      - name: UpdateAPI
+        run: julia -e 'import Pkg; Pkg.develop(Pkg.PackageSpec(url="https://github.com/mattBrzezinski/JuliaCloud-AWS-State.git")); using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
