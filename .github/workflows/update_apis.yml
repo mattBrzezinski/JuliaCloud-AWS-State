@@ -17,4 +17,4 @@ jobs:
       - name: LoadPath
         run: julia -e 'print(LOAD_PATH)'
       - name: ParseMetadata
-        run: julia --project -e 'using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
+        run: sudo julia -e 'import Pkg; Pkg.add(Pkg.PackageSpec(url="https://github.com/mattBrzezinski/JuliaCloud-AWS-State.git")); using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
