@@ -16,7 +16,7 @@ jobs:
           version: ${{ matrix.julia-version }}
       - name: AWSCorePrototype
         run: julia --project -e 'using AWSCorePrototype'
-      - name: CompatHelper.main()
+      - name: ParseMetadata
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: julia -e 'using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
+        run: julia --project -e 'using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
