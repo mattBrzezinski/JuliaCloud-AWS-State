@@ -2,7 +2,18 @@ module AWSCorePrototype
 
 using AWSCore
 
+export @service, RestXMLService
+
 include("AWSMetadata.jl")
+
+macro service(module_name)
+    service_name = "services/" * lowercase(string(module_name)) * ".jl"
+
+    return Expr(:toplevel,
+    :(module ($(esc(module_name)))
+        Base.include($(esc(module_name)), $(esc(service_name)))
+     end))
+end
 
 mutable struct RestXMLService
     name::String

@@ -1,7 +1,9 @@
-include("services/s3.jl")
-using .aws_s3
+include("AWSCorePrototype.jl")
 
-function high_level_main()
-    buckets = aws_s3.ListBuckets()
-    println(buckets)
-end
+# This is a little bit gross
+using .AWSCorePrototype: @service
+@service S3
+using .S3
+
+buckets = S3.ListBuckets()
+println(buckets)
