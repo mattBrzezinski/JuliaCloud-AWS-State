@@ -1,6 +1,5 @@
-module aws_cloudfront
-include("AWSCorePrototypeServices.jl")
-using .AWSCorePrototypeServices: cloudfront
+include("../AWSCorePrototypeServices.jl")
+using .Services: cloudfront
 
 """
 List CloudFront distributions.
@@ -226,4 +225,3 @@ DeleteStreamingDistribution2019_03_26(Id) = cloudfront("DELETE", "/2019-03-26/st
 Create a field-level encryption profile.
 """
 CreateFieldLevelEncryptionProfile2019_03_26(FieldLevelEncryptionProfileConfig) = cloudfront("POST", "/2019-03-26/field-level-encryption-profile")
-end

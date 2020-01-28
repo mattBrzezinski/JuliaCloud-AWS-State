@@ -1,6 +1,5 @@
-module aws_s3_control
-include("AWSCorePrototypeServices.jl")
-using .AWSCorePrototypeServices: s3_control
+include("../AWSCorePrototypeServices.jl")
+using .Services: s3_control
 
 """
 Retrieves the PublicAccessBlock configuration for an Amazon Web Services account.
@@ -81,4 +80,3 @@ PutPublicAccessBlock(PublicAccessBlockConfiguration, AccountId) = s3_control("PU
 Updates the status for the specified job. Use this operation to confirm that you want to run a job or to cancel an existing job.
 """
 UpdateJobStatus(AccountId, JobId, RequestedJobStatus) = s3_control("POST", "/v20180820/jobs/$id/status")
-end

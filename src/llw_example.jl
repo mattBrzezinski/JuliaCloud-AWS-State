@@ -1,7 +1,6 @@
-include("AWSCorePrototypeServices.jl")
-s3 = AWSCorePrototypeServices.s3
+include("AWSCorePrototype.jl")
 
-function low_level_main()
-    buckets = s3("GET", "/")
-    println(buckets)
-end
+using .AWSCorePrototype.Services: s3
+
+buckets = s3("GET", "/")
+println(buckets)

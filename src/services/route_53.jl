@@ -1,6 +1,5 @@
-module aws_route_53
-include("AWSCorePrototypeServices.jl")
-using .AWSCorePrototypeServices: route_53
+include("../AWSCorePrototypeServices.jl")
+using .Services: route_53
 
 """
 Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted zone because you've submitted one or more CreateVPCAssociationAuthorization requests.  The response includes a VPCs element with a VPC child element for each VPC that can be associated with the hosted zone.
@@ -281,4 +280,3 @@ GetAccountLimit(Type) = route_53("GET", "/2013-04-01/accountlimit/$Type")
 Gets information about a specified health check.
 """
 GetHealthCheck(HealthCheckId) = route_53("GET", "/2013-04-01/healthcheck/$HealthCheckId")
-end

@@ -72,9 +72,9 @@ function _generate_low_level_wrapper(services)
     service_definitions = _generate_service_definitions(services)
 
     template = """
-    module AWSCorePrototypeServices
+    module Services
 
-    include("../AWSCorePrototype.jl")
+    using AWSCorePrototype
 
     $(join(service_definitions, "\n"))
 
@@ -169,11 +169,9 @@ function _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
 
     service_path = joinpath(@__DIR__, "services/$service_name.jl")
     open(service_path, "w") do f
-        println(f, "module aws_$service_name")
-        println(f, "include(\"AWSCorePrototypeServices.jl\")")
-        println(f, "using .AWSCorePrototypeServices: $service_name\n")
+        println(f, "include(\"../AWSCorePrototypeServices.jl\")")
+        println(f, "using .Services: $service_name\n")
         print(f, join(function_definitions, "\n"))
-        println(f, "end")
     end
 end
 
@@ -198,4 +196,6 @@ function _generate_high_level_wrapper(services)
         end
     end
 end
+
+parse_aws_metadata()
 end

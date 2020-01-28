@@ -1,10 +1,11 @@
 module AWSCorePrototype
 
+export @service, Services
+
 using AWSCore
 
-export @service, RestXMLService
+include("AWSCorePrototypeServices.jl")
 
-include("AWSMetadata.jl")
 
 macro service(module_name)
     service_name = "services/" * lowercase(string(module_name)) * ".jl"
