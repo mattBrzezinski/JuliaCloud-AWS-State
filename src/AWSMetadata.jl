@@ -16,24 +16,46 @@ updated and we need to re-generate low and high level wrappers for the service.
 """
 function parse_aws_metadata()
     # TODO:
-    # - Only support the latest API version, need to add another filter!(files)
-    # - Generate high-level wrapper for each service
     # - Only regenerate API definitions for services which have changed
-    metadata_path = joinpath(@__DIR__, "metadata.json")
-    metadata = JSON.parsefile(metadata_path, dicttype=OrderedDict)
-    headers = ["User-Agent" => "JuliaCloud/AWSCore.jl"]
-    url = "https://api.github.com/repos/aws/aws-sdk-js/contents/apis"
-    req = HTTP.get(url, headers)
-    files = JSON.parse(String(req.body), dicttype=OrderedDict)
-    filter!(f -> occursin(r".normal.json$", f["name"]), files)  # Only get ${Service}.normal.json files
-    data_changed = false
-    services_modified = String[]
 
     function _process_service(file, version)
         data_changed = true
         push!(metadata, file["name"] => Dict("version" => version, "sha" => file["sha"]))
         push!(services_modified, file["name"])
     end
+
+    # TODO: This can be simplified, also duplicates code below
+    function _filter_lastest_service_version(services)
+        seen_services = String[]
+        new_list = []
+
+        for service in services
+            filename = join(split(service["name"], '.')[1:end-2],'.')
+            filename = split(filename, '-')
+            service_name = join(filename[1:end-3], '-')
+            version = join(filename[end-2:end], '-')
+
+            if !(service_name in seen_services)
+                push!(seen_services, service_name)
+                push!(new_list, service)
+            end
+        end
+
+        return new_list
+    end
+
+    metadata_path = joinpath(@__DIR__, "metadata.json")
+    metadata = JSON.parsefile(metadata_path, dicttype=OrderedDict)
+
+    headers = ["User-Agent" => "JuliaCloud/AWSCore.jl"]
+    url = "https://api.github.com/repos/aws/aws-sdk-js/contents/apis"
+    req = HTTP.get(url, headers)
+    files = JSON.parse(String(req.body), dicttype=OrderedDict)
+    filter!(f -> occursin(r".normal.json$", f["name"]), files)  # Only get ${Service}.normal.json files
+    files = _filter_lastest_service_version(files)
+
+    data_changed = false
+    services_modified = String[]
 
     for file in files
         filename = join(split(file["name"], '.')[1:end-2],'.')
@@ -47,7 +69,7 @@ function parse_aws_metadata()
             println(service_name, " does not exist in metadata.")
             _process_service(file, version)
         else
-            if metadata[filename]["sha"] != file["sha"]
+            if metadata[filename]["sha"] != file["sha"] && filename ∉ services_modified
                 println(service_name, " sha hashes do not match, updating.")
                 _process_service(file, version)
             end
@@ -55,8 +77,6 @@ function parse_aws_metadata()
     end
 
     if data_changed
-        # Should move this generation to _process_service() so we don't regenerate for every
-        # service, just the ones that change
         _generate_low_level_wrapper(files)
         _generate_high_level_wrapper(files)
         open(metadata_path, "w") do f

@@ -51,10 +51,6 @@
     "sha": "e9645cb279ea33cfd9d234a71c0a511a75ba48e9",
     "version": "2018-10-01"
   },
-  "appmesh-2019-01-25.normal.json": {
-    "sha": "482aa6be8ca1c12aebcb9b0d631046848d7676cd",
-    "version": "2019-01-25"
-  },
   "appstream-2016-12-01.normal.json": {
     "sha": "023e0ed556380c666f0a7a1070fc142539786a93",
     "version": "2016-12-01"
@@ -103,10 +99,6 @@
     "sha": "ca413a04b14182d0cb065108e15ccac1ffc31dda",
     "version": "2016-05-10"
   },
-  "clouddirectory-2017-01-11.normal.json": {
-    "sha": "5a9ce6a524f1131cef94ecf48c6fb78f3ebff6f4",
-    "version": "2017-01-11"
-  },
   "cloudformation-2010-05-15.normal.json": {
     "sha": "97c556c927cef7645603abe24465f1bb390e18ea",
     "version": "2010-05-15"
@@ -114,26 +106,6 @@
   "cloudfront-2016-11-25.normal.json": {
     "sha": "304d0ad821ff9a3300169a9de7ee13fe92ec4148",
     "version": "2016-11-25"
-  },
-  "cloudfront-2017-03-25.normal.json": {
-    "sha": "a424317ee5a72d9f03788b48ef60283de95c7701",
-    "version": "2017-03-25"
-  },
-  "cloudfront-2017-10-30.normal.json": {
-    "sha": "3dad99bfafcffbd7570954d3a29f0c51e3ca0fed",
-    "version": "2017-10-30"
-  },
-  "cloudfront-2018-06-18.normal.json": {
-    "sha": "11a238d09c80e2ed9addfec39dfacfdf6e2ad7da",
-    "version": "2018-06-18"
-  },
-  "cloudfront-2018-11-05.normal.json": {
-    "sha": "7c6a428ee7e66afa5a165617b8db53ddd0a0e170",
-    "version": "2018-11-05"
-  },
-  "cloudfront-2019-03-26.normal.json": {
-    "sha": "303139f7b6c1cc7228d17c417357f8b04cebcbc8",
-    "version": "2019-03-26"
   },
   "cloudhsm-2014-05-30.normal.json": {
     "sha": "139daddb6746aba6898f37f5b73273f490a7c733",
@@ -146,10 +118,6 @@
   "cloudsearch-2011-02-01.normal.json": {
     "sha": "873549107839a83cc6d774fe7a09e50cd3443f38",
     "version": "2011-02-01"
-  },
-  "cloudsearch-2013-01-01.normal.json": {
-    "sha": "981d5bb352f401ac411462a0b1dc45f55687c979",
-    "version": "2013-01-01"
   },
   "cloudsearchdomain-2013-01-01.normal.json": {
     "sha": "018b114d5fe224278278227a178c308d0be8cce5",
@@ -286,10 +254,6 @@
   "dynamodb-2011-12-05.normal.json": {
     "sha": "85f5e076c430160b754ffd78b057677e41606e66",
     "version": "2011-12-05"
-  },
-  "dynamodb-2012-08-10.normal.json": {
-    "sha": "0c0fa4c2395ccdf6d783ca7a2c07619163c34286",
-    "version": "2012-08-10"
   },
   "ebs-2019-11-02.normal.json": {
     "sha": "3ef9e73f652fc67c4759da31aef144fcdb0570d5",
@@ -527,10 +491,6 @@
     "sha": "902d3fa96c0c4b719609550e3963a64a25d8c050",
     "version": "2014-11-11"
   },
-  "lambda-2015-03-31.normal.json": {
-    "sha": "ac4587686d24f3415cbf7f585656fcaa08457b29",
-    "version": "2015-03-31"
-  },
   "lex-models-2017-04-19.normal.json": {
     "sha": "3422f0f4d1e61a9c02cc3751176de844c787f7b1",
     "version": "2017-04-19"
@@ -702,22 +662,6 @@
   "rds-2013-01-10.normal.json": {
     "sha": "26ebf698aee5376037d297dd398a04aeabf07083",
     "version": "2013-01-10"
-  },
-  "rds-2013-02-12.normal.json": {
-    "sha": "b4d4c668ae8c8b998c98340e5d9a21c742f664a5",
-    "version": "2013-02-12"
-  },
-  "rds-2013-09-09.normal.json": {
-    "sha": "d56cbf23785eb7b235fa73d18b9e5111358b0d26",
-    "version": "2013-09-09"
-  },
-  "rds-2014-09-01.normal.json": {
-    "sha": "f7ab3129f0ed0180130343fb55fa97abf929f00f",
-    "version": "2014-09-01"
-  },
-  "rds-2014-10-31.normal.json": {
-    "sha": "4025b92ae1eeb0ff8bf802d3f23ae3e9ecebaf34",
-    "version": "2014-10-31"
   },
   "rds-data-2018-08-01.normal.json": {
     "sha": "f02ad932fa68d25c4982323227c6b5ecef3a5be3",
