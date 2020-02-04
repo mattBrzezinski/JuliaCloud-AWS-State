@@ -21,16 +21,12 @@ function parse_aws_metadata()
         push!(services_modified, file)
     end
 
-    # TODO: This can be simplified, also duplicates code below
-    function _filter_lastest_service_version(services)
+    function _filter_latest_service_version(services)
         seen_services = String[]
-        new_list = []
+        new_list = OrderedDict{String, Any}[]
 
         for service in services
-            filename = join(split(service["name"], '.')[1:end-2],'.')
-            filename = split(filename, '-')
-            service_name = join(filename[1:end-3], '-')
-            version = join(filename[end-2:end], '-')
+            service_name, version = _get_service_info(service)
 
             if !(service_name in seen_services)
                 push!(seen_services, service_name)
@@ -41,25 +37,36 @@ function parse_aws_metadata()
         return new_list
     end
 
+    function _get_service_info(service)
+        filename = join(split(service["name"], '.')[1:end-2],'.')
+        filename = split(filename, '-')
+        service_name = join(filename[1:end-3], '-')
+        version = join(filename[end-2:end], '-')
+
+        return (service_name, version)
+    end
+
+    function _get_aws_sdk_js_files()
+        headers = ["User-Agent" => "JuliaCloud/AWSCore.jl"]
+        url = "https://api.github.com/repos/aws/aws-sdk-js/contents/apis"
+        req = HTTP.get(url, headers)
+        files = JSON.parse(String(req.body), dicttype=OrderedDict)
+        filter!(f -> occursin(r".normal.json$", f["name"]), files)  # Only get ${Service}.normal.json files
+        files = _filter_latest_service_version(files)
+
+        return files
+    end
+
     metadata_path = joinpath(@__DIR__, "metadata.json")
     metadata = JSON.parsefile(metadata_path, dicttype=OrderedDict)
 
-    headers = ["User-Agent" => "JuliaCloud/AWSCore.jl"]
-    url = "https://api.github.com/repos/aws/aws-sdk-js/contents/apis"
-    req = HTTP.get(url, headers)
-    files = JSON.parse(String(req.body), dicttype=OrderedDict)
-    filter!(f -> occursin(r".normal.json$", f["name"]), files)  # Only get ${Service}.normal.json files
-    files = _filter_lastest_service_version(files)
+    files = _get_aws_sdk_js_files()
 
     data_changed = false
     services_modified = []
 
     for file in files
-        filename = join(split(file["name"], '.')[1:end-2],'.')
-        filename = split(filename, '-')
-        service_name = join(filename[1:end-3], '-')
-        version = join(filename[end-2:end], '-')
-
+        service_name, version = _get_service_info(file)
         filename = file["name"]
 
         if !haskey(metadata, filename)
@@ -108,6 +115,7 @@ function _generate_service_definitions(services)
         service_name = service["name"]
         println("Generating low level wrapper for $service_name")
         request = HTTP.get(service["download_url"])
+
         service_metadata = JSON.parse(String(request.body))["metadata"]
 
         definition = _generate_service_definition(service_metadata)
