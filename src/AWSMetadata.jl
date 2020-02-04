@@ -15,13 +15,10 @@ if the service SHA hash matches what we keep on file, if they differ then the AP
 updated and we need to re-generate low and high level wrappers for the service.
 """
 function parse_aws_metadata()
-    # TODO:
-    # - Only regenerate API definitions for services which have changed
-
     function _process_service(file, version)
         data_changed = true
         push!(metadata, file["name"] => Dict("version" => version, "sha" => file["sha"]))
-        push!(services_modified, file["name"])
+        push!(services_modified, file)
     end
 
     # TODO: This can be simplified, also duplicates code below
@@ -55,7 +52,7 @@ function parse_aws_metadata()
     files = _filter_lastest_service_version(files)
 
     data_changed = false
-    services_modified = String[]
+    services_modified = []
 
     for file in files
         filename = join(split(file["name"], '.')[1:end-2],'.')
@@ -69,7 +66,7 @@ function parse_aws_metadata()
             println(service_name, " does not exist in metadata.")
             _process_service(file, version)
         else
-            if metadata[filename]["sha"] != file["sha"] && filename ∉ services_modified
+            if metadata[filename]["sha"] != file["sha"]
                 println(service_name, " sha hashes do not match, updating.")
                 _process_service(file, version)
             end
@@ -78,7 +75,7 @@ function parse_aws_metadata()
 
     if data_changed
         _generate_low_level_wrapper(files)
-        _generate_high_level_wrapper(files)
+        _generate_high_level_wrapper(services_modified)
         open(metadata_path, "w") do f
             print(f, json(OrderedDict(metadata), 2))
         end
@@ -86,9 +83,6 @@ function parse_aws_metadata()
 end
 
 function _generate_low_level_wrapper(services)
-    # TODO:
-    # - How do we deal with multiple versions of the same service? e.g. cloudfront
-    # - We now generate the same const over and over again
     service_definitions = _generate_service_definitions(services)
 
     template = """
