@@ -260,7 +260,7 @@
     "version": "2019-11-02"
   },
   "ec2-2016-11-15.normal.json": {
-    "sha": "d226c67aed1f8c01d98584ec051dedfb78cd498b",
+    "sha": "76798ac74f7e7bf823a1cf599887384fb96c14d0",
     "version": "2016-11-15"
   },
   "ec2-instance-connect-2018-04-02.normal.json": {
@@ -444,7 +444,7 @@
     "version": "2018-09-06"
   },
   "kafka-2018-11-14.normal.json": {
-    "sha": "cbf17463c3ccd0146cbf08599921c498c1349830",
+    "sha": "871990424b2e8f858f79aa829d3e867ead9dfd45",
     "version": "2018-11-14"
   },
   "kendra-2019-02-03.normal.json": {
@@ -792,7 +792,7 @@
     "version": "2012-11-05"
   },
   "ssm-2014-11-06.normal.json": {
-    "sha": "8410a797e2ffb36c3e6104a431348a80a8cea751",
+    "sha": "874dbb13594c196f9a6b9a737b3a6ca470bc5808",
     "version": "2014-11-06"
   },
   "sso-2019-06-10.normal.json": {
@@ -808,7 +808,7 @@
     "version": "2016-11-23"
   },
   "storagegateway-2013-06-30.normal.json": {
-    "sha": "05fc1603350f5f1eb3ee6d7bd0e0be461ea6ce00",
+    "sha": "c0a9d68f721967f024051e29dd62f00060d3c17b",
     "version": "2013-06-30"
   },
   "streams.dynamodb-2012-08-10.normal.json": {
@@ -864,7 +864,7 @@
     "version": "2018-09-25"
   },
   "workmail-2017-10-01.normal.json": {
-    "sha": "294208477b9f349791f86381da7a8a2620a6a100",
+    "sha": "9ca11e43e5ec1517ad9663a305fc360586978f6b",
     "version": "2017-10-01"
   },
   "workmailmessageflow-2019-05-01.normal.json": {

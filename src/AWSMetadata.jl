@@ -148,7 +148,6 @@ end
 
 function _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
     # TODO:
-    # - When generating S3 the documentation ends up with $ScanRange set in it which breaks things
     # - Pull down documentation for each input variable and write to the docstr
     function_definitions = String[]
 
@@ -167,6 +166,7 @@ function _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
         if haskey(operation, "documentation")
             documentation = operation["documentation"]
             documentation = replace(documentation, r"\<.*?\>" => "")
+            documentation = replace(documentation, '$' => ' ')
         end
 
         required_parameters = ""
