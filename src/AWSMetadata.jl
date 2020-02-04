@@ -134,8 +134,12 @@ function _generate_service_definition(service::Dict{String, Any})
     service_id = replace(lowercase(service["serviceId"]), ' ' => '_')
     api_version = service["apiVersion"]
 
-    if request_protocol in ["rest-xml", "ec2", "query", "rest-json"]
+    if request_protocol == "rest-xml"
         return "const $service_id = AWSCorePrototype.RestXMLService(\"$service_name\", \"$api_version\")"
+    elseif request_protocol in ["ec2", "query"]
+        return "const $service_id = AWSCorePrototype.QueryService(\"$service_name\", \"$api_version\")"
+    elseif request_protocol == "rest-json"
+        return "const $service_id = AWSCorePrototype.RestJSONService(\"$service_name\", \"$api_version\")"
     elseif request_protocol == "json"
         json_version = service["jsonVersion"]
         target = service["targetPrefix"]
@@ -198,6 +202,59 @@ function _generate_rest_xml_high_level_wrapper(service_name::String, operations:
 end
 
 function _generate_query_high_level_wrapper(service_name::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
+    function_definitions = String[]
+
+    for operation in operations
+        operation = operation[2]
+        name = operation["name"]
+        method = operation["http"]["method"]  # Always "POST"
+        request_uri = operation["http"]["requestUri"]  # Always "/"
+
+        documentation = ""
+        if haskey(operation, "documentation")
+            documentation = operation["documentation"]
+            documentation = replace(documentation, r"\<.*?\>" => "")
+            documentation = replace(documentation, '$' => ' ')
+            documentation = replace(documentation, "\\" => ' ')
+        end
+
+        required_parameters = ""
+        if haskey(operation, "input")  # This should always be true
+            input_shape = shapes[operation["input"]["shape"]]
+
+            if haskey(input_shape, "required")
+                required_parameters = input_shape["required"]
+            end
+        end
+
+        if !isempty(required_parameters)
+            definition = """
+            \"\"\"
+            $documentation
+
+            Required Parameters:
+            $(join(required_parameters, ", "))
+            \"\"\"
+            $name(args) = $service_name(\"$name\", args)
+            """
+        else
+            definition = """
+            \"\"\"
+            $documentation
+            \"\"\"
+            $name() = $service_name(\"$name\")
+            """
+        end
+
+        push!(function_definitions, definition)
+    end
+
+    service_path = joinpath(@__DIR__, "services/$service_name.jl")
+    open(service_path, "w") do f
+        println(f, "include(\"../AWSCorePrototypeServices.jl\")")
+        println(f, "using .Services: $service_name\n")
+        print(f, join(function_definitions, "\n"))
+    end
 end
 
 function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
