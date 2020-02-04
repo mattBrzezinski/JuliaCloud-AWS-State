@@ -229,6 +229,8 @@ Amazon is now making a new service and the auto-generation code needs to accommo
 - Which Julia JSON package should we be using?
   - What are the pros/cons of each of them?
   - [List of Julia JSON packages](https://github.com/search?l=Julia&q=json.jl&type=Repositories)
+- Should we move away from using [XMLDict.jl](https://github.com/JuliaCloud/AWSCore.jl/issues/105)?
+    - It's very very convenient to use
 
 ## Appendix
 
