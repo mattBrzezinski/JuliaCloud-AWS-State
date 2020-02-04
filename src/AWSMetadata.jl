@@ -63,7 +63,7 @@ function parse_aws_metadata()
     files = _get_aws_sdk_js_files()
 
     data_changed = false
-    services_modified = []
+    services_modified = OrderedDict{String, Any}[]
 
     for file in files
         service_name, version = _get_service_info(file)
@@ -89,7 +89,7 @@ function parse_aws_metadata()
     end
 end
 
-function _generate_low_level_wrapper(services)
+function _generate_low_level_wrapper(services::Array{OrderedDict{String, Any}})
     service_definitions = _generate_service_definitions(services)
 
     template = """
@@ -108,7 +108,7 @@ function _generate_low_level_wrapper(services)
     end
 end
 
-function _generate_service_definitions(services)
+function _generate_service_definitions(services::Array{OrderedDict{String, Any}})
     service_definitions = String[]
 
     for service in services
@@ -127,7 +127,7 @@ function _generate_service_definitions(services)
     return service_definitions
 end
 
-function _generate_service_definition(service)
+function _generate_service_definition(service::Dict{String, Any})
     println("Generating Metadata definitions for ", service["serviceId"])
     request_protocol = service["protocol"]
     service_name = service["endpointPrefix"]
@@ -146,7 +146,7 @@ function _generate_service_definition(service)
     end
 end
 
-function _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
+function _generate_rest_xml_high_level_wrapper(service_name::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
     # TODO:
     # - Pull down documentation for each input variable and write to the docstr
     function_definitions = String[]
@@ -197,7 +197,10 @@ function _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
     end
 end
 
-function _generate_high_level_wrapper(services)
+function _generate_query_high_level_wrapper(service_name::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
+end
+
+function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
     # TODO:
     # - Create functions for query, rest-json, and json protocols
     #   These only seem to differ from rest-xml with how their shapes are defined
@@ -215,6 +218,8 @@ function _generate_high_level_wrapper(services)
 
         if protocol in ["rest-xml"]
             _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
+        elseif protocol in ["query", "ec2"]
+            _generate_query_high_level_wrapper(service_name, operations, shapes)
         end
     end
 end
