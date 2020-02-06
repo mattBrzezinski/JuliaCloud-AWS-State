@@ -236,7 +236,7 @@
     "version": "2015-11-01"
   },
   "dlm-2018-01-12.normal.json": {
-    "sha": "70e7607cdd9ef7bc4885bd5fc0efed4254948dcd",
+    "sha": "97b73552c52bd3467287a17c435371571678bb74",
     "version": "2018-01-12"
   },
   "dms-2016-01-01.normal.json": {
@@ -260,7 +260,7 @@
     "version": "2019-11-02"
   },
   "ec2-2016-11-15.normal.json": {
-    "sha": "76798ac74f7e7bf823a1cf599887384fb96c14d0",
+    "sha": "edc6a89ba7ab343b0be933e65b9e1826a41ec370",
     "version": "2016-11-15"
   },
   "ec2-instance-connect-2018-04-02.normal.json": {
@@ -344,7 +344,7 @@
     "version": "2018-06-26"
   },
   "forecastquery-2018-06-26.normal.json": {
-    "sha": "5ef3beee36244c06eaa3a736e9ff3465985126ac",
+    "sha": "de577f3db09c59b88005ce6b04edc9676bf88881",
     "version": "2018-06-26"
   },
   "frauddetector-2019-11-15.normal.json": {
@@ -376,7 +376,7 @@
     "version": "2017-06-07"
   },
   "groundstation-2019-05-23.normal.json": {
-    "sha": "b0de18b0ce684d843fc44423bf74b899ab4474e5",
+    "sha": "1e6301dd4c14809a27e532f7d9942030e6e9ef00",
     "version": "2019-05-23"
   },
   "guardduty-2017-11-28.normal.json": {
@@ -532,7 +532,7 @@
     "version": "2018-11-14"
   },
   "mediaconvert-2017-08-29.normal.json": {
-    "sha": "3032f90fbae15df183668820ecb333d366e2397d",
+    "sha": "9fe867e49c481dfcceebc3f1a5acd461b6b91b96",
     "version": "2017-08-29"
   },
   "medialive-2017-10-14.normal.json": {
@@ -680,7 +680,7 @@
     "version": "2017-11-27"
   },
   "resourcegroupstaggingapi-2017-01-26.normal.json": {
-    "sha": "775a513637708ba63f0fb03c219c6b22cddea722",
+    "sha": "66700d78673dfddcac798767d8d6daed80cd6b12",
     "version": "2017-01-26"
   },
   "robomaker-2018-06-29.normal.json": {
@@ -740,7 +740,7 @@
     "version": "2017-10-17"
   },
   "securityhub-2018-10-26.normal.json": {
-    "sha": "fa7414fbd7da8f143faebcf29ffba96a3da1db6d",
+    "sha": "b0c9a7723496ebfd25609ecae2bf04ef2d0dfcea",
     "version": "2018-10-26"
   },
   "serverlessrepo-2017-09-08.normal.json": {

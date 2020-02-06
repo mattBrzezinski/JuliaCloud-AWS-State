@@ -153,6 +153,10 @@ end
 function _generate_rest_xml_high_level_wrapper(service_name::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
     # TODO:
     # - Pull down documentation for each input variable and write to the docstr
+    # - Fix bug with below, when required_parameters is empty:
+    #     $name($(join(required_parameters, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
+    #   Results in
+    #     function_name(, args) = ...
     function_definitions = String[]
 
     for operation in operations
@@ -188,6 +192,8 @@ function _generate_rest_xml_high_level_wrapper(service_name::String, operations:
         $documentation
         \"\"\"
         $name($(join(required_parameters, ", "))) = $service_name(\"$method\", \"$request_uri\")
+        $name($(join(required_parameters, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
+        $name(a...; b...) = $name(a..., b)
         """
 
         push!(function_definitions, definition)

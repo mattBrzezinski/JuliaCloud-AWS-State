@@ -49,7 +49,7 @@ function (service::RestXMLService)(aws::AWSConfig, request_method::String, reque
         args=args
     )
 end
-(service::RestXMLService)(operation, args=[]) = service(default_aws_config(), operation, args)
+(service::RestXMLService)(request_method::String, request_uri::String, args=[]) = service(default_aws_config(), request_method, request_uri, args)
 (service::RestXMLService)(a...; b...) = service(a..., b)
 
 function (service::QueryService)(aws::AWSConfig, operation, args=[])
