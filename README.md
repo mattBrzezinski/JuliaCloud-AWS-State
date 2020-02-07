@@ -10,14 +10,14 @@ matt.brzezinski@invenia.ca
 
 ## Summary
 Using AWS Services in Julia is currently more difficult than it needs to be.
-Users are currently limited to either the low-level API wrappers, which require knowing the `service`, `operation type`, and `uri` as outlined by Amazon.
+Users are currently limited to either the low-level API wrappers, which require knowing the `service`, `request type`, and `uri` as outlined by Amazon.
 Or users can use a high-level wrapper package which may or may not be available for the service which they want to use.
 Updating these API packages is a manual and undocumented process.
 
 This document proposes a system which can automatically update low and high level API wrappers for AWS Services.
-As well as use one of Julia's key features, multiple dispatch, to dispatch on the request type rather than having an individual function for each AWS Service.
+As well as use one of Julia's key features, multiple dispatch, to dispatch on the `request type` rather than having an individual function for each AWS Service.
 
-These changes will allow JuliaCloud to always have an up-to-date package with the latest Amazon Service APIs. 
+These changes will allow JuliaCloud to always have an up-to-date package with the latest Amazon Service APIs.
 
 ## Current State
 There are two categories of packages currently supporting AWS usage in `JuliaCloud`.
@@ -27,7 +27,7 @@ There are two categories of packages currently supporting AWS usage in `JuliaClo
 The package consists of five major files:
 
 - `AWSAPI.jl`: Generates the `Services.jl` file which contains the low-level API wrappers for each AWS Service
-- `AWSCore.jl`: Processes `json, query, xml, etc.` request protocols
+- `AWSCore.jl`: Processes `json, query, rest-xml, rest-json` request protocols
 - `AWSCredentials.jl`: Handles retrieving AWS Credentials from locations such as environment variables, credential / configuration files, etc.
 - `Services.jl`: Contains a function for every AWS Service
 - `signaturev4.jl`: Creates the `AWS4AuthLayer` to be inserted into the HTTP stack and signs the requests with AWS authentication
@@ -223,16 +223,21 @@ Amazon is now making a new service and the auto-generation code needs to accommo
 - Should we attempt to automate the creation of unit tests as well?
     - I would argue no, and that these should be created by hand.
     - It would be tedious, however it will give us the backing that the generated code is correct.
+    - It would also be complex to know pre-requisites for certain operations
+        - i.e. To add a SecurityGroup to an EC2 Instance you'd first need an Instance in a VPC
 - Do we go all in on GitHub Actions?
     - We can replace TravisCI (what is currently used) to run tests
+    - How do we deal with `bors`?
     - Quick overview I found between the two, [link](https://github.com/datamade/how-to/issues/36#issuecomment-531406762)
 - Which Julia JSON package should we be using?
+  - Prototype reading JSON for an AWS Service API and compare the performance
   - What are the pros/cons of each of them?
   - [List of Julia JSON packages](https://github.com/search?l=Julia&q=json.jl&type=Repositories)
 - Should we move away from using [XMLDict.jl](https://github.com/JuliaCloud/AWSCore.jl/issues/105)?
     - It's very very convenient to use
 - How should optional parameters be passed in?
     - As a Dictionary? Raw `XML` for `Rest-XML` calls? Both?
+    - LittleDict?
 
 ## Appendix
 

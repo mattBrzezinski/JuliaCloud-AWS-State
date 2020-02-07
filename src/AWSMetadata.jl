@@ -263,6 +263,63 @@ function _generate_query_high_level_wrapper(service_name::String, operations::Di
     end
 end
 
+function _generate_rest_json_high_level_wrapper(service_name::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
+    # TODO:
+    # - Pull down documentation for each input variable and write to the docstr
+    # - Fix bug with below, when required_parameters is empty:
+    #     $name($(join(required_parameters, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
+    #   Results in
+    #     function_name(, args) = ...
+    function_definitions = String[]
+
+    for operation in operations
+        operation = operation[2]
+        name = operation["name"]
+        method = operation["http"]["method"]
+        request_uri = operation["http"]["requestUri"]
+
+        # Replace curly braces around parameters in the request_uri with a $, so Julia can pass the parameters along
+        request_uri = replace(request_uri, '{' => "\$")
+        request_uri = replace(request_uri, '}' => "")
+
+        # Removes everything inbetween <> characters
+        documentation = ""
+        if haskey(operation, "documentation")
+            documentation = operation["documentation"]
+            documentation = replace(documentation, r"\<.*?\>" => "")
+            documentation = replace(documentation, '$' => ' ')
+        end
+
+        required_parameters = ""
+
+        if haskey(operation, "input")
+            input_shape = shapes[operation["input"]["shape"]]
+
+            if haskey(input_shape, "required")
+                required_parameters = input_shape["required"]
+            end
+        end
+
+        definition = """
+        \"\"\"
+        $documentation
+        \"\"\"
+        $name($(join(required_parameters, ", "))) = $service_name(\"$method\", \"$request_uri\")
+        $name($(join(required_parameters, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
+        $name(a...; b...) = $name(a..., b)
+        """
+
+        push!(function_definitions, definition)
+    end
+
+    service_path = joinpath(@__DIR__, "services/$service_name.jl")
+    open(service_path, "w") do f
+        println(f, "include(\"../AWSCorePrototypeServices.jl\")")
+        println(f, "using .Services: $service_name\n")
+        print(f, join(function_definitions, "\n"))
+    end
+end
+
 function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
     # TODO:
     # - Create functions for query, rest-json, and json protocols
@@ -283,6 +340,8 @@ function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
             _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
         elseif protocol in ["query", "ec2"]
             _generate_query_high_level_wrapper(service_name, operations, shapes)
+        elseif protocol in ["rest-json"]
+            _generate_rest_json_high_level_wrapper(service_name, operations, shapes)
         end
     end
 end

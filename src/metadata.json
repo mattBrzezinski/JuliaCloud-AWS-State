@@ -56,7 +56,7 @@
     "version": "2016-12-01"
   },
   "appsync-2017-07-25.normal.json": {
-    "sha": "aa77ace5eee7d95a6ac3e0ef6f62c61d41d92040",
+    "sha": "a79e1a2a8834b0ffade7b5d2f41b12d7ae0f2cd2",
     "version": "2017-07-25"
   },
   "athena-2017-05-18.normal.json": {
@@ -128,7 +128,7 @@
     "version": "2013-11-01"
   },
   "codebuild-2016-10-06.normal.json": {
-    "sha": "43238bc07ced6efa63bdaac462079a88e51a822f",
+    "sha": "3fd98f10006e4883f4b1f44b547bc336e495b730",
     "version": "2016-10-06"
   },
   "codecommit-2015-04-13.normal.json": {
@@ -256,11 +256,11 @@
     "version": "2011-12-05"
   },
   "ebs-2019-11-02.normal.json": {
-    "sha": "3ef9e73f652fc67c4759da31aef144fcdb0570d5",
+    "sha": "7fe161f3d3d2327793340af39481c32fd7adaf90",
     "version": "2019-11-02"
   },
   "ec2-2016-11-15.normal.json": {
-    "sha": "edc6a89ba7ab343b0be933e65b9e1826a41ec370",
+    "sha": "b3e41a8b5de2b36654e3b0b126a57acbe0b72b45",
     "version": "2016-11-15"
   },
   "ec2-instance-connect-2018-04-02.normal.json": {
@@ -268,7 +268,7 @@
     "version": "2018-04-02"
   },
   "ecr-2015-09-21.normal.json": {
-    "sha": "038417a5f6e9d3f51f98463409200074f330782f",
+    "sha": "e69c7c12c4ab9e3b93305bef050732ad65861cfb",
     "version": "2015-09-21"
   },
   "ecs-2014-11-13.normal.json": {
@@ -492,7 +492,7 @@
     "version": "2014-11-11"
   },
   "lex-models-2017-04-19.normal.json": {
-    "sha": "3422f0f4d1e61a9c02cc3751176de844c787f7b1",
+    "sha": "52fde4b2ee33d33365da33699539a9dbc4f2a9fe",
     "version": "2017-04-19"
   },
   "license-manager-2018-08-01.normal.json": {

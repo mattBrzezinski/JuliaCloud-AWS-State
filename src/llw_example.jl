@@ -1,7 +1,7 @@
 include("AWSCorePrototype.jl")
 
-using .AWSCorePrototype.Services: s3, auto_scaling
-
+using .AWSCorePrototype.Services: s3, auto_scaling, glacier
+using SymDict
 
 function rest_xml()
     s3("PUT", "/mattbr-test-bucket-ayyy-lmao"; content=
@@ -20,5 +20,15 @@ function query()
     println(autoscaling_groups)
 end
 
-rest_xml()
-query()
+function rest_json()
+    query = @SymDict(
+        "351396300852",
+        "mattbr-test-vault-name"
+    )
+    vault_name = "mattbr-test-vault-name"
+    vault = glacier("PUT", "/accountId/vaults/vaultName", query=query)
+end
+
+rest_json()
+# rest_xml()
+# query()

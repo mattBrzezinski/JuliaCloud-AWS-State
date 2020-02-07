@@ -44,7 +44,7 @@ end
     end
 end
 
-@testset "Query" begin
+@test_skip @testset "Query" begin
     EC2.CreateSecurityGroup(
         [
             "GroupDescription"=>"Test-Description",

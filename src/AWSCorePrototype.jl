@@ -6,8 +6,7 @@ using AWSCore
 
 include("AWSCorePrototypeServices.jl")
 
-
-macro service(module_name)
+macro service(module_name::Symbol)
     service_name = "services/" * lowercase(string(module_name)) * ".jl"
 
     return Expr(:toplevel,
