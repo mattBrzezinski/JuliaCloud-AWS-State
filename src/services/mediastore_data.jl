@@ -12,7 +12,7 @@ DeleteObject(a...; b...) = DeleteObject(a..., b)
 Provides a list of metadata entries about folders and objects in the specified folder.
 """
 ListItems() = mediastore_data("GET", "/")
-ListItems(, args) = mediastore_data("GET", "/", args)
+ListItems(args) = mediastore_data("GET", "/", args)
 ListItems(a...; b...) = ListItems(a..., b)
 
 """

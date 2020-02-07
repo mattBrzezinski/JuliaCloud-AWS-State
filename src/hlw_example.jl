@@ -8,8 +8,10 @@ using UUIDs
 
 @service S3
 @service EC2
+@service ECS
 using .S3
 using .EC2
+using .ECS
 
 macro no_error(ex)
     quote
@@ -22,7 +24,7 @@ macro no_error(ex)
     end
 end
 
-@testset "Rest-XML" begin
+@test_skip @testset "Rest-XML" begin
     rng = MersenneTwister(1)
     bucket_name = "mattbr-" * string(uuid1(rng))
 
@@ -54,4 +56,16 @@ end
 
     groups = EC2.DescribeSecurityGroups()
     println(groups)
+end
+
+@test_skip @testset "Rest-JSON" begin end
+
+@testset "JSON" begin
+    capacity_providers = ECS.ListServices(
+        [
+            "cluster"=>"test"
+        ]
+    )
+
+    println(capacity_providers)
 end

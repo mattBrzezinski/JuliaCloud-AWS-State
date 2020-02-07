@@ -579,7 +579,7 @@ PutObjectRetention(a...; b...) = PutObjectRetention(a..., b)
 Returns a list of all buckets owned by the authenticated sender of the request.
 """
 ListBuckets() = s3("GET", "/")
-ListBuckets(, args) = s3("GET", "/", args)
+ListBuckets(args) = s3("GET", "/", args)
 ListBuckets(a...; b...) = ListBuckets(a..., b)
 
 """

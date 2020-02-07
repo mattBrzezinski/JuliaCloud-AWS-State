@@ -320,6 +320,62 @@ function _generate_rest_json_high_level_wrapper(service_name::String, operations
     end
 end
 
+function _generate_json_high_level_wrapper(service_name, operations, shapes)
+    function_definitions = String[]
+
+    for operation in operations
+        operation = operation[2]
+        name = operation["name"]
+        method = operation["http"]["method"]  # Always "POST"
+        request_uri = operation["http"]["requestUri"]  # Always "/"
+
+        documentation = ""
+        if haskey(operation, "documentation")
+            documentation = operation["documentation"]
+            documentation = replace(documentation, r"\<.*?\>" => "")
+            documentation = replace(documentation, '$' => ' ')
+            documentation = replace(documentation, "\\" => ' ')
+        end
+
+        required_parameters = ""
+        if haskey(operation, "input")  # This should always be true
+            input_shape = shapes[operation["input"]["shape"]]
+
+            if haskey(input_shape, "required")
+                required_parameters = input_shape["required"]
+            end
+        end
+
+        if !isempty(required_parameters)
+            definition = """
+            \"\"\"
+            $documentation
+
+            Required Parameters:
+            $(join(required_parameters, ", "))
+            \"\"\"
+            $name(args) = $service_name(\"$name\", args)
+            """
+        else
+            definition = """
+            \"\"\"
+            $documentation
+            \"\"\"
+            $name() = $service_name(\"$name\")
+            """
+        end
+
+        push!(function_definitions, definition)
+    end
+
+    service_path = joinpath(@__DIR__, "services/$service_name.jl")
+    open(service_path, "w") do f
+        println(f, "include(\"../AWSCorePrototypeServices.jl\")")
+        println(f, "using .Services: $service_name\n")
+        print(f, join(function_definitions, "\n"))
+    end
+end
+
 function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
     # TODO:
     # - Create functions for query, rest-json, and json protocols
@@ -342,6 +398,8 @@ function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
             _generate_query_high_level_wrapper(service_name, operations, shapes)
         elseif protocol in ["rest-json"]
             _generate_rest_json_high_level_wrapper(service_name, operations, shapes)
+        elseif protocol in ["json"]
+            _generate_json_high_level_wrapper(service_name, operations, shapes)
         end
     end
 end
