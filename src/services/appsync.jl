@@ -2,288 +2,833 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: appsync
 
 """
+    ListTagsForResource
+
 Lists the tags for a resource.
-"""
-ListTagsForResource(resourceArn) = appsync("GET", "/v1/tags/$resourceArn")
-ListTagsForResource(resourceArn, args) = appsync("GET", "/v1/tags/$resourceArn", args)
-ListTagsForResource(a...; b...) = ListTagsForResource(a..., b)
+
+Required Parameters:
+{
+  "resourceArn": "The GraphqlApi ARN."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListTagsForResource(args) = appsync("GET", "/v1/tags/{resourceArn}", args)
+"""
+    UpdateFunction
+
 Updates a Function object.
-"""
-UpdateFunction(apiId, name, functionId, dataSourceName, requestMappingTemplate, functionVersion) = appsync("POST", "/v1/apis/$apiId/functions/$functionId")
-UpdateFunction(apiId, name, functionId, dataSourceName, requestMappingTemplate, functionVersion, args) = appsync("POST", "/v1/apis/$apiId/functions/$functionId", args)
-UpdateFunction(a...; b...) = UpdateFunction(a..., b)
+
+Required Parameters:
+{
+  "name": "The Function name.",
+  "apiId": "The GraphQL API ID.",
+  "dataSourceName": "The Function DataSource name.",
+  "functionVersion": "The version of the request mapping template. Currently the supported value is 2018-05-29. ",
+  "requestMappingTemplate": "The Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.",
+  "functionId": "The function ID."
+}
+
+
+Optional Parameters:
+{
+  "responseMappingTemplate": "The Function request mapping template. ",
+  "description": "The Function description."
+}
 
 """
+
+UpdateFunction(args) = appsync("POST", "/v1/apis/{apiId}/functions/{functionId}", args)
+"""
+    GetFunction
+
 Get a Function.
-"""
-GetFunction(apiId, functionId) = appsync("GET", "/v1/apis/$apiId/functions/$functionId")
-GetFunction(apiId, functionId, args) = appsync("GET", "/v1/apis/$apiId/functions/$functionId", args)
-GetFunction(a...; b...) = GetFunction(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The GraphQL API ID.",
+  "functionId": "The Function ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetFunction(args) = appsync("GET", "/v1/apis/{apiId}/functions/{functionId}", args)
+"""
+    GetGraphqlApi
+
 Retrieves a GraphqlApi object.
-"""
-GetGraphqlApi(apiId) = appsync("GET", "/v1/apis/$apiId")
-GetGraphqlApi(apiId, args) = appsync("GET", "/v1/apis/$apiId", args)
-GetGraphqlApi(a...; b...) = GetGraphqlApi(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID for the GraphQL API."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetGraphqlApi(args) = appsync("GET", "/v1/apis/{apiId}", args)
+"""
+    DeleteResolver
+
 Deletes a Resolver object.
-"""
-DeleteResolver(apiId, typeName, fieldName) = appsync("DELETE", "/v1/apis/$apiId/types/$typeName/resolvers/$fieldName")
-DeleteResolver(apiId, typeName, fieldName, args) = appsync("DELETE", "/v1/apis/$apiId/types/$typeName/resolvers/$fieldName", args)
-DeleteResolver(a...; b...) = DeleteResolver(a..., b)
+
+Required Parameters:
+{
+  "typeName": "The name of the resolver type.",
+  "apiId": "The API ID.",
+  "fieldName": "The resolver field name."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteResolver(args) = appsync("DELETE", "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}", args)
+"""
+    FlushApiCache
+
 Flushes an ApiCache object.
-"""
-FlushApiCache(apiId) = appsync("DELETE", "/v1/apis/$apiId/FlushCache")
-FlushApiCache(apiId, args) = appsync("DELETE", "/v1/apis/$apiId/FlushCache", args)
-FlushApiCache(a...; b...) = FlushApiCache(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+FlushApiCache(args) = appsync("DELETE", "/v1/apis/{apiId}/FlushCache", args)
+"""
+    ListTypes
+
 Lists the types for a given API.
-"""
-ListTypes(apiId, format) = appsync("GET", "/v1/apis/$apiId/types")
-ListTypes(apiId, format, args) = appsync("GET", "/v1/apis/$apiId/types", args)
-ListTypes(a...; b...) = ListTypes(a..., b)
+
+Required Parameters:
+{
+  "format": "The type format: SDL or JSON.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{
+  "maxResults": "The maximum number of results you want the request to return.",
+  "nextToken": "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. "
+}
 
 """
+
+ListTypes(args) = appsync("GET", "/v1/apis/{apiId}/types", args)
+"""
+    DeleteDataSource
+
 Deletes a DataSource object.
-"""
-DeleteDataSource(apiId, name) = appsync("DELETE", "/v1/apis/$apiId/datasources/$name")
-DeleteDataSource(apiId, name, args) = appsync("DELETE", "/v1/apis/$apiId/datasources/$name", args)
-DeleteDataSource(a...; b...) = DeleteDataSource(a..., b)
+
+Required Parameters:
+{
+  "name": "The name of the data source.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteDataSource(args) = appsync("DELETE", "/v1/apis/{apiId}/datasources/{name}", args)
+"""
+    DeleteGraphqlApi
+
 Deletes a GraphqlApi object.
-"""
-DeleteGraphqlApi(apiId) = appsync("DELETE", "/v1/apis/$apiId")
-DeleteGraphqlApi(apiId, args) = appsync("DELETE", "/v1/apis/$apiId", args)
-DeleteGraphqlApi(a...; b...) = DeleteGraphqlApi(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteGraphqlApi(args) = appsync("DELETE", "/v1/apis/{apiId}", args)
+"""
+    UpdateResolver
+
 Updates a Resolver object.
-"""
-UpdateResolver(apiId, typeName, fieldName, requestMappingTemplate) = appsync("POST", "/v1/apis/$apiId/types/$typeName/resolvers/$fieldName")
-UpdateResolver(apiId, typeName, fieldName, requestMappingTemplate, args) = appsync("POST", "/v1/apis/$apiId/types/$typeName/resolvers/$fieldName", args)
-UpdateResolver(a...; b...) = UpdateResolver(a..., b)
+
+Required Parameters:
+{
+  "typeName": "The new type name.",
+  "apiId": "The API ID.",
+  "requestMappingTemplate": "The new request mapping template.",
+  "fieldName": "The new field name."
+}
+
+
+Optional Parameters:
+{
+  "kind": "The resolver type.    UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.    PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of Function in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.  ",
+  "syncConfig": "The SyncConfig for a resolver attached to a versioned datasource.",
+  "dataSourceName": "The new data source name.",
+  "responseMappingTemplate": "The new response mapping template.",
+  "pipelineConfig": "The PipelineConfig.",
+  "cachingConfig": "The caching configuration for the resolver."
+}
 
 """
+
+UpdateResolver(args) = appsync("POST", "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}", args)
+"""
+    CreateApiKey
+
 Creates a unique key that you can distribute to clients who are executing your API.
-"""
-CreateApiKey(apiId) = appsync("POST", "/v1/apis/$apiId/apikeys")
-CreateApiKey(apiId, args) = appsync("POST", "/v1/apis/$apiId/apikeys", args)
-CreateApiKey(a...; b...) = CreateApiKey(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The ID for your GraphQL API."
+}
+
+
+Optional Parameters:
+{
+  "expires": "The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .",
+  "description": "A description of the purpose of the API key."
+}
 
 """
+
+CreateApiKey(args) = appsync("POST", "/v1/apis/{apiId}/apikeys", args)
+"""
+    CreateFunction
+
 Creates a Function object. A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
-"""
-CreateFunction(apiId, name, dataSourceName, requestMappingTemplate, functionVersion) = appsync("POST", "/v1/apis/$apiId/functions")
-CreateFunction(apiId, name, dataSourceName, requestMappingTemplate, functionVersion, args) = appsync("POST", "/v1/apis/$apiId/functions", args)
-CreateFunction(a...; b...) = CreateFunction(a..., b)
+
+Required Parameters:
+{
+  "name": "The Function name. The function name does not have to be unique.",
+  "apiId": "The GraphQL API ID.",
+  "dataSourceName": "The Function DataSource name.",
+  "functionVersion": "The version of the request mapping template. Currently the supported value is 2018-05-29. ",
+  "requestMappingTemplate": "The Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template."
+}
+
+
+Optional Parameters:
+{
+  "responseMappingTemplate": "The Function response mapping template. ",
+  "description": "The Function description."
+}
 
 """
+
+CreateFunction(args) = appsync("POST", "/v1/apis/{apiId}/functions", args)
+"""
+    CreateType
+
 Creates a Type object.
-"""
-CreateType(apiId, definition, format) = appsync("POST", "/v1/apis/$apiId/types")
-CreateType(apiId, definition, format, args) = appsync("POST", "/v1/apis/$apiId/types", args)
-CreateType(a...; b...) = CreateType(a..., b)
+
+Required Parameters:
+{
+  "format": "The type format: SDL or JSON.",
+  "apiId": "The API ID.",
+  "definition": "The type definition, in GraphQL Schema Definition Language (SDL) format. For more information, see the GraphQL SDL documentation."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateType(args) = appsync("POST", "/v1/apis/{apiId}/types", args)
+"""
+    GetDataSource
+
 Retrieves a DataSource object.
-"""
-GetDataSource(apiId, name) = appsync("GET", "/v1/apis/$apiId/datasources/$name")
-GetDataSource(apiId, name, args) = appsync("GET", "/v1/apis/$apiId/datasources/$name", args)
-GetDataSource(a...; b...) = GetDataSource(a..., b)
+
+Required Parameters:
+{
+  "name": "The name of the data source.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetDataSource(args) = appsync("GET", "/v1/apis/{apiId}/datasources/{name}", args)
+"""
+    DeleteApiCache
+
 Deletes an ApiCache object.
-"""
-DeleteApiCache(apiId) = appsync("DELETE", "/v1/apis/$apiId/ApiCaches")
-DeleteApiCache(apiId, args) = appsync("DELETE", "/v1/apis/$apiId/ApiCaches", args)
-DeleteApiCache(a...; b...) = DeleteApiCache(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteApiCache(args) = appsync("DELETE", "/v1/apis/{apiId}/ApiCaches", args)
+"""
+    GetResolver
+
 Retrieves a Resolver object.
-"""
-GetResolver(apiId, typeName, fieldName) = appsync("GET", "/v1/apis/$apiId/types/$typeName/resolvers/$fieldName")
-GetResolver(apiId, typeName, fieldName, args) = appsync("GET", "/v1/apis/$apiId/types/$typeName/resolvers/$fieldName", args)
-GetResolver(a...; b...) = GetResolver(a..., b)
+
+Required Parameters:
+{
+  "typeName": "The resolver type name.",
+  "apiId": "The API ID.",
+  "fieldName": "The resolver field name."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetResolver(args) = appsync("GET", "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}", args)
+"""
+    ListApiKeys
+
 Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
-"""
-ListApiKeys(apiId) = appsync("GET", "/v1/apis/$apiId/apikeys")
-ListApiKeys(apiId, args) = appsync("GET", "/v1/apis/$apiId/apikeys", args)
-ListApiKeys(a...; b...) = ListApiKeys(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{
+  "maxResults": "The maximum number of results you want the request to return.",
+  "nextToken": "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list."
+}
 
 """
+
+ListApiKeys(args) = appsync("GET", "/v1/apis/{apiId}/apikeys", args)
+"""
+    GetApiCache
+
 Retrieves an ApiCache object.
-"""
-GetApiCache(apiId) = appsync("GET", "/v1/apis/$apiId/ApiCaches")
-GetApiCache(apiId, args) = appsync("GET", "/v1/apis/$apiId/ApiCaches", args)
-GetApiCache(a...; b...) = GetApiCache(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetApiCache(args) = appsync("GET", "/v1/apis/{apiId}/ApiCaches", args)
+"""
+    ListResolvers
+
 Lists the resolvers for a given API and type.
-"""
-ListResolvers(apiId, typeName) = appsync("GET", "/v1/apis/$apiId/types/$typeName/resolvers")
-ListResolvers(apiId, typeName, args) = appsync("GET", "/v1/apis/$apiId/types/$typeName/resolvers", args)
-ListResolvers(a...; b...) = ListResolvers(a..., b)
+
+Required Parameters:
+{
+  "typeName": "The type name.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{
+  "maxResults": "The maximum number of results you want the request to return.",
+  "nextToken": "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. "
+}
 
 """
+
+ListResolvers(args) = appsync("GET", "/v1/apis/{apiId}/types/{typeName}/resolvers", args)
+"""
+    StartSchemaCreation
+
 Adds a new schema to your GraphQL API. This operation is asynchronous. Use to determine when it has completed.
-"""
-StartSchemaCreation(apiId, definition) = appsync("POST", "/v1/apis/$apiId/schemacreation")
-StartSchemaCreation(apiId, definition, args) = appsync("POST", "/v1/apis/$apiId/schemacreation", args)
-StartSchemaCreation(a...; b...) = StartSchemaCreation(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID.",
+  "definition": "The schema definition, in GraphQL schema language format."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+StartSchemaCreation(args) = appsync("POST", "/v1/apis/{apiId}/schemacreation", args)
+"""
+    DeleteType
+
 Deletes a Type object.
-"""
-DeleteType(apiId, typeName) = appsync("DELETE", "/v1/apis/$apiId/types/$typeName")
-DeleteType(apiId, typeName, args) = appsync("DELETE", "/v1/apis/$apiId/types/$typeName", args)
-DeleteType(a...; b...) = DeleteType(a..., b)
+
+Required Parameters:
+{
+  "typeName": "The type name.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteType(args) = appsync("DELETE", "/v1/apis/{apiId}/types/{typeName}", args)
+"""
+    ListDataSources
+
 Lists the data sources for a given API.
-"""
-ListDataSources(apiId) = appsync("GET", "/v1/apis/$apiId/datasources")
-ListDataSources(apiId, args) = appsync("GET", "/v1/apis/$apiId/datasources", args)
-ListDataSources(a...; b...) = ListDataSources(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{
+  "maxResults": "The maximum number of results you want the request to return.",
+  "nextToken": "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. "
+}
 
 """
+
+ListDataSources(args) = appsync("GET", "/v1/apis/{apiId}/datasources", args)
+"""
+    TagResource
+
 Tags a resource with user-supplied tags.
-"""
-TagResource(resourceArn, tags) = appsync("POST", "/v1/tags/$resourceArn")
-TagResource(resourceArn, tags, args) = appsync("POST", "/v1/tags/$resourceArn", args)
-TagResource(a...; b...) = TagResource(a..., b)
+
+Required Parameters:
+{
+  "resourceArn": "The GraphqlApi ARN.",
+  "tags": "A TagMap object."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+TagResource(args) = appsync("POST", "/v1/tags/{resourceArn}", args)
+"""
+    UntagResource
+
 Untags a resource.
-"""
-UntagResource(resourceArn, tagKeys) = appsync("DELETE", "/v1/tags/$resourceArn")
-UntagResource(resourceArn, tagKeys, args) = appsync("DELETE", "/v1/tags/$resourceArn", args)
-UntagResource(a...; b...) = UntagResource(a..., b)
+
+Required Parameters:
+{
+  "resourceArn": "The GraphqlApi ARN.",
+  "tagKeys": "A list of TagKey objects."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UntagResource(args) = appsync("DELETE", "/v1/tags/{resourceArn}", args)
+"""
+    UpdateApiKey
+
 Updates an API key.
-"""
-UpdateApiKey(apiId, id) = appsync("POST", "/v1/apis/$apiId/apikeys/$id")
-UpdateApiKey(apiId, id, args) = appsync("POST", "/v1/apis/$apiId/apikeys/$id", args)
-UpdateApiKey(a...; b...) = UpdateApiKey(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The ID for the GraphQL API.",
+  "id": "The API key ID."
+}
+
+
+Optional Parameters:
+{
+  "expires": "The time from update time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .",
+  "description": "A description of the purpose of the API key."
+}
 
 """
+
+UpdateApiKey(args) = appsync("POST", "/v1/apis/{apiId}/apikeys/{id}", args)
+"""
+    UpdateGraphqlApi
+
 Updates a GraphqlApi object.
-"""
-UpdateGraphqlApi(apiId, name) = appsync("POST", "/v1/apis/$apiId")
-UpdateGraphqlApi(apiId, name, args) = appsync("POST", "/v1/apis/$apiId", args)
-UpdateGraphqlApi(a...; b...) = UpdateGraphqlApi(a..., b)
+
+Required Parameters:
+{
+  "name": "The new name for the GraphqlApi object.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{
+  "additionalAuthenticationProviders": "A list of additional authentication providers for the GraphqlApi API.",
+  "authenticationType": "The new authentication type for the GraphqlApi object.",
+  "xrayEnabled": "A flag indicating whether to enable X-Ray tracing for the GraphqlApi.",
+  "userPoolConfig": "The new Amazon Cognito user pool configuration for the GraphqlApi object.",
+  "logConfig": "The Amazon CloudWatch Logs configuration for the GraphqlApi object.",
+  "openIDConnectConfig": "The OpenID Connect configuration for the GraphqlApi object."
+}
 
 """
+
+UpdateGraphqlApi(args) = appsync("POST", "/v1/apis/{apiId}", args)
+"""
+    CreateApiCache
+
 Creates a cache for the GraphQL API.
-"""
-CreateApiCache(apiId, ttl, apiCachingBehavior, type) = appsync("POST", "/v1/apis/$apiId/ApiCaches")
-CreateApiCache(apiId, ttl, apiCachingBehavior, type, args) = appsync("POST", "/v1/apis/$apiId/ApiCaches", args)
-CreateApiCache(a...; b...) = CreateApiCache(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The GraphQL API Id.",
+  "apiCachingBehavior": "Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.  ",
+  "ttl": "TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.",
+  "type": "The cache instance type.    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  "
+}
+
+
+Optional Parameters:
+{
+  "transitEncryptionEnabled": "Transit encryption flag when connecting to cache. This setting cannot be updated after creation.",
+  "atRestEncryptionEnabled": "At rest encryption flag for cache. This setting cannot be updated after creation."
+}
 
 """
+
+CreateApiCache(args) = appsync("POST", "/v1/apis/{apiId}/ApiCaches", args)
+"""
+    GetSchemaCreationStatus
+
 Retrieves the current status of a schema creation operation.
-"""
-GetSchemaCreationStatus(apiId) = appsync("GET", "/v1/apis/$apiId/schemacreation")
-GetSchemaCreationStatus(apiId, args) = appsync("GET", "/v1/apis/$apiId/schemacreation", args)
-GetSchemaCreationStatus(a...; b...) = GetSchemaCreationStatus(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetSchemaCreationStatus(args) = appsync("GET", "/v1/apis/{apiId}/schemacreation", args)
+"""
+    CreateResolver
+
 Creates a Resolver object. A resolver converts incoming requests into a format that a data source can understand and converts the data source's responses into GraphQL.
-"""
-CreateResolver(apiId, typeName, fieldName, requestMappingTemplate) = appsync("POST", "/v1/apis/$apiId/types/$typeName/resolvers")
-CreateResolver(apiId, typeName, fieldName, requestMappingTemplate, args) = appsync("POST", "/v1/apis/$apiId/types/$typeName/resolvers", args)
-CreateResolver(a...; b...) = CreateResolver(a..., b)
+
+Required Parameters:
+{
+  "typeName": "The name of the Type.",
+  "apiId": "The ID for the GraphQL API for which the resolver is being created.",
+  "requestMappingTemplate": "The mapping template to be used for requests. A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).",
+  "fieldName": "The name of the field to attach the resolver to."
+}
+
+
+Optional Parameters:
+{
+  "kind": "The resolver type.    UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.    PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of Function in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.  ",
+  "syncConfig": "The SyncConfig for a resolver attached to a versioned datasource.",
+  "dataSourceName": "The name of the data source for which the resolver is being created.",
+  "responseMappingTemplate": "The mapping template to be used for responses from the data source.",
+  "pipelineConfig": "The PipelineConfig.",
+  "cachingConfig": "The caching configuration for the resolver."
+}
 
 """
+
+CreateResolver(args) = appsync("POST", "/v1/apis/{apiId}/types/{typeName}/resolvers", args)
+"""
+    CreateDataSource
+
 Creates a DataSource object.
-"""
-CreateDataSource(apiId, name, type) = appsync("POST", "/v1/apis/$apiId/datasources")
-CreateDataSource(apiId, name, type, args) = appsync("POST", "/v1/apis/$apiId/datasources", args)
-CreateDataSource(a...; b...) = CreateDataSource(a..., b)
+
+Required Parameters:
+{
+  "name": "A user-supplied name for the DataSource.",
+  "apiId": "The API ID for the GraphQL API for the DataSource.",
+  "type": "The type of the DataSource."
+}
+
+
+Optional Parameters:
+{
+  "relationalDatabaseConfig": "Relational database settings.",
+  "lambdaConfig": "AWS Lambda settings.",
+  "serviceRoleArn": "The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.",
+  "dynamodbConfig": "Amazon DynamoDB settings.",
+  "httpConfig": "HTTP endpoint settings.",
+  "description": "A description of the DataSource.",
+  "elasticsearchConfig": "Amazon Elasticsearch Service settings."
+}
 
 """
+
+CreateDataSource(args) = appsync("POST", "/v1/apis/{apiId}/datasources", args)
+"""
+    GetIntrospectionSchema
+
 Retrieves the introspection schema for a GraphQL API.
-"""
-GetIntrospectionSchema(apiId, format) = appsync("GET", "/v1/apis/$apiId/schema")
-GetIntrospectionSchema(apiId, format, args) = appsync("GET", "/v1/apis/$apiId/schema", args)
-GetIntrospectionSchema(a...; b...) = GetIntrospectionSchema(a..., b)
+
+Required Parameters:
+{
+  "format": "The schema format: SDL or JSON.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{
+  "includeDirectives": "A flag that specifies whether the schema introspection should contain directives."
+}
 
 """
+
+GetIntrospectionSchema(args) = appsync("GET", "/v1/apis/{apiId}/schema", args)
+"""
+    ListFunctions
+
 List multiple functions.
-"""
-ListFunctions(apiId) = appsync("GET", "/v1/apis/$apiId/functions")
-ListFunctions(apiId, args) = appsync("GET", "/v1/apis/$apiId/functions", args)
-ListFunctions(a...; b...) = ListFunctions(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The GraphQL API ID."
+}
+
+
+Optional Parameters:
+{
+  "maxResults": "The maximum number of results you want the request to return.",
+  "nextToken": "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list."
+}
 
 """
+
+ListFunctions(args) = appsync("GET", "/v1/apis/{apiId}/functions", args)
+"""
+    DeleteApiKey
+
 Deletes an API key.
-"""
-DeleteApiKey(apiId, id) = appsync("DELETE", "/v1/apis/$apiId/apikeys/$id")
-DeleteApiKey(apiId, id, args) = appsync("DELETE", "/v1/apis/$apiId/apikeys/$id", args)
-DeleteApiKey(a...; b...) = DeleteApiKey(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID.",
+  "id": "The ID for the API key."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteApiKey(args) = appsync("DELETE", "/v1/apis/{apiId}/apikeys/{id}", args)
+"""
+    DeleteFunction
+
 Deletes a Function.
-"""
-DeleteFunction(apiId, functionId) = appsync("DELETE", "/v1/apis/$apiId/functions/$functionId")
-DeleteFunction(apiId, functionId, args) = appsync("DELETE", "/v1/apis/$apiId/functions/$functionId", args)
-DeleteFunction(a...; b...) = DeleteFunction(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The GraphQL API ID.",
+  "functionId": "The Function ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteFunction(args) = appsync("DELETE", "/v1/apis/{apiId}/functions/{functionId}", args)
+"""
+    ListResolversByFunction
+
 List the resolvers that are associated with a specific function.
-"""
-ListResolversByFunction(apiId, functionId) = appsync("GET", "/v1/apis/$apiId/functions/$functionId/resolvers")
-ListResolversByFunction(apiId, functionId, args) = appsync("GET", "/v1/apis/$apiId/functions/$functionId/resolvers", args)
-ListResolversByFunction(a...; b...) = ListResolversByFunction(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The API ID.",
+  "functionId": "The Function ID."
+}
+
+
+Optional Parameters:
+{
+  "maxResults": "The maximum number of results you want the request to return.",
+  "nextToken": "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list."
+}
 
 """
+
+ListResolversByFunction(args) = appsync("GET", "/v1/apis/{apiId}/functions/{functionId}/resolvers", args)
+"""
+    UpdateApiCache
+
 Updates the cache for the GraphQL API.
-"""
-UpdateApiCache(apiId, ttl, apiCachingBehavior, type) = appsync("POST", "/v1/apis/$apiId/ApiCaches/update")
-UpdateApiCache(apiId, ttl, apiCachingBehavior, type, args) = appsync("POST", "/v1/apis/$apiId/ApiCaches/update", args)
-UpdateApiCache(a...; b...) = UpdateApiCache(a..., b)
+
+Required Parameters:
+{
+  "apiId": "The GraphQL API Id.",
+  "apiCachingBehavior": "Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.  ",
+  "ttl": "TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.",
+  "type": "The cache instance type.    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateApiCache(args) = appsync("POST", "/v1/apis/{apiId}/ApiCaches/update", args)
+"""
+    ListGraphqlApis
+
 Lists your GraphQL APIs.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "maxResults": "The maximum number of results you want the request to return.",
+  "nextToken": "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. "
+}
+
 """
 ListGraphqlApis() = appsync("GET", "/v1/apis")
-ListGraphqlApis(, args) = appsync("GET", "/v1/apis", args)
-ListGraphqlApis(a...; b...) = ListGraphqlApis(a..., b)
+ListGraphqlApis(args) = appsync("GET", "/v1/apis", args)
 
 """
+    GetType
+
 Retrieves a Type object.
-"""
-GetType(apiId, typeName, format) = appsync("GET", "/v1/apis/$apiId/types/$typeName")
-GetType(apiId, typeName, format, args) = appsync("GET", "/v1/apis/$apiId/types/$typeName", args)
-GetType(a...; b...) = GetType(a..., b)
+
+Required Parameters:
+{
+  "typeName": "The type name.",
+  "format": "The type format: SDL or JSON.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetType(args) = appsync("GET", "/v1/apis/{apiId}/types/{typeName}", args)
+"""
+    CreateGraphqlApi
+
 Creates a GraphqlApi object.
-"""
-CreateGraphqlApi(name, authenticationType) = appsync("POST", "/v1/apis")
-CreateGraphqlApi(name, authenticationType, args) = appsync("POST", "/v1/apis", args)
-CreateGraphqlApi(a...; b...) = CreateGraphqlApi(a..., b)
+
+Required Parameters:
+{
+  "name": "A user-supplied name for the GraphqlApi.",
+  "authenticationType": "The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools."
+}
+
+
+Optional Parameters:
+{
+  "additionalAuthenticationProviders": "A list of additional authentication providers for the GraphqlApi API.",
+  "xrayEnabled": "A flag indicating whether to enable X-Ray tracing for the GraphqlApi.",
+  "userPoolConfig": "The Amazon Cognito user pool configuration.",
+  "logConfig": "The Amazon CloudWatch Logs configuration.",
+  "tags": "A TagMap object.",
+  "openIDConnectConfig": "The OpenID Connect configuration."
+}
 
 """
+
+CreateGraphqlApi(args) = appsync("POST", "/v1/apis", args)
+"""
+    UpdateDataSource
+
 Updates a DataSource object.
-"""
-UpdateDataSource(apiId, name, type) = appsync("POST", "/v1/apis/$apiId/datasources/$name")
-UpdateDataSource(apiId, name, type, args) = appsync("POST", "/v1/apis/$apiId/datasources/$name", args)
-UpdateDataSource(a...; b...) = UpdateDataSource(a..., b)
+
+Required Parameters:
+{
+  "name": "The new name for the data source.",
+  "apiId": "The API ID.",
+  "type": "The new data source type."
+}
+
+
+Optional Parameters:
+{
+  "relationalDatabaseConfig": "The new relational database configuration.",
+  "lambdaConfig": "The new AWS Lambda configuration.",
+  "serviceRoleArn": "The new service role ARN for the data source.",
+  "dynamodbConfig": "The new Amazon DynamoDB configuration.",
+  "httpConfig": "The new HTTP endpoint configuration.",
+  "description": "The new description for the data source.",
+  "elasticsearchConfig": "The new Elasticsearch Service configuration."
+}
 
 """
-Updates a Type object.
+
+UpdateDataSource(args) = appsync("POST", "/v1/apis/{apiId}/datasources/{name}", args)
 """
-UpdateType(apiId, typeName, format) = appsync("POST", "/v1/apis/$apiId/types/$typeName")
-UpdateType(apiId, typeName, format, args) = appsync("POST", "/v1/apis/$apiId/types/$typeName", args)
-UpdateType(a...; b...) = UpdateType(a..., b)
+    UpdateType
+
+Updates a Type object.
+
+Required Parameters:
+{
+  "typeName": "The new type name.",
+  "format": "The new type format: SDL or JSON.",
+  "apiId": "The API ID."
+}
+
+
+Optional Parameters:
+{
+  "definition": "The new definition."
+}
+
+"""
+
+UpdateType(args) = appsync("POST", "/v1/apis/{apiId}/types/{typeName}", args)

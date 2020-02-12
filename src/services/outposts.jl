@@ -2,36 +2,98 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: outposts
 
 """
+    GetOutpost
+
 Gets information about the specified Outpost.
-"""
-GetOutpost(OutpostId) = outposts("GET", "/outposts/$OutpostId")
-GetOutpost(OutpostId, args) = outposts("GET", "/outposts/$OutpostId", args)
-GetOutpost(a...; b...) = GetOutpost(a..., b)
+
+Required Parameters:
+{
+  "OutpostId": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetOutpost(args) = outposts("GET", "/outposts/{OutpostId}", args)
+"""
+    CreateOutpost
+
 Creates an Outpost.
-"""
-CreateOutpost(SiteId) = outposts("POST", "/outposts")
-CreateOutpost(SiteId, args) = outposts("POST", "/outposts", args)
-CreateOutpost(a...; b...) = CreateOutpost(a..., b)
+
+Required Parameters:
+{
+  "SiteId": ""
+}
+
+
+Optional Parameters:
+{
+  "Description": "",
+  "AvailabilityZone": "",
+  "AvailabilityZoneId": "",
+  "Name": ""
+}
 
 """
+
+CreateOutpost(args) = outposts("POST", "/outposts", args)
+"""
+    ListSites
+
 Lists the sites for the specified AWS account.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "",
+  "NextToken": ""
+}
+
 """
 ListSites() = outposts("GET", "/sites")
-ListSites(, args) = outposts("GET", "/sites", args)
-ListSites(a...; b...) = ListSites(a..., b)
+ListSites(args) = outposts("GET", "/sites", args)
 
 """
+    GetOutpostInstanceTypes
+
 Lists the instance types for the specified Outpost.
-"""
-GetOutpostInstanceTypes(OutpostId) = outposts("GET", "/outposts/$OutpostId/instanceTypes")
-GetOutpostInstanceTypes(OutpostId, args) = outposts("GET", "/outposts/$OutpostId/instanceTypes", args)
-GetOutpostInstanceTypes(a...; b...) = GetOutpostInstanceTypes(a..., b)
+
+Required Parameters:
+{
+  "OutpostId": ""
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "",
+  "NextToken": ""
+}
 
 """
+
+GetOutpostInstanceTypes(args) = outposts("GET", "/outposts/{OutpostId}/instanceTypes", args)
+"""
+    ListOutposts
+
 List the Outposts for your AWS account.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "",
+  "NextToken": ""
+}
+
 """
 ListOutposts() = outposts("GET", "/outposts")
-ListOutposts(, args) = outposts("GET", "/outposts", args)
-ListOutposts(a...; b...) = ListOutposts(a..., b)
+ListOutposts(args) = outposts("GET", "/outposts", args)

@@ -2,750 +2,1984 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: pinpoint
 
 """
+    GetGcmChannel
+
 Retrieves information about the status and settings of the GCM channel for an application.
-"""
-GetGcmChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/gcm")
-GetGcmChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/gcm", args)
-GetGcmChannel(a...; b...) = GetGcmChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetGcmChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/gcm", args)
+"""
+    UpdateEmailTemplate
+
 Updates an existing message template for messages that are sent through the email channel.
-"""
-UpdateEmailTemplate(TemplateName, EmailTemplateRequest) = pinpoint("PUT", "/v1/templates/$template-name/email")
-UpdateEmailTemplate(TemplateName, EmailTemplateRequest, args) = pinpoint("PUT", "/v1/templates/$template-name/email", args)
-UpdateEmailTemplate(a...; b...) = UpdateEmailTemplate(a..., b)
+
+Required Parameters:
+{
+  "EmailTemplateRequest": "",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "CreateNewVersion": "Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.",
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+UpdateEmailTemplate(args) = pinpoint("PUT", "/v1/templates/{template-name}/email", args)
+"""
+    UpdateCampaign
+
 Updates the configuration and other settings for a campaign.
-"""
-UpdateCampaign(CampaignId, ApplicationId, WriteCampaignRequest) = pinpoint("PUT", "/v1/apps/$application-id/campaigns/$campaign-id")
-UpdateCampaign(CampaignId, ApplicationId, WriteCampaignRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/campaigns/$campaign-id", args)
-UpdateCampaign(a...; b...) = UpdateCampaign(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "CampaignId": "The unique identifier for the campaign.",
+  "WriteCampaignRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateCampaign(args) = pinpoint("PUT", "/v1/apps/{application-id}/campaigns/{campaign-id}", args)
+"""
+    DeleteEmailChannel
+
 Disables the email channel for an application and deletes any existing settings for the channel.
-"""
-DeleteEmailChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/email")
-DeleteEmailChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/email", args)
-DeleteEmailChannel(a...; b...) = DeleteEmailChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteEmailChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/email", args)
+"""
+    RemoveAttributes
+
 Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.
-"""
-RemoveAttributes(AttributeType, ApplicationId, UpdateAttributesRequest) = pinpoint("PUT", "/v1/apps/$application-id/attributes/$attribute-type")
-RemoveAttributes(AttributeType, ApplicationId, UpdateAttributesRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/attributes/$attribute-type", args)
-RemoveAttributes(a...; b...) = RemoveAttributes(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "UpdateAttributesRequest": "",
+  "AttributeType": " The type of attribute or attributes to remove. Valid values are: endpoint-custom-attributes - Custom attributes that describe endpoints, such as the date when an associated user opted in or out of receiving communications from you through a specific type of channel. endpoint-metric-attributes - Custom metrics that your app reports to Amazon Pinpoint for endpoints, such as the number of app sessions or the number of items left in a cart. endpoint-user-attributes - Custom attributes that describe users, such as first name, last name, and age."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+RemoveAttributes(args) = pinpoint("PUT", "/v1/apps/{application-id}/attributes/{attribute-type}", args)
+"""
+    DeleteApp
+
 Deletes an application.
-"""
-DeleteApp(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id")
-DeleteApp(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id", args)
-DeleteApp(a...; b...) = DeleteApp(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteApp(args) = pinpoint("DELETE", "/v1/apps/{application-id}", args)
+"""
+    GetEmailTemplate
+
 Retrieves the content and settings of a message template for messages that are sent through the email channel.
-"""
-GetEmailTemplate(TemplateName) = pinpoint("GET", "/v1/templates/$template-name/email")
-GetEmailTemplate(TemplateName, args) = pinpoint("GET", "/v1/templates/$template-name/email", args)
-GetEmailTemplate(a...; b...) = GetEmailTemplate(a..., b)
+
+Required Parameters:
+{
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+GetEmailTemplate(args) = pinpoint("GET", "/v1/templates/{template-name}/email", args)
+"""
+    GetCampaignActivities
+
 Retrieves information about all the activities for a campaign.
-"""
-GetCampaignActivities(ApplicationId, CampaignId) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id/activities")
-GetCampaignActivities(ApplicationId, CampaignId, args) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id/activities", args)
-GetCampaignActivities(a...; b...) = GetCampaignActivities(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "CampaignId": "The unique identifier for the campaign."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetCampaignActivities(args) = pinpoint("GET", "/v1/apps/{application-id}/campaigns/{campaign-id}/activities", args)
+"""
+    GetSegmentExportJobs
+
 Retrieves information about the status and settings of the export jobs for a segment.
-"""
-GetSegmentExportJobs(SegmentId, ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id/jobs/export")
-GetSegmentExportJobs(SegmentId, ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id/jobs/export", args)
-GetSegmentExportJobs(a...; b...) = GetSegmentExportJobs(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SegmentId": "The unique identifier for the segment."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetSegmentExportJobs(args) = pinpoint("GET", "/v1/apps/{application-id}/segments/{segment-id}/jobs/export", args)
+"""
+    GetSegments
+
 Retrieves information about the configuration, dimension, and other settings for all the segments that are associated with an application.
-"""
-GetSegments(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/segments")
-GetSegments(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/segments", args)
-GetSegments(a...; b...) = GetSegments(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetSegments(args) = pinpoint("GET", "/v1/apps/{application-id}/segments", args)
+"""
+    GetApnsChannel
+
 Retrieves information about the status and settings of the APNs channel for an application.
-"""
-GetApnsChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/apns")
-GetApnsChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/apns", args)
-GetApnsChannel(a...; b...) = GetApnsChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetApnsChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/apns", args)
+"""
+    TagResource
+
 Adds one or more tags (keys and values) to an application, campaign, journey, message template, or segment.
-"""
-TagResource(ResourceArn, TagsModel) = pinpoint("POST", "/v1/tags/$resource-arn")
-TagResource(ResourceArn, TagsModel, args) = pinpoint("POST", "/v1/tags/$resource-arn", args)
-TagResource(a...; b...) = TagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) of the resource.",
+  "TagsModel": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+TagResource(args) = pinpoint("POST", "/v1/tags/{resource-arn}", args)
+"""
+    UpdateSegment
+
 Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
-"""
-UpdateSegment(SegmentId, ApplicationId, WriteSegmentRequest) = pinpoint("PUT", "/v1/apps/$application-id/segments/$segment-id")
-UpdateSegment(SegmentId, ApplicationId, WriteSegmentRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/segments/$segment-id", args)
-UpdateSegment(a...; b...) = UpdateSegment(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SegmentId": "The unique identifier for the segment.",
+  "WriteSegmentRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateSegment(args) = pinpoint("PUT", "/v1/apps/{application-id}/segments/{segment-id}", args)
+"""
+    DeleteAdmChannel
+
 Disables the ADM channel for an application and deletes any existing settings for the channel.
-"""
-DeleteAdmChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/adm")
-DeleteAdmChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/adm", args)
-DeleteAdmChannel(a...; b...) = DeleteAdmChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteAdmChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/adm", args)
+"""
+    DeleteSmsTemplate
+
 Deletes a message template for messages that were sent through the SMS channel.
-"""
-DeleteSmsTemplate(TemplateName) = pinpoint("DELETE", "/v1/templates/$template-name/sms")
-DeleteSmsTemplate(TemplateName, args) = pinpoint("DELETE", "/v1/templates/$template-name/sms", args)
-DeleteSmsTemplate(a...; b...) = DeleteSmsTemplate(a..., b)
+
+Required Parameters:
+{
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+DeleteSmsTemplate(args) = pinpoint("DELETE", "/v1/templates/{template-name}/sms", args)
+"""
+    GetCampaignVersion
+
 Retrieves information about the status, configuration, and other settings for a specific version of a campaign.
-"""
-GetCampaignVersion(Version, ApplicationId, CampaignId) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id/versions/$version")
-GetCampaignVersion(Version, ApplicationId, CampaignId, args) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id/versions/$version", args)
-GetCampaignVersion(a...; b...) = GetCampaignVersion(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "CampaignId": "The unique identifier for the campaign.",
+  "Version": "The unique version number (Version property) for the campaign version."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetCampaignVersion(args) = pinpoint("GET", "/v1/apps/{application-id}/campaigns/{campaign-id}/versions/{version}", args)
+"""
+    CreateImportJob
+
 Creates an import job for an application.
-"""
-CreateImportJob(ApplicationId, ImportJobRequest) = pinpoint("POST", "/v1/apps/$application-id/jobs/import")
-CreateImportJob(ApplicationId, ImportJobRequest, args) = pinpoint("POST", "/v1/apps/$application-id/jobs/import", args)
-CreateImportJob(a...; b...) = CreateImportJob(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "ImportJobRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateImportJob(args) = pinpoint("POST", "/v1/apps/{application-id}/jobs/import", args)
+"""
+    GetSmsChannel
+
 Retrieves information about the status and settings of the SMS channel for an application.
-"""
-GetSmsChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/sms")
-GetSmsChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/sms", args)
-GetSmsChannel(a...; b...) = GetSmsChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetSmsChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/sms", args)
+"""
+    GetEventStream
+
 Retrieves information about the event stream settings for an application.
-"""
-GetEventStream(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/eventstream")
-GetEventStream(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/eventstream", args)
-GetEventStream(a...; b...) = GetEventStream(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetEventStream(args) = pinpoint("GET", "/v1/apps/{application-id}/eventstream", args)
+"""
+    GetSegmentVersion
+
 Retrieves information about the configuration, dimension, and other settings for a specific version of a segment that's associated with an application.
-"""
-GetSegmentVersion(SegmentId, Version, ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id/versions/$version")
-GetSegmentVersion(SegmentId, Version, ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id/versions/$version", args)
-GetSegmentVersion(a...; b...) = GetSegmentVersion(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SegmentId": "The unique identifier for the segment.",
+  "Version": "The unique version number (Version property) for the campaign version."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetSegmentVersion(args) = pinpoint("GET", "/v1/apps/{application-id}/segments/{segment-id}/versions/{version}", args)
+"""
+    DeleteEmailTemplate
+
 Deletes a message template for messages that were sent through the email channel.
-"""
-DeleteEmailTemplate(TemplateName) = pinpoint("DELETE", "/v1/templates/$template-name/email")
-DeleteEmailTemplate(TemplateName, args) = pinpoint("DELETE", "/v1/templates/$template-name/email", args)
-DeleteEmailTemplate(a...; b...) = DeleteEmailTemplate(a..., b)
+
+Required Parameters:
+{
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+DeleteEmailTemplate(args) = pinpoint("DELETE", "/v1/templates/{template-name}/email", args)
+"""
+    GetJourney
+
 Retrieves information about the status, configuration, and other settings for a journey.
-"""
-GetJourney(JourneyId, ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/journeys/$journey-id")
-GetJourney(JourneyId, ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/journeys/$journey-id", args)
-GetJourney(a...; b...) = GetJourney(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JourneyId": "The unique identifier for the journey."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetJourney(args) = pinpoint("GET", "/v1/apps/{application-id}/journeys/{journey-id}", args)
+"""
+    GetApp
+
 Retrieves information about an application.
-"""
-GetApp(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id")
-GetApp(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id", args)
-GetApp(a...; b...) = GetApp(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetApp(args) = pinpoint("GET", "/v1/apps/{application-id}", args)
+"""
+    GetCampaign
+
 Retrieves information about the status, configuration, and other settings for a campaign.
-"""
-GetCampaign(CampaignId, ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id")
-GetCampaign(CampaignId, ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id", args)
-GetCampaign(a...; b...) = GetCampaign(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "CampaignId": "The unique identifier for the campaign."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetCampaign(args) = pinpoint("GET", "/v1/apps/{application-id}/campaigns/{campaign-id}", args)
+"""
+    UpdateApnsSandboxChannel
+
 Enables the APNs sandbox channel for an application or updates the status and settings of the APNs sandbox channel for an application.
-"""
-UpdateApnsSandboxChannel(ApplicationId, APNSSandboxChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/apns_sandbox")
-UpdateApnsSandboxChannel(ApplicationId, APNSSandboxChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/apns_sandbox", args)
-UpdateApnsSandboxChannel(a...; b...) = UpdateApnsSandboxChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "APNSSandboxChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateApnsSandboxChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/apns_sandbox", args)
+"""
+    GetChannels
+
 Retrieves information about the history and status of each channel for an application.
-"""
-GetChannels(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels")
-GetChannels(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels", args)
-GetChannels(a...; b...) = GetChannels(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetChannels(args) = pinpoint("GET", "/v1/apps/{application-id}/channels", args)
+"""
+    GetEndpoint
+
 Retrieves information about the settings and attributes of a specific endpoint for an application.
-"""
-GetEndpoint(ApplicationId, EndpointId) = pinpoint("GET", "/v1/apps/$application-id/endpoints/$endpoint-id")
-GetEndpoint(ApplicationId, EndpointId, args) = pinpoint("GET", "/v1/apps/$application-id/endpoints/$endpoint-id", args)
-GetEndpoint(a...; b...) = GetEndpoint(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "EndpointId": "The unique identifier for the endpoint."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetEndpoint(args) = pinpoint("GET", "/v1/apps/{application-id}/endpoints/{endpoint-id}", args)
+"""
+    DeleteVoiceTemplate
+
 Deletes a message template for messages that were sent through the voice channel.
-"""
-DeleteVoiceTemplate(TemplateName) = pinpoint("DELETE", "/v1/templates/$template-name/voice")
-DeleteVoiceTemplate(TemplateName, args) = pinpoint("DELETE", "/v1/templates/$template-name/voice", args)
-DeleteVoiceTemplate(a...; b...) = DeleteVoiceTemplate(a..., b)
+
+Required Parameters:
+{
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+DeleteVoiceTemplate(args) = pinpoint("DELETE", "/v1/templates/{template-name}/voice", args)
+"""
+    CreateJourney
+
 Creates a journey for an application.
-"""
-CreateJourney(ApplicationId, WriteJourneyRequest) = pinpoint("POST", "/v1/apps/$application-id/journeys")
-CreateJourney(ApplicationId, WriteJourneyRequest, args) = pinpoint("POST", "/v1/apps/$application-id/journeys", args)
-CreateJourney(a...; b...) = CreateJourney(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "WriteJourneyRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateJourney(args) = pinpoint("POST", "/v1/apps/{application-id}/journeys", args)
+"""
+    ListTemplateVersions
+
 Retrieves information about all the versions of a specific message template.
-"""
-ListTemplateVersions(TemplateName, TemplateType) = pinpoint("GET", "/v1/templates/$template-name/$template-type/versions")
-ListTemplateVersions(TemplateName, TemplateType, args) = pinpoint("GET", "/v1/templates/$template-name/$template-type/versions", args)
-ListTemplateVersions(a...; b...) = ListTemplateVersions(a..., b)
+
+Required Parameters:
+{
+  "TemplateType": "The type of channel that the message template is designed for. Valid values are: EMAIL, PUSH, SMS, and VOICE.",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "NextToken": "The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics."
+}
 
 """
+
+ListTemplateVersions(args) = pinpoint("GET", "/v1/templates/{template-name}/{template-type}/versions", args)
+"""
+    GetSegment
+
 Retrieves information about the configuration, dimension, and other settings for a specific segment that's associated with an application.
-"""
-GetSegment(SegmentId, ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id")
-GetSegment(SegmentId, ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id", args)
-GetSegment(a...; b...) = GetSegment(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SegmentId": "The unique identifier for the segment."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetSegment(args) = pinpoint("GET", "/v1/apps/{application-id}/segments/{segment-id}", args)
+"""
+    CreateCampaign
+
 Creates a new campaign for an application or updates the settings of an existing campaign for an application.
-"""
-CreateCampaign(ApplicationId, WriteCampaignRequest) = pinpoint("POST", "/v1/apps/$application-id/campaigns")
-CreateCampaign(ApplicationId, WriteCampaignRequest, args) = pinpoint("POST", "/v1/apps/$application-id/campaigns", args)
-CreateCampaign(a...; b...) = CreateCampaign(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "WriteCampaignRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateCampaign(args) = pinpoint("POST", "/v1/apps/{application-id}/campaigns", args)
+"""
+    CreateSmsTemplate
+
 Creates a message template for messages that are sent through the SMS channel.
-"""
-CreateSmsTemplate(TemplateName, SMSTemplateRequest) = pinpoint("POST", "/v1/templates/$template-name/sms")
-CreateSmsTemplate(TemplateName, SMSTemplateRequest, args) = pinpoint("POST", "/v1/templates/$template-name/sms", args)
-CreateSmsTemplate(a...; b...) = CreateSmsTemplate(a..., b)
+
+Required Parameters:
+{
+  "SMSTemplateRequest": "",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateSmsTemplate(args) = pinpoint("POST", "/v1/templates/{template-name}/sms", args)
+"""
+    UpdateVoiceTemplate
+
 Updates an existing message template for messages that are sent through the voice channel.
-"""
-UpdateVoiceTemplate(TemplateName, VoiceTemplateRequest) = pinpoint("PUT", "/v1/templates/$template-name/voice")
-UpdateVoiceTemplate(TemplateName, VoiceTemplateRequest, args) = pinpoint("PUT", "/v1/templates/$template-name/voice", args)
-UpdateVoiceTemplate(a...; b...) = UpdateVoiceTemplate(a..., b)
+
+Required Parameters:
+{
+  "VoiceTemplateRequest": "",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "CreateNewVersion": "Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.",
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+UpdateVoiceTemplate(args) = pinpoint("PUT", "/v1/templates/{template-name}/voice", args)
+"""
+    UpdateEndpointsBatch
+
  Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for a batch of endpoints.
-"""
-UpdateEndpointsBatch(ApplicationId, EndpointBatchRequest) = pinpoint("PUT", "/v1/apps/$application-id/endpoints")
-UpdateEndpointsBatch(ApplicationId, EndpointBatchRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/endpoints", args)
-UpdateEndpointsBatch(a...; b...) = UpdateEndpointsBatch(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "EndpointBatchRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateEndpointsBatch(args) = pinpoint("PUT", "/v1/apps/{application-id}/endpoints", args)
+"""
+    GetJourneyExecutionMetrics
+
 Retrieves (queries) pre-aggregated data for a standard execution metric that applies to a journey.
-"""
-GetJourneyExecutionMetrics(ApplicationId, JourneyId) = pinpoint("GET", "/v1/apps/$application-id/journeys/$journey-id/execution-metrics")
-GetJourneyExecutionMetrics(ApplicationId, JourneyId, args) = pinpoint("GET", "/v1/apps/$application-id/journeys/$journey-id/execution-metrics", args)
-GetJourneyExecutionMetrics(a...; b...) = GetJourneyExecutionMetrics(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JourneyId": "The unique identifier for the journey."
+}
+
+
+Optional Parameters:
+{
+  "NextToken": "The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics."
+}
 
 """
+
+GetJourneyExecutionMetrics(args) = pinpoint("GET", "/v1/apps/{application-id}/journeys/{journey-id}/execution-metrics", args)
+"""
+    UpdateTemplateActiveVersion
+
 Changes the status of a specific version of a message template to active.
-"""
-UpdateTemplateActiveVersion(TemplateName, TemplateType, TemplateActiveVersionRequest) = pinpoint("PUT", "/v1/templates/$template-name/$template-type/active-version")
-UpdateTemplateActiveVersion(TemplateName, TemplateType, TemplateActiveVersionRequest, args) = pinpoint("PUT", "/v1/templates/$template-name/$template-type/active-version", args)
-UpdateTemplateActiveVersion(a...; b...) = UpdateTemplateActiveVersion(a..., b)
+
+Required Parameters:
+{
+  "TemplateActiveVersionRequest": "",
+  "TemplateType": "The type of channel that the message template is designed for. Valid values are: EMAIL, PUSH, SMS, and VOICE.",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateTemplateActiveVersion(args) = pinpoint("PUT", "/v1/templates/{template-name}/{template-type}/active-version", args)
+"""
+    UpdateEndpoint
+
 Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for an endpoint.
-"""
-UpdateEndpoint(ApplicationId, EndpointId, EndpointRequest) = pinpoint("PUT", "/v1/apps/$application-id/endpoints/$endpoint-id")
-UpdateEndpoint(ApplicationId, EndpointId, EndpointRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/endpoints/$endpoint-id", args)
-UpdateEndpoint(a...; b...) = UpdateEndpoint(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "EndpointRequest": "",
+  "EndpointId": "The unique identifier for the endpoint."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateEndpoint(args) = pinpoint("PUT", "/v1/apps/{application-id}/endpoints/{endpoint-id}", args)
+"""
+    UpdateAdmChannel
+
 Enables the ADM channel for an application or updates the status and settings of the ADM channel for an application.
-"""
-UpdateAdmChannel(ApplicationId, ADMChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/adm")
-UpdateAdmChannel(ApplicationId, ADMChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/adm", args)
-UpdateAdmChannel(a...; b...) = UpdateAdmChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "ADMChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateAdmChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/adm", args)
+"""
+    CreateExportJob
+
 Creates an export job for an application.
-"""
-CreateExportJob(ApplicationId, ExportJobRequest) = pinpoint("POST", "/v1/apps/$application-id/jobs/export")
-CreateExportJob(ApplicationId, ExportJobRequest, args) = pinpoint("POST", "/v1/apps/$application-id/jobs/export", args)
-CreateExportJob(a...; b...) = CreateExportJob(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "ExportJobRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateExportJob(args) = pinpoint("POST", "/v1/apps/{application-id}/jobs/export", args)
+"""
+    GetApplicationSettings
+
 Retrieves information about the settings for an application.
-"""
-GetApplicationSettings(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/settings")
-GetApplicationSettings(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/settings", args)
-GetApplicationSettings(a...; b...) = GetApplicationSettings(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetApplicationSettings(args) = pinpoint("GET", "/v1/apps/{application-id}/settings", args)
+"""
+    UpdateSmsChannel
+
 Enables the SMS channel for an application or updates the status and settings of the SMS channel for an application.
-"""
-UpdateSmsChannel(ApplicationId, SMSChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/sms")
-UpdateSmsChannel(ApplicationId, SMSChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/sms", args)
-UpdateSmsChannel(a...; b...) = UpdateSmsChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SMSChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateSmsChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/sms", args)
+"""
+    UntagResource
+
 Removes one or more tags (keys and values) from an application, campaign, journey, message template, or segment.
-"""
-UntagResource(TagKeys, ResourceArn) = pinpoint("DELETE", "/v1/tags/$resource-arn")
-UntagResource(TagKeys, ResourceArn, args) = pinpoint("DELETE", "/v1/tags/$resource-arn", args)
-UntagResource(a...; b...) = UntagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) of the resource.",
+  "TagKeys": "The key of the tag to remove from the resource. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;)."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UntagResource(args) = pinpoint("DELETE", "/v1/tags/{resource-arn}", args)
+"""
+    DeleteApnsChannel
+
 Disables the APNs channel for an application and deletes any existing settings for the channel.
-"""
-DeleteApnsChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/apns")
-DeleteApnsChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/apns", args)
-DeleteApnsChannel(a...; b...) = DeleteApnsChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteApnsChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/apns", args)
+"""
+    UpdateEmailChannel
+
 Enables the email channel for an application or updates the status and settings of the email channel for an application.
-"""
-UpdateEmailChannel(ApplicationId, EmailChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/email")
-UpdateEmailChannel(ApplicationId, EmailChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/email", args)
-UpdateEmailChannel(a...; b...) = UpdateEmailChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "EmailChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateEmailChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/email", args)
+"""
+    DeleteApnsVoipChannel
+
 Disables the APNs VoIP channel for an application and deletes any existing settings for the channel.
-"""
-DeleteApnsVoipChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/apns_voip")
-DeleteApnsVoipChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/apns_voip", args)
-DeleteApnsVoipChannel(a...; b...) = DeleteApnsVoipChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteApnsVoipChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/apns_voip", args)
+"""
+    GetUserEndpoints
+
 Retrieves information about all the endpoints that are associated with a specific user ID.
-"""
-GetUserEndpoints(ApplicationId, UserId) = pinpoint("GET", "/v1/apps/$application-id/users/$user-id")
-GetUserEndpoints(ApplicationId, UserId, args) = pinpoint("GET", "/v1/apps/$application-id/users/$user-id", args)
-GetUserEndpoints(a...; b...) = GetUserEndpoints(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "UserId": "The unique identifier for the user."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetUserEndpoints(args) = pinpoint("GET", "/v1/apps/{application-id}/users/{user-id}", args)
+"""
+    UpdateBaiduChannel
+
 Enables the Baidu channel for an application or updates the status and settings of the Baidu channel for an application.
-"""
-UpdateBaiduChannel(ApplicationId, BaiduChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/baidu")
-UpdateBaiduChannel(ApplicationId, BaiduChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/baidu", args)
-UpdateBaiduChannel(a...; b...) = UpdateBaiduChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "BaiduChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateBaiduChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/baidu", args)
+"""
+    DeleteCampaign
+
 Deletes a campaign from an application.
-"""
-DeleteCampaign(CampaignId, ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/campaigns/$campaign-id")
-DeleteCampaign(CampaignId, ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/campaigns/$campaign-id", args)
-DeleteCampaign(a...; b...) = DeleteCampaign(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "CampaignId": "The unique identifier for the campaign."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteCampaign(args) = pinpoint("DELETE", "/v1/apps/{application-id}/campaigns/{campaign-id}", args)
+"""
+    UpdateSmsTemplate
+
 Updates an existing message template for messages that are sent through the SMS channel.
-"""
-UpdateSmsTemplate(TemplateName, SMSTemplateRequest) = pinpoint("PUT", "/v1/templates/$template-name/sms")
-UpdateSmsTemplate(TemplateName, SMSTemplateRequest, args) = pinpoint("PUT", "/v1/templates/$template-name/sms", args)
-UpdateSmsTemplate(a...; b...) = UpdateSmsTemplate(a..., b)
+
+Required Parameters:
+{
+  "SMSTemplateRequest": "",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "CreateNewVersion": "Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.",
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+UpdateSmsTemplate(args) = pinpoint("PUT", "/v1/templates/{template-name}/sms", args)
+"""
+    DeleteBaiduChannel
+
 Disables the Baidu channel for an application and deletes any existing settings for the channel.
-"""
-DeleteBaiduChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/baidu")
-DeleteBaiduChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/baidu", args)
-DeleteBaiduChannel(a...; b...) = DeleteBaiduChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteBaiduChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/baidu", args)
+"""
+    DeleteApnsVoipSandboxChannel
+
 Disables the APNs VoIP sandbox channel for an application and deletes any existing settings for the channel.
-"""
-DeleteApnsVoipSandboxChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/apns_voip_sandbox")
-DeleteApnsVoipSandboxChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/apns_voip_sandbox", args)
-DeleteApnsVoipSandboxChannel(a...; b...) = DeleteApnsVoipSandboxChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteApnsVoipSandboxChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/apns_voip_sandbox", args)
+"""
+    DeleteEventStream
+
 Deletes the event stream for an application.
-"""
-DeleteEventStream(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/eventstream")
-DeleteEventStream(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/eventstream", args)
-DeleteEventStream(a...; b...) = DeleteEventStream(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteEventStream(args) = pinpoint("DELETE", "/v1/apps/{application-id}/eventstream", args)
+"""
+    CreateSegment
+
 Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
-"""
-CreateSegment(ApplicationId, WriteSegmentRequest) = pinpoint("POST", "/v1/apps/$application-id/segments")
-CreateSegment(ApplicationId, WriteSegmentRequest, args) = pinpoint("POST", "/v1/apps/$application-id/segments", args)
-CreateSegment(a...; b...) = CreateSegment(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "WriteSegmentRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateSegment(args) = pinpoint("POST", "/v1/apps/{application-id}/segments", args)
+"""
+    GetApnsVoipSandboxChannel
+
 Retrieves information about the status and settings of the APNs VoIP sandbox channel for an application.
-"""
-GetApnsVoipSandboxChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/apns_voip_sandbox")
-GetApnsVoipSandboxChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/apns_voip_sandbox", args)
-GetApnsVoipSandboxChannel(a...; b...) = GetApnsVoipSandboxChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetApnsVoipSandboxChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/apns_voip_sandbox", args)
+"""
+    GetImportJob
+
 Retrieves information about the status and settings of a specific import job for an application.
-"""
-GetImportJob(ApplicationId, JobId) = pinpoint("GET", "/v1/apps/$application-id/jobs/import/$job-id")
-GetImportJob(ApplicationId, JobId, args) = pinpoint("GET", "/v1/apps/$application-id/jobs/import/$job-id", args)
-GetImportJob(a...; b...) = GetImportJob(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JobId": "The unique identifier for the job."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetImportJob(args) = pinpoint("GET", "/v1/apps/{application-id}/jobs/import/{job-id}", args)
+"""
+    GetExportJob
+
 Retrieves information about the status and settings of a specific export job for an application.
-"""
-GetExportJob(ApplicationId, JobId) = pinpoint("GET", "/v1/apps/$application-id/jobs/export/$job-id")
-GetExportJob(ApplicationId, JobId, args) = pinpoint("GET", "/v1/apps/$application-id/jobs/export/$job-id", args)
-GetExportJob(a...; b...) = GetExportJob(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JobId": "The unique identifier for the job."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetExportJob(args) = pinpoint("GET", "/v1/apps/{application-id}/jobs/export/{job-id}", args)
+"""
+    ListTagsForResource
+
 Retrieves all the tags (keys and values) that are associated with an application, campaign, journey, message template, or segment.
-"""
-ListTagsForResource(ResourceArn) = pinpoint("GET", "/v1/tags/$resource-arn")
-ListTagsForResource(ResourceArn, args) = pinpoint("GET", "/v1/tags/$resource-arn", args)
-ListTagsForResource(a...; b...) = ListTagsForResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) of the resource."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListTagsForResource(args) = pinpoint("GET", "/v1/tags/{resource-arn}", args)
+"""
+    SendMessages
+
 Creates and sends a direct message.
-"""
-SendMessages(ApplicationId, MessageRequest) = pinpoint("POST", "/v1/apps/$application-id/messages")
-SendMessages(ApplicationId, MessageRequest, args) = pinpoint("POST", "/v1/apps/$application-id/messages", args)
-SendMessages(a...; b...) = SendMessages(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "MessageRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+SendMessages(args) = pinpoint("POST", "/v1/apps/{application-id}/messages", args)
+"""
+    UpdateApnsChannel
+
 Enables the APNs channel for an application or updates the status and settings of the APNs channel for an application.
-"""
-UpdateApnsChannel(ApplicationId, APNSChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/apns")
-UpdateApnsChannel(ApplicationId, APNSChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/apns", args)
-UpdateApnsChannel(a...; b...) = UpdateApnsChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "APNSChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateApnsChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/apns", args)
+"""
+    GetSegmentImportJobs
+
 Retrieves information about the status and settings of the import jobs for a segment.
-"""
-GetSegmentImportJobs(SegmentId, ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id/jobs/import")
-GetSegmentImportJobs(SegmentId, ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id/jobs/import", args)
-GetSegmentImportJobs(a...; b...) = GetSegmentImportJobs(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SegmentId": "The unique identifier for the segment."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetSegmentImportJobs(args) = pinpoint("GET", "/v1/apps/{application-id}/segments/{segment-id}/jobs/import", args)
+"""
+    GetSmsTemplate
+
 Retrieves the content and settings of a message template for messages that are sent through the SMS channel.
-"""
-GetSmsTemplate(TemplateName) = pinpoint("GET", "/v1/templates/$template-name/sms")
-GetSmsTemplate(TemplateName, args) = pinpoint("GET", "/v1/templates/$template-name/sms", args)
-GetSmsTemplate(a...; b...) = GetSmsTemplate(a..., b)
+
+Required Parameters:
+{
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+GetSmsTemplate(args) = pinpoint("GET", "/v1/templates/{template-name}/sms", args)
+"""
+    DeleteGcmChannel
+
 Disables the GCM channel for an application and deletes any existing settings for the channel.
-"""
-DeleteGcmChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/gcm")
-DeleteGcmChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/gcm", args)
-DeleteGcmChannel(a...; b...) = DeleteGcmChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteGcmChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/gcm", args)
+"""
+    DeleteJourney
+
 Deletes a journey from an application.
-"""
-DeleteJourney(JourneyId, ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/journeys/$journey-id")
-DeleteJourney(JourneyId, ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/journeys/$journey-id", args)
-DeleteJourney(a...; b...) = DeleteJourney(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JourneyId": "The unique identifier for the journey."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteJourney(args) = pinpoint("DELETE", "/v1/apps/{application-id}/journeys/{journey-id}", args)
+"""
+    PutEvents
+
 Creates a new event to record for endpoints, or creates or updates endpoint data that existing events are associated with.
-"""
-PutEvents(ApplicationId, EventsRequest) = pinpoint("POST", "/v1/apps/$application-id/events")
-PutEvents(ApplicationId, EventsRequest, args) = pinpoint("POST", "/v1/apps/$application-id/events", args)
-PutEvents(a...; b...) = PutEvents(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "EventsRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+PutEvents(args) = pinpoint("POST", "/v1/apps/{application-id}/events", args)
+"""
+    UpdateApplicationSettings
+
 Updates the settings for an application.
-"""
-UpdateApplicationSettings(ApplicationId, WriteApplicationSettingsRequest) = pinpoint("PUT", "/v1/apps/$application-id/settings")
-UpdateApplicationSettings(ApplicationId, WriteApplicationSettingsRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/settings", args)
-UpdateApplicationSettings(a...; b...) = UpdateApplicationSettings(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "WriteApplicationSettingsRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateApplicationSettings(args) = pinpoint("PUT", "/v1/apps/{application-id}/settings", args)
+"""
+    UpdateJourneyState
+
 Cancels (stops) an active journey.
-"""
-UpdateJourneyState(JourneyId, ApplicationId, JourneyStateRequest) = pinpoint("PUT", "/v1/apps/$application-id/journeys/$journey-id/state")
-UpdateJourneyState(JourneyId, ApplicationId, JourneyStateRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/journeys/$journey-id/state", args)
-UpdateJourneyState(a...; b...) = UpdateJourneyState(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JourneyStateRequest": "",
+  "JourneyId": "The unique identifier for the journey."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateJourneyState(args) = pinpoint("PUT", "/v1/apps/{application-id}/journeys/{journey-id}/state", args)
+"""
+    GetApps
+
 Retrieves information about all the applications that are associated with your Amazon Pinpoint account.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
+
 """
 GetApps() = pinpoint("GET", "/v1/apps")
-GetApps(, args) = pinpoint("GET", "/v1/apps", args)
-GetApps(a...; b...) = GetApps(a..., b)
+GetApps(args) = pinpoint("GET", "/v1/apps", args)
 
 """
+    UpdateApnsVoipChannel
+
 Enables the APNs VoIP channel for an application or updates the status and settings of the APNs VoIP channel for an application.
-"""
-UpdateApnsVoipChannel(ApplicationId, APNSVoipChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/apns_voip")
-UpdateApnsVoipChannel(ApplicationId, APNSVoipChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/apns_voip", args)
-UpdateApnsVoipChannel(a...; b...) = UpdateApnsVoipChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "APNSVoipChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateApnsVoipChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/apns_voip", args)
+"""
+    DeleteVoiceChannel
+
 Disables the voice channel for an application and deletes any existing settings for the channel.
-"""
-DeleteVoiceChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/voice")
-DeleteVoiceChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/voice", args)
-DeleteVoiceChannel(a...; b...) = DeleteVoiceChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteVoiceChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/voice", args)
+"""
+    UpdatePushTemplate
+
 Updates an existing message template for messages that are sent through a push notification channel.
-"""
-UpdatePushTemplate(TemplateName, PushNotificationTemplateRequest) = pinpoint("PUT", "/v1/templates/$template-name/push")
-UpdatePushTemplate(TemplateName, PushNotificationTemplateRequest, args) = pinpoint("PUT", "/v1/templates/$template-name/push", args)
-UpdatePushTemplate(a...; b...) = UpdatePushTemplate(a..., b)
+
+Required Parameters:
+{
+  "PushNotificationTemplateRequest": "",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "CreateNewVersion": "Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.",
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+UpdatePushTemplate(args) = pinpoint("PUT", "/v1/templates/{template-name}/push", args)
+"""
+    DeleteEndpoint
+
 Deletes an endpoint from an application.
-"""
-DeleteEndpoint(ApplicationId, EndpointId) = pinpoint("DELETE", "/v1/apps/$application-id/endpoints/$endpoint-id")
-DeleteEndpoint(ApplicationId, EndpointId, args) = pinpoint("DELETE", "/v1/apps/$application-id/endpoints/$endpoint-id", args)
-DeleteEndpoint(a...; b...) = DeleteEndpoint(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "EndpointId": "The unique identifier for the endpoint."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteEndpoint(args) = pinpoint("DELETE", "/v1/apps/{application-id}/endpoints/{endpoint-id}", args)
+"""
+    PutEventStream
+
 Creates a new event stream for an application or updates the settings of an existing event stream for an application.
-"""
-PutEventStream(ApplicationId, WriteEventStream) = pinpoint("POST", "/v1/apps/$application-id/eventstream")
-PutEventStream(ApplicationId, WriteEventStream, args) = pinpoint("POST", "/v1/apps/$application-id/eventstream", args)
-PutEventStream(a...; b...) = PutEventStream(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "WriteEventStream": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+PutEventStream(args) = pinpoint("POST", "/v1/apps/{application-id}/eventstream", args)
+"""
+    SendUsersMessages
+
 Creates and sends a message to a list of users.
-"""
-SendUsersMessages(ApplicationId, SendUsersMessageRequest) = pinpoint("POST", "/v1/apps/$application-id/users-messages")
-SendUsersMessages(ApplicationId, SendUsersMessageRequest, args) = pinpoint("POST", "/v1/apps/$application-id/users-messages", args)
-SendUsersMessages(a...; b...) = SendUsersMessages(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SendUsersMessageRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+SendUsersMessages(args) = pinpoint("POST", "/v1/apps/{application-id}/users-messages", args)
+"""
+    UpdateGcmChannel
+
 Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.
-"""
-UpdateGcmChannel(ApplicationId, GCMChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/gcm")
-UpdateGcmChannel(ApplicationId, GCMChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/gcm", args)
-UpdateGcmChannel(a...; b...) = UpdateGcmChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "GCMChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateGcmChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/gcm", args)
+"""
+    ListTemplates
+
 Retrieves information about all the message templates that are associated with your Amazon Pinpoint account.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "NextToken": "The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "TemplateType": "The type of message template to include in the results. Valid values are: EMAIL, PUSH, SMS, and VOICE. To include all types of templates in the results, don't include this parameter in your request.",
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Prefix": "The substring to match in the names of the message templates to include in the results. If you specify this value, Amazon Pinpoint returns only those templates whose names begin with the value that you specify."
+}
+
 """
 ListTemplates() = pinpoint("GET", "/v1/templates")
-ListTemplates(, args) = pinpoint("GET", "/v1/templates", args)
-ListTemplates(a...; b...) = ListTemplates(a..., b)
+ListTemplates(args) = pinpoint("GET", "/v1/templates", args)
 
 """
+    GetImportJobs
+
 Retrieves information about the status and settings of all the import jobs for an application.
-"""
-GetImportJobs(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/jobs/import")
-GetImportJobs(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/jobs/import", args)
-GetImportJobs(a...; b...) = GetImportJobs(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetImportJobs(args) = pinpoint("GET", "/v1/apps/{application-id}/jobs/import", args)
+"""
+    GetBaiduChannel
+
 Retrieves information about the status and settings of the Baidu channel for an application.
-"""
-GetBaiduChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/baidu")
-GetBaiduChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/baidu", args)
-GetBaiduChannel(a...; b...) = GetBaiduChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetBaiduChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/baidu", args)
+"""
+    GetEmailChannel
+
 Retrieves information about the status and settings of the email channel for an application.
-"""
-GetEmailChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/email")
-GetEmailChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/email", args)
-GetEmailChannel(a...; b...) = GetEmailChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetEmailChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/email", args)
+"""
+    ListJourneys
+
 Retrieves information about the status, configuration, and other settings for all the journeys that are associated with an application.
-"""
-ListJourneys(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/journeys")
-ListJourneys(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/journeys", args)
-ListJourneys(a...; b...) = ListJourneys(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+ListJourneys(args) = pinpoint("GET", "/v1/apps/{application-id}/journeys", args)
+"""
+    DeleteSegment
+
 Deletes a segment from an application.
-"""
-DeleteSegment(SegmentId, ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/segments/$segment-id")
-DeleteSegment(SegmentId, ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/segments/$segment-id", args)
-DeleteSegment(a...; b...) = DeleteSegment(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SegmentId": "The unique identifier for the segment."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteSegment(args) = pinpoint("DELETE", "/v1/apps/{application-id}/segments/{segment-id}", args)
+"""
+    DeleteUserEndpoints
+
 Deletes all the endpoints that are associated with a specific user ID.
-"""
-DeleteUserEndpoints(ApplicationId, UserId) = pinpoint("DELETE", "/v1/apps/$application-id/users/$user-id")
-DeleteUserEndpoints(ApplicationId, UserId, args) = pinpoint("DELETE", "/v1/apps/$application-id/users/$user-id", args)
-DeleteUserEndpoints(a...; b...) = DeleteUserEndpoints(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "UserId": "The unique identifier for the user."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteUserEndpoints(args) = pinpoint("DELETE", "/v1/apps/{application-id}/users/{user-id}", args)
+"""
+    GetVoiceChannel
+
 Retrieves information about the status and settings of the voice channel for an application.
-"""
-GetVoiceChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/voice")
-GetVoiceChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/voice", args)
-GetVoiceChannel(a...; b...) = GetVoiceChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetVoiceChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/voice", args)
+"""
+    CreateVoiceTemplate
+
 Creates a message template for messages that are sent through the voice channel.
-"""
-CreateVoiceTemplate(TemplateName, VoiceTemplateRequest) = pinpoint("POST", "/v1/templates/$template-name/voice")
-CreateVoiceTemplate(TemplateName, VoiceTemplateRequest, args) = pinpoint("POST", "/v1/templates/$template-name/voice", args)
-CreateVoiceTemplate(a...; b...) = CreateVoiceTemplate(a..., b)
+
+Required Parameters:
+{
+  "VoiceTemplateRequest": "",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateVoiceTemplate(args) = pinpoint("POST", "/v1/templates/{template-name}/voice", args)
+"""
+    GetSegmentVersions
+
 Retrieves information about the configuration, dimension, and other settings for all the versions of a specific segment that's associated with an application.
-"""
-GetSegmentVersions(SegmentId, ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id/versions")
-GetSegmentVersions(SegmentId, ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/segments/$segment-id/versions", args)
-GetSegmentVersions(a...; b...) = GetSegmentVersions(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "SegmentId": "The unique identifier for the segment."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetSegmentVersions(args) = pinpoint("GET", "/v1/apps/{application-id}/segments/{segment-id}/versions", args)
+"""
+    GetApnsVoipChannel
+
 Retrieves information about the status and settings of the APNs VoIP channel for an application.
-"""
-GetApnsVoipChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/apns_voip")
-GetApnsVoipChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/apns_voip", args)
-GetApnsVoipChannel(a...; b...) = GetApnsVoipChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetApnsVoipChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/apns_voip", args)
+"""
+    GetApnsSandboxChannel
+
 Retrieves information about the status and settings of the APNs sandbox channel for an application.
-"""
-GetApnsSandboxChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/apns_sandbox")
-GetApnsSandboxChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/apns_sandbox", args)
-GetApnsSandboxChannel(a...; b...) = GetApnsSandboxChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetApnsSandboxChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/apns_sandbox", args)
+"""
+    DeleteSmsChannel
+
 Disables the SMS channel for an application and deletes any existing settings for the channel.
-"""
-DeleteSmsChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/sms")
-DeleteSmsChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/sms", args)
-DeleteSmsChannel(a...; b...) = DeleteSmsChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteSmsChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/sms", args)
+"""
+    GetCampaignDateRangeKpi
+
 Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
-"""
-GetCampaignDateRangeKpi(ApplicationId, KpiName, CampaignId) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id/kpis/daterange/$kpi-name")
-GetCampaignDateRangeKpi(ApplicationId, KpiName, CampaignId, args) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id/kpis/daterange/$kpi-name", args)
-GetCampaignDateRangeKpi(a...; b...) = GetCampaignDateRangeKpi(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "CampaignId": "The unique identifier for the campaign.",
+  "KpiName": "The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the Amazon Pinpoint Developer Guide."
+}
+
+
+Optional Parameters:
+{
+  "StartTime": "The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.",
+  "NextToken": "The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "EndTime": "The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.",
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics."
+}
 
 """
+
+GetCampaignDateRangeKpi(args) = pinpoint("GET", "/v1/apps/{application-id}/campaigns/{campaign-id}/kpis/daterange/{kpi-name}", args)
+"""
+    GetExportJobs
+
 Retrieves information about the status and settings of all the export jobs for an application.
-"""
-GetExportJobs(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/jobs/export")
-GetExportJobs(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/jobs/export", args)
-GetExportJobs(a...; b...) = GetExportJobs(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetExportJobs(args) = pinpoint("GET", "/v1/apps/{application-id}/jobs/export", args)
+"""
+    PhoneNumberValidate
+
 Retrieves information about a phone number.
-"""
-PhoneNumberValidate(NumberValidateRequest) = pinpoint("POST", "/v1/phone/number/validate")
-PhoneNumberValidate(NumberValidateRequest, args) = pinpoint("POST", "/v1/phone/number/validate", args)
-PhoneNumberValidate(a...; b...) = PhoneNumberValidate(a..., b)
+
+Required Parameters:
+{
+  "NumberValidateRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+PhoneNumberValidate(args) = pinpoint("POST", "/v1/phone/number/validate", args)
+"""
+    GetPushTemplate
+
 Retrieves the content and settings of a message template for messages that are sent through a push notification channel.
-"""
-GetPushTemplate(TemplateName) = pinpoint("GET", "/v1/templates/$template-name/push")
-GetPushTemplate(TemplateName, args) = pinpoint("GET", "/v1/templates/$template-name/push", args)
-GetPushTemplate(a...; b...) = GetPushTemplate(a..., b)
+
+Required Parameters:
+{
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+GetPushTemplate(args) = pinpoint("GET", "/v1/templates/{template-name}/push", args)
+"""
+    CreatePushTemplate
+
 Creates a message template for messages that are sent through a push notification channel.
-"""
-CreatePushTemplate(TemplateName, PushNotificationTemplateRequest) = pinpoint("POST", "/v1/templates/$template-name/push")
-CreatePushTemplate(TemplateName, PushNotificationTemplateRequest, args) = pinpoint("POST", "/v1/templates/$template-name/push", args)
-CreatePushTemplate(a...; b...) = CreatePushTemplate(a..., b)
+
+Required Parameters:
+{
+  "PushNotificationTemplateRequest": "",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreatePushTemplate(args) = pinpoint("POST", "/v1/templates/{template-name}/push", args)
+"""
+    DeletePushTemplate
+
 Deletes a message template for messages that were sent through a push notification channel.
-"""
-DeletePushTemplate(TemplateName) = pinpoint("DELETE", "/v1/templates/$template-name/push")
-DeletePushTemplate(TemplateName, args) = pinpoint("DELETE", "/v1/templates/$template-name/push", args)
-DeletePushTemplate(a...; b...) = DeletePushTemplate(a..., b)
+
+Required Parameters:
+{
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
+
+DeletePushTemplate(args) = pinpoint("DELETE", "/v1/templates/{template-name}/push", args)
+"""
+    GetCampaignVersions
+
 Retrieves information about the status, configuration, and other settings for all versions of a campaign.
-"""
-GetCampaignVersions(ApplicationId, CampaignId) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id/versions")
-GetCampaignVersions(ApplicationId, CampaignId, args) = pinpoint("GET", "/v1/apps/$application-id/campaigns/$campaign-id/versions", args)
-GetCampaignVersions(a...; b...) = GetCampaignVersions(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "CampaignId": "The unique identifier for the campaign."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetCampaignVersions(args) = pinpoint("GET", "/v1/apps/{application-id}/campaigns/{campaign-id}/versions", args)
+"""
+    CreateApp
+
  Creates an application.
-"""
-CreateApp(CreateApplicationRequest) = pinpoint("POST", "/v1/apps")
-CreateApp(CreateApplicationRequest, args) = pinpoint("POST", "/v1/apps", args)
-CreateApp(a...; b...) = CreateApp(a..., b)
+
+Required Parameters:
+{
+  "CreateApplicationRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateApp(args) = pinpoint("POST", "/v1/apps", args)
+"""
+    CreateEmailTemplate
+
 Creates a message template for messages that are sent through the email channel.
-"""
-CreateEmailTemplate(TemplateName, EmailTemplateRequest) = pinpoint("POST", "/v1/templates/$template-name/email")
-CreateEmailTemplate(TemplateName, EmailTemplateRequest, args) = pinpoint("POST", "/v1/templates/$template-name/email", args)
-CreateEmailTemplate(a...; b...) = CreateEmailTemplate(a..., b)
+
+Required Parameters:
+{
+  "EmailTemplateRequest": "",
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CreateEmailTemplate(args) = pinpoint("POST", "/v1/templates/{template-name}/email", args)
+"""
+    GetApplicationDateRangeKpi
+
 Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
-"""
-GetApplicationDateRangeKpi(ApplicationId, KpiName) = pinpoint("GET", "/v1/apps/$application-id/kpis/daterange/$kpi-name")
-GetApplicationDateRangeKpi(ApplicationId, KpiName, args) = pinpoint("GET", "/v1/apps/$application-id/kpis/daterange/$kpi-name", args)
-GetApplicationDateRangeKpi(a...; b...) = GetApplicationDateRangeKpi(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "KpiName": "The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the Amazon Pinpoint Developer Guide."
+}
+
+
+Optional Parameters:
+{
+  "StartTime": "The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the current day.",
+  "NextToken": "The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "EndTime": "The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for 8:00 PM UTC July 26, 2019.",
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics."
+}
 
 """
+
+GetApplicationDateRangeKpi(args) = pinpoint("GET", "/v1/apps/{application-id}/kpis/daterange/{kpi-name}", args)
+"""
+    GetAdmChannel
+
 Retrieves information about the status and settings of the ADM channel for an application.
-"""
-GetAdmChannel(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/channels/adm")
-GetAdmChannel(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/channels/adm", args)
-GetAdmChannel(a...; b...) = GetAdmChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetAdmChannel(args) = pinpoint("GET", "/v1/apps/{application-id}/channels/adm", args)
+"""
+    UpdateJourney
+
 Updates the configuration and other settings for a journey.
-"""
-UpdateJourney(JourneyId, ApplicationId, WriteJourneyRequest) = pinpoint("PUT", "/v1/apps/$application-id/journeys/$journey-id")
-UpdateJourney(JourneyId, ApplicationId, WriteJourneyRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/journeys/$journey-id", args)
-UpdateJourney(a...; b...) = UpdateJourney(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JourneyId": "The unique identifier for the journey.",
+  "WriteJourneyRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateJourney(args) = pinpoint("PUT", "/v1/apps/{application-id}/journeys/{journey-id}", args)
+"""
+    UpdateApnsVoipSandboxChannel
+
 Enables the APNs VoIP sandbox channel for an application or updates the status and settings of the APNs VoIP sandbox channel for an application.
-"""
-UpdateApnsVoipSandboxChannel(ApplicationId, APNSVoipSandboxChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/apns_voip_sandbox")
-UpdateApnsVoipSandboxChannel(ApplicationId, APNSVoipSandboxChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/apns_voip_sandbox", args)
-UpdateApnsVoipSandboxChannel(a...; b...) = UpdateApnsVoipSandboxChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "APNSVoipSandboxChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateApnsVoipSandboxChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/apns_voip_sandbox", args)
+"""
+    GetJourneyDateRangeKpi
+
 Retrieves (queries) pre-aggregated data for a standard engagement metric that applies to a journey.
-"""
-GetJourneyDateRangeKpi(JourneyId, ApplicationId, KpiName) = pinpoint("GET", "/v1/apps/$application-id/journeys/$journey-id/kpis/daterange/$kpi-name")
-GetJourneyDateRangeKpi(JourneyId, ApplicationId, KpiName, args) = pinpoint("GET", "/v1/apps/$application-id/journeys/$journey-id/kpis/daterange/$kpi-name", args)
-GetJourneyDateRangeKpi(a...; b...) = GetJourneyDateRangeKpi(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JourneyId": "The unique identifier for the journey.",
+  "KpiName": "The name of the metric, also referred to as a key performance indicator (KPI), to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the Amazon Pinpoint Developer Guide."
+}
+
+
+Optional Parameters:
+{
+  "StartTime": "The first date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-15T00:00:00Z for July 15, 2019 and 2019-07-15T16:00:00Z for 4:00 PM July 15, 2019.",
+  "NextToken": "The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "EndTime": "The last date and time to retrieve data for, as part of an inclusive date range that filters the query results. This value should be in extended ISO 8601 format, for example: 2019-07-19T00:00:00Z for July 19, 2019 and 2019-07-19T20:00:00Z for 8:00 PM July 19, 2019.",
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics."
+}
 
 """
+
+GetJourneyDateRangeKpi(args) = pinpoint("GET", "/v1/apps/{application-id}/journeys/{journey-id}/kpis/daterange/{kpi-name}", args)
+"""
+    DeleteApnsSandboxChannel
+
 Disables the APNs sandbox channel for an application and deletes any existing settings for the channel.
-"""
-DeleteApnsSandboxChannel(ApplicationId) = pinpoint("DELETE", "/v1/apps/$application-id/channels/apns_sandbox")
-DeleteApnsSandboxChannel(ApplicationId, args) = pinpoint("DELETE", "/v1/apps/$application-id/channels/apns_sandbox", args)
-DeleteApnsSandboxChannel(a...; b...) = DeleteApnsSandboxChannel(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteApnsSandboxChannel(args) = pinpoint("DELETE", "/v1/apps/{application-id}/channels/apns_sandbox", args)
+"""
+    GetJourneyExecutionActivityMetrics
+
 Retrieves (queries) pre-aggregated data for a standard execution metric that applies to a journey activity.
-"""
-GetJourneyExecutionActivityMetrics(JourneyActivityId, ApplicationId, JourneyId) = pinpoint("GET", "/v1/apps/$application-id/journeys/$journey-id/activities/$journey-activity-id/execution-metrics")
-GetJourneyExecutionActivityMetrics(JourneyActivityId, ApplicationId, JourneyId, args) = pinpoint("GET", "/v1/apps/$application-id/journeys/$journey-id/activities/$journey-activity-id/execution-metrics", args)
-GetJourneyExecutionActivityMetrics(a...; b...) = GetJourneyExecutionActivityMetrics(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "JourneyId": "The unique identifier for the journey.",
+  "JourneyActivityId": "The unique identifier for the journey activity."
+}
+
+
+Optional Parameters:
+{
+  "NextToken": "The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics."
+}
 
 """
+
+GetJourneyExecutionActivityMetrics(args) = pinpoint("GET", "/v1/apps/{application-id}/journeys/{journey-id}/activities/{journey-activity-id}/execution-metrics", args)
+"""
+    GetCampaigns
+
 Retrieves information about the status, configuration, and other settings for all the campaigns that are associated with an application.
-"""
-GetCampaigns(ApplicationId) = pinpoint("GET", "/v1/apps/$application-id/campaigns")
-GetCampaigns(ApplicationId, args) = pinpoint("GET", "/v1/apps/$application-id/campaigns", args)
-GetCampaigns(a...; b...) = GetCampaigns(a..., b)
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console."
+}
+
+
+Optional Parameters:
+{
+  "PageSize": "The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.",
+  "Token": "The NextToken string that specifies which page of results to return in a paginated response."
+}
 
 """
+
+GetCampaigns(args) = pinpoint("GET", "/v1/apps/{application-id}/campaigns", args)
+"""
+    GetVoiceTemplate
+
 Retrieves the content and settings of a message template for messages that are sent through the voice channel.
-"""
-GetVoiceTemplate(TemplateName) = pinpoint("GET", "/v1/templates/$template-name/voice")
-GetVoiceTemplate(TemplateName, args) = pinpoint("GET", "/v1/templates/$template-name/voice", args)
-GetVoiceTemplate(a...; b...) = GetVoiceTemplate(a..., b)
+
+Required Parameters:
+{
+  "TemplateName": "The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive."
+}
+
+
+Optional Parameters:
+{
+  "Version": "The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier of an existing template version. If specified for an update operation, this value must match the identifier of the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template."
+}
 
 """
-Enables the voice channel for an application or updates the status and settings of the voice channel for an application.
+
+GetVoiceTemplate(args) = pinpoint("GET", "/v1/templates/{template-name}/voice", args)
 """
-UpdateVoiceChannel(ApplicationId, VoiceChannelRequest) = pinpoint("PUT", "/v1/apps/$application-id/channels/voice")
-UpdateVoiceChannel(ApplicationId, VoiceChannelRequest, args) = pinpoint("PUT", "/v1/apps/$application-id/channels/voice", args)
-UpdateVoiceChannel(a...; b...) = UpdateVoiceChannel(a..., b)
+    UpdateVoiceChannel
+
+Enables the voice channel for an application or updates the status and settings of the voice channel for an application.
+
+Required Parameters:
+{
+  "ApplicationId": "The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.",
+  "VoiceChannelRequest": ""
+}
+
+
+Optional Parameters:
+{}
+
+"""
+
+UpdateVoiceChannel(args) = pinpoint("PUT", "/v1/apps/{application-id}/channels/voice", args)

@@ -2,8 +2,19 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: workmailmessageflow
 
 """
+    GetRawMessageContent
+
 Retrieves the raw content of an in-transit email message, in MIME format. 
+
+Required Parameters:
+{
+  "messageId": "The identifier of the email message to retrieve."
+}
+
+
+Optional Parameters:
+{}
+
 """
-GetRawMessageContent(messageId) = workmailmessageflow("GET", "/messages/$messageId")
-GetRawMessageContent(messageId, args) = workmailmessageflow("GET", "/messages/$messageId", args)
-GetRawMessageContent(a...; b...) = GetRawMessageContent(a..., b)
+
+GetRawMessageContent(args) = workmailmessageflow("GET", "/messages/{messageId}", args)

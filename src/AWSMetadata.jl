@@ -150,232 +150,6 @@ function _generate_service_definition(service::Dict{String, Any})
     end
 end
 
-function _generate_rest_xml_high_level_wrapper(service_name::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
-    # TODO:
-    # - Pull down documentation for each input variable and write to the docstr
-    # - Fix bug with below, when required_parameters is empty:
-    #     $name($(join(required_parameters, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
-    #   Results in
-    #     function_name(, args) = ...
-    function_definitions = String[]
-
-    for operation in operations
-        operation = operation[2]
-        name = operation["name"]
-        method = operation["http"]["method"]
-        request_uri = operation["http"]["requestUri"]
-
-        # Replace curly braces around parameters in the request_uri with a $, so Julia can pass the parameters along
-        request_uri = replace(request_uri, '{' => "\$")
-        request_uri = replace(request_uri, '}' => "")
-
-        # Removes everything inbetween <> characters
-        documentation = ""
-        if haskey(operation, "documentation")
-            documentation = operation["documentation"]
-            documentation = replace(documentation, r"\<.*?\>" => "")
-            documentation = replace(documentation, '$' => ' ')
-        end
-
-        required_parameters = ""
-
-        if haskey(operation, "input")
-            input_shape = shapes[operation["input"]["shape"]]
-
-            if haskey(input_shape, "required")
-                required_parameters = input_shape["required"]
-            end
-        end
-
-        definition = """
-        \"\"\"
-        $documentation
-        \"\"\"
-        $name($(join(required_parameters, ", "))) = $service_name(\"$method\", \"$request_uri\")
-        $name($(join(required_parameters, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
-        $name(a...; b...) = $name(a..., b)
-        """
-
-        push!(function_definitions, definition)
-    end
-
-    service_path = joinpath(@__DIR__, "services/$service_name.jl")
-    open(service_path, "w") do f
-        println(f, "include(\"../AWSCorePrototypeServices.jl\")")
-        println(f, "using .Services: $service_name\n")
-        print(f, join(function_definitions, "\n"))
-    end
-end
-
-function _generate_query_high_level_wrapper(service_name::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
-    function_definitions = String[]
-
-    for operation in operations
-        operation = operation[2]
-        name = operation["name"]
-        method = operation["http"]["method"]  # Always "POST"
-        request_uri = operation["http"]["requestUri"]  # Always "/"
-
-        documentation = ""
-        if haskey(operation, "documentation")
-            documentation = operation["documentation"]
-            documentation = replace(documentation, r"\<.*?\>" => "")
-            documentation = replace(documentation, '$' => ' ')
-            documentation = replace(documentation, "\\" => ' ')
-        end
-
-        required_parameters = ""
-        if haskey(operation, "input")  # This should always be true
-            input_shape = shapes[operation["input"]["shape"]]
-
-            if haskey(input_shape, "required")
-                required_parameters = input_shape["required"]
-            end
-        end
-
-        if !isempty(required_parameters)
-            definition = """
-            \"\"\"
-            $documentation
-
-            Required Parameters:
-            $(join(required_parameters, ", "))
-            \"\"\"
-            $name(args) = $service_name(\"$name\", args)
-            """
-        else
-            definition = """
-            \"\"\"
-            $documentation
-            \"\"\"
-            $name() = $service_name(\"$name\")
-            """
-        end
-
-        push!(function_definitions, definition)
-    end
-
-    service_path = joinpath(@__DIR__, "services/$service_name.jl")
-    open(service_path, "w") do f
-        println(f, "include(\"../AWSCorePrototypeServices.jl\")")
-        println(f, "using .Services: $service_name\n")
-        print(f, join(function_definitions, "\n"))
-    end
-end
-
-function _generate_rest_json_high_level_wrapper(service_name::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
-    # TODO:
-    # - Pull down documentation for each input variable and write to the docstr
-    # - Fix bug with below, when required_parameters is empty:
-    #     $name($(join(required_parameters, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
-    #   Results in
-    #     function_name(, args) = ...
-    function_definitions = String[]
-
-    for operation in operations
-        operation = operation[2]
-        name = operation["name"]
-        method = operation["http"]["method"]
-        request_uri = operation["http"]["requestUri"]
-
-        # Replace curly braces around parameters in the request_uri with a $, so Julia can pass the parameters along
-        request_uri = replace(request_uri, '{' => "\$")
-        request_uri = replace(request_uri, '}' => "")
-
-        # Removes everything inbetween <> characters
-        documentation = ""
-        if haskey(operation, "documentation")
-            documentation = operation["documentation"]
-            documentation = replace(documentation, r"\<.*?\>" => "")
-            documentation = replace(documentation, '$' => ' ')
-        end
-
-        required_parameters = ""
-
-        if haskey(operation, "input")
-            input_shape = shapes[operation["input"]["shape"]]
-
-            if haskey(input_shape, "required")
-                required_parameters = input_shape["required"]
-            end
-        end
-
-        definition = """
-        \"\"\"
-        $documentation
-        \"\"\"
-        $name($(join(required_parameters, ", "))) = $service_name(\"$method\", \"$request_uri\")
-        $name($(join(required_parameters, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
-        $name(a...; b...) = $name(a..., b)
-        """
-
-        push!(function_definitions, definition)
-    end
-
-    service_path = joinpath(@__DIR__, "services/$service_name.jl")
-    open(service_path, "w") do f
-        println(f, "include(\"../AWSCorePrototypeServices.jl\")")
-        println(f, "using .Services: $service_name\n")
-        print(f, join(function_definitions, "\n"))
-    end
-end
-
-function _generate_json_high_level_wrapper(service_name, operations, shapes)
-    function_definitions = String[]
-
-    for operation in operations
-        operation = operation[2]
-        name = operation["name"]
-        method = operation["http"]["method"]  # Always "POST"
-        request_uri = operation["http"]["requestUri"]  # Always "/"
-
-        documentation = ""
-        if haskey(operation, "documentation")
-            documentation = operation["documentation"]
-            documentation = replace(documentation, r"\<.*?\>" => "")
-            documentation = replace(documentation, '$' => ' ')
-            documentation = replace(documentation, "\\" => ' ')
-        end
-
-        required_parameters = ""
-        if haskey(operation, "input")  # This should always be true
-            input_shape = shapes[operation["input"]["shape"]]
-
-            if haskey(input_shape, "required")
-                required_parameters = input_shape["required"]
-            end
-        end
-
-        if !isempty(required_parameters)
-            definition = """
-            \"\"\"
-            $documentation
-
-            Required Parameters:
-            $(join(required_parameters, ", "))
-            \"\"\"
-            $name(args) = $service_name(\"$name\", args)
-            """
-        else
-            definition = """
-            \"\"\"
-            $documentation
-            \"\"\"
-            $name() = $service_name(\"$name\")
-            """
-        end
-
-        push!(function_definitions, definition)
-    end
-
-    service_path = joinpath(@__DIR__, "services/$service_name.jl")
-    open(service_path, "w") do f
-        println(f, "include(\"../AWSCorePrototypeServices.jl\")")
-        println(f, "using .Services: $service_name\n")
-        print(f, join(function_definitions, "\n"))
-    end
-end
-
 function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
     # TODO:
     # - Create functions for query, rest-json, and json protocols
@@ -392,16 +166,132 @@ function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
 
         protocol = service["metadata"]["protocol"]
 
-        if protocol in ["rest-xml"]
-            _generate_rest_xml_high_level_wrapper(service_name, operations, shapes)
-        elseif protocol in ["query", "ec2"]
-            _generate_query_high_level_wrapper(service_name, operations, shapes)
-        elseif protocol in ["rest-json"]
-            _generate_rest_json_high_level_wrapper(service_name, operations, shapes)
-        elseif protocol in ["json"]
-            _generate_json_high_level_wrapper(service_name, operations, shapes)
+        operations = _generate_wrapper(service_name, protocol, operations, shapes)
+
+        service_path = joinpath(@__DIR__, "services/$service_name.jl")
+        open(service_path, "w") do f
+            println(f, "include(\"../AWSCorePrototypeServices.jl\")")
+            println(f, "using .Services: $service_name\n")
+            print(f, join(operations, "\n"))
         end
     end
+end
+
+function _generate_wrapper(service_name::String, protocol::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
+    function _documentation_cleaning(documentation)
+        documentation = replace(documentation, r"\<.*?\>" => "")
+        documentation = replace(documentation, '$' => ' ')
+        documentation = replace(documentation, "\\" => ' ')
+
+        return documentation
+    end
+
+    function _get_parameters(input, shapes)
+        required_parameters = Dict()
+        optional_parameters = Dict()
+
+        input_shape = shapes[input["shape"]]
+
+        if haskey(input_shape, "required")
+            for parameter in input_shape["required"]
+                required_parameters[parameter] = _documentation_cleaning(get(input_shape["members"][parameter], "documentation", ""))
+            end
+        end
+
+        if haskey(input_shape, "members")
+            for parameter in input_shape["members"]
+                parameter_name = parameter[1]
+
+                if !haskey(required_parameters, parameter_name)
+                    optional_parameters[parameter_name] = _documentation_cleaning(get(parameter[2], "documentation", ""))
+                end
+            end
+        end
+
+        return (required_parameters, optional_parameters)
+    end
+
+    function _generate_operation_definition(name, protocol, method, request_uri, required_parameters, optional_parameters, documentation)
+        required_param_keys = collect(keys(required_parameters))
+
+        operation_definition = """
+        \"\"\"
+            $name
+
+        $documentation
+
+        Required Parameters:
+        $(json(required_parameters, 2))
+
+        Optional Parameters:
+        $(json(optional_parameters, 2))
+        \"\"\"
+        """
+
+        if protocol in ["json", "query", "ec2"]
+            if !isempty(required_parameters)
+                operation_definition = operation_definition * "\n$name(args) = $service_name(\"$name\", args)"
+            else
+                operation_definition = operation_definition * """
+                    $name() = $service_name(\"$name\")
+                    $name(args) = $service_name(\"$name\", args)
+                    """
+            end
+        elseif protocol == "rest-json"
+            if !isempty(required_parameters)
+                operation_definition = operation_definition * "\n$name(args) = $service_name(\"$method\", \"$request_uri\", args)"
+            else
+                operation_definition = operation_definition * """
+                $name() = $service_name(\"$method\", \"$request_uri\")
+                $name(args) = $service_name(\"$method\", \"$request_uri\", args)
+                """
+            end
+        elseif protocol == "rest-xml"
+            if !isempty(required_parameters)
+                operation_definition = operation_definition * """
+                $name($(join(required_param_keys, ", "))) = $service_name(\"$method\", \"$request_uri\")
+                $name($(join(required_param_keys, ", ")), args) = $service_name(\"$method\", \"$request_uri\", args)
+                $name(a...; b...) = $name(a..., b)
+                """
+            else
+                operation_definition = operation_definition * """
+                $name() = $service_name(\"$method\", \"$request_uri\")
+                $name(args) $service_name(\"$method\", \"$request_uri\", args)
+                $name(a...; b...) = $name(a..., b)
+                """
+            end
+        end
+
+        return operation_definition
+    end
+
+    operation_definitions = []
+
+    for operation in operations
+        operation = operation[2]
+        name = operation["name"]
+        method = operation["http"]["method"]
+        request_uri = operation["http"]["requestUri"]
+
+        documentation = ""
+
+        if haskey(operation, "documentation")
+            documentation = _documentation_cleaning(operation["documentation"])
+        end
+
+        required_parameters = Dict()
+        optional_parameters = Dict()
+
+        if haskey(operation, "input")
+            required_parameters, optional_parameters = _get_parameters(operation["input"], shapes)
+        end
+
+        operation_definition = _generate_operation_definition(name, protocol, method, request_uri, required_parameters, optional_parameters, documentation)
+
+        push!(operation_definitions, operation_definition)
+    end
+
+    return operation_definitions
 end
 
 parse_aws_metadata()

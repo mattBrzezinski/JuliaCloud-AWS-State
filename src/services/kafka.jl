@@ -2,190 +2,445 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: kafka
 
 """
+    CreateCluster
+
 
             Creates a new MSK cluster.
          
-"""
-CreateCluster(BrokerNodeGroupInfo, KafkaVersion, NumberOfBrokerNodes, ClusterName) = kafka("POST", "/v1/clusters")
-CreateCluster(BrokerNodeGroupInfo, KafkaVersion, NumberOfBrokerNodes, ClusterName, args) = kafka("POST", "/v1/clusters", args)
-CreateCluster(a...; b...) = CreateCluster(a..., b)
+
+Required Parameters:
+{
+  "ClusterName": "\n            The name of the cluster.\n         ",
+  "KafkaVersion": "\n            The version of Apache Kafka.\n         ",
+  "BrokerNodeGroupInfo": "\n            Information about the broker nodes in the cluster.\n         ",
+  "NumberOfBrokerNodes": "\n            The number of broker nodes in the cluster.\n         "
+}
+
+
+Optional Parameters:
+{
+  "EnhancedMonitoring": "\n            Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.\n         ",
+  "ClientAuthentication": "\n            Includes all client authentication related information.\n         ",
+  "Tags": "\n            Create tags when creating the cluster.\n         ",
+  "ConfigurationInfo": "\n            Represents the configuration that you want MSK to use for the brokers in a cluster.\n         ",
+  "OpenMonitoring": "\n            The settings for open monitoring.\n         ",
+  "EncryptionInfo": "\n            Includes all encryption-related information.\n         "
+}
 
 """
+
+CreateCluster(args) = kafka("POST", "/v1/clusters", args)
+"""
+    ListKafkaVersions
+
 
             Returns a list of Kafka versions.
          
-"""
-ListKafkaVersions() = kafka("GET", "/v1/kafka-versions")
-ListKafkaVersions(, args) = kafka("GET", "/v1/kafka-versions", args)
-ListKafkaVersions(a...; b...) = ListKafkaVersions(a..., b)
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "\n            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.",
+  "NextToken": "\n            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. To get the next batch, provide this token in your next request."
+}
 
 """
+ListKafkaVersions() = kafka("GET", "/v1/kafka-versions")
+ListKafkaVersions(args) = kafka("GET", "/v1/kafka-versions", args)
+
+"""
+    ListTagsForResource
+
 
             Returns a list of the tags associated with the specified resource.
          
-"""
-ListTagsForResource(ResourceArn) = kafka("GET", "/v1/tags/$resourceArn")
-ListTagsForResource(ResourceArn, args) = kafka("GET", "/v1/tags/$resourceArn", args)
-ListTagsForResource(a...; b...) = ListTagsForResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListTagsForResource(args) = kafka("GET", "/v1/tags/{resourceArn}", args)
+"""
+    UpdateBrokerStorage
+
 
             Updates the EBS storage associated with MSK brokers.
          
-"""
-UpdateBrokerStorage(ClusterArn, TargetBrokerEBSVolumeInfo, CurrentVersion) = kafka("PUT", "/v1/clusters/$clusterArn/nodes/storage")
-UpdateBrokerStorage(ClusterArn, TargetBrokerEBSVolumeInfo, CurrentVersion, args) = kafka("PUT", "/v1/clusters/$clusterArn/nodes/storage", args)
-UpdateBrokerStorage(a...; b...) = UpdateBrokerStorage(a..., b)
+
+Required Parameters:
+{
+  "TargetBrokerEBSVolumeInfo": "\n            Describes the target volume size and the ID of the broker to apply the update to.\n         ",
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         ",
+  "CurrentVersion": "\n            The version of cluster to update from. A successful operation will then generate a new version.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateBrokerStorage(args) = kafka("PUT", "/v1/clusters/{clusterArn}/nodes/storage", args)
+"""
+    DescribeConfigurationRevision
+
 
             Returns a description of this revision of the configuration.
          
-"""
-DescribeConfigurationRevision(Revision, Arn) = kafka("GET", "/v1/configurations/$arn/revisions/$revision")
-DescribeConfigurationRevision(Revision, Arn, args) = kafka("GET", "/v1/configurations/$arn/revisions/$revision", args)
-DescribeConfigurationRevision(a...; b...) = DescribeConfigurationRevision(a..., b)
+
+Required Parameters:
+{
+  "Arn": "\n            The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.\n         ",
+  "Revision": "\n            A string that uniquely identifies a revision of an MSK configuration.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DescribeConfigurationRevision(args) = kafka("GET", "/v1/configurations/{arn}/revisions/{revision}", args)
+"""
+    ListNodes
+
 
             Returns a list of the broker nodes in the cluster.
          
-"""
-ListNodes(ClusterArn) = kafka("GET", "/v1/clusters/$clusterArn/nodes")
-ListNodes(ClusterArn, args) = kafka("GET", "/v1/clusters/$clusterArn/nodes", args)
-ListNodes(a...; b...) = ListNodes(a..., b)
+
+Required Parameters:
+{
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         "
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "\n            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.\n         ",
+  "NextToken": "\n            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.\n         "
+}
 
 """
+
+ListNodes(args) = kafka("GET", "/v1/clusters/{clusterArn}/nodes", args)
+"""
+    UpdateClusterConfiguration
+
 
             Updates the cluster with the configuration that is specified in the request body.
          
-"""
-UpdateClusterConfiguration(ClusterArn, CurrentVersion, ConfigurationInfo) = kafka("PUT", "/v1/clusters/$clusterArn/configuration")
-UpdateClusterConfiguration(ClusterArn, CurrentVersion, ConfigurationInfo, args) = kafka("PUT", "/v1/clusters/$clusterArn/configuration", args)
-UpdateClusterConfiguration(a...; b...) = UpdateClusterConfiguration(a..., b)
+
+Required Parameters:
+{
+  "ConfigurationInfo": "\n            Represents the configuration that you want MSK to use for the brokers in a cluster.\n         ",
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         ",
+  "CurrentVersion": "\n            The version of the cluster that needs to be updated.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateClusterConfiguration(args) = kafka("PUT", "/v1/clusters/{clusterArn}/configuration", args)
+"""
+    ListConfigurations
+
 
             Returns a list of all the MSK configurations in this Region.
          
-"""
-ListConfigurations() = kafka("GET", "/v1/configurations")
-ListConfigurations(, args) = kafka("GET", "/v1/configurations", args)
-ListConfigurations(a...; b...) = ListConfigurations(a..., b)
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "\n            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.\n         ",
+  "NextToken": "\n            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.\n         "
+}
 
 """
+ListConfigurations() = kafka("GET", "/v1/configurations")
+ListConfigurations(args) = kafka("GET", "/v1/configurations", args)
+
+"""
+    CreateConfiguration
+
 
             Creates a new MSK configuration.
          
-"""
-CreateConfiguration(ServerProperties, KafkaVersions, Name) = kafka("POST", "/v1/configurations")
-CreateConfiguration(ServerProperties, KafkaVersions, Name, args) = kafka("POST", "/v1/configurations", args)
-CreateConfiguration(a...; b...) = CreateConfiguration(a..., b)
+
+Required Parameters:
+{
+  "ServerProperties": "\n            Contents of the server.properties file. When using the API, you must ensure that the contents of the file are base64 encoded. \n               When using the AWS Management Console, the SDK, or the AWS CLI, the contents of server.properties can be in plaintext.\n         ",
+  "KafkaVersions": "\n            The versions of Apache Kafka with which you can use this MSK configuration.\n         ",
+  "Name": "\n            The name of the configuration.\n         "
+}
+
+
+Optional Parameters:
+{
+  "Description": "\n            The description of the configuration.\n         "
+}
 
 """
+
+CreateConfiguration(args) = kafka("POST", "/v1/configurations", args)
+"""
+    ListClusterOperations
+
 
             Returns a list of all the operations that have been performed on the specified MSK cluster.
          
-"""
-ListClusterOperations(ClusterArn) = kafka("GET", "/v1/clusters/$clusterArn/operations")
-ListClusterOperations(ClusterArn, args) = kafka("GET", "/v1/clusters/$clusterArn/operations", args)
-ListClusterOperations(a...; b...) = ListClusterOperations(a..., b)
+
+Required Parameters:
+{
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         "
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "\n            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.\n         ",
+  "NextToken": "\n            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.\n         "
+}
 
 """
+
+ListClusterOperations(args) = kafka("GET", "/v1/clusters/{clusterArn}/operations", args)
+"""
+    TagResource
+
 
             Adds tags to the specified MSK resource.
          
-"""
-TagResource(ResourceArn, Tags) = kafka("POST", "/v1/tags/$resourceArn")
-TagResource(ResourceArn, Tags, args) = kafka("POST", "/v1/tags/$resourceArn", args)
-TagResource(a...; b...) = TagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.\n         ",
+  "Tags": "\n            The key-value pair for the resource tag.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+TagResource(args) = kafka("POST", "/v1/tags/{resourceArn}", args)
+"""
+    UntagResource
+
 
             Removes the tags associated with the keys that are provided in the query.
          
-"""
-UntagResource(TagKeys, ResourceArn) = kafka("DELETE", "/v1/tags/$resourceArn")
-UntagResource(TagKeys, ResourceArn, args) = kafka("DELETE", "/v1/tags/$resourceArn", args)
-UntagResource(a...; b...) = UntagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.\n         ",
+  "TagKeys": "\n            Tag keys must be unique for a given cluster. In addition, the following restrictions apply:\n            \n               \n                  Each tag key must be unique. If you add a tag with a key that's already in\n                  use, your new tag overwrites the existing key-value pair. \n               \n               \n                  You can't start a tag key with aws: because this prefix is reserved for use\n                  by  AWS.  AWS creates tags that begin with this prefix on your behalf, but\n                  you can't edit or delete them.\n               \n               \n                  Tag keys must be between 1 and 128 Unicode characters in length.\n               \n               \n                  Tag keys must consist of the following characters: Unicode letters, digits,\n                  white space, and the following special characters: _ . / = + -\n                     @.\n               \n            \n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UntagResource(args) = kafka("DELETE", "/v1/tags/{resourceArn}", args)
+"""
+    UpdateMonitoring
+
 
             Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.
          
-"""
-UpdateMonitoring(ClusterArn, CurrentVersion) = kafka("PUT", "/v1/clusters/$clusterArn/monitoring")
-UpdateMonitoring(ClusterArn, CurrentVersion, args) = kafka("PUT", "/v1/clusters/$clusterArn/monitoring", args)
-UpdateMonitoring(a...; b...) = UpdateMonitoring(a..., b)
+
+Required Parameters:
+{
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         ",
+  "CurrentVersion": "\n            The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.\n         "
+}
+
+
+Optional Parameters:
+{
+  "EnhancedMonitoring": "\n            Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.\n         ",
+  "OpenMonitoring": "\n            The settings for open monitoring.\n         "
+}
 
 """
+
+UpdateMonitoring(args) = kafka("PUT", "/v1/clusters/{clusterArn}/monitoring", args)
+"""
+    UpdateBrokerCount
+
 
             Updates the number of broker nodes in the cluster.
          
-"""
-UpdateBrokerCount(ClusterArn, CurrentVersion, TargetNumberOfBrokerNodes) = kafka("PUT", "/v1/clusters/$clusterArn/nodes/count")
-UpdateBrokerCount(ClusterArn, CurrentVersion, TargetNumberOfBrokerNodes, args) = kafka("PUT", "/v1/clusters/$clusterArn/nodes/count", args)
-UpdateBrokerCount(a...; b...) = UpdateBrokerCount(a..., b)
+
+Required Parameters:
+{
+  "TargetNumberOfBrokerNodes": "\n            The number of broker nodes that you want the cluster to have after this operation completes successfully.\n         ",
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         ",
+  "CurrentVersion": "\n            The version of cluster to update from. A successful operation will then generate a new version.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateBrokerCount(args) = kafka("PUT", "/v1/clusters/{clusterArn}/nodes/count", args)
+"""
+    DescribeClusterOperation
+
 
             Returns a description of the cluster operation specified by the ARN.
          
-"""
-DescribeClusterOperation(ClusterOperationArn) = kafka("GET", "/v1/operations/$clusterOperationArn")
-DescribeClusterOperation(ClusterOperationArn, args) = kafka("GET", "/v1/operations/$clusterOperationArn", args)
-DescribeClusterOperation(a...; b...) = DescribeClusterOperation(a..., b)
+
+Required Parameters:
+{
+  "ClusterOperationArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DescribeClusterOperation(args) = kafka("GET", "/v1/operations/{clusterOperationArn}", args)
+"""
+    DeleteCluster
+
 
             Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
          
-"""
-DeleteCluster(ClusterArn) = kafka("DELETE", "/v1/clusters/$clusterArn")
-DeleteCluster(ClusterArn, args) = kafka("DELETE", "/v1/clusters/$clusterArn", args)
-DeleteCluster(a...; b...) = DeleteCluster(a..., b)
+
+Required Parameters:
+{
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         "
+}
+
+
+Optional Parameters:
+{
+  "CurrentVersion": "\n            The current version of the MSK cluster.\n         "
+}
 
 """
+
+DeleteCluster(args) = kafka("DELETE", "/v1/clusters/{clusterArn}", args)
+"""
+    DescribeCluster
+
 
             Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
          
-"""
-DescribeCluster(ClusterArn) = kafka("GET", "/v1/clusters/$clusterArn")
-DescribeCluster(ClusterArn, args) = kafka("GET", "/v1/clusters/$clusterArn", args)
-DescribeCluster(a...; b...) = DescribeCluster(a..., b)
+
+Required Parameters:
+{
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DescribeCluster(args) = kafka("GET", "/v1/clusters/{clusterArn}", args)
+"""
+    GetBootstrapBrokers
+
 
             A list of brokers that a client application can use to bootstrap.
          
-"""
-GetBootstrapBrokers(ClusterArn) = kafka("GET", "/v1/clusters/$clusterArn/bootstrap-brokers")
-GetBootstrapBrokers(ClusterArn, args) = kafka("GET", "/v1/clusters/$clusterArn/bootstrap-brokers", args)
-GetBootstrapBrokers(a...; b...) = GetBootstrapBrokers(a..., b)
+
+Required Parameters:
+{
+  "ClusterArn": "\n            The Amazon Resource Name (ARN) that uniquely identifies the cluster.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetBootstrapBrokers(args) = kafka("GET", "/v1/clusters/{clusterArn}/bootstrap-brokers", args)
+"""
+    DescribeConfiguration
+
 
             Returns a description of this MSK configuration.
          
-"""
-DescribeConfiguration(Arn) = kafka("GET", "/v1/configurations/$arn")
-DescribeConfiguration(Arn, args) = kafka("GET", "/v1/configurations/$arn", args)
-DescribeConfiguration(a...; b...) = DescribeConfiguration(a..., b)
+
+Required Parameters:
+{
+  "Arn": "\n            The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.\n         "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DescribeConfiguration(args) = kafka("GET", "/v1/configurations/{arn}", args)
+"""
+    ListConfigurationRevisions
+
 
             Returns a list of all the MSK configurations in this Region.
          
-"""
-ListConfigurationRevisions(Arn) = kafka("GET", "/v1/configurations/$arn/revisions")
-ListConfigurationRevisions(Arn, args) = kafka("GET", "/v1/configurations/$arn/revisions", args)
-ListConfigurationRevisions(a...; b...) = ListConfigurationRevisions(a..., b)
+
+Required Parameters:
+{
+  "Arn": "\n            The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.\n         "
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "\n            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.\n         ",
+  "NextToken": "\n            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.\n         "
+}
 
 """
+
+ListConfigurationRevisions(args) = kafka("GET", "/v1/configurations/{arn}/revisions", args)
+"""
+    ListClusters
+
 
             Returns a list of all the MSK clusters in the current Region.
          
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "\n            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.\n         ",
+  "NextToken": "\n            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.\n         ",
+  "ClusterNameFilter": "\n            Specify a prefix of the name of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.\n         "
+}
+
 """
 ListClusters() = kafka("GET", "/v1/clusters")
-ListClusters(, args) = kafka("GET", "/v1/clusters", args)
-ListClusters(a...; b...) = ListClusters(a..., b)
+ListClusters(args) = kafka("GET", "/v1/clusters", args)

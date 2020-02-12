@@ -2,631 +2,1706 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: greengrass
 
 """
+    UpdateFunctionDefinition
+
 Updates a Lambda function definition.
-"""
-UpdateFunctionDefinition(FunctionDefinitionId) = greengrass("PUT", "/greengrass/definition/functions/$FunctionDefinitionId")
-UpdateFunctionDefinition(FunctionDefinitionId, args) = greengrass("PUT", "/greengrass/definition/functions/$FunctionDefinitionId", args)
-UpdateFunctionDefinition(a...; b...) = UpdateFunctionDefinition(a..., b)
+
+Required Parameters:
+{
+  "FunctionDefinitionId": "The ID of the Lambda function definition."
+}
+
+
+Optional Parameters:
+{
+  "Name": "The name of the definition."
+}
 
 """
+
+UpdateFunctionDefinition(args) = greengrass("PUT", "/greengrass/definition/functions/{FunctionDefinitionId}", args)
+"""
+    DeleteGroup
+
 Deletes a group.
-"""
-DeleteGroup(GroupId) = greengrass("DELETE", "/greengrass/groups/$GroupId")
-DeleteGroup(GroupId, args) = greengrass("DELETE", "/greengrass/groups/$GroupId", args)
-DeleteGroup(a...; b...) = DeleteGroup(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteGroup(args) = greengrass("DELETE", "/greengrass/groups/{GroupId}", args)
+"""
+    GetGroup
+
 Retrieves information about a group.
-"""
-GetGroup(GroupId) = greengrass("GET", "/greengrass/groups/$GroupId")
-GetGroup(GroupId, args) = greengrass("GET", "/greengrass/groups/$GroupId", args)
-GetGroup(a...; b...) = GetGroup(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetGroup(args) = greengrass("GET", "/greengrass/groups/{GroupId}", args)
+"""
+    ListSubscriptionDefinitionVersions
+
 Lists the versions of a subscription definition.
-"""
-ListSubscriptionDefinitionVersions(SubscriptionDefinitionId) = greengrass("GET", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId/versions")
-ListSubscriptionDefinitionVersions(SubscriptionDefinitionId, args) = greengrass("GET", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId/versions", args)
-ListSubscriptionDefinitionVersions(a...; b...) = ListSubscriptionDefinitionVersions(a..., b)
+
+Required Parameters:
+{
+  "SubscriptionDefinitionId": "The ID of the subscription definition."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListSubscriptionDefinitionVersions(args) = greengrass("GET", "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions", args)
+"""
+    DisassociateServiceRoleFromAccount
+
 Disassociates the service role from your account. Without a service role, deployments will not work.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{}
+
 """
 DisassociateServiceRoleFromAccount() = greengrass("DELETE", "/greengrass/servicerole")
-DisassociateServiceRoleFromAccount(, args) = greengrass("DELETE", "/greengrass/servicerole", args)
-DisassociateServiceRoleFromAccount(a...; b...) = DisassociateServiceRoleFromAccount(a..., b)
+DisassociateServiceRoleFromAccount(args) = greengrass("DELETE", "/greengrass/servicerole", args)
 
 """
+    GetDeviceDefinitionVersion
+
 Retrieves information about a device definition version.
-"""
-GetDeviceDefinitionVersion(DeviceDefinitionVersionId, DeviceDefinitionId) = greengrass("GET", "/greengrass/definition/devices/$DeviceDefinitionId/versions/$DeviceDefinitionVersionId")
-GetDeviceDefinitionVersion(DeviceDefinitionVersionId, DeviceDefinitionId, args) = greengrass("GET", "/greengrass/definition/devices/$DeviceDefinitionId/versions/$DeviceDefinitionVersionId", args)
-GetDeviceDefinitionVersion(a...; b...) = GetDeviceDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "DeviceDefinitionVersionId": "The ID of the device definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListDeviceDefinitionVersions'' requests. If the version is the last one that was associated with a device definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.",
+  "DeviceDefinitionId": "The ID of the device definition."
+}
+
+
+Optional Parameters:
+{
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+GetDeviceDefinitionVersion(args) = greengrass("GET", "/greengrass/definition/devices/{DeviceDefinitionId}/versions/{DeviceDefinitionVersionId}", args)
+"""
+    UpdateResourceDefinition
+
 Updates a resource definition.
-"""
-UpdateResourceDefinition(ResourceDefinitionId) = greengrass("PUT", "/greengrass/definition/resources/$ResourceDefinitionId")
-UpdateResourceDefinition(ResourceDefinitionId, args) = greengrass("PUT", "/greengrass/definition/resources/$ResourceDefinitionId", args)
-UpdateResourceDefinition(a...; b...) = UpdateResourceDefinition(a..., b)
+
+Required Parameters:
+{
+  "ResourceDefinitionId": "The ID of the resource definition."
+}
+
+
+Optional Parameters:
+{
+  "Name": "The name of the definition."
+}
 
 """
+
+UpdateResourceDefinition(args) = greengrass("PUT", "/greengrass/definition/resources/{ResourceDefinitionId}", args)
+"""
+    UpdateLoggerDefinition
+
 Updates a logger definition.
-"""
-UpdateLoggerDefinition(LoggerDefinitionId) = greengrass("PUT", "/greengrass/definition/loggers/$LoggerDefinitionId")
-UpdateLoggerDefinition(LoggerDefinitionId, args) = greengrass("PUT", "/greengrass/definition/loggers/$LoggerDefinitionId", args)
-UpdateLoggerDefinition(a...; b...) = UpdateLoggerDefinition(a..., b)
+
+Required Parameters:
+{
+  "LoggerDefinitionId": "The ID of the logger definition."
+}
+
+
+Optional Parameters:
+{
+  "Name": "The name of the definition."
+}
 
 """
+
+UpdateLoggerDefinition(args) = greengrass("PUT", "/greengrass/definition/loggers/{LoggerDefinitionId}", args)
+"""
+    DeleteCoreDefinition
+
 Deletes a core definition.
-"""
-DeleteCoreDefinition(CoreDefinitionId) = greengrass("DELETE", "/greengrass/definition/cores/$CoreDefinitionId")
-DeleteCoreDefinition(CoreDefinitionId, args) = greengrass("DELETE", "/greengrass/definition/cores/$CoreDefinitionId", args)
-DeleteCoreDefinition(a...; b...) = DeleteCoreDefinition(a..., b)
+
+Required Parameters:
+{
+  "CoreDefinitionId": "The ID of the core definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteCoreDefinition(args) = greengrass("DELETE", "/greengrass/definition/cores/{CoreDefinitionId}", args)
+"""
+    TagResource
+
 Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'.
-"""
-TagResource(ResourceArn) = greengrass("POST", "/tags/$resource-arn")
-TagResource(ResourceArn, args) = greengrass("POST", "/tags/$resource-arn", args)
-TagResource(a...; b...) = TagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) of the resource."
+}
+
+
+Optional Parameters:
+{
+  "tags": ""
+}
 
 """
+
+TagResource(args) = greengrass("POST", "/tags/{resource-arn}", args)
+"""
+    GetConnectorDefinitionVersion
+
 Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
-"""
-GetConnectorDefinitionVersion(ConnectorDefinitionId, ConnectorDefinitionVersionId) = greengrass("GET", "/greengrass/definition/connectors/$ConnectorDefinitionId/versions/$ConnectorDefinitionVersionId")
-GetConnectorDefinitionVersion(ConnectorDefinitionId, ConnectorDefinitionVersionId, args) = greengrass("GET", "/greengrass/definition/connectors/$ConnectorDefinitionId/versions/$ConnectorDefinitionVersionId", args)
-GetConnectorDefinitionVersion(a...; b...) = GetConnectorDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "ConnectorDefinitionId": "The ID of the connector definition.",
+  "ConnectorDefinitionVersionId": "The ID of the connector definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListConnectorDefinitionVersions'' requests. If the version is the last one that was associated with a connector definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
+}
+
+
+Optional Parameters:
+{
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+GetConnectorDefinitionVersion(args) = greengrass("GET", "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions/{ConnectorDefinitionVersionId}", args)
+"""
+    GetResourceDefinition
+
 Retrieves information about a resource definition, including its creation time and latest version.
-"""
-GetResourceDefinition(ResourceDefinitionId) = greengrass("GET", "/greengrass/definition/resources/$ResourceDefinitionId")
-GetResourceDefinition(ResourceDefinitionId, args) = greengrass("GET", "/greengrass/definition/resources/$ResourceDefinitionId", args)
-GetResourceDefinition(a...; b...) = GetResourceDefinition(a..., b)
+
+Required Parameters:
+{
+  "ResourceDefinitionId": "The ID of the resource definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetResourceDefinition(args) = greengrass("GET", "/greengrass/definition/resources/{ResourceDefinitionId}", args)
+"""
+    ListFunctionDefinitionVersions
+
 Lists the versions of a Lambda function definition.
-"""
-ListFunctionDefinitionVersions(FunctionDefinitionId) = greengrass("GET", "/greengrass/definition/functions/$FunctionDefinitionId/versions")
-ListFunctionDefinitionVersions(FunctionDefinitionId, args) = greengrass("GET", "/greengrass/definition/functions/$FunctionDefinitionId/versions", args)
-ListFunctionDefinitionVersions(a...; b...) = ListFunctionDefinitionVersions(a..., b)
+
+Required Parameters:
+{
+  "FunctionDefinitionId": "The ID of the Lambda function definition."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListFunctionDefinitionVersions(args) = greengrass("GET", "/greengrass/definition/functions/{FunctionDefinitionId}/versions", args)
+"""
+    GetSubscriptionDefinitionVersion
+
 Retrieves information about a subscription definition version.
-"""
-GetSubscriptionDefinitionVersion(SubscriptionDefinitionId, SubscriptionDefinitionVersionId) = greengrass("GET", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId/versions/$SubscriptionDefinitionVersionId")
-GetSubscriptionDefinitionVersion(SubscriptionDefinitionId, SubscriptionDefinitionVersionId, args) = greengrass("GET", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId/versions/$SubscriptionDefinitionVersionId", args)
-GetSubscriptionDefinitionVersion(a...; b...) = GetSubscriptionDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "SubscriptionDefinitionVersionId": "The ID of the subscription definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListSubscriptionDefinitionVersions'' requests. If the version is the last one that was associated with a subscription definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.",
+  "SubscriptionDefinitionId": "The ID of the subscription definition."
+}
+
+
+Optional Parameters:
+{
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+GetSubscriptionDefinitionVersion(args) = greengrass("GET", "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions/{SubscriptionDefinitionVersionId}", args)
+"""
+    ListDeployments
+
 Returns a history of deployments for the group.
-"""
-ListDeployments(GroupId) = greengrass("GET", "/greengrass/groups/$GroupId/deployments")
-ListDeployments(GroupId, args) = greengrass("GET", "/greengrass/groups/$GroupId/deployments", args)
-ListDeployments(a...; b...) = ListDeployments(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListDeployments(args) = greengrass("GET", "/greengrass/groups/{GroupId}/deployments", args)
+"""
+    CreateConnectorDefinition
+
 Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "InitialVersion": "Information about the initial version of the connector definition.",
+  "tags": "Tag(s) to add to the new resource.",
+  "Name": "The name of the connector definition.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
 CreateConnectorDefinition() = greengrass("POST", "/greengrass/definition/connectors")
-CreateConnectorDefinition(, args) = greengrass("POST", "/greengrass/definition/connectors", args)
-CreateConnectorDefinition(a...; b...) = CreateConnectorDefinition(a..., b)
+CreateConnectorDefinition(args) = greengrass("POST", "/greengrass/definition/connectors", args)
 
 """
+    GetLoggerDefinition
+
 Retrieves information about a logger definition.
-"""
-GetLoggerDefinition(LoggerDefinitionId) = greengrass("GET", "/greengrass/definition/loggers/$LoggerDefinitionId")
-GetLoggerDefinition(LoggerDefinitionId, args) = greengrass("GET", "/greengrass/definition/loggers/$LoggerDefinitionId", args)
-GetLoggerDefinition(a...; b...) = GetLoggerDefinition(a..., b)
+
+Required Parameters:
+{
+  "LoggerDefinitionId": "The ID of the logger definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetLoggerDefinition(args) = greengrass("GET", "/greengrass/definition/loggers/{LoggerDefinitionId}", args)
+"""
+    CreateDeployment
+
 Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
-"""
-CreateDeployment(GroupId, DeploymentType) = greengrass("POST", "/greengrass/groups/$GroupId/deployments")
-CreateDeployment(GroupId, DeploymentType, args) = greengrass("POST", "/greengrass/groups/$GroupId/deployments", args)
-CreateDeployment(a...; b...) = CreateDeployment(a..., b)
+
+Required Parameters:
+{
+  "DeploymentType": "The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.",
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{
+  "DeploymentId": "The ID of the deployment if you wish to redeploy a previous deployment.",
+  "GroupVersionId": "The ID of the group version to be deployed.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateDeployment(args) = greengrass("POST", "/greengrass/groups/{GroupId}/deployments", args)
+"""
+    DisassociateRoleFromGroup
+
 Disassociates the role from a group.
-"""
-DisassociateRoleFromGroup(GroupId) = greengrass("DELETE", "/greengrass/groups/$GroupId/role")
-DisassociateRoleFromGroup(GroupId, args) = greengrass("DELETE", "/greengrass/groups/$GroupId/role", args)
-DisassociateRoleFromGroup(a...; b...) = DisassociateRoleFromGroup(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DisassociateRoleFromGroup(args) = greengrass("DELETE", "/greengrass/groups/{GroupId}/role", args)
+"""
+    ListCoreDefinitionVersions
+
 Lists the versions of a core definition.
-"""
-ListCoreDefinitionVersions(CoreDefinitionId) = greengrass("GET", "/greengrass/definition/cores/$CoreDefinitionId/versions")
-ListCoreDefinitionVersions(CoreDefinitionId, args) = greengrass("GET", "/greengrass/definition/cores/$CoreDefinitionId/versions", args)
-ListCoreDefinitionVersions(a...; b...) = ListCoreDefinitionVersions(a..., b)
+
+Required Parameters:
+{
+  "CoreDefinitionId": "The ID of the core definition."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListCoreDefinitionVersions(args) = greengrass("GET", "/greengrass/definition/cores/{CoreDefinitionId}/versions", args)
+"""
+    ListResourceDefinitionVersions
+
 Lists the versions of a resource definition.
-"""
-ListResourceDefinitionVersions(ResourceDefinitionId) = greengrass("GET", "/greengrass/definition/resources/$ResourceDefinitionId/versions")
-ListResourceDefinitionVersions(ResourceDefinitionId, args) = greengrass("GET", "/greengrass/definition/resources/$ResourceDefinitionId/versions", args)
-ListResourceDefinitionVersions(a...; b...) = ListResourceDefinitionVersions(a..., b)
+
+Required Parameters:
+{
+  "ResourceDefinitionId": "The ID of the resource definition."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListResourceDefinitionVersions(args) = greengrass("GET", "/greengrass/definition/resources/{ResourceDefinitionId}/versions", args)
+"""
+    StopBulkDeployment
+
 Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
-"""
-StopBulkDeployment(BulkDeploymentId) = greengrass("PUT", "/greengrass/bulk/deployments/$BulkDeploymentId/$stop")
-StopBulkDeployment(BulkDeploymentId, args) = greengrass("PUT", "/greengrass/bulk/deployments/$BulkDeploymentId/$stop", args)
-StopBulkDeployment(a...; b...) = StopBulkDeployment(a..., b)
+
+Required Parameters:
+{
+  "BulkDeploymentId": "The ID of the bulk deployment."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+StopBulkDeployment(args) = greengrass("PUT", "/greengrass/bulk/deployments/{BulkDeploymentId}/$stop", args)
+"""
+    GetSubscriptionDefinition
+
 Retrieves information about a subscription definition.
-"""
-GetSubscriptionDefinition(SubscriptionDefinitionId) = greengrass("GET", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId")
-GetSubscriptionDefinition(SubscriptionDefinitionId, args) = greengrass("GET", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId", args)
-GetSubscriptionDefinition(a...; b...) = GetSubscriptionDefinition(a..., b)
+
+Required Parameters:
+{
+  "SubscriptionDefinitionId": "The ID of the subscription definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetSubscriptionDefinition(args) = greengrass("GET", "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", args)
+"""
+    ListSubscriptionDefinitions
+
 Retrieves a list of subscription definitions.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListSubscriptionDefinitions() = greengrass("GET", "/greengrass/definition/subscriptions")
-ListSubscriptionDefinitions(, args) = greengrass("GET", "/greengrass/definition/subscriptions", args)
-ListSubscriptionDefinitions(a...; b...) = ListSubscriptionDefinitions(a..., b)
+ListSubscriptionDefinitions(args) = greengrass("GET", "/greengrass/definition/subscriptions", args)
 
 """
+    CreateCoreDefinition
+
 Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "InitialVersion": "Information about the initial version of the core definition.",
+  "tags": "Tag(s) to add to the new resource.",
+  "Name": "The name of the core definition.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
 CreateCoreDefinition() = greengrass("POST", "/greengrass/definition/cores")
-CreateCoreDefinition(, args) = greengrass("POST", "/greengrass/definition/cores", args)
-CreateCoreDefinition(a...; b...) = CreateCoreDefinition(a..., b)
+CreateCoreDefinition(args) = greengrass("POST", "/greengrass/definition/cores", args)
 
 """
+    ListLoggerDefinitions
+
 Retrieves a list of logger definitions.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListLoggerDefinitions() = greengrass("GET", "/greengrass/definition/loggers")
-ListLoggerDefinitions(, args) = greengrass("GET", "/greengrass/definition/loggers", args)
-ListLoggerDefinitions(a...; b...) = ListLoggerDefinitions(a..., b)
+ListLoggerDefinitions(args) = greengrass("GET", "/greengrass/definition/loggers", args)
 
 """
+    UntagResource
+
 Remove resource tags from a Greengrass Resource.
-"""
-UntagResource(TagKeys, ResourceArn) = greengrass("DELETE", "/tags/$resource-arn")
-UntagResource(TagKeys, ResourceArn, args) = greengrass("DELETE", "/tags/$resource-arn", args)
-UntagResource(a...; b...) = UntagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) of the resource.",
+  "TagKeys": "An array of tag keys to delete"
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UntagResource(args) = greengrass("DELETE", "/tags/{resource-arn}", args)
+"""
+    GetDeviceDefinition
+
 Retrieves information about a device definition.
-"""
-GetDeviceDefinition(DeviceDefinitionId) = greengrass("GET", "/greengrass/definition/devices/$DeviceDefinitionId")
-GetDeviceDefinition(DeviceDefinitionId, args) = greengrass("GET", "/greengrass/definition/devices/$DeviceDefinitionId", args)
-GetDeviceDefinition(a...; b...) = GetDeviceDefinition(a..., b)
+
+Required Parameters:
+{
+  "DeviceDefinitionId": "The ID of the device definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetDeviceDefinition(args) = greengrass("GET", "/greengrass/definition/devices/{DeviceDefinitionId}", args)
+"""
+    CreateLoggerDefinitionVersion
+
 Creates a version of a logger definition that has already been defined.
-"""
-CreateLoggerDefinitionVersion(LoggerDefinitionId) = greengrass("POST", "/greengrass/definition/loggers/$LoggerDefinitionId/versions")
-CreateLoggerDefinitionVersion(LoggerDefinitionId, args) = greengrass("POST", "/greengrass/definition/loggers/$LoggerDefinitionId/versions", args)
-CreateLoggerDefinitionVersion(a...; b...) = CreateLoggerDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "LoggerDefinitionId": "The ID of the logger definition."
+}
+
+
+Optional Parameters:
+{
+  "Loggers": "A list of loggers.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateLoggerDefinitionVersion(args) = greengrass("POST", "/greengrass/definition/loggers/{LoggerDefinitionId}/versions", args)
+"""
+    ListDeviceDefinitionVersions
+
 Lists the versions of a device definition.
-"""
-ListDeviceDefinitionVersions(DeviceDefinitionId) = greengrass("GET", "/greengrass/definition/devices/$DeviceDefinitionId/versions")
-ListDeviceDefinitionVersions(DeviceDefinitionId, args) = greengrass("GET", "/greengrass/definition/devices/$DeviceDefinitionId/versions", args)
-ListDeviceDefinitionVersions(a...; b...) = ListDeviceDefinitionVersions(a..., b)
+
+Required Parameters:
+{
+  "DeviceDefinitionId": "The ID of the device definition."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListDeviceDefinitionVersions(args) = greengrass("GET", "/greengrass/definition/devices/{DeviceDefinitionId}/versions", args)
+"""
+    CreateResourceDefinitionVersion
+
 Creates a version of a resource definition that has already been defined.
-"""
-CreateResourceDefinitionVersion(ResourceDefinitionId) = greengrass("POST", "/greengrass/definition/resources/$ResourceDefinitionId/versions")
-CreateResourceDefinitionVersion(ResourceDefinitionId, args) = greengrass("POST", "/greengrass/definition/resources/$ResourceDefinitionId/versions", args)
-CreateResourceDefinitionVersion(a...; b...) = CreateResourceDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "ResourceDefinitionId": "The ID of the resource definition."
+}
+
+
+Optional Parameters:
+{
+  "Resources": "A list of resources.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateResourceDefinitionVersion(args) = greengrass("POST", "/greengrass/definition/resources/{ResourceDefinitionId}/versions", args)
+"""
+    GetServiceRoleForAccount
+
 Retrieves the service role that is attached to your account.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{}
+
 """
 GetServiceRoleForAccount() = greengrass("GET", "/greengrass/servicerole")
-GetServiceRoleForAccount(, args) = greengrass("GET", "/greengrass/servicerole", args)
-GetServiceRoleForAccount(a...; b...) = GetServiceRoleForAccount(a..., b)
+GetServiceRoleForAccount(args) = greengrass("GET", "/greengrass/servicerole", args)
 
 """
+    GetLoggerDefinitionVersion
+
 Retrieves information about a logger definition version.
-"""
-GetLoggerDefinitionVersion(LoggerDefinitionVersionId, LoggerDefinitionId) = greengrass("GET", "/greengrass/definition/loggers/$LoggerDefinitionId/versions/$LoggerDefinitionVersionId")
-GetLoggerDefinitionVersion(LoggerDefinitionVersionId, LoggerDefinitionId, args) = greengrass("GET", "/greengrass/definition/loggers/$LoggerDefinitionId/versions/$LoggerDefinitionVersionId", args)
-GetLoggerDefinitionVersion(a...; b...) = GetLoggerDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "LoggerDefinitionId": "The ID of the logger definition.",
+  "LoggerDefinitionVersionId": "The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
+}
+
+
+Optional Parameters:
+{
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+GetLoggerDefinitionVersion(args) = greengrass("GET", "/greengrass/definition/loggers/{LoggerDefinitionId}/versions/{LoggerDefinitionVersionId}", args)
+"""
+    CreateGroup
+
 Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "InitialVersion": "Information about the initial version of the group.",
+  "tags": "Tag(s) to add to the new resource.",
+  "Name": "The name of the group.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
 CreateGroup() = greengrass("POST", "/greengrass/groups")
-CreateGroup(, args) = greengrass("POST", "/greengrass/groups", args)
-CreateGroup(a...; b...) = CreateGroup(a..., b)
+CreateGroup(args) = greengrass("POST", "/greengrass/groups", args)
 
 """
+    DeleteConnectorDefinition
+
 Deletes a connector definition.
-"""
-DeleteConnectorDefinition(ConnectorDefinitionId) = greengrass("DELETE", "/greengrass/definition/connectors/$ConnectorDefinitionId")
-DeleteConnectorDefinition(ConnectorDefinitionId, args) = greengrass("DELETE", "/greengrass/definition/connectors/$ConnectorDefinitionId", args)
-DeleteConnectorDefinition(a...; b...) = DeleteConnectorDefinition(a..., b)
+
+Required Parameters:
+{
+  "ConnectorDefinitionId": "The ID of the connector definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteConnectorDefinition(args) = greengrass("DELETE", "/greengrass/definition/connectors/{ConnectorDefinitionId}", args)
+"""
+    ListLoggerDefinitionVersions
+
 Lists the versions of a logger definition.
-"""
-ListLoggerDefinitionVersions(LoggerDefinitionId) = greengrass("GET", "/greengrass/definition/loggers/$LoggerDefinitionId/versions")
-ListLoggerDefinitionVersions(LoggerDefinitionId, args) = greengrass("GET", "/greengrass/definition/loggers/$LoggerDefinitionId/versions", args)
-ListLoggerDefinitionVersions(a...; b...) = ListLoggerDefinitionVersions(a..., b)
+
+Required Parameters:
+{
+  "LoggerDefinitionId": "The ID of the logger definition."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListLoggerDefinitionVersions(args) = greengrass("GET", "/greengrass/definition/loggers/{LoggerDefinitionId}/versions", args)
+"""
+    ListGroupVersions
+
 Lists the versions of a group.
-"""
-ListGroupVersions(GroupId) = greengrass("GET", "/greengrass/groups/$GroupId/versions")
-ListGroupVersions(GroupId, args) = greengrass("GET", "/greengrass/groups/$GroupId/versions", args)
-ListGroupVersions(a...; b...) = ListGroupVersions(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListGroupVersions(args) = greengrass("GET", "/greengrass/groups/{GroupId}/versions", args)
+"""
+    CreateGroupVersion
+
 Creates a version of a group which has already been defined.
-"""
-CreateGroupVersion(GroupId) = greengrass("POST", "/greengrass/groups/$GroupId/versions")
-CreateGroupVersion(GroupId, args) = greengrass("POST", "/greengrass/groups/$GroupId/versions", args)
-CreateGroupVersion(a...; b...) = CreateGroupVersion(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{
+  "FunctionDefinitionVersionArn": "The ARN of the function definition version for this group.",
+  "ResourceDefinitionVersionArn": "The ARN of the resource definition version for this group.",
+  "DeviceDefinitionVersionArn": "The ARN of the device definition version for this group.",
+  "LoggerDefinitionVersionArn": "The ARN of the logger definition version for this group.",
+  "CoreDefinitionVersionArn": "The ARN of the core definition version for this group.",
+  "SubscriptionDefinitionVersionArn": "The ARN of the subscription definition version for this group.",
+  "AmznClientToken": "A client token used to correlate requests and responses.",
+  "ConnectorDefinitionVersionArn": "The ARN of the connector definition version for this group."
+}
 
 """
+
+CreateGroupVersion(args) = greengrass("POST", "/greengrass/groups/{GroupId}/versions", args)
+"""
+    GetConnectorDefinition
+
 Retrieves information about a connector definition.
-"""
-GetConnectorDefinition(ConnectorDefinitionId) = greengrass("GET", "/greengrass/definition/connectors/$ConnectorDefinitionId")
-GetConnectorDefinition(ConnectorDefinitionId, args) = greengrass("GET", "/greengrass/definition/connectors/$ConnectorDefinitionId", args)
-GetConnectorDefinition(a...; b...) = GetConnectorDefinition(a..., b)
+
+Required Parameters:
+{
+  "ConnectorDefinitionId": "The ID of the connector definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetConnectorDefinition(args) = greengrass("GET", "/greengrass/definition/connectors/{ConnectorDefinitionId}", args)
+"""
+    AssociateServiceRoleToAccount
+
 Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
-"""
-AssociateServiceRoleToAccount(RoleArn) = greengrass("PUT", "/greengrass/servicerole")
-AssociateServiceRoleToAccount(RoleArn, args) = greengrass("PUT", "/greengrass/servicerole", args)
-AssociateServiceRoleToAccount(a...; b...) = AssociateServiceRoleToAccount(a..., b)
+
+Required Parameters:
+{
+  "RoleArn": "The ARN of the service role you wish to associate with your account."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+AssociateServiceRoleToAccount(args) = greengrass("PUT", "/greengrass/servicerole", args)
+"""
+    GetAssociatedRole
+
 Retrieves the role associated with a particular group.
-"""
-GetAssociatedRole(GroupId) = greengrass("GET", "/greengrass/groups/$GroupId/role")
-GetAssociatedRole(GroupId, args) = greengrass("GET", "/greengrass/groups/$GroupId/role", args)
-GetAssociatedRole(a...; b...) = GetAssociatedRole(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetAssociatedRole(args) = greengrass("GET", "/greengrass/groups/{GroupId}/role", args)
+"""
+    StartBulkDeployment
+
 Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
-"""
-StartBulkDeployment(ExecutionRoleArn, InputFileUri) = greengrass("POST", "/greengrass/bulk/deployments")
-StartBulkDeployment(ExecutionRoleArn, InputFileUri, args) = greengrass("POST", "/greengrass/bulk/deployments", args)
-StartBulkDeployment(a...; b...) = StartBulkDeployment(a..., b)
+
+Required Parameters:
+{
+  "InputFileUri": "The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types.",
+  "ExecutionRoleArn": "The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''greengrass:CreateDeployment'' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file."
+}
+
+
+Optional Parameters:
+{
+  "tags": "Tag(s) to add to the new resource.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+StartBulkDeployment(args) = greengrass("POST", "/greengrass/bulk/deployments", args)
+"""
+    UpdateDeviceDefinition
+
 Updates a device definition.
-"""
-UpdateDeviceDefinition(DeviceDefinitionId) = greengrass("PUT", "/greengrass/definition/devices/$DeviceDefinitionId")
-UpdateDeviceDefinition(DeviceDefinitionId, args) = greengrass("PUT", "/greengrass/definition/devices/$DeviceDefinitionId", args)
-UpdateDeviceDefinition(a...; b...) = UpdateDeviceDefinition(a..., b)
+
+Required Parameters:
+{
+  "DeviceDefinitionId": "The ID of the device definition."
+}
+
+
+Optional Parameters:
+{
+  "Name": "The name of the definition."
+}
 
 """
+
+UpdateDeviceDefinition(args) = greengrass("PUT", "/greengrass/definition/devices/{DeviceDefinitionId}", args)
+"""
+    ListTagsForResource
+
 Retrieves a list of resource tags for a resource arn.
-"""
-ListTagsForResource(ResourceArn) = greengrass("GET", "/tags/$resource-arn")
-ListTagsForResource(ResourceArn, args) = greengrass("GET", "/tags/$resource-arn", args)
-ListTagsForResource(a...; b...) = ListTagsForResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) of the resource."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListTagsForResource(args) = greengrass("GET", "/tags/{resource-arn}", args)
+"""
+    GetGroupVersion
+
 Retrieves information about a group version.
-"""
-GetGroupVersion(GroupVersionId, GroupId) = greengrass("GET", "/greengrass/groups/$GroupId/versions/$GroupVersionId")
-GetGroupVersion(GroupVersionId, GroupId, args) = greengrass("GET", "/greengrass/groups/$GroupId/versions/$GroupVersionId", args)
-GetGroupVersion(a...; b...) = GetGroupVersion(a..., b)
+
+Required Parameters:
+{
+  "GroupVersionId": "The ID of the group version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListGroupVersions'' requests. If the version is the last one that was associated with a group, the value also maps to the ''LatestVersion'' property of the corresponding ''GroupInformation'' object.",
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetGroupVersion(args) = greengrass("GET", "/greengrass/groups/{GroupId}/versions/{GroupVersionId}", args)
+"""
+    ListBulkDeploymentDetailedReports
+
 Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
-"""
-ListBulkDeploymentDetailedReports(BulkDeploymentId) = greengrass("GET", "/greengrass/bulk/deployments/$BulkDeploymentId/detailed-reports")
-ListBulkDeploymentDetailedReports(BulkDeploymentId, args) = greengrass("GET", "/greengrass/bulk/deployments/$BulkDeploymentId/detailed-reports", args)
-ListBulkDeploymentDetailedReports(a...; b...) = ListBulkDeploymentDetailedReports(a..., b)
+
+Required Parameters:
+{
+  "BulkDeploymentId": "The ID of the bulk deployment."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListBulkDeploymentDetailedReports(args) = greengrass("GET", "/greengrass/bulk/deployments/{BulkDeploymentId}/detailed-reports", args)
+"""
+    GetCoreDefinition
+
 Retrieves information about a core definition version.
-"""
-GetCoreDefinition(CoreDefinitionId) = greengrass("GET", "/greengrass/definition/cores/$CoreDefinitionId")
-GetCoreDefinition(CoreDefinitionId, args) = greengrass("GET", "/greengrass/definition/cores/$CoreDefinitionId", args)
-GetCoreDefinition(a...; b...) = GetCoreDefinition(a..., b)
+
+Required Parameters:
+{
+  "CoreDefinitionId": "The ID of the core definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetCoreDefinition(args) = greengrass("GET", "/greengrass/definition/cores/{CoreDefinitionId}", args)
+"""
+    ListGroupCertificateAuthorities
+
 Retrieves the current CAs for a group.
-"""
-ListGroupCertificateAuthorities(GroupId) = greengrass("GET", "/greengrass/groups/$GroupId/certificateauthorities")
-ListGroupCertificateAuthorities(GroupId, args) = greengrass("GET", "/greengrass/groups/$GroupId/certificateauthorities", args)
-ListGroupCertificateAuthorities(a...; b...) = ListGroupCertificateAuthorities(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListGroupCertificateAuthorities(args) = greengrass("GET", "/greengrass/groups/{GroupId}/certificateauthorities", args)
+"""
+    GetGroupCertificateConfiguration
+
 Retrieves the current configuration for the CA used by the group.
-"""
-GetGroupCertificateConfiguration(GroupId) = greengrass("GET", "/greengrass/groups/$GroupId/certificateauthorities/configuration/expiry")
-GetGroupCertificateConfiguration(GroupId, args) = greengrass("GET", "/greengrass/groups/$GroupId/certificateauthorities/configuration/expiry", args)
-GetGroupCertificateConfiguration(a...; b...) = GetGroupCertificateConfiguration(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetGroupCertificateConfiguration(args) = greengrass("GET", "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry", args)
+"""
+    GetBulkDeploymentStatus
+
 Returns the status of a bulk deployment.
-"""
-GetBulkDeploymentStatus(BulkDeploymentId) = greengrass("GET", "/greengrass/bulk/deployments/$BulkDeploymentId/status")
-GetBulkDeploymentStatus(BulkDeploymentId, args) = greengrass("GET", "/greengrass/bulk/deployments/$BulkDeploymentId/status", args)
-GetBulkDeploymentStatus(a...; b...) = GetBulkDeploymentStatus(a..., b)
+
+Required Parameters:
+{
+  "BulkDeploymentId": "The ID of the bulk deployment."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetBulkDeploymentStatus(args) = greengrass("GET", "/greengrass/bulk/deployments/{BulkDeploymentId}/status", args)
+"""
+    DeleteDeviceDefinition
+
 Deletes a device definition.
-"""
-DeleteDeviceDefinition(DeviceDefinitionId) = greengrass("DELETE", "/greengrass/definition/devices/$DeviceDefinitionId")
-DeleteDeviceDefinition(DeviceDefinitionId, args) = greengrass("DELETE", "/greengrass/definition/devices/$DeviceDefinitionId", args)
-DeleteDeviceDefinition(a...; b...) = DeleteDeviceDefinition(a..., b)
+
+Required Parameters:
+{
+  "DeviceDefinitionId": "The ID of the device definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteDeviceDefinition(args) = greengrass("DELETE", "/greengrass/definition/devices/{DeviceDefinitionId}", args)
+"""
+    GetResourceDefinitionVersion
+
 Retrieves information about a resource definition version, including which resources are included in the version.
-"""
-GetResourceDefinitionVersion(ResourceDefinitionVersionId, ResourceDefinitionId) = greengrass("GET", "/greengrass/definition/resources/$ResourceDefinitionId/versions/$ResourceDefinitionVersionId")
-GetResourceDefinitionVersion(ResourceDefinitionVersionId, ResourceDefinitionId, args) = greengrass("GET", "/greengrass/definition/resources/$ResourceDefinitionId/versions/$ResourceDefinitionVersionId", args)
-GetResourceDefinitionVersion(a...; b...) = GetResourceDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "ResourceDefinitionVersionId": "The ID of the resource definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListResourceDefinitionVersions'' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.",
+  "ResourceDefinitionId": "The ID of the resource definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetResourceDefinitionVersion(args) = greengrass("GET", "/greengrass/definition/resources/{ResourceDefinitionId}/versions/{ResourceDefinitionVersionId}", args)
+"""
+    AssociateRoleToGroup
+
 Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
-"""
-AssociateRoleToGroup(GroupId, RoleArn) = greengrass("PUT", "/greengrass/groups/$GroupId/role")
-AssociateRoleToGroup(GroupId, RoleArn, args) = greengrass("PUT", "/greengrass/groups/$GroupId/role", args)
-AssociateRoleToGroup(a...; b...) = AssociateRoleToGroup(a..., b)
+
+Required Parameters:
+{
+  "RoleArn": "The ARN of the role you wish to associate with this group. The existence of the role is not validated.",
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+AssociateRoleToGroup(args) = greengrass("PUT", "/greengrass/groups/{GroupId}/role", args)
+"""
+    UpdateSubscriptionDefinition
+
 Updates a subscription definition.
-"""
-UpdateSubscriptionDefinition(SubscriptionDefinitionId) = greengrass("PUT", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId")
-UpdateSubscriptionDefinition(SubscriptionDefinitionId, args) = greengrass("PUT", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId", args)
-UpdateSubscriptionDefinition(a...; b...) = UpdateSubscriptionDefinition(a..., b)
+
+Required Parameters:
+{
+  "SubscriptionDefinitionId": "The ID of the subscription definition."
+}
+
+
+Optional Parameters:
+{
+  "Name": "The name of the definition."
+}
 
 """
+
+UpdateSubscriptionDefinition(args) = greengrass("PUT", "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", args)
+"""
+    ListConnectorDefinitionVersions
+
 Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
-"""
-ListConnectorDefinitionVersions(ConnectorDefinitionId) = greengrass("GET", "/greengrass/definition/connectors/$ConnectorDefinitionId/versions")
-ListConnectorDefinitionVersions(ConnectorDefinitionId, args) = greengrass("GET", "/greengrass/definition/connectors/$ConnectorDefinitionId/versions", args)
-ListConnectorDefinitionVersions(a...; b...) = ListConnectorDefinitionVersions(a..., b)
+
+Required Parameters:
+{
+  "ConnectorDefinitionId": "The ID of the connector definition."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+ListConnectorDefinitionVersions(args) = greengrass("GET", "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions", args)
+"""
+    CreateResourceDefinition
+
 Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ''CreateResourceDefinitionVersion'' later.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "InitialVersion": "Information about the initial version of the resource definition.",
+  "tags": "Tag(s) to add to the new resource.",
+  "Name": "The name of the resource definition.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
 CreateResourceDefinition() = greengrass("POST", "/greengrass/definition/resources")
-CreateResourceDefinition(, args) = greengrass("POST", "/greengrass/definition/resources", args)
-CreateResourceDefinition(a...; b...) = CreateResourceDefinition(a..., b)
+CreateResourceDefinition(args) = greengrass("POST", "/greengrass/definition/resources", args)
 
 """
+    DeleteLoggerDefinition
+
 Deletes a logger definition.
-"""
-DeleteLoggerDefinition(LoggerDefinitionId) = greengrass("DELETE", "/greengrass/definition/loggers/$LoggerDefinitionId")
-DeleteLoggerDefinition(LoggerDefinitionId, args) = greengrass("DELETE", "/greengrass/definition/loggers/$LoggerDefinitionId", args)
-DeleteLoggerDefinition(a...; b...) = DeleteLoggerDefinition(a..., b)
+
+Required Parameters:
+{
+  "LoggerDefinitionId": "The ID of the logger definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteLoggerDefinition(args) = greengrass("DELETE", "/greengrass/definition/loggers/{LoggerDefinitionId}", args)
+"""
+    CreateSubscriptionDefinitionVersion
+
 Creates a version of a subscription definition which has already been defined.
-"""
-CreateSubscriptionDefinitionVersion(SubscriptionDefinitionId) = greengrass("POST", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId/versions")
-CreateSubscriptionDefinitionVersion(SubscriptionDefinitionId, args) = greengrass("POST", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId/versions", args)
-CreateSubscriptionDefinitionVersion(a...; b...) = CreateSubscriptionDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "SubscriptionDefinitionId": "The ID of the subscription definition."
+}
+
+
+Optional Parameters:
+{
+  "Subscriptions": "A list of subscriptions.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateSubscriptionDefinitionVersion(args) = greengrass("POST", "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions", args)
+"""
+    DeleteSubscriptionDefinition
+
 Deletes a subscription definition.
-"""
-DeleteSubscriptionDefinition(SubscriptionDefinitionId) = greengrass("DELETE", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId")
-DeleteSubscriptionDefinition(SubscriptionDefinitionId, args) = greengrass("DELETE", "/greengrass/definition/subscriptions/$SubscriptionDefinitionId", args)
-DeleteSubscriptionDefinition(a...; b...) = DeleteSubscriptionDefinition(a..., b)
+
+Required Parameters:
+{
+  "SubscriptionDefinitionId": "The ID of the subscription definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteSubscriptionDefinition(args) = greengrass("DELETE", "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", args)
+"""
+    GetFunctionDefinition
+
 Retrieves information about a Lambda function definition, including its creation time and latest version.
-"""
-GetFunctionDefinition(FunctionDefinitionId) = greengrass("GET", "/greengrass/definition/functions/$FunctionDefinitionId")
-GetFunctionDefinition(FunctionDefinitionId, args) = greengrass("GET", "/greengrass/definition/functions/$FunctionDefinitionId", args)
-GetFunctionDefinition(a...; b...) = GetFunctionDefinition(a..., b)
+
+Required Parameters:
+{
+  "FunctionDefinitionId": "The ID of the Lambda function definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetFunctionDefinition(args) = greengrass("GET", "/greengrass/definition/functions/{FunctionDefinitionId}", args)
+"""
+    CreateLoggerDefinition
+
 Creates a logger definition. You may provide the initial version of the logger definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "InitialVersion": "Information about the initial version of the logger definition.",
+  "tags": "Tag(s) to add to the new resource.",
+  "Name": "The name of the logger definition.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
 CreateLoggerDefinition() = greengrass("POST", "/greengrass/definition/loggers")
-CreateLoggerDefinition(, args) = greengrass("POST", "/greengrass/definition/loggers", args)
-CreateLoggerDefinition(a...; b...) = CreateLoggerDefinition(a..., b)
+CreateLoggerDefinition(args) = greengrass("POST", "/greengrass/definition/loggers", args)
 
 """
+    CreateDeviceDefinition
+
 Creates a device definition. You may provide the initial version of the device definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "InitialVersion": "Information about the initial version of the device definition.",
+  "tags": "Tag(s) to add to the new resource.",
+  "Name": "The name of the device definition.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
 CreateDeviceDefinition() = greengrass("POST", "/greengrass/definition/devices")
-CreateDeviceDefinition(, args) = greengrass("POST", "/greengrass/definition/devices", args)
-CreateDeviceDefinition(a...; b...) = CreateDeviceDefinition(a..., b)
+CreateDeviceDefinition(args) = greengrass("POST", "/greengrass/definition/devices", args)
 
 """
+    ListCoreDefinitions
+
 Retrieves a list of core definitions.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListCoreDefinitions() = greengrass("GET", "/greengrass/definition/cores")
-ListCoreDefinitions(, args) = greengrass("GET", "/greengrass/definition/cores", args)
-ListCoreDefinitions(a...; b...) = ListCoreDefinitions(a..., b)
+ListCoreDefinitions(args) = greengrass("GET", "/greengrass/definition/cores", args)
 
 """
+    UpdateCoreDefinition
+
 Updates a core definition.
-"""
-UpdateCoreDefinition(CoreDefinitionId) = greengrass("PUT", "/greengrass/definition/cores/$CoreDefinitionId")
-UpdateCoreDefinition(CoreDefinitionId, args) = greengrass("PUT", "/greengrass/definition/cores/$CoreDefinitionId", args)
-UpdateCoreDefinition(a...; b...) = UpdateCoreDefinition(a..., b)
+
+Required Parameters:
+{
+  "CoreDefinitionId": "The ID of the core definition."
+}
+
+
+Optional Parameters:
+{
+  "Name": "The name of the definition."
+}
 
 """
+
+UpdateCoreDefinition(args) = greengrass("PUT", "/greengrass/definition/cores/{CoreDefinitionId}", args)
+"""
+    ListGroups
+
 Retrieves a list of groups.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListGroups() = greengrass("GET", "/greengrass/groups")
-ListGroups(, args) = greengrass("GET", "/greengrass/groups", args)
-ListGroups(a...; b...) = ListGroups(a..., b)
+ListGroups(args) = greengrass("GET", "/greengrass/groups", args)
 
 """
+    GetDeploymentStatus
+
 Returns the status of a deployment.
-"""
-GetDeploymentStatus(GroupId, DeploymentId) = greengrass("GET", "/greengrass/groups/$GroupId/deployments/$DeploymentId/status")
-GetDeploymentStatus(GroupId, DeploymentId, args) = greengrass("GET", "/greengrass/groups/$GroupId/deployments/$DeploymentId/status", args)
-GetDeploymentStatus(a...; b...) = GetDeploymentStatus(a..., b)
+
+Required Parameters:
+{
+  "DeploymentId": "The ID of the deployment.",
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetDeploymentStatus(args) = greengrass("GET", "/greengrass/groups/{GroupId}/deployments/{DeploymentId}/status", args)
+"""
+    UpdateConnectivityInfo
+
 Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
-"""
-UpdateConnectivityInfo(ThingName) = greengrass("PUT", "/greengrass/things/$ThingName/connectivityInfo")
-UpdateConnectivityInfo(ThingName, args) = greengrass("PUT", "/greengrass/things/$ThingName/connectivityInfo", args)
-UpdateConnectivityInfo(a...; b...) = UpdateConnectivityInfo(a..., b)
+
+Required Parameters:
+{
+  "ThingName": "The thing name."
+}
+
+
+Optional Parameters:
+{
+  "ConnectivityInfo": "A list of connectivity info."
+}
 
 """
+
+UpdateConnectivityInfo(args) = greengrass("PUT", "/greengrass/things/{ThingName}/connectivityInfo", args)
+"""
+    CreateGroupCertificateAuthority
+
 Creates a CA for the group. If a CA already exists, it will rotate the existing CA.
-"""
-CreateGroupCertificateAuthority(GroupId) = greengrass("POST", "/greengrass/groups/$GroupId/certificateauthorities")
-CreateGroupCertificateAuthority(GroupId, args) = greengrass("POST", "/greengrass/groups/$GroupId/certificateauthorities", args)
-CreateGroupCertificateAuthority(a...; b...) = CreateGroupCertificateAuthority(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateGroupCertificateAuthority(args) = greengrass("POST", "/greengrass/groups/{GroupId}/certificateauthorities", args)
+"""
+    GetCoreDefinitionVersion
+
 Retrieves information about a core definition version.
-"""
-GetCoreDefinitionVersion(CoreDefinitionId, CoreDefinitionVersionId) = greengrass("GET", "/greengrass/definition/cores/$CoreDefinitionId/versions/$CoreDefinitionVersionId")
-GetCoreDefinitionVersion(CoreDefinitionId, CoreDefinitionVersionId, args) = greengrass("GET", "/greengrass/definition/cores/$CoreDefinitionId/versions/$CoreDefinitionVersionId", args)
-GetCoreDefinitionVersion(a...; b...) = GetCoreDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "CoreDefinitionVersionId": "The ID of the core definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListCoreDefinitionVersions'' requests. If the version is the last one that was associated with a core definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.",
+  "CoreDefinitionId": "The ID of the core definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetCoreDefinitionVersion(args) = greengrass("GET", "/greengrass/definition/cores/{CoreDefinitionId}/versions/{CoreDefinitionVersionId}", args)
+"""
+    UpdateConnectorDefinition
+
 Updates a connector definition.
-"""
-UpdateConnectorDefinition(ConnectorDefinitionId) = greengrass("PUT", "/greengrass/definition/connectors/$ConnectorDefinitionId")
-UpdateConnectorDefinition(ConnectorDefinitionId, args) = greengrass("PUT", "/greengrass/definition/connectors/$ConnectorDefinitionId", args)
-UpdateConnectorDefinition(a...; b...) = UpdateConnectorDefinition(a..., b)
+
+Required Parameters:
+{
+  "ConnectorDefinitionId": "The ID of the connector definition."
+}
+
+
+Optional Parameters:
+{
+  "Name": "The name of the definition."
+}
 
 """
+
+UpdateConnectorDefinition(args) = greengrass("PUT", "/greengrass/definition/connectors/{ConnectorDefinitionId}", args)
+"""
+    CreateSubscriptionDefinition
+
 Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "InitialVersion": "Information about the initial version of the subscription definition.",
+  "tags": "Tag(s) to add to the new resource.",
+  "Name": "The name of the subscription definition.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
 CreateSubscriptionDefinition() = greengrass("POST", "/greengrass/definition/subscriptions")
-CreateSubscriptionDefinition(, args) = greengrass("POST", "/greengrass/definition/subscriptions", args)
-CreateSubscriptionDefinition(a...; b...) = CreateSubscriptionDefinition(a..., b)
+CreateSubscriptionDefinition(args) = greengrass("POST", "/greengrass/definition/subscriptions", args)
 
 """
+    DeleteFunctionDefinition
+
 Deletes a Lambda function definition.
-"""
-DeleteFunctionDefinition(FunctionDefinitionId) = greengrass("DELETE", "/greengrass/definition/functions/$FunctionDefinitionId")
-DeleteFunctionDefinition(FunctionDefinitionId, args) = greengrass("DELETE", "/greengrass/definition/functions/$FunctionDefinitionId", args)
-DeleteFunctionDefinition(a...; b...) = DeleteFunctionDefinition(a..., b)
+
+Required Parameters:
+{
+  "FunctionDefinitionId": "The ID of the Lambda function definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteFunctionDefinition(args) = greengrass("DELETE", "/greengrass/definition/functions/{FunctionDefinitionId}", args)
+"""
+    ResetDeployments
+
 Resets a group's deployments.
-"""
-ResetDeployments(GroupId) = greengrass("POST", "/greengrass/groups/$GroupId/deployments/$reset")
-ResetDeployments(GroupId, args) = greengrass("POST", "/greengrass/groups/$GroupId/deployments/$reset", args)
-ResetDeployments(a...; b...) = ResetDeployments(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{
+  "Force": "If true, performs a best-effort only core reset.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+ResetDeployments(args) = greengrass("POST", "/greengrass/groups/{GroupId}/deployments/$reset", args)
+"""
+    GetGroupCertificateAuthority
+
 Retreives the CA associated with a group. Returns the public key of the CA.
-"""
-GetGroupCertificateAuthority(CertificateAuthorityId, GroupId) = greengrass("GET", "/greengrass/groups/$GroupId/certificateauthorities/$CertificateAuthorityId")
-GetGroupCertificateAuthority(CertificateAuthorityId, GroupId, args) = greengrass("GET", "/greengrass/groups/$GroupId/certificateauthorities/$CertificateAuthorityId", args)
-GetGroupCertificateAuthority(a...; b...) = GetGroupCertificateAuthority(a..., b)
+
+Required Parameters:
+{
+  "CertificateAuthorityId": "The ID of the certificate authority.",
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetGroupCertificateAuthority(args) = greengrass("GET", "/greengrass/groups/{GroupId}/certificateauthorities/{CertificateAuthorityId}", args)
+"""
+    GetFunctionDefinitionVersion
+
 Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.
-"""
-GetFunctionDefinitionVersion(FunctionDefinitionId, FunctionDefinitionVersionId) = greengrass("GET", "/greengrass/definition/functions/$FunctionDefinitionId/versions/$FunctionDefinitionVersionId")
-GetFunctionDefinitionVersion(FunctionDefinitionId, FunctionDefinitionVersionId, args) = greengrass("GET", "/greengrass/definition/functions/$FunctionDefinitionId/versions/$FunctionDefinitionVersionId", args)
-GetFunctionDefinitionVersion(a...; b...) = GetFunctionDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "FunctionDefinitionId": "The ID of the Lambda function definition.",
+  "FunctionDefinitionVersionId": "The ID of the function definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListFunctionDefinitionVersions'' requests. If the version is the last one that was associated with a function definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object."
+}
+
+
+Optional Parameters:
+{
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
 
 """
+
+GetFunctionDefinitionVersion(args) = greengrass("GET", "/greengrass/definition/functions/{FunctionDefinitionId}/versions/{FunctionDefinitionVersionId}", args)
+"""
+    CreateCoreDefinitionVersion
+
 Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
-"""
-CreateCoreDefinitionVersion(CoreDefinitionId) = greengrass("POST", "/greengrass/definition/cores/$CoreDefinitionId/versions")
-CreateCoreDefinitionVersion(CoreDefinitionId, args) = greengrass("POST", "/greengrass/definition/cores/$CoreDefinitionId/versions", args)
-CreateCoreDefinitionVersion(a...; b...) = CreateCoreDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "CoreDefinitionId": "The ID of the core definition."
+}
+
+
+Optional Parameters:
+{
+  "Cores": "A list of cores in the core definition version.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateCoreDefinitionVersion(args) = greengrass("POST", "/greengrass/definition/cores/{CoreDefinitionId}/versions", args)
+"""
+    CreateFunctionDefinitionVersion
+
 Creates a version of a Lambda function definition that has already been defined.
-"""
-CreateFunctionDefinitionVersion(FunctionDefinitionId) = greengrass("POST", "/greengrass/definition/functions/$FunctionDefinitionId/versions")
-CreateFunctionDefinitionVersion(FunctionDefinitionId, args) = greengrass("POST", "/greengrass/definition/functions/$FunctionDefinitionId/versions", args)
-CreateFunctionDefinitionVersion(a...; b...) = CreateFunctionDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "FunctionDefinitionId": "The ID of the Lambda function definition."
+}
+
+
+Optional Parameters:
+{
+  "DefaultConfig": "The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.",
+  "Functions": "A list of Lambda functions in this function definition version.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateFunctionDefinitionVersion(args) = greengrass("POST", "/greengrass/definition/functions/{FunctionDefinitionId}/versions", args)
+"""
+    ListDeviceDefinitions
+
 Retrieves a list of device definitions.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListDeviceDefinitions() = greengrass("GET", "/greengrass/definition/devices")
-ListDeviceDefinitions(, args) = greengrass("GET", "/greengrass/definition/devices", args)
-ListDeviceDefinitions(a...; b...) = ListDeviceDefinitions(a..., b)
+ListDeviceDefinitions(args) = greengrass("GET", "/greengrass/definition/devices", args)
 
 """
+    CreateDeviceDefinitionVersion
+
 Creates a version of a device definition that has already been defined.
-"""
-CreateDeviceDefinitionVersion(DeviceDefinitionId) = greengrass("POST", "/greengrass/definition/devices/$DeviceDefinitionId/versions")
-CreateDeviceDefinitionVersion(DeviceDefinitionId, args) = greengrass("POST", "/greengrass/definition/devices/$DeviceDefinitionId/versions", args)
-CreateDeviceDefinitionVersion(a...; b...) = CreateDeviceDefinitionVersion(a..., b)
+
+Required Parameters:
+{
+  "DeviceDefinitionId": "The ID of the device definition."
+}
+
+
+Optional Parameters:
+{
+  "Devices": "A list of devices in the definition version.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateDeviceDefinitionVersion(args) = greengrass("POST", "/greengrass/definition/devices/{DeviceDefinitionId}/versions", args)
+"""
+    ListFunctionDefinitions
+
 Retrieves a list of Lambda function definitions.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListFunctionDefinitions() = greengrass("GET", "/greengrass/definition/functions")
-ListFunctionDefinitions(, args) = greengrass("GET", "/greengrass/definition/functions", args)
-ListFunctionDefinitions(a...; b...) = ListFunctionDefinitions(a..., b)
+ListFunctionDefinitions(args) = greengrass("GET", "/greengrass/definition/functions", args)
 
 """
+    ListConnectorDefinitions
+
 Retrieves a list of connector definitions.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListConnectorDefinitions() = greengrass("GET", "/greengrass/definition/connectors")
-ListConnectorDefinitions(, args) = greengrass("GET", "/greengrass/definition/connectors", args)
-ListConnectorDefinitions(a...; b...) = ListConnectorDefinitions(a..., b)
+ListConnectorDefinitions(args) = greengrass("GET", "/greengrass/definition/connectors", args)
 
 """
+    UpdateGroupCertificateConfiguration
+
 Updates the Certificate expiry time for a group.
-"""
-UpdateGroupCertificateConfiguration(GroupId) = greengrass("PUT", "/greengrass/groups/$GroupId/certificateauthorities/configuration/expiry")
-UpdateGroupCertificateConfiguration(GroupId, args) = greengrass("PUT", "/greengrass/groups/$GroupId/certificateauthorities/configuration/expiry", args)
-UpdateGroupCertificateConfiguration(a...; b...) = UpdateGroupCertificateConfiguration(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{
+  "CertificateExpiryInMilliseconds": "The amount of time remaining before the certificate expires, in milliseconds."
+}
 
 """
+
+UpdateGroupCertificateConfiguration(args) = greengrass("PUT", "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry", args)
+"""
+    DeleteResourceDefinition
+
 Deletes a resource definition.
-"""
-DeleteResourceDefinition(ResourceDefinitionId) = greengrass("DELETE", "/greengrass/definition/resources/$ResourceDefinitionId")
-DeleteResourceDefinition(ResourceDefinitionId, args) = greengrass("DELETE", "/greengrass/definition/resources/$ResourceDefinitionId", args)
-DeleteResourceDefinition(a...; b...) = DeleteResourceDefinition(a..., b)
+
+Required Parameters:
+{
+  "ResourceDefinitionId": "The ID of the resource definition."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteResourceDefinition(args) = greengrass("DELETE", "/greengrass/definition/resources/{ResourceDefinitionId}", args)
+"""
+    GetConnectivityInfo
+
 Retrieves the connectivity information for a core.
-"""
-GetConnectivityInfo(ThingName) = greengrass("GET", "/greengrass/things/$ThingName/connectivityInfo")
-GetConnectivityInfo(ThingName, args) = greengrass("GET", "/greengrass/things/$ThingName/connectivityInfo", args)
-GetConnectivityInfo(a...; b...) = GetConnectivityInfo(a..., b)
+
+Required Parameters:
+{
+  "ThingName": "The thing name."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetConnectivityInfo(args) = greengrass("GET", "/greengrass/things/{ThingName}/connectivityInfo", args)
+"""
+    ListBulkDeployments
+
 Returns a list of bulk deployments.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListBulkDeployments() = greengrass("GET", "/greengrass/bulk/deployments")
-ListBulkDeployments(, args) = greengrass("GET", "/greengrass/bulk/deployments", args)
-ListBulkDeployments(a...; b...) = ListBulkDeployments(a..., b)
+ListBulkDeployments(args) = greengrass("GET", "/greengrass/bulk/deployments", args)
 
 """
+    ListResourceDefinitions
+
 Retrieves a list of resource definitions.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to be returned per request.",
+  "NextToken": "The token for the next set of results, or ''null'' if there are no additional results."
+}
+
 """
 ListResourceDefinitions() = greengrass("GET", "/greengrass/definition/resources")
-ListResourceDefinitions(, args) = greengrass("GET", "/greengrass/definition/resources", args)
-ListResourceDefinitions(a...; b...) = ListResourceDefinitions(a..., b)
+ListResourceDefinitions(args) = greengrass("GET", "/greengrass/definition/resources", args)
 
 """
+    CreateSoftwareUpdateJob
+
 Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job.
-"""
-CreateSoftwareUpdateJob(S3UrlSignerRole, UpdateTargetsArchitecture, SoftwareToUpdate, UpdateTargets, UpdateTargetsOperatingSystem) = greengrass("POST", "/greengrass/updates")
-CreateSoftwareUpdateJob(S3UrlSignerRole, UpdateTargetsArchitecture, SoftwareToUpdate, UpdateTargets, UpdateTargetsOperatingSystem, args) = greengrass("POST", "/greengrass/updates", args)
-CreateSoftwareUpdateJob(a...; b...) = CreateSoftwareUpdateJob(a..., b)
+
+Required Parameters:
+{
+  "SoftwareToUpdate": "",
+  "UpdateTargetsArchitecture": "",
+  "UpdateTargets": "",
+  "S3UrlSignerRole": "",
+  "UpdateTargetsOperatingSystem": ""
+}
+
+
+Optional Parameters:
+{
+  "UpdateAgentLogLevel": "",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
 
 """
+
+CreateSoftwareUpdateJob(args) = greengrass("POST", "/greengrass/updates", args)
+"""
+    UpdateGroup
+
 Updates a group.
-"""
-UpdateGroup(GroupId) = greengrass("PUT", "/greengrass/groups/$GroupId")
-UpdateGroup(GroupId, args) = greengrass("PUT", "/greengrass/groups/$GroupId", args)
-UpdateGroup(a...; b...) = UpdateGroup(a..., b)
+
+Required Parameters:
+{
+  "GroupId": "The ID of the Greengrass group."
+}
+
+
+Optional Parameters:
+{
+  "Name": "The name of the definition."
+}
 
 """
+
+UpdateGroup(args) = greengrass("PUT", "/greengrass/groups/{GroupId}", args)
+"""
+    CreateFunctionDefinition
+
 Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ''CreateFunctionDefinitionVersion'' later.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "InitialVersion": "Information about the initial version of the function definition.",
+  "tags": "Tag(s) to add to the new resource.",
+  "Name": "The name of the function definition.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
 CreateFunctionDefinition() = greengrass("POST", "/greengrass/definition/functions")
-CreateFunctionDefinition(, args) = greengrass("POST", "/greengrass/definition/functions", args)
-CreateFunctionDefinition(a...; b...) = CreateFunctionDefinition(a..., b)
+CreateFunctionDefinition(args) = greengrass("POST", "/greengrass/definition/functions", args)
 
 """
+    CreateConnectorDefinitionVersion
+
 Creates a version of a connector definition which has already been defined.
+
+Required Parameters:
+{
+  "ConnectorDefinitionId": "The ID of the connector definition."
+}
+
+
+Optional Parameters:
+{
+  "Connectors": "A list of references to connectors in this version, with their corresponding configuration settings.",
+  "AmznClientToken": "A client token used to correlate requests and responses."
+}
+
 """
-CreateConnectorDefinitionVersion(ConnectorDefinitionId) = greengrass("POST", "/greengrass/definition/connectors/$ConnectorDefinitionId/versions")
-CreateConnectorDefinitionVersion(ConnectorDefinitionId, args) = greengrass("POST", "/greengrass/definition/connectors/$ConnectorDefinitionId/versions", args)
-CreateConnectorDefinitionVersion(a...; b...) = CreateConnectorDefinitionVersion(a..., b)
+
+CreateConnectorDefinitionVersion(args) = greengrass("POST", "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions", args)

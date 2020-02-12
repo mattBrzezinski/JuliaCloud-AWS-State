@@ -2,107 +2,255 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: iot_1click_devices_service
 
 """
+    ListTagsForResource
+
 Lists the tags associated with the specified resource ARN.
-"""
-ListTagsForResource(ResourceArn) = iot_1click_devices_service("GET", "/tags/$resource-arn")
-ListTagsForResource(ResourceArn, args) = iot_1click_devices_service("GET", "/tags/$resource-arn", args)
-ListTagsForResource(a...; b...) = ListTagsForResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The ARN of the resource."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListTagsForResource(args) = iot_1click_devices_service("GET", "/tags/{resource-arn}", args)
+"""
+    ListDevices
+
 Lists the 1-Click compatible devices associated with your AWS account.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "DeviceType": "The type of the device, such as \"button\".",
+  "MaxResults": "The maximum number of results to return per request. If not set, a default value of\n 100 is used.",
+  "NextToken": "The token to retrieve the next set of results."
+}
+
 """
 ListDevices() = iot_1click_devices_service("GET", "/devices")
-ListDevices(, args) = iot_1click_devices_service("GET", "/devices", args)
-ListDevices(a...; b...) = ListDevices(a..., b)
+ListDevices(args) = iot_1click_devices_service("GET", "/devices", args)
 
 """
+    InvokeDeviceMethod
+
 Given a device ID, issues a request to invoke a named device method (with possible
  parameters). See the "Example POST" code snippet below.
-"""
-InvokeDeviceMethod(DeviceId) = iot_1click_devices_service("POST", "/devices/$deviceId/methods")
-InvokeDeviceMethod(DeviceId, args) = iot_1click_devices_service("POST", "/devices/$deviceId/methods", args)
-InvokeDeviceMethod(a...; b...) = InvokeDeviceMethod(a..., b)
+
+Required Parameters:
+{
+  "DeviceId": "The unique identifier of the device."
+}
+
+
+Optional Parameters:
+{
+  "DeviceMethodParameters": "A JSON encoded string containing the device method request parameters.",
+  "DeviceMethod": "The device method to invoke."
+}
 
 """
+
+InvokeDeviceMethod(args) = iot_1click_devices_service("POST", "/devices/{deviceId}/methods", args)
+"""
+    TagResource
+
 Adds or updates the tags associated with the resource ARN. See AWS IoT 1-Click Service Limits for the maximum number of tags allowed per
  resource.
-"""
-TagResource(ResourceArn, Tags) = iot_1click_devices_service("POST", "/tags/$resource-arn")
-TagResource(ResourceArn, Tags, args) = iot_1click_devices_service("POST", "/tags/$resource-arn", args)
-TagResource(a...; b...) = TagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The ARN of the resource.",
+  "Tags": "A collection of key/value pairs defining the resource tags. For example, {\n \"tags\": {\"key1\": \"value1\", \"key2\": \"value2\"} }. For more information, see AWS\n Tagging Strategies.\n \n "
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+TagResource(args) = iot_1click_devices_service("POST", "/tags/{resource-arn}", args)
+"""
+    UntagResource
+
 Using tag keys, deletes the tags (key/value pairs) associated with the specified
  resource ARN.
-"""
-UntagResource(TagKeys, ResourceArn) = iot_1click_devices_service("DELETE", "/tags/$resource-arn")
-UntagResource(TagKeys, ResourceArn, args) = iot_1click_devices_service("DELETE", "/tags/$resource-arn", args)
-UntagResource(a...; b...) = UntagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The ARN of the resource.",
+  "TagKeys": "A collections of tag keys. For example, {\"key1\",\"key2\"}"
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UntagResource(args) = iot_1click_devices_service("DELETE", "/tags/{resource-arn}", args)
+"""
+    ListDeviceEvents
+
 Using a device ID, returns a DeviceEventsResponse object containing an
  array of events for the device.
-"""
-ListDeviceEvents(DeviceId, FromTimeStamp, ToTimeStamp) = iot_1click_devices_service("GET", "/devices/$deviceId/events")
-ListDeviceEvents(DeviceId, FromTimeStamp, ToTimeStamp, args) = iot_1click_devices_service("GET", "/devices/$deviceId/events", args)
-ListDeviceEvents(a...; b...) = ListDeviceEvents(a..., b)
+
+Required Parameters:
+{
+  "FromTimeStamp": "The start date for the device event query, in ISO8061 format. For example,\n 2018-03-28T15:45:12.880Z\n ",
+  "ToTimeStamp": "The end date for the device event query, in ISO8061 format. For example,\n 2018-03-28T15:45:12.880Z\n ",
+  "DeviceId": "The unique identifier of the device."
+}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to return per request. If not set, a default value of\n 100 is used.",
+  "NextToken": "The token to retrieve the next set of results."
+}
 
 """
+
+ListDeviceEvents(args) = iot_1click_devices_service("GET", "/devices/{deviceId}/events", args)
+"""
+    FinalizeDeviceClaim
+
 Given a device ID, finalizes the claim request for the associated device.
  Claiming a device consists of initiating a claim, then publishing a device event,
  and finalizing the claim. For a device of type button, a device event can
  be published by simply clicking the device.
  
-"""
-FinalizeDeviceClaim(DeviceId) = iot_1click_devices_service("PUT", "/devices/$deviceId/finalize-claim")
-FinalizeDeviceClaim(DeviceId, args) = iot_1click_devices_service("PUT", "/devices/$deviceId/finalize-claim", args)
-FinalizeDeviceClaim(a...; b...) = FinalizeDeviceClaim(a..., b)
+
+Required Parameters:
+{
+  "DeviceId": "The unique identifier of the device."
+}
+
+
+Optional Parameters:
+{
+  "Tags": "A collection of key/value pairs defining the resource tags. For example, {\n \"tags\": {\"key1\": \"value1\", \"key2\": \"value2\"} }. For more information, see AWS\n Tagging Strategies.\n \n "
+}
 
 """
+
+FinalizeDeviceClaim(args) = iot_1click_devices_service("PUT", "/devices/{deviceId}/finalize-claim", args)
+"""
+    ClaimDevicesByClaimCode
+
 Adds device(s) to your account (i.e., claim one or more devices) if and only if you
  received a claim code with the device(s).
-"""
-ClaimDevicesByClaimCode(ClaimCode) = iot_1click_devices_service("PUT", "/claims/$claimCode")
-ClaimDevicesByClaimCode(ClaimCode, args) = iot_1click_devices_service("PUT", "/claims/$claimCode", args)
-ClaimDevicesByClaimCode(a...; b...) = ClaimDevicesByClaimCode(a..., b)
+
+Required Parameters:
+{
+  "ClaimCode": "The claim code, starting with \"C-\", as provided by the device manufacturer."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ClaimDevicesByClaimCode(args) = iot_1click_devices_service("PUT", "/claims/{claimCode}", args)
+"""
+    DescribeDevice
+
 Given a device ID, returns a DescribeDeviceResponse object describing the
  details of the device.
-"""
-DescribeDevice(DeviceId) = iot_1click_devices_service("GET", "/devices/$deviceId")
-DescribeDevice(DeviceId, args) = iot_1click_devices_service("GET", "/devices/$deviceId", args)
-DescribeDevice(a...; b...) = DescribeDevice(a..., b)
+
+Required Parameters:
+{
+  "DeviceId": "The unique identifier of the device."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DescribeDevice(args) = iot_1click_devices_service("GET", "/devices/{deviceId}", args)
+"""
+    UnclaimDevice
+
 Disassociates a device from your AWS account using its device ID.
-"""
-UnclaimDevice(DeviceId) = iot_1click_devices_service("PUT", "/devices/$deviceId/unclaim")
-UnclaimDevice(DeviceId, args) = iot_1click_devices_service("PUT", "/devices/$deviceId/unclaim", args)
-UnclaimDevice(a...; b...) = UnclaimDevice(a..., b)
+
+Required Parameters:
+{
+  "DeviceId": "The unique identifier of the device."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UnclaimDevice(args) = iot_1click_devices_service("PUT", "/devices/{deviceId}/unclaim", args)
+"""
+    InitiateDeviceClaim
+
 Given a device ID, initiates a claim request for the associated device.
  Claiming a device consists of initiating a claim, then publishing a device event,
  and finalizing the claim. For a device of type button, a device event can
  be published by simply clicking the device.
  
-"""
-InitiateDeviceClaim(DeviceId) = iot_1click_devices_service("PUT", "/devices/$deviceId/initiate-claim")
-InitiateDeviceClaim(DeviceId, args) = iot_1click_devices_service("PUT", "/devices/$deviceId/initiate-claim", args)
-InitiateDeviceClaim(a...; b...) = InitiateDeviceClaim(a..., b)
+
+Required Parameters:
+{
+  "DeviceId": "The unique identifier of the device."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+InitiateDeviceClaim(args) = iot_1click_devices_service("PUT", "/devices/{deviceId}/initiate-claim", args)
+"""
+    GetDeviceMethods
+
 Given a device ID, returns the invokable methods associated with the device.
-"""
-GetDeviceMethods(DeviceId) = iot_1click_devices_service("GET", "/devices/$deviceId/methods")
-GetDeviceMethods(DeviceId, args) = iot_1click_devices_service("GET", "/devices/$deviceId/methods", args)
-GetDeviceMethods(a...; b...) = GetDeviceMethods(a..., b)
+
+Required Parameters:
+{
+  "DeviceId": "The unique identifier of the device."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetDeviceMethods(args) = iot_1click_devices_service("GET", "/devices/{deviceId}/methods", args)
+"""
+    UpdateDeviceState
+
 Using a Boolean value (true or false), this operation
  enables or disables the device given a device ID.
+
+Required Parameters:
+{
+  "DeviceId": "The unique identifier of the device."
+}
+
+
+Optional Parameters:
+{
+  "Enabled": "If true, the device is enabled. If false, the device is\n disabled."
+}
+
 """
-UpdateDeviceState(DeviceId) = iot_1click_devices_service("PUT", "/devices/$deviceId/state")
-UpdateDeviceState(DeviceId, args) = iot_1click_devices_service("PUT", "/devices/$deviceId/state", args)
-UpdateDeviceState(a...; b...) = UpdateDeviceState(a..., b)
+
+UpdateDeviceState(args) = iot_1click_devices_service("PUT", "/devices/{deviceId}/state", args)

@@ -2,120 +2,334 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: mediaconnect
 
 """
+    ListTagsForResource
+
 List all tags on an AWS Elemental MediaConnect resource
-"""
-ListTagsForResource(ResourceArn) = mediaconnect("GET", "/tags/$resourceArn")
-ListTagsForResource(ResourceArn, args) = mediaconnect("GET", "/tags/$resourceArn", args)
-ListTagsForResource(a...; b...) = ListTagsForResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource for which to list the tags."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListTagsForResource(args) = mediaconnect("GET", "/tags/{resourceArn}", args)
+"""
+    DescribeFlow
+
 Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
-"""
-DescribeFlow(FlowArn) = mediaconnect("GET", "/v1/flows/$flowArn")
-DescribeFlow(FlowArn, args) = mediaconnect("GET", "/v1/flows/$flowArn", args)
-DescribeFlow(a...; b...) = DescribeFlow(a..., b)
+
+Required Parameters:
+{
+  "FlowArn": "The ARN of the flow that you want to describe."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DescribeFlow(args) = mediaconnect("GET", "/v1/flows/{flowArn}", args)
+"""
+    AddFlowOutputs
+
 Adds outputs to an existing flow. You can create up to 20 outputs per flow.
-"""
-AddFlowOutputs(FlowArn, Outputs) = mediaconnect("POST", "/v1/flows/$flowArn/outputs")
-AddFlowOutputs(FlowArn, Outputs, args) = mediaconnect("POST", "/v1/flows/$flowArn/outputs", args)
-AddFlowOutputs(a...; b...) = AddFlowOutputs(a..., b)
+
+Required Parameters:
+{
+  "FlowArn": "The flow that you want to add outputs to.",
+  "Outputs": "A list of outputs that you want to add."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+AddFlowOutputs(args) = mediaconnect("POST", "/v1/flows/{flowArn}/outputs", args)
+"""
+    UpdateFlowOutput
+
 Updates an existing flow output.
-"""
-UpdateFlowOutput(FlowArn, OutputArn) = mediaconnect("PUT", "/v1/flows/$flowArn/outputs/$outputArn")
-UpdateFlowOutput(FlowArn, OutputArn, args) = mediaconnect("PUT", "/v1/flows/$flowArn/outputs/$outputArn", args)
-UpdateFlowOutput(a...; b...) = UpdateFlowOutput(a..., b)
+
+Required Parameters:
+{
+  "OutputArn": "The ARN of the output that you want to update.",
+  "FlowArn": "The flow that is associated with the output that you want to update."
+}
+
+
+Optional Parameters:
+{
+  "Encryption": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+  "Description": "A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.",
+  "MaxLatency": "The maximum latency in milliseconds for Zixi-based streams.",
+  "RemoteId": "The remote ID for the Zixi-pull stream.",
+  "CidrAllowList": "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+  "SmoothingLatency": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
+  "StreamId": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+  "Protocol": "The protocol to use for the output.",
+  "Port": "The port to use when content is distributed to this output.",
+  "Destination": "The IP address where you want to send the output."
+}
 
 """
+
+UpdateFlowOutput(args) = mediaconnect("PUT", "/v1/flows/{flowArn}/outputs/{outputArn}", args)
+"""
+    UpdateFlowEntitlement
+
 You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
-"""
-UpdateFlowEntitlement(FlowArn, EntitlementArn) = mediaconnect("PUT", "/v1/flows/$flowArn/entitlements/$entitlementArn")
-UpdateFlowEntitlement(FlowArn, EntitlementArn, args) = mediaconnect("PUT", "/v1/flows/$flowArn/entitlements/$entitlementArn", args)
-UpdateFlowEntitlement(a...; b...) = UpdateFlowEntitlement(a..., b)
+
+Required Parameters:
+{
+  "EntitlementArn": "The ARN of the entitlement that you want to update.",
+  "FlowArn": "The flow that is associated with the entitlement that you want to update."
+}
+
+
+Optional Parameters:
+{
+  "Encryption": "The type of encryption that will be used on the output associated with this entitlement.",
+  "Description": "A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.",
+  "Subscribers": "The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source."
+}
 
 """
+
+UpdateFlowEntitlement(args) = mediaconnect("PUT", "/v1/flows/{flowArn}/entitlements/{entitlementArn}", args)
+"""
+    ListFlows
+
 Displays a list of flows that are associated with this account. This request returns a paginated result.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to return per API request. For example, you submit a ListFlows request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.",
+  "NextToken": "The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value."
+}
+
 """
 ListFlows() = mediaconnect("GET", "/v1/flows")
-ListFlows(, args) = mediaconnect("GET", "/v1/flows", args)
-ListFlows(a...; b...) = ListFlows(a..., b)
+ListFlows(args) = mediaconnect("GET", "/v1/flows", args)
 
 """
+    TagResource
+
 Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
-"""
-TagResource(ResourceArn, Tags) = mediaconnect("POST", "/tags/$resourceArn")
-TagResource(ResourceArn, Tags, args) = mediaconnect("POST", "/tags/$resourceArn", args)
-TagResource(a...; b...) = TagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource to which to add tags.",
+  "Tags": "A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+TagResource(args) = mediaconnect("POST", "/tags/{resourceArn}", args)
+"""
+    UntagResource
+
 Deletes specified tags from a resource.
-"""
-UntagResource(TagKeys, ResourceArn) = mediaconnect("DELETE", "/tags/$resourceArn")
-UntagResource(TagKeys, ResourceArn, args) = mediaconnect("DELETE", "/tags/$resourceArn", args)
-UntagResource(a...; b...) = UntagResource(a..., b)
+
+Required Parameters:
+{
+  "ResourceArn": "The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource from which to delete tags.",
+  "TagKeys": "The keys of the tags to be removed."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UntagResource(args) = mediaconnect("DELETE", "/tags/{resourceArn}", args)
+"""
+    StopFlow
+
 Stops a flow.
-"""
-StopFlow(FlowArn) = mediaconnect("POST", "/v1/flows/stop/$flowArn")
-StopFlow(FlowArn, args) = mediaconnect("POST", "/v1/flows/stop/$flowArn", args)
-StopFlow(a...; b...) = StopFlow(a..., b)
+
+Required Parameters:
+{
+  "FlowArn": "The ARN of the flow that you want to stop."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+StopFlow(args) = mediaconnect("POST", "/v1/flows/stop/{flowArn}", args)
+"""
+    UpdateFlowSource
+
 Updates the source of a flow.
-"""
-UpdateFlowSource(FlowArn, SourceArn) = mediaconnect("PUT", "/v1/flows/$flowArn/source/$sourceArn")
-UpdateFlowSource(FlowArn, SourceArn, args) = mediaconnect("PUT", "/v1/flows/$flowArn/source/$sourceArn", args)
-UpdateFlowSource(a...; b...) = UpdateFlowSource(a..., b)
+
+Required Parameters:
+{
+  "SourceArn": "The ARN of the source that you want to update.",
+  "FlowArn": "The flow that is associated with the source that you want to update."
+}
+
+
+Optional Parameters:
+{
+  "EntitlementArn": "The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator's flow.",
+  "Description": "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
+  "MaxLatency": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
+  "MaxBitrate": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
+  "WhitelistCidr": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+  "Decryption": "The type of encryption used on the content ingested from this source.",
+  "IngestPort": "The port that the flow will be listening on for incoming content.",
+  "Protocol": "The protocol that is used by the source.",
+  "StreamId": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
+}
 
 """
+
+UpdateFlowSource(args) = mediaconnect("PUT", "/v1/flows/{flowArn}/source/{sourceArn}", args)
+"""
+    DeleteFlow
+
 Deletes a flow. Before you can delete a flow, you must stop the flow.
-"""
-DeleteFlow(FlowArn) = mediaconnect("DELETE", "/v1/flows/$flowArn")
-DeleteFlow(FlowArn, args) = mediaconnect("DELETE", "/v1/flows/$flowArn", args)
-DeleteFlow(a...; b...) = DeleteFlow(a..., b)
+
+Required Parameters:
+{
+  "FlowArn": "The ARN of the flow that you want to delete."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteFlow(args) = mediaconnect("DELETE", "/v1/flows/{flowArn}", args)
+"""
+    StartFlow
+
 Starts a flow.
-"""
-StartFlow(FlowArn) = mediaconnect("POST", "/v1/flows/start/$flowArn")
-StartFlow(FlowArn, args) = mediaconnect("POST", "/v1/flows/start/$flowArn", args)
-StartFlow(a...; b...) = StartFlow(a..., b)
+
+Required Parameters:
+{
+  "FlowArn": "The ARN of the flow that you want to start."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+StartFlow(args) = mediaconnect("POST", "/v1/flows/start/{flowArn}", args)
+"""
+    RevokeFlowEntitlement
+
 Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
-"""
-RevokeFlowEntitlement(FlowArn, EntitlementArn) = mediaconnect("DELETE", "/v1/flows/$flowArn/entitlements/$entitlementArn")
-RevokeFlowEntitlement(FlowArn, EntitlementArn, args) = mediaconnect("DELETE", "/v1/flows/$flowArn/entitlements/$entitlementArn", args)
-RevokeFlowEntitlement(a...; b...) = RevokeFlowEntitlement(a..., b)
+
+Required Parameters:
+{
+  "EntitlementArn": "The ARN of the entitlement that you want to revoke.",
+  "FlowArn": "The flow that you want to revoke an entitlement from."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+RevokeFlowEntitlement(args) = mediaconnect("DELETE", "/v1/flows/{flowArn}/entitlements/{entitlementArn}", args)
+"""
+    ListEntitlements
+
 Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "MaxResults": "The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.",
+  "NextToken": "The token that identifies which batch of results that you want to see. For example, you submit a ListEntitlements request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListEntitlements request a second time and specify the NextToken value."
+}
+
 """
 ListEntitlements() = mediaconnect("GET", "/v1/entitlements")
-ListEntitlements(, args) = mediaconnect("GET", "/v1/entitlements", args)
-ListEntitlements(a...; b...) = ListEntitlements(a..., b)
+ListEntitlements(args) = mediaconnect("GET", "/v1/entitlements", args)
 
 """
+    CreateFlow
+
 Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
-"""
-CreateFlow(Source, Name) = mediaconnect("POST", "/v1/flows")
-CreateFlow(Source, Name, args) = mediaconnect("POST", "/v1/flows", args)
-CreateFlow(a...; b...) = CreateFlow(a..., b)
+
+Required Parameters:
+{
+  "Source": "",
+  "Name": "The name of the flow."
+}
+
+
+Optional Parameters:
+{
+  "AvailabilityZone": "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.",
+  "Entitlements": "The entitlements that you want to grant on a flow.",
+  "Outputs": "The outputs that you want to add to this flow."
+}
 
 """
+
+CreateFlow(args) = mediaconnect("POST", "/v1/flows", args)
+"""
+    RemoveFlowOutput
+
 Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
-"""
-RemoveFlowOutput(FlowArn, OutputArn) = mediaconnect("DELETE", "/v1/flows/$flowArn/outputs/$outputArn")
-RemoveFlowOutput(FlowArn, OutputArn, args) = mediaconnect("DELETE", "/v1/flows/$flowArn/outputs/$outputArn", args)
-RemoveFlowOutput(a...; b...) = RemoveFlowOutput(a..., b)
+
+Required Parameters:
+{
+  "OutputArn": "The ARN of the output that you want to remove.",
+  "FlowArn": "The flow that you want to remove an output from."
+}
+
+
+Optional Parameters:
+{}
 
 """
-Grants entitlements to an existing flow.
+
+RemoveFlowOutput(args) = mediaconnect("DELETE", "/v1/flows/{flowArn}/outputs/{outputArn}", args)
 """
-GrantFlowEntitlements(FlowArn, Entitlements) = mediaconnect("POST", "/v1/flows/$flowArn/entitlements")
-GrantFlowEntitlements(FlowArn, Entitlements, args) = mediaconnect("POST", "/v1/flows/$flowArn/entitlements", args)
-GrantFlowEntitlements(a...; b...) = GrantFlowEntitlements(a..., b)
+    GrantFlowEntitlements
+
+Grants entitlements to an existing flow.
+
+Required Parameters:
+{
+  "FlowArn": "The flow that you want to grant entitlements on.",
+  "Entitlements": "The list of entitlements that you want to grant."
+}
+
+
+Optional Parameters:
+{}
+
+"""
+
+GrantFlowEntitlements(args) = mediaconnect("POST", "/v1/flows/{flowArn}/entitlements", args)

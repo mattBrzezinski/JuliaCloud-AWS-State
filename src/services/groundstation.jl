@@ -2,176 +2,479 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: groundstation
 
 """
+    ListTagsForResource
+
 Returns a list of tags for a specified resource.
-"""
-ListTagsForResource(resourceArn) = groundstation("GET", "/tags/$resourceArn")
-ListTagsForResource(resourceArn, args) = groundstation("GET", "/tags/$resourceArn", args)
-ListTagsForResource(a...; b...) = ListTagsForResource(a..., b)
+
+Required Parameters:
+{
+  "resourceArn": "ARN of a resource."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListTagsForResource(args) = groundstation("GET", "/tags/{resourceArn}", args)
+"""
+    DeleteDataflowEndpointGroup
+
 Deletes a dataflow endpoint group.
-"""
-DeleteDataflowEndpointGroup(dataflowEndpointGroupId) = groundstation("DELETE", "/dataflowEndpointGroup/$dataflowEndpointGroupId")
-DeleteDataflowEndpointGroup(dataflowEndpointGroupId, args) = groundstation("DELETE", "/dataflowEndpointGroup/$dataflowEndpointGroupId", args)
-DeleteDataflowEndpointGroup(a...; b...) = DeleteDataflowEndpointGroup(a..., b)
+
+Required Parameters:
+{
+  "dataflowEndpointGroupId": "UUID of a dataflow endpoint group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteDataflowEndpointGroup(args) = groundstation("DELETE", "/dataflowEndpointGroup/{dataflowEndpointGroupId}", args)
+"""
+    ListContacts
+
 Returns a list of contacts. If statusList contains AVAILABLE, the request must include groundStation, missionprofileArn, and satelliteArn. 
-"""
-ListContacts(endTime, startTime, statusList) = groundstation("POST", "/contacts")
-ListContacts(endTime, startTime, statusList, args) = groundstation("POST", "/contacts", args)
-ListContacts(a...; b...) = ListContacts(a..., b)
+
+Required Parameters:
+{
+  "startTime": "Start time of a contact.",
+  "statusList": "Status of a contact reservation.",
+  "endTime": "End time of a contact."
+}
+
+
+Optional Parameters:
+{
+  "satelliteArn": "ARN of a satellite.",
+  "missionProfileArn": "ARN of a mission profile.",
+  "maxResults": "Maximum number of contacts returned.",
+  "nextToken": "Next token returned in the request of a previous ListContacts call. Used to get the next page of results.",
+  "groundStation": "Name of a ground station."
+}
 
 """
+
+ListContacts(args) = groundstation("POST", "/contacts", args)
+"""
+    ListMissionProfiles
+
 Returns a list of mission profiles.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "maxResults": "Maximum number of mission profiles returned.",
+  "nextToken": "Next token returned in the request of a previous ListMissionProfiles call. Used to get the next page of results."
+}
+
 """
 ListMissionProfiles() = groundstation("GET", "/missionprofile")
-ListMissionProfiles(, args) = groundstation("GET", "/missionprofile", args)
-ListMissionProfiles(a...; b...) = ListMissionProfiles(a..., b)
+ListMissionProfiles(args) = groundstation("GET", "/missionprofile", args)
 
 """
+    ListGroundStations
+
 Returns a list of ground stations. 
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "satelliteId": "Satellite ID to retrieve on-boarded ground stations.",
+  "maxResults": "Maximum number of ground stations returned.",
+  "nextToken": "Next token that can be supplied in the next call to get the next page of ground stations."
+}
+
 """
 ListGroundStations() = groundstation("GET", "/groundstation")
-ListGroundStations(, args) = groundstation("GET", "/groundstation", args)
-ListGroundStations(a...; b...) = ListGroundStations(a..., b)
+ListGroundStations(args) = groundstation("GET", "/groundstation", args)
 
 """
+    CreateDataflowEndpointGroup
+
 Creates a DataflowEndpoint group containing the specified list of DataflowEndpoint objects. The name field in each endpoint is used in your mission profile DataflowEndpointConfig to specify which endpoints to use during a contact. When a contact uses multiple DataflowEndpointConfig objects, each Config must match a DataflowEndpoint in the same group.
-"""
-CreateDataflowEndpointGroup(endpointDetails) = groundstation("POST", "/dataflowEndpointGroup")
-CreateDataflowEndpointGroup(endpointDetails, args) = groundstation("POST", "/dataflowEndpointGroup", args)
-CreateDataflowEndpointGroup(a...; b...) = CreateDataflowEndpointGroup(a..., b)
+
+Required Parameters:
+{
+  "endpointDetails": "Endpoint details of each endpoint in the dataflow endpoint group."
+}
+
+
+Optional Parameters:
+{
+  "tags": "Tags of a dataflow endpoint group."
+}
 
 """
+
+CreateDataflowEndpointGroup(args) = groundstation("POST", "/dataflowEndpointGroup", args)
+"""
+    DeleteMissionProfile
+
 Deletes a mission profile.
-"""
-DeleteMissionProfile(missionProfileId) = groundstation("DELETE", "/missionprofile/$missionProfileId")
-DeleteMissionProfile(missionProfileId, args) = groundstation("DELETE", "/missionprofile/$missionProfileId", args)
-DeleteMissionProfile(a...; b...) = DeleteMissionProfile(a..., b)
+
+Required Parameters:
+{
+  "missionProfileId": "UUID of a mission profile."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteMissionProfile(args) = groundstation("DELETE", "/missionprofile/{missionProfileId}", args)
+"""
+    GetConfig
+
 Returns Config information. Only one Config response can be returned.
-"""
-GetConfig(configId, configType) = groundstation("GET", "/config/$configType/$configId")
-GetConfig(configId, configType, args) = groundstation("GET", "/config/$configType/$configId", args)
-GetConfig(a...; b...) = GetConfig(a..., b)
+
+Required Parameters:
+{
+  "configType": "Type of a Config.",
+  "configId": "UUID of a Config."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetConfig(args) = groundstation("GET", "/config/{configType}/{configId}", args)
+"""
+    ListConfigs
+
 Returns a list of Config objects.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "maxResults": "Maximum number of Configs returned.",
+  "nextToken": "Next token returned in the request of a previous ListConfigs call. Used to get the next page of results."
+}
+
 """
 ListConfigs() = groundstation("GET", "/config")
-ListConfigs(, args) = groundstation("GET", "/config", args)
-ListConfigs(a...; b...) = ListConfigs(a..., b)
+ListConfigs(args) = groundstation("GET", "/config", args)
 
 """
+    DescribeContact
+
 Describes an existing contact.
-"""
-DescribeContact(contactId) = groundstation("GET", "/contact/$contactId")
-DescribeContact(contactId, args) = groundstation("GET", "/contact/$contactId", args)
-DescribeContact(a...; b...) = DescribeContact(a..., b)
+
+Required Parameters:
+{
+  "contactId": "UUID of a contact."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DescribeContact(args) = groundstation("GET", "/contact/{contactId}", args)
+"""
+    CreateMissionProfile
+
 Creates a mission profile.  dataflowEdges is a list of lists of strings. Each lower level list of strings has two elements: a from ARN and a to ARN.
-"""
-CreateMissionProfile(dataflowEdges, minimumViableContactDurationSeconds, name, trackingConfigArn) = groundstation("POST", "/missionprofile")
-CreateMissionProfile(dataflowEdges, minimumViableContactDurationSeconds, name, trackingConfigArn, args) = groundstation("POST", "/missionprofile", args)
-CreateMissionProfile(a...; b...) = CreateMissionProfile(a..., b)
+
+Required Parameters:
+{
+  "name": "Name of a mission profile.",
+  "trackingConfigArn": "ARN of a tracking Config.",
+  "dataflowEdges": "A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a to Config.",
+  "minimumViableContactDurationSeconds": "Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration."
+}
+
+
+Optional Parameters:
+{
+  "contactPrePassDurationSeconds": "Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.",
+  "contactPostPassDurationSeconds": "Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.",
+  "tags": "Tags assigned to a mission profile."
+}
 
 """
+
+CreateMissionProfile(args) = groundstation("POST", "/missionprofile", args)
+"""
+    GetDataflowEndpointGroup
+
 Returns the dataflow endpoint group.
-"""
-GetDataflowEndpointGroup(dataflowEndpointGroupId) = groundstation("GET", "/dataflowEndpointGroup/$dataflowEndpointGroupId")
-GetDataflowEndpointGroup(dataflowEndpointGroupId, args) = groundstation("GET", "/dataflowEndpointGroup/$dataflowEndpointGroupId", args)
-GetDataflowEndpointGroup(a...; b...) = GetDataflowEndpointGroup(a..., b)
+
+Required Parameters:
+{
+  "dataflowEndpointGroupId": "UUID of a dataflow endpoint group."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetDataflowEndpointGroup(args) = groundstation("GET", "/dataflowEndpointGroup/{dataflowEndpointGroupId}", args)
+"""
+    GetSatellite
+
 Returns a satellite.
-"""
-GetSatellite(satelliteId) = groundstation("GET", "/satellite/$satelliteId")
-GetSatellite(satelliteId, args) = groundstation("GET", "/satellite/$satelliteId", args)
-GetSatellite(a...; b...) = GetSatellite(a..., b)
+
+Required Parameters:
+{
+  "satelliteId": "UUID of a satellite."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetSatellite(args) = groundstation("GET", "/satellite/{satelliteId}", args)
+"""
+    CancelContact
+
 Cancels a contact with a specified contact ID.
-"""
-CancelContact(contactId) = groundstation("DELETE", "/contact/$contactId")
-CancelContact(contactId, args) = groundstation("DELETE", "/contact/$contactId", args)
-CancelContact(a...; b...) = CancelContact(a..., b)
+
+Required Parameters:
+{
+  "contactId": "UUID of a contact."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+CancelContact(args) = groundstation("DELETE", "/contact/{contactId}", args)
+"""
+    ReserveContact
+
 Reserves a contact using specified parameters.
-"""
-ReserveContact(endTime, groundStation, missionProfileArn, satelliteArn, startTime) = groundstation("POST", "/contact")
-ReserveContact(endTime, groundStation, missionProfileArn, satelliteArn, startTime, args) = groundstation("POST", "/contact", args)
-ReserveContact(a...; b...) = ReserveContact(a..., b)
+
+Required Parameters:
+{
+  "satelliteArn": "ARN of a satellite",
+  "startTime": "Start time of a contact.",
+  "missionProfileArn": "ARN of a mission profile.",
+  "endTime": "End time of a contact.",
+  "groundStation": "Name of a ground station."
+}
+
+
+Optional Parameters:
+{
+  "tags": "Tags assigned to a contact."
+}
 
 """
+
+ReserveContact(args) = groundstation("POST", "/contact", args)
+"""
+    TagResource
+
 Assigns a tag to a resource.
-"""
-TagResource(resourceArn, tags) = groundstation("POST", "/tags/$resourceArn")
-TagResource(resourceArn, tags, args) = groundstation("POST", "/tags/$resourceArn", args)
-TagResource(a...; b...) = TagResource(a..., b)
+
+Required Parameters:
+{
+  "resourceArn": "ARN of a resource tag.",
+  "tags": "Tags assigned to a resource."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+TagResource(args) = groundstation("POST", "/tags/{resourceArn}", args)
+"""
+    UntagResource
+
 Deassigns a resource tag.
-"""
-UntagResource(resourceArn, tagKeys) = groundstation("DELETE", "/tags/$resourceArn")
-UntagResource(resourceArn, tagKeys, args) = groundstation("DELETE", "/tags/$resourceArn", args)
-UntagResource(a...; b...) = UntagResource(a..., b)
+
+Required Parameters:
+{
+  "resourceArn": "ARN of a resource.",
+  "tagKeys": "Keys of a resource tag."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UntagResource(args) = groundstation("DELETE", "/tags/{resourceArn}", args)
+"""
+    UpdateConfig
+
 Updates the Config used when scheduling contacts. Updating a Config will not update the execution parameters for existing future contacts scheduled with this Config.
-"""
-UpdateConfig(configData, configId, configType, name) = groundstation("PUT", "/config/$configType/$configId")
-UpdateConfig(configData, configId, configType, name, args) = groundstation("PUT", "/config/$configType/$configId", args)
-UpdateConfig(a...; b...) = UpdateConfig(a..., b)
+
+Required Parameters:
+{
+  "name": "Name of a Config.",
+  "configType": "Type of a Config.",
+  "configId": "UUID of a Config.",
+  "configData": "Parameters of a Config."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+UpdateConfig(args) = groundstation("PUT", "/config/{configType}/{configId}", args)
+"""
+    ListSatellites
+
 Returns a list of satellites.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "maxResults": "Maximum number of satellites returned.",
+  "nextToken": "Next token that can be supplied in the next call to get the next page of satellites."
+}
+
 """
 ListSatellites() = groundstation("GET", "/satellite")
-ListSatellites(, args) = groundstation("GET", "/satellite", args)
-ListSatellites(a...; b...) = ListSatellites(a..., b)
+ListSatellites(args) = groundstation("GET", "/satellite", args)
 
 """
+    GetMinuteUsage
+
 Returns the number of minutes used by account.
-"""
-GetMinuteUsage(month, year) = groundstation("POST", "/minute-usage")
-GetMinuteUsage(month, year, args) = groundstation("POST", "/minute-usage", args)
-GetMinuteUsage(a...; b...) = GetMinuteUsage(a..., b)
+
+Required Parameters:
+{
+  "month": "The month being requested, with a value of 1-12.",
+  "year": "The year being requested, in the format of YYYY."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetMinuteUsage(args) = groundstation("POST", "/minute-usage", args)
+"""
+    CreateConfig
+
 Creates a Config with the specified configData parameters. Only one type of configData can be specified.
-"""
-CreateConfig(configData, name) = groundstation("POST", "/config")
-CreateConfig(configData, name, args) = groundstation("POST", "/config", args)
-CreateConfig(a...; b...) = CreateConfig(a..., b)
+
+Required Parameters:
+{
+  "name": "Name of a Config.",
+  "configData": "Parameters of a Config."
+}
+
+
+Optional Parameters:
+{
+  "tags": "Tags assigned to a Config."
+}
 
 """
+
+CreateConfig(args) = groundstation("POST", "/config", args)
+"""
+    GetMissionProfile
+
 Returns a mission profile.
-"""
-GetMissionProfile(missionProfileId) = groundstation("GET", "/missionprofile/$missionProfileId")
-GetMissionProfile(missionProfileId, args) = groundstation("GET", "/missionprofile/$missionProfileId", args)
-GetMissionProfile(a...; b...) = GetMissionProfile(a..., b)
+
+Required Parameters:
+{
+  "missionProfileId": "UUID of a mission profile."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+GetMissionProfile(args) = groundstation("GET", "/missionprofile/{missionProfileId}", args)
+"""
+    DeleteConfig
+
 Deletes a Config.
-"""
-DeleteConfig(configId, configType) = groundstation("DELETE", "/config/$configType/$configId")
-DeleteConfig(configId, configType, args) = groundstation("DELETE", "/config/$configType/$configId", args)
-DeleteConfig(a...; b...) = DeleteConfig(a..., b)
+
+Required Parameters:
+{
+  "configType": "Type of a Config.",
+  "configId": "UUID of a Config."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+DeleteConfig(args) = groundstation("DELETE", "/config/{configType}/{configId}", args)
+"""
+    ListDataflowEndpointGroups
+
 Returns a list of DataflowEndpoint groups.
+
+Required Parameters:
+{}
+
+
+Optional Parameters:
+{
+  "maxResults": "Maximum number of dataflow endpoint groups returned.",
+  "nextToken": "Next token returned in the request of a previous ListDataflowEndpointGroups call. Used to get the next page of results."
+}
+
 """
 ListDataflowEndpointGroups() = groundstation("GET", "/dataflowEndpointGroup")
-ListDataflowEndpointGroups(, args) = groundstation("GET", "/dataflowEndpointGroup", args)
-ListDataflowEndpointGroups(a...; b...) = ListDataflowEndpointGroups(a..., b)
+ListDataflowEndpointGroups(args) = groundstation("GET", "/dataflowEndpointGroup", args)
 
 """
+    UpdateMissionProfile
+
 Updates a mission profile. Updating a mission profile will not update the execution parameters for existing future contacts.
+
+Required Parameters:
+{
+  "missionProfileId": "UUID of a mission profile."
+}
+
+
+Optional Parameters:
+{
+  "name": "Name of a mission profile.",
+  "trackingConfigArn": "ARN of a tracking Config.",
+  "contactPrePassDurationSeconds": "Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.",
+  "contactPostPassDurationSeconds": "Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.",
+  "dataflowEdges": "A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a to Config.",
+  "minimumViableContactDurationSeconds": "Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration."
+}
+
 """
-UpdateMissionProfile(missionProfileId) = groundstation("PUT", "/missionprofile/$missionProfileId")
-UpdateMissionProfile(missionProfileId, args) = groundstation("PUT", "/missionprofile/$missionProfileId", args)
-UpdateMissionProfile(a...; b...) = UpdateMissionProfile(a..., b)
+
+UpdateMissionProfile(args) = groundstation("PUT", "/missionprofile/{missionProfileId}", args)

@@ -2,22 +2,55 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: elastic_inference
 
 """
+    ListTagsForResource
+
 Returns all tags of an Elastic Inference Accelerator.
-"""
-ListTagsForResource(resourceArn) = elastic_inference("GET", "/tags/$resourceArn")
-ListTagsForResource(resourceArn, args) = elastic_inference("GET", "/tags/$resourceArn", args)
-ListTagsForResource(a...; b...) = ListTagsForResource(a..., b)
+
+Required Parameters:
+{
+  "resourceArn": "The ARN of the Elastic Inference Accelerator to list the tags for."
+}
+
+
+Optional Parameters:
+{}
 
 """
+
+ListTagsForResource(args) = elastic_inference("GET", "/tags/{resourceArn}", args)
+"""
+    TagResource
+
 Adds the specified tag(s) to an Elastic Inference Accelerator.
-"""
-TagResource(resourceArn, tags) = elastic_inference("POST", "/tags/$resourceArn")
-TagResource(resourceArn, tags, args) = elastic_inference("POST", "/tags/$resourceArn", args)
-TagResource(a...; b...) = TagResource(a..., b)
+
+Required Parameters:
+{
+  "resourceArn": "The ARN of the Elastic Inference Accelerator to tag.",
+  "tags": "The tags to add to the Elastic Inference Accelerator."
+}
+
+
+Optional Parameters:
+{}
 
 """
-Removes the specified tag(s) from an Elastic Inference Accelerator.
+
+TagResource(args) = elastic_inference("POST", "/tags/{resourceArn}", args)
 """
-UntagResource(resourceArn, tagKeys) = elastic_inference("DELETE", "/tags/$resourceArn")
-UntagResource(resourceArn, tagKeys, args) = elastic_inference("DELETE", "/tags/$resourceArn", args)
-UntagResource(a...; b...) = UntagResource(a..., b)
+    UntagResource
+
+Removes the specified tag(s) from an Elastic Inference Accelerator.
+
+Required Parameters:
+{
+  "resourceArn": "The ARN of the Elastic Inference Accelerator to untag.",
+  "tagKeys": "The list of tags to remove from the Elastic Inference Accelerator."
+}
+
+
+Optional Parameters:
+{}
+
+"""
+
+UntagResource(args) = elastic_inference("DELETE", "/tags/{resourceArn}", args)

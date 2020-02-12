@@ -100,7 +100,7 @@
     "version": "2016-05-10"
   },
   "cloudformation-2010-05-15.normal.json": {
-    "sha": "97c556c927cef7645603abe24465f1bb390e18ea",
+    "sha": "12760a6018394fd8ecbca5a662b74f7cc0aa00e5",
     "version": "2010-05-15"
   },
   "cloudfront-2016-11-25.normal.json": {
@@ -168,7 +168,7 @@
     "version": "2014-06-30"
   },
   "cognito-idp-2016-04-18.normal.json": {
-    "sha": "ae05eb35399df9ef2e129e850dc7d0f1350b01b4",
+    "sha": "100eb3058b57f2735ad471a293638880dc29c16d",
     "version": "2016-04-18"
   },
   "cognito-sync-2014-06-30.normal.json": {
@@ -244,7 +244,7 @@
     "version": "2016-01-01"
   },
   "docdb-2014-10-31.normal.json": {
-    "sha": "f32d6de9a1b455d1deebd6142c8e7df2c3878ef7",
+    "sha": "d4253c0b414ef08bef658fa31566fbadcf10b1ce",
     "version": "2014-10-31"
   },
   "ds-2015-04-16.normal.json": {
@@ -260,7 +260,7 @@
     "version": "2019-11-02"
   },
   "ec2-2016-11-15.normal.json": {
-    "sha": "b3e41a8b5de2b36654e3b0b126a57acbe0b72b45",
+    "sha": "076eb4f2cd935c027017a3fca9a1ce3fea64385e",
     "version": "2016-11-15"
   },
   "ec2-instance-connect-2018-04-02.normal.json": {
@@ -392,7 +392,7 @@
     "version": "2010-05-08"
   },
   "imagebuilder-2019-12-02.normal.json": {
-    "sha": "c11248bbf0ac97dde0fab589154f1a3637048a1d",
+    "sha": "a3eb26a0e6c9899295289a6ce3c75f7518ac6ee8",
     "version": "2019-12-02"
   },
   "importexport-2010-06-01.normal.json": {
@@ -480,7 +480,7 @@
     "version": "2017-09-30"
   },
   "kms-2014-11-01.normal.json": {
-    "sha": "b275baff4b1efb1f31c5c4e857d3476d646d4061",
+    "sha": "3c186fca2d4831b653eb9fa94ac701f30aca4130",
     "version": "2014-11-01"
   },
   "lakeformation-2017-03-31.normal.json": {
@@ -684,7 +684,7 @@
     "version": "2017-01-26"
   },
   "robomaker-2018-06-29.normal.json": {
-    "sha": "0e3effa9a112d1afd748aac290d2adf57d30ef19",
+    "sha": "60ba8d16db897b9510b6717a7b3c048cf729bac9",
     "version": "2018-06-29"
   },
   "route53-2013-04-01.normal.json": {
