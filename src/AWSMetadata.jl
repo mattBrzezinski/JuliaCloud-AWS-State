@@ -216,32 +216,41 @@ function _generate_wrapper(service_name::String, protocol::String, operations::D
 
         operation_definition = """
         \"\"\"
-            $name
+            $name()
 
         $documentation
-
-        Required Parameters:
-        $(json(required_parameters, 2))
-
-        Optional Parameters:
-        $(json(optional_parameters, 2))
-        \"\"\"
         """
+
+        if !isempty(required_parameters)
+            operation_definition = operation_definition * """
+
+            Required Parameters
+            $(json(required_parameters, 2))"""
+        end
+
+        if !isempty(optional_parameters)
+            operation_definition = operation_definition * """
+
+            Optional Parameters
+            $(json(optional_parameters, 2))"""
+        end
+
+        operation_definition = operation_definition * "\"\"\""
 
         if protocol in ["json", "query", "ec2"]
             if !isempty(required_parameters)
-                operation_definition = operation_definition * "\n$name(args) = $service_name(\"$name\", args)"
+                operation_definition = operation_definition * "\n$name(args) = $service_name(\"$name\", args)\n"
             else
-                operation_definition = operation_definition * """
+                operation_definition = operation_definition * """\n
                     $name() = $service_name(\"$name\")
                     $name(args) = $service_name(\"$name\", args)
                     """
             end
         elseif protocol == "rest-json"
             if !isempty(required_parameters)
-                operation_definition = operation_definition * "\n$name(args) = $service_name(\"$method\", \"$request_uri\", args)"
+                operation_definition = operation_definition * "\n$name(args) = $service_name(\"$method\", \"$request_uri\", args)\n"
             else
-                operation_definition = operation_definition * """
+                operation_definition = operation_definition * """\n
                 $name() = $service_name(\"$method\", \"$request_uri\")
                 $name(args) = $service_name(\"$method\", \"$request_uri\", args)
                 """

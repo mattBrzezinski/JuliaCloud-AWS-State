@@ -2,132 +2,99 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: iotsecuretunneling
 
 """
-    ListTagsForResource
+    ListTagsForResource()
 
 Lists the tags for the specified resource.
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": "The resource ARN."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTagsForResource(args) = iotsecuretunneling("ListTagsForResource", args)
+
 """
-    OpenTunnel
+    OpenTunnel()
 
 Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server. .
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "destinationConfig": "The destination configuration for the OpenTunnel request.",
   "timeoutConfig": "Timeout configuration for a tunnel.",
   "tags": "A collection of tag metadata.",
   "description": "A short text description of the tunnel. "
 }
-
 """
 OpenTunnel() = iotsecuretunneling("OpenTunnel")
 OpenTunnel(args) = iotsecuretunneling("OpenTunnel", args)
 
 """
-    DescribeTunnel
+    DescribeTunnel()
 
 Gets information about a tunnel identified by the unique tunnel id.
 
-Required Parameters:
+Required Parameters
 {
   "tunnelId": "The tunnel to describe."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeTunnel(args) = iotsecuretunneling("DescribeTunnel", args)
+
 """
-    ListTunnels
+    ListTunnels()
 
 List all tunnels for an AWS account. Tunnels are listed by creation time in descending order, newer tunnels will be listed before older tunnels.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "thingName": "The name of the IoT thing associated with the destination device.",
   "maxResults": "The maximum number of results to return at once.",
   "nextToken": "A token to retrieve the next set of results."
 }
-
 """
 ListTunnels() = iotsecuretunneling("ListTunnels")
 ListTunnels(args) = iotsecuretunneling("ListTunnels", args)
 
 """
-    CloseTunnel
+    CloseTunnel()
 
 Closes a tunnel identified by the unique tunnel id. When a CloseTunnel request is received, we close the WebSocket connections between the client and proxy server so no data can be transmitted.
 
-Required Parameters:
+Required Parameters
 {
   "tunnelId": "The ID of the tunnel to close."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "delete": "When set to true, AWS IoT Secure Tunneling deletes the tunnel data immediately."
 }
-
 """
-
 CloseTunnel(args) = iotsecuretunneling("CloseTunnel", args)
+
 """
-    TagResource
+    TagResource()
 
 A resource tag.
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": "The ARN of the resource.",
   "tags": "The tags for the resource."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 TagResource(args) = iotsecuretunneling("TagResource", args)
+
 """
-    UntagResource
+    UntagResource()
 
 Removes a tag from a resource.
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": "The resource ARN.",
   "tagKeys": "The keys of the tags to remove."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = iotsecuretunneling("UntagResource", args)

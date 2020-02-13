@@ -2,416 +2,323 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: dataexchange
 
 """
-    ListTagsForResource
+    ListTagsForResource()
 
 This operation lists the tags on the resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTagsForResource(args) = dataexchange("GET", "/tags/{resource-arn}", args)
+
 """
-    GetDataSet
+    GetDataSet()
 
 This operation returns information about a data set.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetDataSet(args) = dataexchange("GET", "/v1/data-sets/{DataSetId}", args)
+
 """
-    CreateRevision
+    CreateRevision()
 
 This operation creates a revision for a data set.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Comment": "An optional comment about the revision.",
   "Tags": "A revision tag is an optional label that you can assign to a revision when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions."
 }
-
 """
-
 CreateRevision(args) = dataexchange("POST", "/v1/data-sets/{DataSetId}/revisions", args)
+
 """
-    GetRevision
+    GetRevision()
 
 This operation returns information about a revision.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set.",
   "RevisionId": "The unique identifier for a revision."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetRevision(args) = dataexchange("GET", "/v1/data-sets/{DataSetId}/revisions/{RevisionId}", args)
+
 """
-    ListDataSetRevisions
+    ListDataSetRevisions()
 
 This operation lists a data set's revisions sorted by CreatedAt in descending order.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results returned by a single call.",
   "NextToken": "The token value retrieved from a previous call to access the next page of results."
 }
-
 """
-
 ListDataSetRevisions(args) = dataexchange("GET", "/v1/data-sets/{DataSetId}/revisions", args)
+
 """
-    GetAsset
+    GetAsset()
 
 This operation returns information about an asset.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set.",
   "RevisionId": "The unique identifier for a revision.",
   "AssetId": "The unique identifier for an asset."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetAsset(args) = dataexchange("GET", "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/assets/{AssetId}", args)
+
 """
-    DeleteAsset
+    DeleteAsset()
 
 This operation deletes an asset.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set.",
   "RevisionId": "The unique identifier for a revision.",
   "AssetId": "The unique identifier for an asset."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteAsset(args) = dataexchange("DELETE", "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/assets/{AssetId}", args)
+
 """
-    StartJob
+    StartJob()
 
 This operation starts a job.
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The unique identifier for a job."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 StartJob(args) = dataexchange("PATCH", "/v1/jobs/{JobId}", args)
+
 """
-    CancelJob
+    CancelJob()
 
 This operation cancels a job. Jobs can be cancelled only when they are in the WAITING state.
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The unique identifier for a job."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CancelJob(args) = dataexchange("DELETE", "/v1/jobs/{JobId}", args)
+
 """
-    CreateJob
+    CreateJob()
 
 This operation creates a job.
 
-Required Parameters:
+Required Parameters
 {
   "Type": "The type of job to be created.",
   "Details": "The details for the CreateJob request."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateJob(args) = dataexchange("POST", "/v1/jobs", args)
+
 """
-    TagResource
+    TagResource()
 
 This operation tags a resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.",
   "Tags": "A label that consists of a customer-defined key and an optional value."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 TagResource(args) = dataexchange("POST", "/tags/{resource-arn}", args)
+
 """
-    CreateDataSet
+    CreateDataSet()
 
 This operation creates a data set.
 
-Required Parameters:
+Required Parameters
 {
   "Description": "A description for the data set. This value can be up to 16,348 characters long.",
   "AssetType": "The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.",
   "Name": "The name of the data set."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Tags": "A data set tag is an optional label that you can assign to a data set when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions."
 }
-
 """
-
 CreateDataSet(args) = dataexchange("POST", "/v1/data-sets", args)
+
 """
-    UntagResource
+    UntagResource()
 
 This operation removes one or more tags from a resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.",
   "TagKeys": "The key tags."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = dataexchange("DELETE", "/tags/{resource-arn}", args)
+
 """
-    GetJob
+    GetJob()
 
 This operation returns information about a job.
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The unique identifier for a job."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetJob(args) = dataexchange("GET", "/v1/jobs/{JobId}", args)
+
 """
-    DeleteDataSet
+    DeleteDataSet()
 
 This operation deletes a data set.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDataSet(args) = dataexchange("DELETE", "/v1/data-sets/{DataSetId}", args)
+
 """
-    ListRevisionAssets
+    ListRevisionAssets()
 
 This operation lists a revision's assets sorted alphabetically in descending order.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set.",
   "RevisionId": "The unique identifier for a revision."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results returned by a single call.",
   "NextToken": "The token value retrieved from a previous call to access the next page of results."
 }
-
 """
-
 ListRevisionAssets(args) = dataexchange("GET", "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/assets", args)
+
 """
-    DeleteRevision
+    DeleteRevision()
 
 This operation deletes a revision.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set.",
   "RevisionId": "The unique identifier for a revision."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteRevision(args) = dataexchange("DELETE", "/v1/data-sets/{DataSetId}/revisions/{RevisionId}", args)
+
 """
-    UpdateRevision
+    UpdateRevision()
 
 This operation updates a revision.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set.",
   "RevisionId": "The unique identifier for a revision."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Comment": "An optional comment about the revision.",
   "Finalized": "Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products."
 }
-
 """
-
 UpdateRevision(args) = dataexchange("PATCH", "/v1/data-sets/{DataSetId}/revisions/{RevisionId}", args)
+
 """
-    ListDataSets
+    ListDataSets()
 
 This operation lists your data sets. When listing by origin OWNED, results are sorted by CreatedAt in descending order. When listing by origin ENTITLED, there is no order and the maxResults parameter is ignored.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results returned by a single call.",
   "NextToken": "The token value retrieved from a previous call to access the next page of results.",
   "Origin": "A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers)."
 }
-
 """
 ListDataSets() = dataexchange("GET", "/v1/data-sets")
 ListDataSets(args) = dataexchange("GET", "/v1/data-sets", args)
 
 """
-    ListJobs
+    ListJobs()
 
 This operation lists your jobs sorted by CreatedAt in descending order.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "DataSetId": "The unique identifier for a data set.",
   "MaxResults": "The maximum number of results returned by a single call.",
   "NextToken": "The token value retrieved from a previous call to access the next page of results.",
   "RevisionId": "The unique identifier for a revision."
 }
-
 """
 ListJobs() = dataexchange("GET", "/v1/jobs")
 ListJobs(args) = dataexchange("GET", "/v1/jobs", args)
 
 """
-    UpdateAsset
+    UpdateAsset()
 
 This operation updates an asset.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set.",
   "RevisionId": "The unique identifier for a revision.",
   "AssetId": "The unique identifier for an asset.",
   "Name": "The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UpdateAsset(args) = dataexchange("PATCH", "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/assets/{AssetId}", args)
+
 """
-    UpdateDataSet
+    UpdateDataSet()
 
 This operation updates a data set.
 
-Required Parameters:
+Required Parameters
 {
   "DataSetId": "The unique identifier for a data set."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "The description for the data set.",
   "Name": "The name of the data set."
 }
-
 """
-
 UpdateDataSet(args) = dataexchange("PATCH", "/v1/data-sets/{DataSetId}", args)

@@ -2,98 +2,79 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: outposts
 
 """
-    GetOutpost
+    GetOutpost()
 
 Gets information about the specified Outpost.
 
-Required Parameters:
+Required Parameters
 {
   "OutpostId": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetOutpost(args) = outposts("GET", "/outposts/{OutpostId}", args)
+
 """
-    CreateOutpost
+    CreateOutpost()
 
 Creates an Outpost.
 
-Required Parameters:
+Required Parameters
 {
   "SiteId": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "",
   "AvailabilityZone": "",
   "AvailabilityZoneId": "",
   "Name": ""
 }
-
 """
-
 CreateOutpost(args) = outposts("POST", "/outposts", args)
+
 """
-    ListSites
+    ListSites()
 
 Lists the sites for the specified AWS account.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "",
   "NextToken": ""
 }
-
 """
 ListSites() = outposts("GET", "/sites")
 ListSites(args) = outposts("GET", "/sites", args)
 
 """
-    GetOutpostInstanceTypes
+    GetOutpostInstanceTypes()
 
 Lists the instance types for the specified Outpost.
 
-Required Parameters:
+Required Parameters
 {
   "OutpostId": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "",
   "NextToken": ""
 }
-
 """
-
 GetOutpostInstanceTypes(args) = outposts("GET", "/outposts/{OutpostId}/instanceTypes", args)
+
 """
-    ListOutposts
+    ListOutposts()
 
 List the Outposts for your AWS account.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "",
   "NextToken": ""
 }
-
 """
 ListOutposts() = outposts("GET", "/outposts")
 ListOutposts(args) = outposts("GET", "/outposts", args)

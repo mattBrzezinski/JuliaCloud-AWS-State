@@ -2,68 +2,49 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: mediatailor
 
 """
-    ListTagsForResource
+    ListTagsForResource()
 
 Returns a list of the tags assigned to the specified playback configuration resource. 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTagsForResource(args) = mediatailor("GET", "/tags/{ResourceArn}", args)
+
 """
-    ListPlaybackConfigurations
+    ListPlaybackConfigurations()
 
 Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "Maximum number of records to return. ",
   "NextToken": "Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results."
 }
-
 """
 ListPlaybackConfigurations() = mediatailor("GET", "/playbackConfigurations")
 ListPlaybackConfigurations(args) = mediatailor("GET", "/playbackConfigurations", args)
 
 """
-    DeletePlaybackConfiguration
+    DeletePlaybackConfiguration()
 
 Deletes the playback configuration for the specified name. 
 
-Required Parameters:
+Required Parameters
 {
   "Name": "The identifier for the playback configuration."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeletePlaybackConfiguration(args) = mediatailor("DELETE", "/playbackConfiguration/{Name}", args)
+
 """
-    PutPlaybackConfiguration
+    PutPlaybackConfiguration()
 
 Adds a new playback configuration to AWS Elemental MediaTailor. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "Tags": "The tags to assign to the playback configuration. ",
   "AdDecisionServerUrl": "The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.",
@@ -75,61 +56,44 @@ Optional Parameters:
   "VideoContentSourceUrl": "The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.",
   "Name": "The identifier for the playback configuration."
 }
-
 """
 PutPlaybackConfiguration() = mediatailor("PUT", "/playbackConfiguration")
 PutPlaybackConfiguration(args) = mediatailor("PUT", "/playbackConfiguration", args)
 
 """
-    GetPlaybackConfiguration
+    GetPlaybackConfiguration()
 
 Returns the playback configuration for the specified name. 
 
-Required Parameters:
+Required Parameters
 {
   "Name": "The identifier for the playback configuration."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetPlaybackConfiguration(args) = mediatailor("GET", "/playbackConfiguration/{Name}", args)
+
 """
-    TagResource
+    TagResource()
 
 Adds tags to the specified playback configuration resource. You can specify one or more tags to add. 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request. ",
   "Tags": "A comma-separated list of tag key:value pairs. For example: \n {\n \"Key1\": \"Value1\",\n \"Key2\": \"Value2\"\n }\n "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 TagResource(args) = mediatailor("POST", "/tags/{ResourceArn}", args)
+
 """
-    UntagResource
+    UntagResource()
 
 Removes tags from the specified playback configuration resource. You can specify one or more tags to remove. 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request. ",
   "TagKeys": "A comma-separated list of the tag keys to remove from the playback configuration. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = mediatailor("DELETE", "/tags/{ResourceArn}", args)

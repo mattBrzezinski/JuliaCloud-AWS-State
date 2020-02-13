@@ -2,18 +2,17 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: apigatewayv2
 
 """
-    CreateStage
+    CreateStage()
 
 Creates a Stage for an API.
 
-Required Parameters:
+Required Parameters
 {
   "StageName": "The name of the stage.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "AccessLogSettings": "Settings for logging access in this stage.",
   "ClientCertificateId": "The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.",
@@ -25,41 +24,34 @@ Optional Parameters:
   "StageVariables": "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.",
   "AutoDeploy": "Specifies whether updates to an API automatically trigger a new deployment. The default value is false."
 }
-
 """
-
 CreateStage(args) = apigatewayv2("POST", "/v2/apis/{apiId}/stages", args)
+
 """
-    DeleteStage
+    DeleteStage()
 
 Deletes a Stage.
 
-Required Parameters:
+Required Parameters
 {
   "StageName": "The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteStage(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/stages/{stageName}", args)
+
 """
-    CreateApi
+    CreateApi()
 
 Creates an Api resource.
 
-Required Parameters:
+Required Parameters
 {
   "ProtocolType": "The API protocol.",
   "Name": "The name of the API."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "RouteKey": "This property is part of quick create. If you don't specify a routeKey, a default route of  default is created. The  default route acts as a catch-all for any request made to your API, for a particular stage. The  default route key can't be modified. You can add routes after creating the API, and you can update the route keys of additional routes. Supported only for HTTP APIs.",
   "Description": "The description of the API.",
@@ -72,174 +64,144 @@ Optional Parameters:
   "DisableSchemaValidation": "Avoid validating models when creating a deployment. Supported only for WebSocket APIs.",
   "Target": "This property is part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes. For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN. The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Supported only for HTTP APIs."
 }
-
 """
-
 CreateApi(args) = apigatewayv2("POST", "/v2/apis", args)
+
 """
-    CreateDomainName
+    CreateDomainName()
 
 Creates a domain name.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Tags": "The collection of tags associated with a domain name.",
   "DomainNameConfigurations": "The domain name configurations."
 }
-
 """
-
 CreateDomainName(args) = apigatewayv2("POST", "/v2/domainnames", args)
+
 """
-    GetModel
+    GetModel()
 
 Gets a Model.
 
-Required Parameters:
+Required Parameters
 {
   "ModelId": "The model ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetModel(args) = apigatewayv2("GET", "/v2/apis/{apiId}/models/{modelId}", args)
+
 """
-    GetStage
+    GetStage()
 
 Gets a Stage.
 
-Required Parameters:
+Required Parameters
 {
   "StageName": "The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetStage(args) = apigatewayv2("GET", "/v2/apis/{apiId}/stages/{stageName}", args)
+
 """
-    TagResource
+    TagResource()
 
 Creates a new Tag resource to represent a tag.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The resource ARN for the tag."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Tags": "The collection of tags. Each tag element is associated with a given resource."
 }
-
 """
-
 TagResource(args) = apigatewayv2("POST", "/v2/tags/{resource-arn}", args)
+
 """
-    UpdateDomainName
+    UpdateDomainName()
 
 Updates a domain name.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DomainNameConfigurations": "The domain name configurations."
 }
-
 """
-
 UpdateDomainName(args) = apigatewayv2("PATCH", "/v2/domainnames/{domainName}", args)
+
 """
-    GetAuthorizer
+    GetAuthorizer()
 
 Gets an Authorizer.
 
-Required Parameters:
+Required Parameters
 {
   "AuthorizerId": "The authorizer identifier.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetAuthorizer(args) = apigatewayv2("GET", "/v2/apis/{apiId}/authorizers/{authorizerId}", args)
+
 """
-    GetModels
+    GetModels()
 
 Gets the Models for an API.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetModels(args) = apigatewayv2("GET", "/v2/apis/{apiId}/models", args)
+
 """
-    DeleteIntegrationResponse
+    DeleteIntegrationResponse()
 
 Deletes an IntegrationResponses.
 
-Required Parameters:
+Required Parameters
 {
   "IntegrationResponseId": "The integration response ID.",
   "ApiId": "The API identifier.",
   "IntegrationId": "The integration ID."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteIntegrationResponse(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses/{integrationResponseId}", args)
+
 """
-    UpdateAuthorizer
+    UpdateAuthorizer()
 
 Updates an Authorizer.
 
-Required Parameters:
+Required Parameters
 {
   "AuthorizerId": "The authorizer identifier.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "IdentitySource": "The identity source for which authorization is requested. For a REQUEST authorizer, this is optional. The value is a set of one or more mapping expressions of the specified request parameters. Currently, the identity source can be headers, query string parameters, stage variables, and context parameters. For example, if an Auth header and a Name query string parameter are defined as identity sources, this value is route.request.header.Auth, route.request.querystring.Name. These parameters will be used to perform runtime validation for Lambda-based authorizers by verifying all of the identity-related request parameters are present in the request, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function. Otherwise, it returns a 401 Unauthorized response without calling the Lambda function. For JWT, a single entry that specifies where to extract the JSON Web Token (JWT) from inbound requests. Currently only header-based and query parameter-based selections are supported, for example \" request.header.Authorization\".",
   "AuthorizerUri": "The authorizer's Uniform Resource Identifier (URI). For REQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api}\n               , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations. Supported only for REQUEST authorizers.",
@@ -250,23 +212,21 @@ Optional Parameters:
   "AuthorizerCredentialsArn": "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.",
   "JwtConfiguration": "Represents the configuration of a JWT authorizer. Required for the JWT authorizer type. Supported only for HTTP APIs."
 }
-
 """
-
 UpdateAuthorizer(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}/authorizers/{authorizerId}", args)
+
 """
-    CreateRoute
+    CreateRoute()
 
 Creates a Route for an API.
 
-Required Parameters:
+Required Parameters
 {
   "RouteKey": "The route key for the route.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "RequestModels": "The request models for the route. Supported only for WebSocket APIs.",
   "AuthorizationScopes": "The authorization scopes supported by this route.",
@@ -279,23 +239,21 @@ Optional Parameters:
   "OperationName": "The operation name for the route.",
   "Target": "The target for the route."
 }
-
 """
-
 CreateRoute(args) = apigatewayv2("POST", "/v2/apis/{apiId}/routes", args)
+
 """
-    CreateIntegration
+    CreateIntegration()
 
 Creates an Integration.
 
-Required Parameters:
+Required Parameters
 {
   "IntegrationType": "The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ConnectionType": "The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.",
   "IntegrationUri": "For a Lambda proxy integration, this is the URI of the Lambda function.",
@@ -311,275 +269,226 @@ Optional Parameters:
   "RequestTemplates": "Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.",
   "TimeoutInMillis": "Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs."
 }
-
 """
-
 CreateIntegration(args) = apigatewayv2("POST", "/v2/apis/{apiId}/integrations", args)
+
 """
-    DeleteRouteSettings
+    DeleteRouteSettings()
 
 Deletes the RouteSettings for a stage.
 
-Required Parameters:
+Required Parameters
 {
   "RouteKey": "The route key.",
   "StageName": "The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteRouteSettings(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/stages/{stageName}/routesettings/{routeKey}", args)
+
 """
-    GetIntegrations
+    GetIntegrations()
 
 Gets the Integrations for an API.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetIntegrations(args) = apigatewayv2("GET", "/v2/apis/{apiId}/integrations", args)
+
 """
-    GetRoutes
+    GetRoutes()
 
 Gets the Routes for an API.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetRoutes(args) = apigatewayv2("GET", "/v2/apis/{apiId}/routes", args)
+
 """
-    UpdateApiMapping
+    UpdateApiMapping()
 
 The API mapping.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name.",
   "ApiMappingId": "The API mapping identifier.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Stage": "The API stage.",
   "ApiMappingKey": "The API mapping key."
 }
-
 """
-
 UpdateApiMapping(args) = apigatewayv2("PATCH", "/v2/domainnames/{domainName}/apimappings/{apiMappingId}", args)
+
 """
-    GetDeployment
+    GetDeployment()
 
 Gets a Deployment.
 
-Required Parameters:
+Required Parameters
 {
   "DeploymentId": "The deployment ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetDeployment(args) = apigatewayv2("GET", "/v2/apis/{apiId}/deployments/{deploymentId}", args)
+
 """
-    CreateDeployment
+    CreateDeployment()
 
 Creates a Deployment for an API.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "The description for the deployment resource.",
   "StageName": "The name of the Stage resource for the Deployment resource to create."
 }
-
 """
-
 CreateDeployment(args) = apigatewayv2("POST", "/v2/apis/{apiId}/deployments", args)
+
 """
-    DeleteApiMapping
+    DeleteApiMapping()
 
 Deletes an API mapping.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name.",
   "ApiMappingId": "The API mapping identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteApiMapping(args) = apigatewayv2("DELETE", "/v2/domainnames/{domainName}/apimappings/{apiMappingId}", args)
+
 """
-    GetAuthorizers
+    GetAuthorizers()
 
 Gets the Authorizers for an API.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetAuthorizers(args) = apigatewayv2("GET", "/v2/apis/{apiId}/authorizers", args)
+
 """
-    DeleteDomainName
+    DeleteDomainName()
 
 Deletes a domain name.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDomainName(args) = apigatewayv2("DELETE", "/v2/domainnames/{domainName}", args)
+
 """
-    GetDomainNames
+    GetDomainNames()
 
 Gets the domain names for an AWS account.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
 GetDomainNames() = apigatewayv2("GET", "/v2/domainnames")
 GetDomainNames(args) = apigatewayv2("GET", "/v2/domainnames", args)
 
 """
-    UntagResource
+    UntagResource()
 
 Deletes a Tag.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The resource ARN for the tag.",
   "TagKeys": "\n            The Tag keys to delete.\n         "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = apigatewayv2("DELETE", "/v2/tags/{resource-arn}", args)
+
 """
-    CreateModel
+    CreateModel()
 
 Creates a Model for an API.
 
-Required Parameters:
+Required Parameters
 {
   "Schema": "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
   "ApiId": "The API identifier.",
   "Name": "The name of the model. Must be alphanumeric."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "The description of the model.",
   "ContentType": "The content-type for the model, for example, \"application/json\"."
 }
-
 """
-
 CreateModel(args) = apigatewayv2("POST", "/v2/apis/{apiId}/models", args)
+
 """
-    DeleteRouteResponse
+    DeleteRouteResponse()
 
 Deletes a RouteResponse.
 
-Required Parameters:
+Required Parameters
 {
   "RouteResponseId": "The route response ID.",
   "RouteId": "The route ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteRouteResponse(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/routes/{routeId}/routeresponses/{routeResponseId}", args)
+
 """
-    UpdateStage
+    UpdateStage()
 
 Updates a Stage.
 
-Required Parameters:
+Required Parameters
 {
   "StageName": "The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "AccessLogSettings": "Settings for logging access in this stage.",
   "ClientCertificateId": "The identifier of a client certificate for a Stage.",
@@ -590,22 +499,20 @@ Optional Parameters:
   "StageVariables": "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.",
   "AutoDeploy": "Specifies whether updates to an API automatically trigger a new deployment. The default value is false."
 }
-
 """
-
 UpdateStage(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}/stages/{stageName}", args)
+
 """
-    UpdateApi
+    UpdateApi()
 
 Updates an Api resource.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "RouteKey": "This property is part of quick create. If not specified, the route created using quick create is kept. Otherwise, this value replaces the route key of the quick create route. Additional routes may still be added after the API is updated. Supported only for HTTP APIs.",
   "Target": "This property is part of quick create. For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN. The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. The value provided updates the integration URI and integration type. You can update a quick-created target, but you can't remove it from an API. Supported only for HTTP APIs.",
@@ -618,48 +525,44 @@ Optional Parameters:
   "DisableSchemaValidation": "Avoid validating models when creating a deployment. Supported only for WebSocket APIs.",
   "Name": "The name of the API."
 }
-
 """
-
 UpdateApi(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}", args)
+
 """
-    UpdateRouteResponse
+    UpdateRouteResponse()
 
 Updates a RouteResponse.
 
-Required Parameters:
+Required Parameters
 {
   "RouteResponseId": "The route response ID.",
   "RouteId": "The route ID.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ModelSelectionExpression": "The model selection expression for the route response. Supported only for WebSocket APIs.",
   "ResponseParameters": "The route response parameters.",
   "RouteResponseKey": "The route response key.",
   "ResponseModels": "The response models for the route response."
 }
-
 """
-
 UpdateRouteResponse(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}/routes/{routeId}/routeresponses/{routeResponseId}", args)
+
 """
-    UpdateIntegrationResponse
+    UpdateIntegrationResponse()
 
 Updates an IntegrationResponses.
 
-Required Parameters:
+Required Parameters
 {
   "IntegrationResponseId": "The integration response ID.",
   "ApiId": "The API identifier.",
   "IntegrationId": "The integration ID."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "IntegrationResponseKey": "The integration response key.",
   "ContentHandlingStrategy": "Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string. If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.",
@@ -667,204 +570,165 @@ Optional Parameters:
   "ResponseTemplates": "The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.",
   "ResponseParameters": "A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}\n               , where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name}\n                or integration.response.body.{JSON-expression}\n               , where \n                  {name}\n                is a valid and unique response header name and \n                  {JSON-expression}\n                is a valid JSON expression without the   prefix."
 }
-
 """
-
 UpdateIntegrationResponse(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses/{integrationResponseId}", args)
+
 """
-    DeleteDeployment
+    DeleteDeployment()
 
 Deletes a Deployment.
 
-Required Parameters:
+Required Parameters
 {
   "DeploymentId": "The deployment ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDeployment(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/deployments/{deploymentId}", args)
+
 """
-    ImportApi
+    ImportApi()
 
 Imports an API.
 
-Required Parameters:
+Required Parameters
 {
   "Body": "The OpenAPI definition. Supported only for HTTP APIs."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Basepath": "Represents the base path of the imported API. Supported only for HTTP APIs.",
   "FailOnWarnings": "Specifies whether to rollback the API creation (true) or not (false) when a warning is encountered. The default value is false."
 }
-
 """
-
 ImportApi(args) = apigatewayv2("PUT", "/v2/apis", args)
+
 """
-    GetApiMapping
+    GetApiMapping()
 
 Gets an API mapping.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name.",
   "ApiMappingId": "The API mapping identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetApiMapping(args) = apigatewayv2("GET", "/v2/domainnames/{domainName}/apimappings/{apiMappingId}", args)
+
 """
-    GetDeployments
+    GetDeployments()
 
 Gets the Deployments for an API.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetDeployments(args) = apigatewayv2("GET", "/v2/apis/{apiId}/deployments", args)
+
 """
-    GetIntegrationResponse
+    GetIntegrationResponse()
 
 Gets an IntegrationResponses.
 
-Required Parameters:
+Required Parameters
 {
   "IntegrationResponseId": "The integration response ID.",
   "ApiId": "The API identifier.",
   "IntegrationId": "The integration ID."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetIntegrationResponse(args) = apigatewayv2("GET", "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses/{integrationResponseId}", args)
+
 """
-    GetRouteResponses
+    GetRouteResponses()
 
 Gets the RouteResponses for a Route.
 
-Required Parameters:
+Required Parameters
 {
   "RouteId": "The route ID.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetRouteResponses(args) = apigatewayv2("GET", "/v2/apis/{apiId}/routes/{routeId}/routeresponses", args)
+
 """
-    GetTags
+    GetTags()
 
 Gets a collection of Tag resources.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The resource ARN for the tag."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetTags(args) = apigatewayv2("GET", "/v2/tags/{resource-arn}", args)
+
 """
-    GetIntegration
+    GetIntegration()
 
 Gets an Integration.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier.",
   "IntegrationId": "The integration ID."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetIntegration(args) = apigatewayv2("GET", "/v2/apis/{apiId}/integrations/{integrationId}", args)
+
 """
-    GetApi
+    GetApi()
 
 Gets an Api resource.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetApi(args) = apigatewayv2("GET", "/v2/apis/{apiId}", args)
+
 """
-    GetStages
+    GetStages()
 
 Gets the Stages for an API.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetStages(args) = apigatewayv2("GET", "/v2/apis/{apiId}/stages", args)
+
 """
-    CreateAuthorizer
+    CreateAuthorizer()
 
 Creates an Authorizer for an API.
 
-Required Parameters:
+Required Parameters
 {
   "IdentitySource": "The identity source for which authorization is requested. For a REQUEST authorizer, this is optional. The value is a set of one or more mapping expressions of the specified request parameters. Currently, the identity source can be headers, query string parameters, stage variables, and context parameters. For example, if an Auth header and a Name query string parameter are defined as identity sources, this value is route.request.header.Auth, route.request.querystring.Name. These parameters will be used to perform runtime validation for Lambda-based authorizers by verifying all of the identity-related request parameters are present in the request, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function. Otherwise, it returns a 401 Unauthorized response without calling the Lambda function. For JWT, a single entry that specifies where to extract the JSON Web Token (JWT )from inbound requests. Currently only header-based and query parameter-based selections are supported, for example \" request.header.Authorization\".",
   "AuthorizerType": "The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function using incoming request parameters. For HTTP APIs, specify JWT to use JSON Web Tokens.",
@@ -872,8 +736,7 @@ Required Parameters:
   "Name": "The name of the authorizer."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "AuthorizerUri": "The authorizer's Uniform Resource Identifier (URI). For REQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api}\n               , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations. Supported only for REQUEST authorizers.",
   "IdentityValidationExpression": "This parameter is not used.",
@@ -881,83 +744,69 @@ Optional Parameters:
   "AuthorizerResultTtlInSeconds": "Authorizer caching is not currently supported. Don't specify this value for authorizers.",
   "AuthorizerCredentialsArn": "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null. Supported only for REQUEST authorizers."
 }
-
 """
-
 CreateAuthorizer(args) = apigatewayv2("POST", "/v2/apis/{apiId}/authorizers", args)
+
 """
-    GetApis
+    GetApis()
 
 Gets a collection of Api resources.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
 GetApis() = apigatewayv2("GET", "/v2/apis")
 GetApis(args) = apigatewayv2("GET", "/v2/apis", args)
 
 """
-    DeleteRoute
+    DeleteRoute()
 
 Deletes a Route.
 
-Required Parameters:
+Required Parameters
 {
   "RouteId": "The route ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteRoute(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/routes/{routeId}", args)
+
 """
-    CreateRouteResponse
+    CreateRouteResponse()
 
 Creates a RouteResponse for a Route.
 
-Required Parameters:
+Required Parameters
 {
   "RouteId": "The route ID.",
   "RouteResponseKey": "The route response key.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ModelSelectionExpression": "The model selection expression for the route response. Supported only for WebSocket APIs.",
   "ResponseParameters": "The route response parameters.",
   "ResponseModels": "The response models for the route response."
 }
-
 """
-
 CreateRouteResponse(args) = apigatewayv2("POST", "/v2/apis/{apiId}/routes/{routeId}/routeresponses", args)
+
 """
-    UpdateRoute
+    UpdateRoute()
 
 Updates a Route.
 
-Required Parameters:
+Required Parameters
 {
   "RouteId": "The route ID.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "RouteKey": "The route key for the route.",
   "ModelSelectionExpression": "The model selection expression for the route. Supported only for WebSocket APIs.",
@@ -971,253 +820,206 @@ Optional Parameters:
   "RouteResponseSelectionExpression": "The route response selection expression for the route. Supported only for WebSocket APIs.",
   "OperationName": "The operation name for the route."
 }
-
 """
-
 UpdateRoute(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}/routes/{routeId}", args)
+
 """
-    GetModelTemplate
+    GetModelTemplate()
 
 Gets a model template.
 
-Required Parameters:
+Required Parameters
 {
   "ModelId": "The model ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetModelTemplate(args) = apigatewayv2("GET", "/v2/apis/{apiId}/models/{modelId}/template", args)
+
 """
-    UpdateDeployment
+    UpdateDeployment()
 
 Updates a Deployment.
 
-Required Parameters:
+Required Parameters
 {
   "DeploymentId": "The deployment ID.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "The description for the deployment resource."
 }
-
 """
-
 UpdateDeployment(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}/deployments/{deploymentId}", args)
+
 """
-    GetIntegrationResponses
+    GetIntegrationResponses()
 
 Gets the IntegrationResponses for an Integration.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier.",
   "IntegrationId": "The integration ID."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetIntegrationResponses(args) = apigatewayv2("GET", "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses", args)
+
 """
-    GetRouteResponse
+    GetRouteResponse()
 
 Gets a RouteResponse.
 
-Required Parameters:
+Required Parameters
 {
   "RouteResponseId": "The route response ID.",
   "RouteId": "The route ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetRouteResponse(args) = apigatewayv2("GET", "/v2/apis/{apiId}/routes/{routeId}/routeresponses/{routeResponseId}", args)
+
 """
-    GetApiMappings
+    GetApiMappings()
 
 Gets API mappings.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of elements to be returned for this resource.",
   "NextToken": "The next page of elements from this collection. Not valid for the last element of the collection."
 }
-
 """
-
 GetApiMappings(args) = apigatewayv2("GET", "/v2/domainnames/{domainName}/apimappings", args)
+
 """
-    GetRoute
+    GetRoute()
 
 Gets a Route.
 
-Required Parameters:
+Required Parameters
 {
   "RouteId": "The route ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetRoute(args) = apigatewayv2("GET", "/v2/apis/{apiId}/routes/{routeId}", args)
+
 """
-    GetDomainName
+    GetDomainName()
 
 Gets a domain name.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetDomainName(args) = apigatewayv2("GET", "/v2/domainnames/{domainName}", args)
+
 """
-    DeleteIntegration
+    DeleteIntegration()
 
 Deletes an Integration.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier.",
   "IntegrationId": "The integration ID."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteIntegration(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/integrations/{integrationId}", args)
+
 """
-    DeleteModel
+    DeleteModel()
 
 Deletes a Model.
 
-Required Parameters:
+Required Parameters
 {
   "ModelId": "The model ID.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteModel(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/models/{modelId}", args)
+
 """
-    CreateApiMapping
+    CreateApiMapping()
 
 Creates an API mapping.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The domain name.",
   "Stage": "The API stage.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ApiMappingKey": "The API mapping key."
 }
-
 """
-
 CreateApiMapping(args) = apigatewayv2("POST", "/v2/domainnames/{domainName}/apimappings", args)
+
 """
-    UpdateModel
+    UpdateModel()
 
 Updates a Model.
 
-Required Parameters:
+Required Parameters
 {
   "ModelId": "The model ID.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "The description of the model.",
   "Schema": "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
   "ContentType": "The content-type for the model, for example, \"application/json\".",
   "Name": "The name of the model."
 }
-
 """
-
 UpdateModel(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}/models/{modelId}", args)
+
 """
-    DeleteApi
+    DeleteApi()
 
 Deletes an Api resource.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteApi(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}", args)
+
 """
-    UpdateIntegration
+    UpdateIntegration()
 
 Updates an Integration.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier.",
   "IntegrationId": "The integration ID."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ConnectionType": "The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.",
   "IntegrationUri": "For a Lambda proxy integration, this is the URI of the Lambda function.",
@@ -1234,87 +1036,71 @@ Optional Parameters:
   "RequestTemplates": "Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.",
   "TimeoutInMillis": "Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs."
 }
-
 """
-
 UpdateIntegration(args) = apigatewayv2("PATCH", "/v2/apis/{apiId}/integrations/{integrationId}", args)
+
 """
-    CreateIntegrationResponse
+    CreateIntegrationResponse()
 
 Creates an IntegrationResponses.
 
-Required Parameters:
+Required Parameters
 {
   "IntegrationResponseKey": "The integration response key.",
   "ApiId": "The API identifier.",
   "IntegrationId": "The integration ID."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ContentHandlingStrategy": "Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string. If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.",
   "TemplateSelectionExpression": "The template selection expression for the integration response. Supported only for WebSocket APIs.",
   "ResponseTemplates": "The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.",
   "ResponseParameters": "A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where {name} is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where {name} is a valid and unique response header name and {JSON-expression} is a valid JSON expression without the   prefix."
 }
-
 """
-
 CreateIntegrationResponse(args) = apigatewayv2("POST", "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses", args)
+
 """
-    ReimportApi
+    ReimportApi()
 
 Puts an Api resource.
 
-Required Parameters:
+Required Parameters
 {
   "Body": "The OpenAPI definition. Supported only for HTTP APIs.",
   "ApiId": "The API identifier."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Basepath": "Represents the base path of the imported API. Supported only for HTTP APIs.",
   "FailOnWarnings": "Specifies whether to rollback the API creation (true) or not (false) when a warning is encountered. The default value is false."
 }
-
 """
-
 ReimportApi(args) = apigatewayv2("PUT", "/v2/apis/{apiId}", args)
+
 """
-    DeleteCorsConfiguration
+    DeleteCorsConfiguration()
 
 Deletes a CORS configuration.
 
-Required Parameters:
+Required Parameters
 {
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteCorsConfiguration(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/cors", args)
+
 """
-    DeleteAuthorizer
+    DeleteAuthorizer()
 
 Deletes an Authorizer.
 
-Required Parameters:
+Required Parameters
 {
   "AuthorizerId": "The authorizer identifier.",
   "ApiId": "The API identifier."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteAuthorizer(args) = apigatewayv2("DELETE", "/v2/apis/{apiId}/authorizers/{authorizerId}", args)

@@ -2,36 +2,30 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: rds
 
 """
-    DescribeOptionGroupOptions
+    DescribeOptionGroupOptions()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "EngineName": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "Marker": "",
   "MajorEngineVersion": ""
 }
-
 """
-
 DescribeOptionGroupOptions(args) = rds("DescribeOptionGroupOptions", args)
+
 """
-    DescribeDBEngineVersions
+    DescribeDBEngineVersions()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "Marker": "",
@@ -41,82 +35,65 @@ Optional Parameters:
   "DefaultOnly": "",
   "DBParameterGroupFamily": ""
 }
-
 """
 DescribeDBEngineVersions() = rds("DescribeDBEngineVersions")
 DescribeDBEngineVersions(args) = rds("DescribeDBEngineVersions", args)
 
 """
-    DescribeDBInstances
+    DescribeDBInstances()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "DBInstanceIdentifier": "",
   "MaxRecords": "",
   "Marker": ""
 }
-
 """
 DescribeDBInstances() = rds("DescribeDBInstances")
 DescribeDBInstances(args) = rds("DescribeDBInstances", args)
 
 """
-    CreateDBSnapshot
+    CreateDBSnapshot()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBInstanceIdentifier": "",
   "DBSnapshotIdentifier": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateDBSnapshot(args) = rds("CreateDBSnapshot", args)
+
 """
-    CreateOptionGroup
+    CreateOptionGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "EngineName": "",
   "OptionGroupName": "",
   "MajorEngineVersion": "",
   "OptionGroupDescription": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateOptionGroup(args) = rds("CreateOptionGroup", args)
+
 """
-    RestoreDBInstanceToPointInTime
+    RestoreDBInstanceToPointInTime()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "TargetDBInstanceIdentifier": "",
   "SourceDBInstanceIdentifier": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "UseLatestRestorableTime": "",
   "PubliclyAccessible": "",
@@ -133,78 +110,64 @@ Optional Parameters:
   "DBName": "",
   "MultiAZ": ""
 }
-
 """
-
 RestoreDBInstanceToPointInTime(args) = rds("RestoreDBInstanceToPointInTime", args)
+
 """
-    PromoteReadReplica
+    PromoteReadReplica()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBInstanceIdentifier": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "PreferredBackupWindow": "",
   "BackupRetentionPeriod": ""
 }
-
 """
-
 PromoteReadReplica(args) = rds("PromoteReadReplica", args)
+
 """
-    DescribeEventCategories
+    DescribeEventCategories()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "SourceType": ""
 }
-
 """
 DescribeEventCategories() = rds("DescribeEventCategories")
 DescribeEventCategories(args) = rds("DescribeEventCategories", args)
 
 """
-    DeleteOptionGroup
+    DeleteOptionGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "OptionGroupName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteOptionGroup(args) = rds("DeleteOptionGroup", args)
+
 """
-    RestoreDBInstanceFromDBSnapshot
+    RestoreDBInstanceFromDBSnapshot()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBInstanceIdentifier": "",
   "DBSnapshotIdentifier": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "PubliclyAccessible": "",
   "OptionGroupName": "",
@@ -219,81 +182,70 @@ Optional Parameters:
   "DBName": "",
   "MultiAZ": ""
 }
-
 """
-
 RestoreDBInstanceFromDBSnapshot(args) = rds("RestoreDBInstanceFromDBSnapshot", args)
+
 """
-    DeleteEventSubscription
+    DeleteEventSubscription()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "SubscriptionName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteEventSubscription(args) = rds("DeleteEventSubscription", args)
+
 """
-    ResetDBParameterGroup
+    ResetDBParameterGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBParameterGroupName": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Parameters": "",
   "ResetAllParameters": ""
 }
-
 """
-
 ResetDBParameterGroup(args) = rds("ResetDBParameterGroup", args)
+
 """
-    ModifyEventSubscription
+    ModifyEventSubscription()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "SubscriptionName": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "SourceType": "",
   "SnsTopicArn": "",
   "EventCategories": "",
   "Enabled": ""
 }
-
 """
-
 ModifyEventSubscription(args) = rds("ModifyEventSubscription", args)
+
 """
-    DescribeOrderableDBInstanceOptions
+    DescribeOrderableDBInstanceOptions()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "Engine": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "Marker": "",
@@ -302,182 +254,149 @@ Optional Parameters:
   "Vpc": "",
   "DBInstanceClass": ""
 }
-
 """
-
 DescribeOrderableDBInstanceOptions(args) = rds("DescribeOrderableDBInstanceOptions", args)
+
 """
-    DescribeDBParameterGroups
+    DescribeDBParameterGroups()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "Marker": "",
   "DBParameterGroupName": ""
 }
-
 """
 DescribeDBParameterGroups() = rds("DescribeDBParameterGroups")
 DescribeDBParameterGroups(args) = rds("DescribeDBParameterGroups", args)
 
 """
-    ModifyDBParameterGroup
+    ModifyDBParameterGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "Parameters": "",
   "DBParameterGroupName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ModifyDBParameterGroup(args) = rds("ModifyDBParameterGroup", args)
+
 """
-    CreateEventSubscription
+    CreateEventSubscription()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "SubscriptionName": "",
   "SnsTopicArn": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "SourceIds": "",
   "SourceType": "",
   "EventCategories": "",
   "Enabled": ""
 }
-
 """
-
 CreateEventSubscription(args) = rds("CreateEventSubscription", args)
+
 """
-    CreateDBSubnetGroup
+    CreateDBSubnetGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBSubnetGroupName": "",
   "SubnetIds": "",
   "DBSubnetGroupDescription": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateDBSubnetGroup(args) = rds("CreateDBSubnetGroup", args)
+
 """
-    RemoveSourceIdentifierFromSubscription
+    RemoveSourceIdentifierFromSubscription()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "SubscriptionName": "",
   "SourceIdentifier": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 RemoveSourceIdentifierFromSubscription(args) = rds("RemoveSourceIdentifierFromSubscription", args)
+
 """
-    RevokeDBSecurityGroupIngress
+    RevokeDBSecurityGroupIngress()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBSecurityGroupName": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "CIDRIP": "",
   "EC2SecurityGroupOwnerId": "",
   "EC2SecurityGroupName": "",
   "EC2SecurityGroupId": ""
 }
-
 """
-
 RevokeDBSecurityGroupIngress(args) = rds("RevokeDBSecurityGroupIngress", args)
+
 """
-    DeleteDBInstance
+    DeleteDBInstance()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBInstanceIdentifier": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "SkipFinalSnapshot": "",
   "FinalDBSnapshotIdentifier": ""
 }
-
 """
-
 DeleteDBInstance(args) = rds("DeleteDBInstance", args)
+
 """
-    AuthorizeDBSecurityGroupIngress
+    AuthorizeDBSecurityGroupIngress()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBSecurityGroupName": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "CIDRIP": "",
   "EC2SecurityGroupOwnerId": "",
   "EC2SecurityGroupName": "",
   "EC2SecurityGroupId": ""
 }
-
 """
-
 AuthorizeDBSecurityGroupIngress(args) = rds("AuthorizeDBSecurityGroupIngress", args)
+
 """
-    DescribeDBSnapshots
+    DescribeDBSnapshots()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "DBInstanceIdentifier": "",
   "MaxRecords": "",
@@ -485,21 +404,16 @@ Optional Parameters:
   "SnapshotType": "",
   "DBSnapshotIdentifier": ""
 }
-
 """
 DescribeDBSnapshots() = rds("DescribeDBSnapshots")
 DescribeDBSnapshots(args) = rds("DescribeDBSnapshots", args)
 
 """
-    DescribeReservedDBInstances
+    DescribeReservedDBInstances()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "ReservedDBInstancesOfferingId": "",
   "MaxRecords": "",
@@ -511,24 +425,22 @@ Optional Parameters:
   "ReservedDBInstanceId": "",
   "MultiAZ": ""
 }
-
 """
 DescribeReservedDBInstances() = rds("DescribeReservedDBInstances")
 DescribeReservedDBInstances(args) = rds("DescribeReservedDBInstances", args)
 
 """
-    CreateDBInstanceReadReplica
+    CreateDBInstanceReadReplica()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBInstanceIdentifier": "",
   "SourceDBInstanceIdentifier": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "PubliclyAccessible": "",
   "AvailabilityZone": "",
@@ -538,37 +450,27 @@ Optional Parameters:
   "DBInstanceClass": "",
   "Port": ""
 }
-
 """
-
 CreateDBInstanceReadReplica(args) = rds("CreateDBInstanceReadReplica", args)
+
 """
-    ListTagsForResource
+    ListTagsForResource()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTagsForResource(args) = rds("ListTagsForResource", args)
+
 """
-    DescribeReservedDBInstancesOfferings
+    DescribeReservedDBInstancesOfferings()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "ReservedDBInstancesOfferingId": "",
   "MaxRecords": "",
@@ -579,60 +481,48 @@ Optional Parameters:
   "DBInstanceClass": "",
   "MultiAZ": ""
 }
-
 """
 DescribeReservedDBInstancesOfferings() = rds("DescribeReservedDBInstancesOfferings")
 DescribeReservedDBInstancesOfferings(args) = rds("DescribeReservedDBInstancesOfferings", args)
 
 """
-    DescribeDBParameters
+    DescribeDBParameters()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBParameterGroupName": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "Marker": "",
   "Source": ""
 }
-
 """
-
 DescribeDBParameters(args) = rds("DescribeDBParameters", args)
+
 """
-    CreateDBSecurityGroup
+    CreateDBSecurityGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBSecurityGroupDescription": "",
   "DBSecurityGroupName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateDBSecurityGroup(args) = rds("CreateDBSecurityGroup", args)
+
 """
-    DescribeOptionGroups
+    DescribeOptionGroups()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "Marker": "",
   "MaxRecords": "",
@@ -640,130 +530,105 @@ Optional Parameters:
   "OptionGroupName": "",
   "MajorEngineVersion": ""
 }
-
 """
 DescribeOptionGroups() = rds("DescribeOptionGroups")
 DescribeOptionGroups(args) = rds("DescribeOptionGroups", args)
 
 """
-    AddTagsToResource
+    AddTagsToResource()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "Tags": "",
   "ResourceName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 AddTagsToResource(args) = rds("AddTagsToResource", args)
+
 """
-    DeleteDBSecurityGroup
+    DeleteDBSecurityGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBSecurityGroupName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDBSecurityGroup(args) = rds("DeleteDBSecurityGroup", args)
+
 """
-    RemoveTagsFromResource
+    RemoveTagsFromResource()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceName": "",
   "TagKeys": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 RemoveTagsFromResource(args) = rds("RemoveTagsFromResource", args)
+
 """
-    RebootDBInstance
+    RebootDBInstance()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBInstanceIdentifier": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ForceFailover": ""
 }
-
 """
-
 RebootDBInstance(args) = rds("RebootDBInstance", args)
+
 """
-    DescribeDBSubnetGroups
+    DescribeDBSubnetGroups()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "DBSubnetGroupName": "",
   "Marker": ""
 }
-
 """
 DescribeDBSubnetGroups() = rds("DescribeDBSubnetGroups")
 DescribeDBSubnetGroups(args) = rds("DescribeDBSubnetGroups", args)
 
 """
-    ModifyOptionGroup
+    ModifyOptionGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "OptionGroupName": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ApplyImmediately": "",
   "OptionsToInclude": "",
   "OptionsToRemove": ""
 }
-
 """
-
 ModifyOptionGroup(args) = rds("ModifyOptionGroup", args)
+
 """
-    CreateDBInstance
+    CreateDBInstance()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBInstanceIdentifier": "",
   "MasterUsername": "",
@@ -773,8 +638,7 @@ Required Parameters:
   "AllocatedStorage": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "PubliclyAccessible": "",
   "OptionGroupName": "",
@@ -795,92 +659,70 @@ Optional Parameters:
   "VpcSecurityGroupIds": "",
   "MultiAZ": ""
 }
-
 """
-
 CreateDBInstance(args) = rds("CreateDBInstance", args)
+
 """
-    ModifyDBSubnetGroup
+    ModifyDBSubnetGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBSubnetGroupName": "",
   "SubnetIds": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DBSubnetGroupDescription": ""
 }
-
 """
-
 ModifyDBSubnetGroup(args) = rds("ModifyDBSubnetGroup", args)
+
 """
-    CopyDBSnapshot
+    CopyDBSnapshot()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "TargetDBSnapshotIdentifier": "",
   "SourceDBSnapshotIdentifier": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CopyDBSnapshot(args) = rds("CopyDBSnapshot", args)
+
 """
-    DeleteDBSubnetGroup
+    DeleteDBSubnetGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBSubnetGroupName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDBSubnetGroup(args) = rds("DeleteDBSubnetGroup", args)
+
 """
-    DeleteDBSnapshot
+    DeleteDBSnapshot()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBSnapshotIdentifier": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDBSnapshot(args) = rds("DeleteDBSnapshot", args)
+
 """
-    DescribeEvents
+    DescribeEvents()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "StartTime": "",
   "MaxRecords": "",
@@ -891,122 +733,101 @@ Optional Parameters:
   "Duration": "",
   "EventCategories": ""
 }
-
 """
 DescribeEvents() = rds("DescribeEvents")
 DescribeEvents(args) = rds("DescribeEvents", args)
 
 """
-    DescribeEngineDefaultParameters
+    DescribeEngineDefaultParameters()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBParameterGroupFamily": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "Marker": ""
 }
-
 """
-
 DescribeEngineDefaultParameters(args) = rds("DescribeEngineDefaultParameters", args)
+
 """
-    CreateDBParameterGroup
+    CreateDBParameterGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "Description": "",
   "DBParameterGroupName": "",
   "DBParameterGroupFamily": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateDBParameterGroup(args) = rds("CreateDBParameterGroup", args)
+
 """
-    PurchaseReservedDBInstancesOffering
+    PurchaseReservedDBInstancesOffering()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "ReservedDBInstancesOfferingId": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ReservedDBInstanceId": "",
   "DBInstanceCount": ""
 }
-
 """
-
 PurchaseReservedDBInstancesOffering(args) = rds("PurchaseReservedDBInstancesOffering", args)
+
 """
-    DescribeDBSecurityGroups
+    DescribeDBSecurityGroups()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "Marker": "",
   "DBSecurityGroupName": ""
 }
-
 """
 DescribeDBSecurityGroups() = rds("DescribeDBSecurityGroups")
 DescribeDBSecurityGroups(args) = rds("DescribeDBSecurityGroups", args)
 
 """
-    DescribeEventSubscriptions
+    DescribeEventSubscriptions()
 
 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxRecords": "",
   "Marker": "",
   "SubscriptionName": ""
 }
-
 """
 DescribeEventSubscriptions() = rds("DescribeEventSubscriptions")
 DescribeEventSubscriptions(args) = rds("DescribeEventSubscriptions", args)
 
 """
-    ModifyDBInstance
+    ModifyDBInstance()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBInstanceIdentifier": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "AllowMajorVersionUpgrade": "",
   "OptionGroupName": "",
@@ -1026,42 +847,30 @@ Optional Parameters:
   "VpcSecurityGroupIds": "",
   "MultiAZ": ""
 }
-
 """
-
 ModifyDBInstance(args) = rds("ModifyDBInstance", args)
+
 """
-    AddSourceIdentifierToSubscription
+    AddSourceIdentifierToSubscription()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "SubscriptionName": "",
   "SourceIdentifier": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 AddSourceIdentifierToSubscription(args) = rds("AddSourceIdentifierToSubscription", args)
+
 """
-    DeleteDBParameterGroup
+    DeleteDBParameterGroup()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "DBParameterGroupName": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDBParameterGroup(args) = rds("DeleteDBParameterGroup", args)

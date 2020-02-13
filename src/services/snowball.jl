@@ -2,11 +2,11 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: snowball
 
 """
-    CreateCluster
+    CreateCluster()
 
 Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
 
-Required Parameters:
+Required Parameters
 {
   "AddressId": "The ID for the address that you want the cluster shipped to.",
   "ShippingOption": "The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  ",
@@ -15,8 +15,7 @@ Required Parameters:
   "JobType": "The type of job for this cluster. Currently, the only job type supported for clusters is LOCAL_USE."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "An optional description of this specific cluster, for example Environmental Data Cluster-01.",
   "SnowballType": "The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE.",
@@ -24,126 +23,91 @@ Optional Parameters:
   "ForwardingAddressId": "The forwarding address ID for a cluster. This field is not supported in most regions.",
   "KmsKeyARN": "The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN values are created by using the CreateKey API action in AWS Key Management Service (AWS KMS). "
 }
-
 """
-
 CreateCluster(args) = snowball("CreateCluster", args)
+
 """
-    ListCompatibleImages
+    ListCompatibleImages()
 
 This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snowball Edge device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results for the list of compatible images. Currently, a Snowball Edge device can store 10 AMIs.",
   "NextToken": "HTTP requests are stateless. To identify what object comes \"next\" in the list of compatible images, you can specify a value for NextToken as the starting point for your list of returned images."
 }
-
 """
 ListCompatibleImages() = snowball("ListCompatibleImages")
 ListCompatibleImages(args) = snowball("ListCompatibleImages", args)
 
 """
-    CreateAddress
+    CreateAddress()
 
 Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
 
-Required Parameters:
+Required Parameters
 {
   "Address": "The address that you want the Snowball shipped to."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateAddress(args) = snowball("CreateAddress", args)
+
 """
-    ListClusterJobs
+    ListClusterJobs()
 
 Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
 
-Required Parameters:
+Required Parameters
 {
   "ClusterId": "The 39-character ID for the cluster that you want to list, for example CID123e4567-e89b-12d3-a456-426655440000."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The number of JobListEntry objects to return.",
   "NextToken": "HTTP requests are stateless. To identify what object comes \"next\" in the list of JobListEntry objects, you have the option of specifying NextToken as the starting point for your returned list."
 }
-
 """
-
 ListClusterJobs(args) = snowball("ListClusterJobs", args)
+
 """
-    DescribeAddress
+    DescribeAddress()
 
 Takes an AddressId and returns specific details about that address in the form of an Address object.
 
-Required Parameters:
+Required Parameters
 {
   "AddressId": "The automatically generated ID for a specific address."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeAddress(args) = snowball("DescribeAddress", args)
+
 """
-    CancelJob
+    CancelJob()
 
 Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action returns a job's JobState as part of the response element data returned.
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The 39-character job ID for the job that you want to cancel, for example JID123e4567-e89b-12d3-a456-426655440000."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CancelJob(args) = snowball("CancelJob", args)
+
 """
-    GetSnowballUsage
+    GetSnowballUsage()
 
 Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use. The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
-
-Required Parameters:
-{}
-
-
-Optional Parameters:
-{}
-
 """
 GetSnowballUsage() = snowball("GetSnowballUsage")
 GetSnowballUsage(args) = snowball("GetSnowballUsage", args)
 
 """
-    CreateJob
+    CreateJob()
 
 Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "SnowballCapacityPreference": "If your job is being created in one of the US regions, you have the option of specifying what size Snowball you'd like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.",
   "KmsKeyARN": "The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created using the CreateKey AWS Key Management Service (KMS) API action.",
@@ -158,23 +122,21 @@ Optional Parameters:
   "ForwardingAddressId": "The forwarding address ID for a job. This field is not supported in most regions.",
   "JobType": "Defines the type of job that you're creating. "
 }
-
 """
 CreateJob() = snowball("CreateJob")
 CreateJob(args) = snowball("CreateJob", args)
 
 """
-    UpdateCluster
+    UpdateCluster()
 
 While a cluster's ClusterState value is in the AwaitingQuorum state, you can update some of the information associated with a cluster. Once the cluster changes to a different job state, usually 60 minutes after the cluster being created, this action is no longer available.
 
-Required Parameters:
+Required Parameters
 {
   "ClusterId": "The cluster ID of the cluster that you want to update, for example CID123e4567-e89b-12d3-a456-426655440000."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "The updated description of this cluster.",
   "AddressId": "The ID of the updated Address object.",
@@ -184,39 +146,32 @@ Optional Parameters:
   "Notification": "The new or updated Notification object.",
   "ForwardingAddressId": "The updated ID for the forwarding address for a cluster. This field is not supported in most regions."
 }
-
 """
-
 UpdateCluster(args) = snowball("UpdateCluster", args)
+
 """
-    GetJobUnlockCode
+    GetJobUnlockCode()
 
 Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created. The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The ID for the job that you want to get the UnlockCode value for, for example JID123e4567-e89b-12d3-a456-426655440000."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetJobUnlockCode(args) = snowball("GetJobUnlockCode", args)
+
 """
-    UpdateJob
+    UpdateJob()
 
 While a job's JobState value is New, you can update some of the information associated with a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The job ID of the job that you want to update, for example JID123e4567-e89b-12d3-a456-426655440000."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "The updated description of this job's JobMetadata object.",
   "AddressId": "The ID of the updated Address object.",
@@ -227,148 +182,107 @@ Optional Parameters:
   "ForwardingAddressId": "The updated ID for the forwarding address for a job. This field is not supported in most regions.",
   "SnowballCapacityPreference": "The updated SnowballCapacityPreference of this job's JobMetadata object. The 50 TB Snowballs are only available in the US regions."
 }
-
 """
-
 UpdateJob(args) = snowball("UpdateJob", args)
+
 """
-    DescribeJob
+    DescribeJob()
 
 Returns information about a specific job including shipping information, job status, and other important metadata. 
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The automatically generated ID for a job, for example JID123e4567-e89b-12d3-a456-426655440000."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeJob(args) = snowball("DescribeJob", args)
+
 """
-    DescribeAddresses
+    DescribeAddresses()
 
 Returns a specified number of ADDRESS objects. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The number of ADDRESS objects to return.",
   "NextToken": "HTTP requests are stateless. To identify what object comes \"next\" in the list of ADDRESS objects, you have the option of specifying a value for NextToken as the starting point for your list of returned addresses."
 }
-
 """
 DescribeAddresses() = snowball("DescribeAddresses")
 DescribeAddresses(args) = snowball("DescribeAddresses", args)
 
 """
-    DescribeCluster
+    DescribeCluster()
 
 Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
 
-Required Parameters:
+Required Parameters
 {
   "ClusterId": "The automatically generated ID for a cluster."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeCluster(args) = snowball("DescribeCluster", args)
+
 """
-    GetJobManifest
+    GetJobManifest()
 
 Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The ID for a job that you want to get the manifest file for, for example JID123e4567-e89b-12d3-a456-426655440000."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetJobManifest(args) = snowball("GetJobManifest", args)
+
 """
-    ListJobs
+    ListJobs()
 
 Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The number of JobListEntry objects to return.",
   "NextToken": "HTTP requests are stateless. To identify what object comes \"next\" in the list of JobListEntry objects, you have the option of specifying NextToken as the starting point for your returned list."
 }
-
 """
 ListJobs() = snowball("ListJobs")
 ListJobs(args) = snowball("ListJobs", args)
 
 """
-    GetSoftwareUpdates
+    GetSoftwareUpdates()
 
 Returns an Amazon S3 presigned URL for an update file associated with a specified JobId.
 
-Required Parameters:
+Required Parameters
 {
   "JobId": "The ID for a job that you want to get the software update file for, for example JID123e4567-e89b-12d3-a456-426655440000."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetSoftwareUpdates(args) = snowball("GetSoftwareUpdates", args)
+
 """
-    CancelCluster
+    CancelCluster()
 
 Cancels a cluster job. You can only cancel a cluster job while it's in the AwaitingQuorum status. You'll have at least an hour after creating a cluster job to cancel it.
 
-Required Parameters:
+Required Parameters
 {
   "ClusterId": "The 39-character ID for the cluster that you want to cancel, for example CID123e4567-e89b-12d3-a456-426655440000."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CancelCluster(args) = snowball("CancelCluster", args)
+
 """
-    ListClusters
+    ListClusters()
 
 Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The number of ClusterListEntry objects to return.",
   "NextToken": "HTTP requests are stateless. To identify what object comes \"next\" in the list of ClusterListEntry objects, you have the option of specifying NextToken as the starting point for your returned list."
 }
-
 """
 ListClusters() = snowball("ListClusters")
 ListClusters(args) = snowball("ListClusters", args)

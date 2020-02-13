@@ -2,63 +2,48 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: dlm
 
 """
-    ListTagsForResource
+    ListTagsForResource()
 
 Lists the tags for the specified resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) of the resource."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTagsForResource(args) = dlm("GET", "/tags/{resourceArn}", args)
+
 """
-    UntagResource
+    UntagResource()
 
 Removes the specified tags from the specified resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) of the resource.",
   "TagKeys": "The tag keys."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = dlm("DELETE", "/tags/{resourceArn}", args)
+
 """
-    GetLifecyclePolicy
+    GetLifecyclePolicy()
 
 Gets detailed information about the specified lifecycle policy.
 
-Required Parameters:
+Required Parameters
 {
   "PolicyId": "The identifier of the lifecycle policy."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetLifecyclePolicy(args) = dlm("GET", "/policies/{policyId}/", args)
+
 """
-    CreateLifecyclePolicy
+    CreateLifecyclePolicy()
 
 Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
 
-Required Parameters:
+Required Parameters
 {
   "PolicyDetails": "The configuration details of the lifecycle policy.",
   "Description": "A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+  are supported.",
@@ -66,25 +51,19 @@ Required Parameters:
   "ExecutionRoleArn": "The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Tags": "The tags to apply to the lifecycle policy during creation."
 }
-
 """
-
 CreateLifecyclePolicy(args) = dlm("POST", "/policies", args)
+
 """
-    GetLifecyclePolicies
+    GetLifecyclePolicies()
 
 Gets summary information about all or the specified data lifecycle policies. To get complete information about a policy, use GetLifecyclePolicy.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "TagsToAdd": "The tags to add to objects created by the policy. Tags are strings in the format key=value. These user-defined tags are added in addition to the AWS-added lifecycle tags.",
   "TargetTags": "The target tag for a policy. Tags are strings in the format key=value.",
@@ -92,65 +71,51 @@ Optional Parameters:
   "State": "The activation state.",
   "ResourceTypes": "The resource type."
 }
-
 """
 GetLifecyclePolicies() = dlm("GET", "/policies")
 GetLifecyclePolicies(args) = dlm("GET", "/policies", args)
 
 """
-    UpdateLifecyclePolicy
+    UpdateLifecyclePolicy()
 
 Updates the specified lifecycle policy.
 
-Required Parameters:
+Required Parameters
 {
   "PolicyId": "The identifier of the lifecycle policy."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "PolicyDetails": "The configuration of the lifecycle policy. You cannot update the policy type or the resource type.",
   "Description": "A description of the lifecycle policy.",
   "State": "The desired activation state of the lifecycle policy after creation.",
   "ExecutionRoleArn": "The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy."
 }
-
 """
-
 UpdateLifecyclePolicy(args) = dlm("PATCH", "/policies/{policyId}", args)
+
 """
-    DeleteLifecyclePolicy
+    DeleteLifecyclePolicy()
 
 Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
 
-Required Parameters:
+Required Parameters
 {
   "PolicyId": "The identifier of the lifecycle policy."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteLifecyclePolicy(args) = dlm("DELETE", "/policies/{policyId}/", args)
+
 """
-    TagResource
+    TagResource()
 
 Adds the specified tags to the specified resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) of the resource.",
   "Tags": "One or more tags."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 TagResource(args) = dlm("POST", "/tags/{resourceArn}", args)

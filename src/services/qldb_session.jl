@@ -2,15 +2,11 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: qldb_session
 
 """
-    SendCommand
+    SendCommand()
 
 Sends a command to an Amazon QLDB ledger.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "SessionToken": "Specifies the session token for the current command. A session token is constant throughout the life of the session. To obtain a session token, run the StartSession command. This SessionToken is required for every subsequent command that is issued during the current session.",
   "AbortTransaction": "Command to abort the current transaction.",
@@ -21,7 +17,6 @@ Optional Parameters:
   "EndSession": "Command to end the current session.",
   "ExecuteStatement": "Command to execute a statement in the specified transaction."
 }
-
 """
 SendCommand() = qldb_session("SendCommand")
 SendCommand(args) = qldb_session("SendCommand", args)

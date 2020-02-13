@@ -2,36 +2,30 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: imagebuilder
 
 """
-    ListTagsForResource
+    ListTagsForResource()
 
  Returns the list of tags for the specified resource. 
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": " The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTagsForResource(args) = imagebuilder("GET", "/tags/{resourceArn}", args)
+
 """
-    CreateInfrastructureConfiguration
+    CreateInfrastructureConfiguration()
 
  Creates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested. 
 
-Required Parameters:
+Required Parameters
 {
   "name": " The name of the infrastructure configuration. ",
   "instanceProfileName": " The instance profile to associate with the instance used to customize your EC2 AMI. ",
   "clientToken": " The idempotency token used to make this request idempotent. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "keyPair": " The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image. ",
   "logging": " The logging configuration of the infrastructure configuration. ",
@@ -43,92 +37,71 @@ Optional Parameters:
   "subnetId": " The subnet ID in which to place the instance used to customize your EC2 AMI. ",
   "snsTopicArn": " The SNS topic on which to send image build events. "
 }
-
 """
-
 CreateInfrastructureConfiguration(args) = imagebuilder("PUT", "/CreateInfrastructureConfiguration", args)
+
 """
-    DeleteInfrastructureConfiguration
+    DeleteInfrastructureConfiguration()
 
  Deletes an infrastructure configuration. 
 
-Required Parameters:
+Required Parameters
 {
   "infrastructureConfigurationArn": " The Amazon Resource Name (ARN) of the infrastructure configuration to delete. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteInfrastructureConfiguration(args) = imagebuilder("DELETE", "/DeleteInfrastructureConfiguration", args)
+
 """
-    ListComponents
+    ListComponents()
 
 Returns the list of component build versions for the specified semantic version. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "filters": " The filters. ",
   "owner": " The owner defines which components you want to list. By default, this request will only show components owned by your account. You can use this field to specify if you want to view components owned by yourself, by Amazon, or those components that have been shared with you by other customers. ",
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
 ListComponents() = imagebuilder("POST", "/ListComponents")
 ListComponents(args) = imagebuilder("POST", "/ListComponents", args)
 
 """
-    GetInfrastructureConfiguration
+    GetInfrastructureConfiguration()
 
  Gets an infrastructure configuration. 
 
-Required Parameters:
+Required Parameters
 {
   "infrastructureConfigurationArn": "The Amazon Resource Name (ARN) of the infrastructure configuration that you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetInfrastructureConfiguration(args) = imagebuilder("GET", "/GetInfrastructureConfiguration", args)
+
 """
-    ListImages
+    ListImages()
 
  Returns the list of image build versions for the specified semantic version. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "filters": " The filters. ",
   "owner": " The owner defines which images you want to list. By default, this request will only show images owned by your account. You can use this field to specify if you want to view images owned by yourself, by Amazon, or those images that have been shared with you by other customers. ",
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
 ListImages() = imagebuilder("POST", "/ListImages")
 ListImages(args) = imagebuilder("POST", "/ListImages", args)
 
 """
-    CreateImagePipeline
+    CreateImagePipeline()
 
  Creates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images. 
 
-Required Parameters:
+Required Parameters
 {
   "name": " The name of the image pipeline. ",
   "imageRecipeArn": " The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. ",
@@ -136,8 +109,7 @@ Required Parameters:
   "infrastructureConfigurationArn": " The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "imageTestsConfiguration": " The image test configuration of the image pipeline. ",
   "distributionConfigurationArn": " The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline. ",
@@ -146,33 +118,27 @@ Optional Parameters:
   "description": " The description of the image pipeline. ",
   "schedule": " The schedule of the image pipeline. "
 }
-
 """
-
 CreateImagePipeline(args) = imagebuilder("PUT", "/CreateImagePipeline", args)
+
 """
-    GetImage
+    GetImage()
 
  Gets an image. 
 
-Required Parameters:
+Required Parameters
 {
   "imageBuildVersionArn": " The Amazon Resource Name (ARN) of the image that you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetImage(args) = imagebuilder("GET", "/GetImage", args)
+
 """
-    CreateImageRecipe
+    CreateImageRecipe()
 
  Creates a new image recipe. Image recipes define how images are configured, tested, and assessed. 
 
-Required Parameters:
+Required Parameters
 {
   "semanticVersion": " The semantic version of the image recipe. ",
   "name": " The name of the image recipe. ",
@@ -181,23 +147,21 @@ Required Parameters:
   "parentImage": " The parent image of the image recipe. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "blockDeviceMappings": " The block device mappings of the image recipe. ",
   "tags": " The tags of the image recipe. ",
   "description": " The description of the image recipe. "
 }
-
 """
-
 CreateImageRecipe(args) = imagebuilder("PUT", "/CreateImageRecipe", args)
+
 """
-    ImportComponent
+    ImportComponent()
 
 Imports a component and transforms its data into a component document. 
 
-Required Parameters:
+Required Parameters
 {
   "semanticVersion": "The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).",
   "name": " The name of the component. ",
@@ -207,8 +171,7 @@ Required Parameters:
   "type": "The type of the component denotes whether the component is used to build the image or only to test it. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "uri": "The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component. ",
   "data": "The data of the component. Used to specify the data inline. Either data or uri can be used to specify the data within the component.",
@@ -217,341 +180,266 @@ Optional Parameters:
   "description": "The description of the component. Describes the contents of the component. ",
   "kmsKeyId": " The ID of the KMS key that should be used to encrypt this component. "
 }
-
 """
-
 ImportComponent(args) = imagebuilder("PUT", "/ImportComponent", args)
+
 """
-    CreateDistributionConfiguration
+    CreateDistributionConfiguration()
 
 Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. 
 
-Required Parameters:
+Required Parameters
 {
   "name": " The name of the distribution configuration. ",
   "distributions": " The distributions of the distribution configuration. ",
   "clientToken": " The idempotency token of the distribution configuration. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "tags": " The tags of the distribution configuration. ",
   "description": " The description of the distribution configuration. "
 }
-
 """
-
 CreateDistributionConfiguration(args) = imagebuilder("PUT", "/CreateDistributionConfiguration", args)
+
 """
-    ListComponentBuildVersions
+    ListComponentBuildVersions()
 
  Returns the list of component build versions for the specified semantic version. 
 
-Required Parameters:
+Required Parameters
 {
   "componentVersionArn": " The component version Amazon Resource Name (ARN) whose versions you want to list. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
-
 ListComponentBuildVersions(args) = imagebuilder("POST", "/ListComponentBuildVersions", args)
+
 """
-    ListImageBuildVersions
+    ListImageBuildVersions()
 
  Returns a list of distribution configurations. 
 
-Required Parameters:
+Required Parameters
 {
   "imageVersionArn": " The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "filters": " The filters. ",
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
-
 ListImageBuildVersions(args) = imagebuilder("POST", "/ListImageBuildVersions", args)
+
 """
-    PutComponentPolicy
+    PutComponentPolicy()
 
  Applies a policy to a component. 
 
-Required Parameters:
+Required Parameters
 {
   "componentArn": " The Amazon Resource Name (ARN) of the component that this policy should be applied to. ",
   "policy": " The policy to apply. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 PutComponentPolicy(args) = imagebuilder("PUT", "/PutComponentPolicy", args)
+
 """
-    GetComponent
+    GetComponent()
 
  Gets a component object. 
 
-Required Parameters:
+Required Parameters
 {
   "componentBuildVersionArn": " The Amazon Resource Name (ARN) of the component that you want to retrieve. Regex requires \"/ d+ \" suffix."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetComponent(args) = imagebuilder("GET", "/GetComponent", args)
+
 """
-    DeleteImageRecipe
+    DeleteImageRecipe()
 
  Deletes an image recipe. 
 
-Required Parameters:
+Required Parameters
 {
   "imageRecipeArn": " The Amazon Resource Name (ARN) of the image recipe to delete. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteImageRecipe(args) = imagebuilder("DELETE", "/DeleteImageRecipe", args)
+
 """
-    CreateImage
+    CreateImage()
 
  Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration. 
 
-Required Parameters:
+Required Parameters
 {
   "imageRecipeArn": " The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. ",
   "clientToken": " The idempotency token used to make this request idempotent. ",
   "infrastructureConfigurationArn": " The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "imageTestsConfiguration": " The image tests configuration of the image. ",
   "distributionConfigurationArn": " The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline. ",
   "tags": " The tags of the image. "
 }
-
 """
-
 CreateImage(args) = imagebuilder("PUT", "/CreateImage", args)
+
 """
-    GetImageRecipePolicy
+    GetImageRecipePolicy()
 
  Gets an image recipe policy. 
 
-Required Parameters:
+Required Parameters
 {
   "imageRecipeArn": " The Amazon Resource Name (ARN) of the image recipe whose policy you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetImageRecipePolicy(args) = imagebuilder("GET", "/GetImageRecipePolicy", args)
+
 """
-    StartImagePipelineExecution
+    StartImagePipelineExecution()
 
  Manually triggers a pipeline to create an image. 
 
-Required Parameters:
+Required Parameters
 {
   "imagePipelineArn": " The Amazon Resource Name (ARN) of the image pipeline that you want to manually invoke. ",
   "clientToken": " The idempotency token used to make this request idempotent. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 StartImagePipelineExecution(args) = imagebuilder("PUT", "/StartImagePipelineExecution", args)
+
 """
-    DeleteImagePipeline
+    DeleteImagePipeline()
 
  Deletes an image pipeline. 
 
-Required Parameters:
+Required Parameters
 {
   "imagePipelineArn": " The Amazon Resource Name (ARN) of the image pipeline to delete. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteImagePipeline(args) = imagebuilder("DELETE", "/DeleteImagePipeline", args)
+
 """
-    GetComponentPolicy
+    GetComponentPolicy()
 
  Gets a component policy. 
 
-Required Parameters:
+Required Parameters
 {
   "componentArn": " The Amazon Resource Name (ARN) of the component whose policy you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetComponentPolicy(args) = imagebuilder("GET", "/GetComponentPolicy", args)
+
 """
-    ListImagePipelines
+    ListImagePipelines()
 
 Returns a list of image pipelines. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "filters": " The filters. ",
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
 ListImagePipelines() = imagebuilder("POST", "/ListImagePipelines")
 ListImagePipelines(args) = imagebuilder("POST", "/ListImagePipelines", args)
 
 """
-    DeleteDistributionConfiguration
+    DeleteDistributionConfiguration()
 
  Deletes a distribution configuration. 
 
-Required Parameters:
+Required Parameters
 {
   "distributionConfigurationArn": " The Amazon Resource Name (ARN) of the distribution configuration to delete. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDistributionConfiguration(args) = imagebuilder("DELETE", "/DeleteDistributionConfiguration", args)
+
 """
-    TagResource
+    TagResource()
 
  Adds a tag to a resource. 
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": " The Amazon Resource Name (ARN) of the resource that you want to tag. ",
   "tags": " The tags to apply to the resource. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 TagResource(args) = imagebuilder("POST", "/tags/{resourceArn}", args)
+
 """
-    UntagResource
+    UntagResource()
 
  Removes a tag from a resource. 
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": " The Amazon Resource Name (ARN) of the resource that you want to untag. ",
   "tagKeys": " The tag keys to remove from the resource. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = imagebuilder("DELETE", "/tags/{resourceArn}", args)
+
 """
-    ListDistributionConfigurations
+    ListDistributionConfigurations()
 
  Returns a list of distribution configurations. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "filters": " The filters. ",
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
 ListDistributionConfigurations() = imagebuilder("POST", "/ListDistributionConfigurations")
 ListDistributionConfigurations(args) = imagebuilder("POST", "/ListDistributionConfigurations", args)
 
 """
-    GetImagePipeline
+    GetImagePipeline()
 
  Gets an image pipeline. 
 
-Required Parameters:
+Required Parameters
 {
   "imagePipelineArn": " The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetImagePipeline(args) = imagebuilder("GET", "/GetImagePipeline", args)
+
 """
-    UpdateInfrastructureConfiguration
+    UpdateInfrastructureConfiguration()
 
  Updates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested. 
 
-Required Parameters:
+Required Parameters
 {
   "instanceProfileName": " The instance profile to associate with the instance used to customize your EC2 AMI. ",
   "clientToken": " The idempotency token used to make this request idempotent. ",
   "infrastructureConfigurationArn": " The Amazon Resource Name (ARN) of the infrastructure configuration that you want to update. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "keyPair": " The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image. ",
   "logging": " The logging configuration of the infrastructure configuration. ",
@@ -562,199 +450,151 @@ Optional Parameters:
   "subnetId": " The subnet ID to place the instance used to customize your EC2 AMI in. ",
   "snsTopicArn": " The SNS topic on which to send image build events. "
 }
-
 """
-
 UpdateInfrastructureConfiguration(args) = imagebuilder("PUT", "/UpdateInfrastructureConfiguration", args)
+
 """
-    GetImagePolicy
+    GetImagePolicy()
 
  Gets an image policy. 
 
-Required Parameters:
+Required Parameters
 {
   "imageArn": " The Amazon Resource Name (ARN) of the image whose policy you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetImagePolicy(args) = imagebuilder("GET", "/GetImagePolicy", args)
+
 """
-    PutImageRecipePolicy
+    PutImageRecipePolicy()
 
  Applies a policy to an image recipe. 
 
-Required Parameters:
+Required Parameters
 {
   "imageRecipeArn": " The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to. ",
   "policy": " The policy to apply. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 PutImageRecipePolicy(args) = imagebuilder("PUT", "/PutImageRecipePolicy", args)
+
 """
-    ListInfrastructureConfigurations
+    ListInfrastructureConfigurations()
 
  Returns a list of infrastructure configurations. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "filters": " The filters. ",
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
 ListInfrastructureConfigurations() = imagebuilder("POST", "/ListInfrastructureConfigurations")
 ListInfrastructureConfigurations(args) = imagebuilder("POST", "/ListInfrastructureConfigurations", args)
 
 """
-    DeleteComponent
+    DeleteComponent()
 
  Deletes a component build version. 
 
-Required Parameters:
+Required Parameters
 {
   "componentBuildVersionArn": " The Amazon Resource Name (ARN) of the component build version to delete. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteComponent(args) = imagebuilder("DELETE", "/DeleteComponent", args)
+
 """
-    DeleteImage
+    DeleteImage()
 
  Deletes an image. 
 
-Required Parameters:
+Required Parameters
 {
   "imageBuildVersionArn": " The Amazon Resource Name (ARN) of the image to delete. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteImage(args) = imagebuilder("DELETE", "/DeleteImage", args)
+
 """
-    ListImageRecipes
+    ListImageRecipes()
 
  Returns a list of image recipes. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "filters": " The filters. ",
   "owner": " The owner defines which image recipes you want to list. By default, this request will only show image recipes owned by your account. You can use this field to specify if you want to view image recipes owned by yourself, by Amazon, or those image recipes that have been shared with you by other customers. ",
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
 ListImageRecipes() = imagebuilder("POST", "/ListImageRecipes")
 ListImageRecipes(args) = imagebuilder("POST", "/ListImageRecipes", args)
 
 """
-    GetDistributionConfiguration
+    GetDistributionConfiguration()
 
  Gets a distribution configuration. 
 
-Required Parameters:
+Required Parameters
 {
   "distributionConfigurationArn": " The Amazon Resource Name (ARN) of the distribution configuration that you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetDistributionConfiguration(args) = imagebuilder("GET", "/GetDistributionConfiguration", args)
+
 """
-    GetImageRecipe
+    GetImageRecipe()
 
  Gets an image recipe. 
 
-Required Parameters:
+Required Parameters
 {
   "imageRecipeArn": " The Amazon Resource Name (ARN) of the image recipe that you want to retrieve. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetImageRecipe(args) = imagebuilder("GET", "/GetImageRecipe", args)
+
 """
-    CancelImageCreation
+    CancelImageCreation()
 
 CancelImageCreation cancels the creation of Image. This operation can only be used on images in a non-terminal state.
 
-Required Parameters:
+Required Parameters
 {
   "imageBuildVersionArn": "The Amazon Resource Name (ARN) of the image whose creation you want to cancel.",
   "clientToken": "The idempotency token used to make this request idempotent."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CancelImageCreation(args) = imagebuilder("PUT", "/CancelImageCreation", args)
+
 """
-    ListImagePipelineImages
+    ListImagePipelineImages()
 
  Returns a list of images created by the specified pipeline. 
 
-Required Parameters:
+Required Parameters
 {
   "imagePipelineArn": " The Amazon Resource Name (ARN) of the image pipeline whose images you want to view. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "filters": " The filters. ",
   "maxResults": " The maximum items to return in a request. ",
   "nextToken": " A token to specify where to start paginating. This is the NextToken from a previously truncated response. "
 }
-
 """
-
 ListImagePipelineImages(args) = imagebuilder("POST", "/ListImagePipelineImages", args)
+
 """
-    CreateComponent
+    CreateComponent()
 
 Creates a new component that can be used to build, validate, test, and assess your image.
 
-Required Parameters:
+Required Parameters
 {
   "semanticVersion": "The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).",
   "name": "The name of the component.",
@@ -762,8 +602,7 @@ Required Parameters:
   "platform": "The platform of the component."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "uri": "The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component.",
   "data": "The data of the component. Used to specify the data inline. Either data or uri can be used to specify the data within the component.",
@@ -772,55 +611,47 @@ Optional Parameters:
   "description": "The description of the component. Describes the contents of the component.",
   "kmsKeyId": "The ID of the KMS key that should be used to encrypt this component."
 }
-
 """
-
 CreateComponent(args) = imagebuilder("PUT", "/CreateComponent", args)
+
 """
-    PutImagePolicy
+    PutImagePolicy()
 
  Applies a policy to an image. 
 
-Required Parameters:
+Required Parameters
 {
   "policy": " The policy to apply. ",
   "imageArn": " The Amazon Resource Name (ARN) of the image that this policy should be applied to. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 PutImagePolicy(args) = imagebuilder("PUT", "/PutImagePolicy", args)
+
 """
-    UpdateDistributionConfiguration
+    UpdateDistributionConfiguration()
 
  Updates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. 
 
-Required Parameters:
+Required Parameters
 {
   "distributionConfigurationArn": " The Amazon Resource Name (ARN) of the distribution configuration that you want to update. ",
   "distributions": " The distributions of the distribution configuration. ",
   "clientToken": " The idempotency token of the distribution configuration. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "description": " The description of the distribution configuration. "
 }
-
 """
-
 UpdateDistributionConfiguration(args) = imagebuilder("PUT", "/UpdateDistributionConfiguration", args)
+
 """
-    UpdateImagePipeline
+    UpdateImagePipeline()
 
  Updates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images. 
 
-Required Parameters:
+Required Parameters
 {
   "imagePipelineArn": " The Amazon Resource Name (ARN) of the image pipeline that you want to update. ",
   "imageRecipeArn": " The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. ",
@@ -828,8 +659,7 @@ Required Parameters:
   "infrastructureConfigurationArn": " The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "imageTestsConfiguration": " The image test configuration of the image pipeline. ",
   "distributionConfigurationArn": " The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images updated by this image pipeline. ",
@@ -837,7 +667,5 @@ Optional Parameters:
   "description": " The description of the image pipeline. ",
   "schedule": " The schedule of the image pipeline. "
 }
-
 """
-
 UpdateImagePipeline(args) = imagebuilder("PUT", "/UpdateImagePipeline", args)

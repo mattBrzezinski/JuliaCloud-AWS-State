@@ -2,71 +2,58 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: ecs
 
 """
-    PutAttributes
+    PutAttributes()
 
 Create or update an attribute on an Amazon ECS resource. If the attribute does not exist, it is created. If the attribute exists, its value is replaced with the specified value. To delete an attribute, use DeleteAttributes. For more information, see Attributes in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "attributes": "The attributes to apply to your resource. You can specify up to 10 custom attributes per resource. You can specify up to 10 attributes in a single call."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to apply attributes. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 PutAttributes(args) = ecs("PutAttributes", args)
+
 """
-    DescribeTaskDefinition
+    DescribeTaskDefinition()
 
 Describes a task definition. You can specify a family and revision to find information about a specific task definition, or you can simply specify the family to find the latest ACTIVE revision in that family.  You can only describe INACTIVE task definitions while an active task or service references them. 
 
-Required Parameters:
+Required Parameters
 {
   "taskDefinition": "The family for the latest ACTIVE revision, family and revision (family:revision) for a specific revision in the family, or full Amazon Resource Name (ARN) of the task definition to describe."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "include": "Specifies whether to see the resource tags for the task definition. If TAGS is specified, the tags are included in the response. If this field is omitted, tags are not included in the response."
 }
-
 """
-
 DescribeTaskDefinition(args) = ecs("DescribeTaskDefinition", args)
+
 """
-    UpdateClusterSettings
+    UpdateClusterSettings()
 
 Modifies the settings to use for a cluster.
 
-Required Parameters:
+Required Parameters
 {
   "settings": "The setting to use by default for a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.",
   "cluster": "The name of the cluster to modify the settings for."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UpdateClusterSettings(args) = ecs("UpdateClusterSettings", args)
+
 """
-    ListTaskDefinitions
+    ListTaskDefinitions()
 
 Returns a list of task definitions that are registered to your account. You can filter the results by family name with the familyPrefix parameter or by status with the status parameter.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "status": "The task definition status with which to filter the ListTaskDefinitions results. By default, only ACTIVE task definitions are listed. By setting this parameter to INACTIVE, you can view task definitions that are INACTIVE as long as an active task or service still references them. If you paginate the resulting output, be sure to keep the status value constant in each subsequent request.",
   "sort": "The order in which to sort the results. Valid values are ASC and DESC. By default (ASC), task definitions are listed lexicographically by family name and in ascending numerical order by revision so that the newest task definitions in a family are listed last. Setting this parameter to DESC reverses the sort order on family name and revision so that the newest task definitions in a family are listed first.",
@@ -74,113 +61,89 @@ Optional Parameters:
   "nextToken": "The nextToken value returned from a ListTaskDefinitions request indicating that more results are available to fulfill the request and further calls will be needed. If maxResults was provided, it is possible the number of results to be fewer than maxResults.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. ",
   "familyPrefix": "The full family name with which to filter the ListTaskDefinitions results. Specifying a familyPrefix limits the listed task definitions to task definition revisions that belong to that family."
 }
-
 """
 ListTaskDefinitions() = ecs("ListTaskDefinitions")
 ListTaskDefinitions(args) = ecs("ListTaskDefinitions", args)
 
 """
-    TagResource
+    TagResource()
 
 Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": "The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resources are Amazon ECS capacity providers, tasks, services, task definitions, clusters, and container instances.",
   "tags": "The tags to add to the resource. A tag is an array of key-value pairs. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 TagResource(args) = ecs("TagResource", args)
+
 """
-    DeleteAccountSetting
+    DeleteAccountSetting()
 
 Disables an account setting for a specified IAM user, IAM role, or the root user for an account.
 
-Required Parameters:
+Required Parameters
 {
   "name": "The resource name for which to disable the account setting. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If awsvpcTrunking is specified, the ENI limit for your Amazon ECS container instances is affected."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "principalArn": "The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it disables the account setting for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings. If this field is omitted, the setting is changed only for the authenticated user."
 }
-
 """
-
 DeleteAccountSetting(args) = ecs("DeleteAccountSetting", args)
+
 """
-    DeleteCluster
+    DeleteCluster()
 
 Deletes the specified cluster. The cluster will transition to the INACTIVE state. Clusters with an INACTIVE status may remain discoverable in your account for a period of time. However, this behavior is subject to change in the future, so you should not rely on INACTIVE clusters persisting. You must deregister all container instances from this cluster before you may delete it. You can list the container instances in a cluster with ListContainerInstances and deregister them with DeregisterContainerInstance.
 
-Required Parameters:
+Required Parameters
 {
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster to delete."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteCluster(args) = ecs("DeleteCluster", args)
+
 """
-    DeleteAttributes
+    DeleteAttributes()
 
 Deletes one or more custom attributes from an Amazon ECS resource.
 
-Required Parameters:
+Required Parameters
 {
   "attributes": "The attributes to delete from your resource. You can specify up to 10 attributes per request. For custom attributes, specify the attribute name and target ID, but do not specify the value. If you specify the target ID using the short form, you must also specify the target type."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to delete attributes. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 DeleteAttributes(args) = ecs("DeleteAttributes", args)
+
 """
-    DiscoverPollEndpoint
+    DiscoverPollEndpoint()
 
  This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.  Returns an endpoint for the Amazon ECS agent to poll for updates.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "containerInstance": "The container instance ID or full ARN of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster to which the container instance belongs."
 }
-
 """
 DiscoverPollEndpoint() = ecs("DiscoverPollEndpoint")
 DiscoverPollEndpoint(args) = ecs("DiscoverPollEndpoint", args)
 
 """
-    CreateCluster
+    CreateCluster()
 
 Creates a new Amazon ECS cluster. By default, your account receives a default cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the CreateCluster action.  When you call the CreateCluster API operation, Amazon ECS attempts to create the Amazon ECS service-linked role for your account so that required resources in other AWS services can be managed on your behalf. However, if the IAM user that makes the call does not have permissions to create the service-linked role, it is not created. For more information, see Using Service-Linked Roles for Amazon ECS in the Amazon Elastic Container Service Developer Guide. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "defaultCapacityProviderStrategy": "The capacity provider strategy to use by default for the cluster. When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then the default capacity provider strategy for the cluster is used. A capacity provider strategy consists of one or more capacity providers along with the base and weight to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an ACTIVE or UPDATING status can be used. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used. If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later with the PutClusterCapacityProviders API operation.",
   "capacityProviders": "The short name or full Amazon Resource Name (ARN) of one or more capacity providers to associate with the cluster. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created and not already associated with another cluster. New capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used. The PutClusterCapacityProviders API operation is used to update the list of available capacity providers for a cluster after the cluster is created.",
@@ -188,60 +151,51 @@ Optional Parameters:
   "tags": "The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  ",
   "clusterName": "The name of your cluster. If you do not specify a name for your cluster, you create a cluster named default. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. "
 }
-
 """
 CreateCluster() = ecs("CreateCluster")
 CreateCluster(args) = ecs("CreateCluster", args)
 
 """
-    PutAccountSettingDefault
+    PutAccountSettingDefault()
 
 Modifies an account setting for all IAM users on an account for whom no individual account setting has been specified. Account settings are set on a per-Region basis.
 
-Required Parameters:
+Required Parameters
 {
   "name": "The resource name for which to modify the account setting. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If awsvpcTrunking is specified, the ENI limit for your Amazon ECS container instances is affected. If containerInsights is specified, the default setting for CloudWatch Container Insights for your clusters is affected.",
   "value": "The account setting value for the specified principal ARN. Accepted values are enabled and disabled."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 PutAccountSettingDefault(args) = ecs("PutAccountSettingDefault", args)
+
 """
-    SubmitAttachmentStateChanges
+    SubmitAttachmentStateChanges()
 
  This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.  Sent to acknowledge that an attachment changed states.
 
-Required Parameters:
+Required Parameters
 {
   "attachments": "Any attachments associated with the state change request."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "cluster": "The short name or full ARN of the cluster that hosts the container instance the attachment belongs to."
 }
-
 """
-
 SubmitAttachmentStateChanges(args) = ecs("SubmitAttachmentStateChanges", args)
+
 """
-    UpdateService
+    UpdateService()
 
 Modifies the parameters of a service. For services using the rolling update (ECS) deployment controller, the desired count, deployment configuration, network configuration, or task definition used can be updated. For services using the blue/green (CODE_DEPLOY) deployment controller, only the desired count, deployment configuration, and health check grace period can be updated using this API. If the network configuration, platform version, or task definition need to be updated, a new AWS CodeDeploy deployment should be created. For more information, see CreateDeployment in the AWS CodeDeploy API Reference. For services using an external deployment controller, you can update only the desired count and health check grace period using this API. If the launch type, load balancer, network configuration, platform version, or task definition need to be updated, you should create a new task set. For more information, see CreateTaskSet. You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new desiredCount parameter. If you have updated the Docker image of your application, you can create a new task definition with that image and deploy it to your service. The service scheduler uses the minimum healthy percent and maximum percent parameters (in the service's deployment configuration) to determine the deployment strategy.  If your updated Docker image uses the same tag as what is in the existing task definition for your service (for example, my_image:latest), you do not need to create a new revision of your task definition. You can update the service using the forceNewDeployment option. The new tasks launched by the deployment pull the current image/tag combination from your repository when they start.  You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, minimumHealthyPercent and maximumPercent, to determine the deployment strategy.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during a deployment. For example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).   When UpdateService stops a task during a deployment, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM and a 30-second timeout, after which SIGKILL is sent and the containers are forcibly stopped. If the container handles the SIGTERM gracefully and exits within 30 seconds from receiving it, no SIGKILL is sent. When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:   Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).   By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):   Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.   Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.     When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic:    Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.   Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.  
 
-Required Parameters:
+Required Parameters
 {
   "service": "The name of the service to update."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "healthCheckGracePeriodSeconds": "The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds. During that time, the Amazon ECS service scheduler ignores the Elastic Load Balancing health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.",
   "platformVersion": "The platform version on which your tasks in the service are running. A platform version is only specified for tasks using the Fargate launch type. If a platform version is not specified, the LATEST platform version is used by default. For more information, see AWS Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.",
@@ -253,38 +207,28 @@ Optional Parameters:
   "networkConfiguration": "",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that your service is running on. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 UpdateService(args) = ecs("UpdateService", args)
+
 """
-    UntagResource
+    UntagResource()
 
 Deletes specified tags from a resource.
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": "The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resources are Amazon ECS capacity providers, tasks, services, task definitions, clusters, and container instances.",
   "tagKeys": "The keys of the tags to be removed."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = ecs("UntagResource", args)
+
 """
-    ListAccountSettings
+    ListAccountSettings()
 
 Lists the account settings for a specified principal.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "name": "The resource name you want to list the account settings for.",
   "maxResults": "The maximum number of account setting results returned by ListAccountSettings in paginated output. When this parameter is used, ListAccountSettings only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListAccountSettings request with the returned nextToken value. This value can be between 1 and 10. If this parameter is not used, then ListAccountSettings returns up to 10 results and a nextToken value if applicable.",
@@ -293,101 +237,88 @@ Optional Parameters:
   "effectiveSettings": "Specifies whether to return the effective settings. If true, the account settings for the root user or the default setting for the principalArn are returned. If false, the account settings for the principalArn are returned if they are set. Otherwise, no account settings are returned.",
   "nextToken": "The nextToken value returned from a ListAccountSettings request indicating that more results are available to fulfill the request and further calls will be needed. If maxResults was provided, it is possible the number of results to be fewer than maxResults.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. "
 }
-
 """
 ListAccountSettings() = ecs("ListAccountSettings")
 ListAccountSettings(args) = ecs("ListAccountSettings", args)
 
 """
-    PutAccountSetting
+    PutAccountSetting()
 
 Modifies an account setting. Account settings are set on a per-Region basis. If you change the account setting for the root user, the default settings for all of the IAM users and roles for which no individual account setting has been specified are reset. For more information, see Account Settings in the Amazon Elastic Container Service Developer Guide. When serviceLongArnFormat, taskLongArnFormat, or containerInstanceLongArnFormat are specified, the Amazon Resource Name (ARN) and resource ID format of the resource type for a specified IAM user, IAM role, or the root user for an account is affected. The opt-in and opt-out account setting must be set for each Amazon ECS resource separately. The ARN and resource ID format of a resource will be defined by the opt-in status of the IAM user or role that created the resource. You must enable this setting to use Amazon ECS features such as resource tagging. When awsvpcTrunking is specified, the elastic network interface (ENI) limit for any new container instances that support the feature is changed. If awsvpcTrunking is enabled, any new container instances that support the feature are launched have the increased ENI limits available to them. For more information, see Elastic Network Interface Trunking in the Amazon Elastic Container Service Developer Guide. When containerInsights is specified, the default setting indicating whether CloudWatch Container Insights is enabled for your clusters is changed. If containerInsights is enabled, any new clusters that are created will have Container Insights enabled unless you disable it during cluster creation. For more information, see CloudWatch Container Insights in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "name": "The Amazon ECS resource name for which to modify the account setting. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If awsvpcTrunking is specified, the elastic network interface (ENI) limit for your Amazon ECS container instances is affected. If containerInsights is specified, the default setting for CloudWatch Container Insights for your clusters is affected.",
   "value": "The account setting value for the specified principal ARN. Accepted values are enabled and disabled."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "principalArn": "The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the account setting for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings. If this field is omitted, the setting is changed only for the authenticated user."
 }
-
 """
-
 PutAccountSetting(args) = ecs("PutAccountSetting", args)
+
 """
-    DescribeServices
+    DescribeServices()
 
 Describes the specified services running in your cluster.
 
-Required Parameters:
+Required Parameters
 {
   "services": "A list of services to describe. You may specify up to 10 services to describe in a single operation."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "include": "Specifies whether you want to see the resource tags for the service. If TAGS is specified, the tags are included in the response. If this field is omitted, tags are not included in the response.",
   "cluster": "The short name or full Amazon Resource Name (ARN)the cluster that hosts the service to describe. If you do not specify a cluster, the default cluster is assumed. This parameter is required if the service or services you are describing were launched in any cluster other than the default cluster."
 }
-
 """
-
 DescribeServices(args) = ecs("DescribeServices", args)
+
 """
-    UpdateContainerAgent
+    UpdateContainerAgent()
 
 Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  UpdateContainerAgent requires the Amazon ECS-optimized AMI or Amazon Linux with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "containerInstance": "The container instance ID or full ARN entries for the container instance on which you would like to update the Amazon ECS container agent."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that your container instance is running on. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 UpdateContainerAgent(args) = ecs("UpdateContainerAgent", args)
+
 """
-    DeleteTaskSet
+    DeleteTaskSet()
 
 Deletes a specified task set within a service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS Deployment Types in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "taskSet": "The task set ID or full Amazon Resource Name (ARN) of the task set to delete.",
   "service": "The short name or full Amazon Resource Name (ARN) of the service that hosts the task set to delete.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task set exists in to delete."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "force": "If true, this allows you to delete a task set even if it hasn't been scaled down to zero."
 }
-
 """
-
 DeleteTaskSet(args) = ecs("DeleteTaskSet", args)
+
 """
-    RegisterContainerInstance
+    RegisterContainerInstance()
 
  This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.  Registers an EC2 instance into the specified cluster. This instance becomes available to place containers on.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster with which to register your container instance. If you do not specify a cluster, the default cluster is assumed.",
   "versionInfo": "The version information for the Amazon ECS container agent and Docker daemon running on the container instance.",
@@ -399,60 +330,51 @@ Optional Parameters:
   "platformDevices": "The devices that are available on the container instance. The only supported device type is a GPU.",
   "instanceIdentityDocument": "The instance identity document for the EC2 instance to register. This document can be found by running the following command from the instance: curl http://169.254.169.254/latest/dynamic/instance-identity/document/ "
 }
-
 """
 RegisterContainerInstance() = ecs("RegisterContainerInstance")
 RegisterContainerInstance(args) = ecs("RegisterContainerInstance", args)
 
 """
-    UpdateContainerInstancesState
+    UpdateContainerInstancesState()
 
 Modifies the status of an Amazon ECS container instance. Once a container instance has reached an ACTIVE state, you can change the status of a container instance to DRAINING to manually remove an instance from a cluster, for example to perform system updates, update the Docker daemon, or scale down the cluster size.  A container instance cannot be changed to DRAINING until it has reached an ACTIVE status. If the instance is in any other status, an error will be received.  When you set a container instance to DRAINING, Amazon ECS prevents new tasks from being scheduled for placement on the container instance and replacement service tasks are started on other container instances in the cluster if the resources are available. Service tasks on the container instance that are in the PENDING state are stopped immediately. Service tasks on the container instance that are in the RUNNING state are stopped and replaced according to the service's deployment configuration parameters, minimumHealthyPercent and maximumPercent. You can change the deployment configuration of your service using UpdateService.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during task replacement. For example, desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. If the minimum is 100%, the service scheduler can't remove existing tasks until the replacement tasks are considered healthy. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during task replacement, which enables you to define the replacement batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four tasks to be drained, provided that the cluster resources required to do this are available. If the maximum is 100%, then replacement tasks can't start until the draining tasks have stopped.   Any PENDING or RUNNING tasks that do not belong to a service are not affected. You must wait for them to finish or stop them manually. A container instance has completed draining when it has no more RUNNING tasks. You can verify this using ListTasks. When a container instance has been drained, you can set a container instance to ACTIVE status and once it has reached that status the Amazon ECS scheduler can begin scheduling tasks on the instance again.
 
-Required Parameters:
+Required Parameters
 {
   "containerInstances": "A list of container instance IDs or full ARN entries.",
   "status": "The container instance state with which to update the container instance. The only valid values for this action are ACTIVE and DRAINING. A container instance can only be updated to DRAINING status once it has reached an ACTIVE state. If a container instance is in REGISTERING, DEREGISTERING, or REGISTRATION_FAILED state you can describe the container instance but will be unable to update the container instance state."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to update. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 UpdateContainerInstancesState(args) = ecs("UpdateContainerInstancesState", args)
+
 """
-    ListTagsForResource
+    ListTagsForResource()
 
 List the tags for an Amazon ECS resource.
 
-Required Parameters:
+Required Parameters
 {
   "resourceArn": "The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Amazon ECS tasks, services, task definitions, clusters, and container instances."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTagsForResource(args) = ecs("ListTagsForResource", args)
+
 """
-    RunTask
+    RunTask()
 
 Starts a new task using the specified task definition. You can allow Amazon ECS to place tasks for you, or you can customize how Amazon ECS places tasks using placement constraints and placement strategies. For more information, see Scheduling Tasks in the Amazon Elastic Container Service Developer Guide. Alternatively, you can use StartTask to use your own scheduler or place tasks manually on specific container instances. The Amazon ECS API follows an eventual consistency model, due to the distributed nature of the system supporting the API. This means that the result of an API command you run that affects your Amazon ECS resources might not be immediately visible to all subsequent commands you run. Keep this in mind when you carry out an API command that immediately follows a previous API command. To manage eventual consistency, you can do the following:   Confirm the state of the resource before you run a command to modify it. Run the DescribeTasks command using an exponential backoff algorithm to ensure that you allow enough time for the previous command to propagate through the system. To do this, run the DescribeTasks command repeatedly, starting with a couple of seconds of wait time and increasing gradually up to five minutes of wait time.   Add wait time between subsequent commands, even if the DescribeTasks command returns an accurate response. Apply an exponential backoff algorithm starting with a couple of seconds of wait time, and increase gradually up to about five minutes of wait time.  
 
-Required Parameters:
+Required Parameters
 {
   "taskDefinition": "The family and revision (family:revision) or full ARN of the task definition to run. If a revision is not specified, the latest ACTIVE revision is used."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "platformVersion": "The platform version the task should run. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the LATEST platform version is used by default. For more information, see AWS Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.",
   "launchType": "The launch type on which to run your task. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide. If a launchType is specified, the capacityProviderStrategy parameter must be omitted.",
@@ -470,41 +392,31 @@ Optional Parameters:
   "startedBy": "An optional tag specified when a task is started. For example, if you automatically trigger a task to run a batch process job, you could apply a unique identifier for that job to your task with the startedBy parameter. You can then identify which tasks belong to that job by filtering the results of a ListTasks call with the startedBy value. Up to 36 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. If a task is started by an Amazon ECS service, then the startedBy parameter contains the deployment ID of the service that starts it.",
   "tags": "The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  "
 }
-
 """
-
 RunTask(args) = ecs("RunTask", args)
+
 """
-    DescribeCapacityProviders
+    DescribeCapacityProviders()
 
 Describes one or more of your capacity providers.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "capacityProviders": "The short name or full Amazon Resource Name (ARN) of one or more capacity providers. Up to 100 capacity providers can be described in an action.",
   "maxResults": "The maximum number of account setting results returned by DescribeCapacityProviders in paginated output. When this parameter is used, DescribeCapacityProviders only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeCapacityProviders request with the returned nextToken value. This value can be between 1 and 10. If this parameter is not used, then DescribeCapacityProviders returns up to 10 results and a nextToken value if applicable.",
   "nextToken": "The nextToken value returned from a previous paginated DescribeCapacityProviders request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. ",
   "include": "Specifies whether or not you want to see the resource tags for the capacity provider. If TAGS is specified, the tags are included in the response. If this field is omitted, tags are not included in the response."
 }
-
 """
 DescribeCapacityProviders() = ecs("DescribeCapacityProviders")
 DescribeCapacityProviders(args) = ecs("DescribeCapacityProviders", args)
 
 """
-    ListTasks
+    ListTasks()
 
 Returns a list of tasks for a specified cluster. You can filter the results by family name, by a particular container instance, or by the desired status of the task with the family, containerInstance, and desiredStatus parameters. Recently stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "family": "The name of the family with which to filter the ListTasks results. Specifying a family limits the results to tasks that belong to that family.",
   "serviceName": "The name of the service with which to filter the ListTasks results. Specifying a serviceName limits the results to tasks that belong to that service.",
@@ -516,81 +428,67 @@ Optional Parameters:
   "nextToken": "The nextToken value returned from a ListTasks request indicating that more results are available to fulfill the request and further calls will be needed. If maxResults was provided, it is possible the number of results to be fewer than maxResults.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. ",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the tasks to list. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
 ListTasks() = ecs("ListTasks")
 ListTasks(args) = ecs("ListTasks", args)
 
 """
-    DescribeTasks
+    DescribeTasks()
 
 Describes a specified task or tasks.
 
-Required Parameters:
+Required Parameters
 {
   "tasks": "A list of up to 100 task IDs or full ARN entries."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "include": "Specifies whether you want to see the resource tags for the task. If TAGS is specified, the tags are included in the response. If this field is omitted, tags are not included in the response.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task or tasks to describe. If you do not specify a cluster, the default cluster is assumed. This parameter is required if the task or tasks you are describing were launched in any cluster other than the default cluster."
 }
-
 """
-
 DescribeTasks(args) = ecs("DescribeTasks", args)
+
 """
-    DeleteService
+    DeleteService()
 
 Deletes a specified service within a cluster. You can delete a service if you have no running tasks in it and the desired task count is zero. If the service is actively maintaining tasks, you cannot delete it, and you must update the service to a desired task count of zero. For more information, see UpdateService.  When you delete a service, if there are still running tasks that require cleanup, the service status moves from ACTIVE to DRAINING, and the service is no longer visible in the console or in the ListServices API operation. After all tasks have transitioned to either STOPPING or STOPPED status, the service status moves from DRAINING to INACTIVE. Services in the DRAINING or INACTIVE status can still be viewed with the DescribeServices API operation. However, in the future, INACTIVE services may be cleaned up and purged from Amazon ECS record keeping, and DescribeServices calls on those services return a ServiceNotFoundException error.   If you attempt to create a new service with the same name as an existing service in either ACTIVE or DRAINING status, you receive an error. 
 
-Required Parameters:
+Required Parameters
 {
   "service": "The name of the service to delete."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "force": "If true, allows you to delete a service even if it has not been scaled down to zero tasks. It is only necessary to use this if the service is using the REPLICA scheduling strategy.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to delete. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 DeleteService(args) = ecs("DeleteService", args)
+
 """
-    UpdateTaskSet
+    UpdateTaskSet()
 
 Modifies a task set. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS Deployment Types in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "taskSet": "The short name or full Amazon Resource Name (ARN) of the task set to update.",
   "service": "The short name or full Amazon Resource Name (ARN) of the service that the task set exists in.",
   "scale": "",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task set exists in."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UpdateTaskSet(args) = ecs("UpdateTaskSet", args)
+
 """
-    ListServices
+    ListServices()
 
 Lists the services that are running in a specified cluster.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "schedulingStrategy": "The scheduling strategy for services to list.",
   "launchType": "The launch type for the services to list.",
@@ -598,43 +496,39 @@ Optional Parameters:
   "nextToken": "The nextToken value returned from a ListServices request indicating that more results are available to fulfill the request and further calls will be needed. If maxResults was provided, it is possible the number of results to be fewer than maxResults.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. ",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the services to list. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
 ListServices() = ecs("ListServices")
 ListServices(args) = ecs("ListServices", args)
 
 """
-    DeregisterContainerInstance
+    DeregisterContainerInstance()
 
 Deregisters an Amazon ECS container instance from the specified cluster. This instance is no longer available to run tasks. If you intend to use the container instance for some other purpose after deregistration, you should stop all of the tasks running on the container instance before deregistration. That prevents any orphaned tasks from consuming resources. Deregistering a container instance removes the instance from a cluster, but it does not terminate the EC2 instance. If you are finished using the instance, be sure to terminate it in the Amazon EC2 console to stop billing.  If you terminate a running container instance, Amazon ECS automatically deregisters the instance from your cluster (stopped container instances or instances with disconnected agents are not automatically deregistered when terminated). 
 
-Required Parameters:
+Required Parameters
 {
   "containerInstance": "The container instance ID or full ARN of the container instance to deregister. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "force": "Forces the deregistration of the container instance. If you have tasks running on the container instance when you deregister it with the force option, these tasks remain running until you terminate the instance or the tasks stop through some other means, but they are orphaned (no longer monitored or accounted for by Amazon ECS). If an orphaned task on your container instance is part of an Amazon ECS service, then the service scheduler starts another copy of that task, on a different container instance if possible.  Any containers in orphaned service tasks that are registered with a Classic Load Balancer or an Application Load Balancer target group are deregistered. They begin connection draining according to the settings on the load balancer or target group.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to deregister. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 DeregisterContainerInstance(args) = ecs("DeregisterContainerInstance", args)
+
 """
-    CreateService
+    CreateService()
 
 Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below the desiredCount, Amazon ECS runs another copy of the task in the specified cluster. To update an existing service, see UpdateService. In addition to maintaining the desired count of tasks in your service, you can optionally run your service behind one or more load balancers. The load balancers distribute traffic across the tasks that are associated with the service. For more information, see Service Load Balancing in the Amazon Elastic Container Service Developer Guide. Tasks for services that do not use a load balancer are considered healthy if they're in the RUNNING state. Tasks for services that do use a load balancer are considered healthy if they're in the RUNNING state and the container instance that they're hosted on is reported as healthy by the load balancer. There are two service scheduler strategies available:    REPLICA - The replica scheduling strategy places and maintains the desired number of tasks across your cluster. By default, the service scheduler spreads tasks across Availability Zones. You can use task placement strategies and constraints to customize task placement decisions. For more information, see Service Scheduler Concepts in the Amazon Elastic Container Service Developer Guide.    DAEMON - The daemon scheduling strategy deploys exactly one task on each active container instance that meets all of the task placement constraints that you specify in your cluster. When using this strategy, you don't need to specify a desired number of tasks, a task placement strategy, or use Service Auto Scaling policies. For more information, see Service Scheduler Concepts in the Amazon Elastic Container Service Developer Guide.   You can optionally specify a deployment configuration for your service. The deployment is triggered by changing properties, such as the task definition or the desired count of a service, with an UpdateService operation. The default value for a replica service for minimumHealthyPercent is 100%. The default value for a daemon service for minimumHealthyPercent is 0%. If a service is using the ECS deployment controller, the minimum healthy percent represents a lower limit on the number of tasks in a service that must remain in the RUNNING state during a deployment, as a percentage of the desired number of tasks (rounded up to the nearest integer), and while any container instances are in the DRAINING state if the service contains tasks using the EC2 launch type. This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desired number of four tasks and a minimum healthy percent of 50%, the scheduler might stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they're in the RUNNING state. Tasks for services that do use a load balancer are considered healthy if they're in the RUNNING state and they're reported as healthy by the load balancer. The default value for minimum healthy percent is 100%. If a service is using the ECS deployment controller, the maximum percent parameter represents an upper limit on the number of tasks in a service that are allowed in the RUNNING or PENDING state during a deployment, as a percentage of the desired number of tasks (rounded down to the nearest integer), and while any container instances are in the DRAINING state if the service contains tasks using the EC2 launch type. This parameter enables you to define the deployment batch size. For example, if your service has a desired number of four tasks and a maximum percent value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for maximum percent is 200%. If a service is using either the CODE_DEPLOY or EXTERNAL deployment controller types and tasks that use the EC2 launch type, the minimum healthy percent and maximum percent values are used only to define the lower and upper limit on the number of the tasks in the service that remain in the RUNNING state while the container instances are in the DRAINING state. If the tasks in the service use the Fargate launch type, the minimum healthy percent and maximum percent values aren't used, although they're currently visible when describing your service. When creating a service that uses the EXTERNAL deployment controller, you can specify only parameters that aren't controlled at the task set level. The only required parameter is the service name. You control your services using the CreateTaskSet operation. For more information, see Amazon ECS Deployment Types in the Amazon Elastic Container Service Developer Guide. When the service scheduler launches new tasks, it determines task placement in your cluster using the following logic:   Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).   By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy) with the placementStrategy parameter):   Sort the valid container instances, giving priority to instances that have the fewest number of running tasks for this service in their respective Availability Zone. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.   Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.    
 
-Required Parameters:
+Required Parameters
 {
   "serviceName": "The name of your service. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "healthCheckGracePeriodSeconds": "The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds. During that time, the ECS service scheduler ignores health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.",
   "role": "The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition does not use the awsvpc network mode. If you specify the role parameter, you must also specify a load balancer object with the loadBalancers parameter.  If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. The service-linked role is required if your task definition uses the awsvpc network mode or if the service is configured to use service discovery, an external deployment controller, multiple target groups, or Elastic Inference accelerators in which case you should not specify a role here. For more information, see Using Service-Linked Roles for Amazon ECS in the Amazon Elastic Container Service Developer Guide.  If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name bar has a path of /foo/ then you would specify /foo/bar as the role name. For more information, see Friendly Names and Paths in the IAM User Guide.",
@@ -657,44 +551,40 @@ Optional Parameters:
   "tags": "The metadata that you apply to the service to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. When a service is deleted, the tags are deleted as well. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  ",
   "deploymentController": "The deployment controller to use for the service."
 }
-
 """
-
 CreateService(args) = ecs("CreateService", args)
+
 """
-    CreateCapacityProvider
+    CreateCapacityProvider()
 
 Creates a new capacity provider. Capacity providers are associated with an Amazon ECS cluster and are used in capacity provider strategies to facilitate cluster auto scaling. Only capacity providers using an Auto Scaling group can be created. Amazon ECS tasks on AWS Fargate use the FARGATE and FARGATE_SPOT capacity providers which are already created and available to all accounts in Regions supported by AWS Fargate.
 
-Required Parameters:
+Required Parameters
 {
   "name": "The name of the capacity provider. Up to 255 characters are allowed, including letters (upper and lowercase), numbers, underscores, and hyphens. The name cannot be prefixed with \"aws\", \"ecs\", or \"fargate\".",
   "autoScalingGroupProvider": "The details of the Auto Scaling group for the capacity provider."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "tags": "The metadata that you apply to the capacity provider to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  "
 }
-
 """
-
 CreateCapacityProvider(args) = ecs("CreateCapacityProvider", args)
+
 """
-    CreateTaskSet
+    CreateTaskSet()
 
 Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS Deployment Types in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "taskDefinition": "The task definition for the tasks in the task set to use.",
   "service": "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "platformVersion": "The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.",
   "loadBalancers": "A load balancer object representing the load balancer to use with the task set. The supported load balancer types are either an Application Load Balancer or a Network Load Balancer.",
@@ -707,23 +597,21 @@ Optional Parameters:
   "networkConfiguration": "",
   "scale": ""
 }
-
 """
-
 CreateTaskSet(args) = ecs("CreateTaskSet", args)
+
 """
-    StartTask
+    StartTask()
 
 Starts a new task from the specified task definition on the specified container instance or instances. Alternatively, you can use RunTask to place tasks for you. For more information, see Scheduling Tasks in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "containerInstances": "The container instance IDs or full ARN entries for the container instances on which you would like to place your task. You can specify up to 10 container instances.",
   "taskDefinition": "The family and revision (family:revision) or full ARN of the task definition to start. If a revision is not specified, the latest ACTIVE revision is used."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "overrides": "A list of container overrides in JSON format that specify the name of a container in the specified task definition and the overrides it should receive. You can override the default command for a container (that is specified in the task definition or Docker image) with a command override. You can also override existing environment variables (that are specified in the task definition or Docker image) on a container or add new environment variables to it with an environment override.  A total of 8192 characters are allowed for overrides. This limit includes the JSON formatting characters of the override structure. ",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster on which to start your task. If you do not specify a cluster, the default cluster is assumed.",
@@ -735,20 +623,15 @@ Optional Parameters:
   "propagateTags": "Specifies whether to propagate the tags from the task definition or the service to the task. If no value is specified, the tags are not propagated.",
   "group": "The name of the task group to associate with the task. The default value is the family name of the task definition (for example, family:my-family-name)."
 }
-
 """
-
 StartTask(args) = ecs("StartTask", args)
+
 """
-    SubmitTaskStateChange
+    SubmitTaskStateChange()
 
  This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.  Sent to acknowledge that a task changed states.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "task": "The task ID or full ARN of the task in the state change request.",
   "pullStartedAt": "The Unix timestamp for when the container image pull began.",
@@ -760,61 +643,49 @@ Optional Parameters:
   "attachments": "Any attachments associated with the state change request.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task."
 }
-
 """
 SubmitTaskStateChange() = ecs("SubmitTaskStateChange")
 SubmitTaskStateChange(args) = ecs("SubmitTaskStateChange", args)
 
 """
-    DescribeClusters
+    DescribeClusters()
 
 Describes one or more of your clusters.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "clusters": "A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN) entries. If you do not specify a cluster, the default cluster is assumed.",
   "include": "Whether to include additional information about your clusters in the response. If this field is omitted, the attachments, statistics, and tags are not included. If ATTACHMENTS is specified, the attachments for the container instances or tasks within the cluster are included. If SETTINGS is specified, the settings for the cluster are included. If STATISTICS is specified, the following additional information, separated by launch type, is included:   runningEC2TasksCount   runningFargateTasksCount   pendingEC2TasksCount   pendingFargateTasksCount   activeEC2ServiceCount   activeFargateServiceCount   drainingEC2ServiceCount   drainingFargateServiceCount   If TAGS is specified, the metadata tags associated with the cluster are included."
 }
-
 """
 DescribeClusters() = ecs("DescribeClusters")
 DescribeClusters(args) = ecs("DescribeClusters", args)
 
 """
-    UpdateServicePrimaryTaskSet
+    UpdateServicePrimaryTaskSet()
 
 Modifies which task set in a service is the primary task set. Any parameters that are updated on the primary task set in a service will transition to the service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS Deployment Types in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "service": "The short name or full Amazon Resource Name (ARN) of the service that the task set exists in.",
   "primaryTaskSet": "The short name or full Amazon Resource Name (ARN) of the task set to set as the primary task set in the deployment.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task set exists in."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UpdateServicePrimaryTaskSet(args) = ecs("UpdateServicePrimaryTaskSet", args)
+
 """
-    ListAttributes
+    ListAttributes()
 
 Lists the attributes for Amazon ECS resources within a specified target type and cluster. When you specify a target type and cluster, ListAttributes returns a list of attribute objects, one for each attribute on each resource. You can filter the list of results to a single attribute name to only return results that have that name. You can also filter the results by attribute name and value, for example, to see which container instances in a cluster are running a Linux AMI (ecs.os-type=linux). 
 
-Required Parameters:
+Required Parameters
 {
   "targetType": "The type of the target with which to list attributes."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "attributeValue": "The value of the attribute with which to filter results. You must also specify an attribute name to use this parameter.",
   "attributeName": "The name of the attribute with which to filter the results. ",
@@ -822,44 +693,37 @@ Optional Parameters:
   "nextToken": "The nextToken value returned from a ListAttributes request indicating that more results are available to fulfill the request and further calls will be needed. If maxResults was provided, it is possible the number of results to be fewer than maxResults.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. ",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster to list attributes. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 ListAttributes(args) = ecs("ListAttributes", args)
+
 """
-    ListTaskDefinitionFamilies
+    ListTaskDefinitionFamilies()
 
 Returns a list of task definition families that are registered to your account (which may include task definition families that no longer have any ACTIVE task definition revisions). You can filter out task definition families that do not contain any ACTIVE task definition revisions by setting the status parameter to ACTIVE. You can also filter the results with the familyPrefix parameter.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "status": "The task definition family status with which to filter the ListTaskDefinitionFamilies results. By default, both ACTIVE and INACTIVE task definition families are listed. If this parameter is set to ACTIVE, only task definition families that have an ACTIVE task definition revision are returned. If this parameter is set to INACTIVE, only task definition families that do not have any ACTIVE task definition revisions are returned. If you paginate the resulting output, be sure to keep the status value constant in each subsequent request.",
   "maxResults": "The maximum number of task definition family results returned by ListTaskDefinitionFamilies in paginated output. When this parameter is used, ListTaskDefinitions only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListTaskDefinitionFamilies request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListTaskDefinitionFamilies returns up to 100 results and a nextToken value if applicable.",
   "nextToken": "The nextToken value returned from a ListTaskDefinitionFamilies request indicating that more results are available to fulfill the request and further calls will be needed. If maxResults was provided, it is possible the number of results to be fewer than maxResults.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. ",
   "familyPrefix": "The familyPrefix is a string that is used to filter the results of ListTaskDefinitionFamilies. If you specify a familyPrefix, only task definition family names that begin with the familyPrefix string are returned."
 }
-
 """
 ListTaskDefinitionFamilies() = ecs("ListTaskDefinitionFamilies")
 ListTaskDefinitionFamilies(args) = ecs("ListTaskDefinitionFamilies", args)
 
 """
-    RegisterTaskDefinition
+    RegisterTaskDefinition()
 
 Registers a new task definition from the supplied family and containerDefinitions. Optionally, you can add data volumes to your containers with the volumes parameter. For more information about task definition parameters and defaults, see Amazon ECS Task Definitions in the Amazon Elastic Container Service Developer Guide. You can specify an IAM role for your task with the taskRoleArn parameter. When you specify an IAM role for a task, its containers can then use the latest versions of the AWS CLI or SDKs to make API requests to the AWS services that are specified in the IAM policy associated with the role. For more information, see IAM Roles for Tasks in the Amazon Elastic Container Service Developer Guide. You can specify a Docker networking mode for the containers in your task definition with the networkMode parameter. The available network modes correspond to those described in Network settings in the Docker run reference. If you specify the awsvpc network mode, the task is allocated an elastic network interface, and you must specify a NetworkConfiguration when you create a service or run a task with the task definition. For more information, see Task Networking in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "family": "You must specify a family for a task definition, which allows you to track multiple versions of the same task definition. The family is used as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed.",
   "containerDefinitions": "A list of container definitions in JSON format that describe the different containers that make up your task."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "pidMode": "The process namespace to use for the containers in the task. The valid values are host or task. If host is specified, then all containers within the tasks that specified the host PID mode on the same container instance share the same process namespace with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same process namespace. If no value is specified, the default is a private namespace. For more information, see PID settings in the Docker run reference. If the host PID mode is used, be aware that there is a heightened risk of undesired process namespace expose. For more information, see Docker security.  This parameter is not supported for Windows containers or tasks using the Fargate launch type. ",
   "executionRoleArn": "The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.",
@@ -875,40 +739,33 @@ Optional Parameters:
   "placementConstraints": "An array of placement constraint objects to use for the task. You can specify a maximum of 10 constraints per task (this limit includes constraints in the task definition and those specified at runtime).",
   "tags": "The metadata that you apply to the task definition to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  "
 }
-
 """
-
 RegisterTaskDefinition(args) = ecs("RegisterTaskDefinition", args)
+
 """
-    StopTask
+    StopTask()
 
 Stops a running task. Any tags associated with the task will be deleted. When StopTask is called on a task, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM value and a default 30-second timeout, after which the SIGKILL value is sent and the containers are forcibly stopped. If the container handles the SIGTERM value gracefully and exits within 30 seconds from receiving it, no SIGKILL value is sent.  The default 30-second timeout can be configured on the Amazon ECS container agent with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
 
-Required Parameters:
+Required Parameters
 {
   "task": "The task ID or full Amazon Resource Name (ARN) of the task to stop."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "reason": "An optional message specified when a task is stopped. For example, if you are using a custom scheduler, you can use this parameter to specify the reason for stopping the task here, and the message appears in subsequent DescribeTasks API operations on this task. Up to 255 characters are allowed in this message.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task to stop. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
-
 StopTask(args) = ecs("StopTask", args)
+
 """
-    SubmitContainerStateChange
+    SubmitContainerStateChange()
 
  This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.  Sent to acknowledge that a container changed states.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "task": "The task ID or full Amazon Resource Name (ARN) of the task that hosts the container.",
   "cluster": "The short name or full ARN of the cluster that hosts the container.",
@@ -919,42 +776,35 @@ Optional Parameters:
   "reason": "The reason for the state change request.",
   "exitCode": "The exit code returned for the state change request."
 }
-
 """
 SubmitContainerStateChange() = ecs("SubmitContainerStateChange")
 SubmitContainerStateChange(args) = ecs("SubmitContainerStateChange", args)
 
 """
-    DescribeTaskSets
+    DescribeTaskSets()
 
 Describes the task sets in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS Deployment Types in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "service": "The short name or full Amazon Resource Name (ARN) of the service that the task sets exist in.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task sets exist in."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "taskSets": "The ID or full Amazon Resource Name (ARN) of task sets to describe.",
   "include": "Specifies whether to see the resource tags for the task set. If TAGS is specified, the tags are included in the response. If this field is omitted, tags are not included in the response."
 }
-
 """
-
 DescribeTaskSets(args) = ecs("DescribeTaskSets", args)
+
 """
-    ListContainerInstances
+    ListContainerInstances()
 
 Returns a list of container instances in a specified cluster. You can filter the results of a ListContainerInstances operation with cluster query language statements inside the filter parameter. For more information, see Cluster Query Language in the Amazon Elastic Container Service Developer Guide.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "status": "Filters the container instances by status. For example, if you specify the DRAINING status, the results include only container instances that have been set to DRAINING using UpdateContainerInstancesState. If you do not specify this parameter, the default is to include container instances set to all states other than INACTIVE.",
   "filter": "You can filter the results of a ListContainerInstances operation with cluster query language statements. For more information, see Cluster Query Language in the Amazon Elastic Container Service Developer Guide.",
@@ -962,82 +812,64 @@ Optional Parameters:
   "nextToken": "The nextToken value returned from a ListContainerInstances request indicating that more results are available to fulfill the request and further calls will be needed. If maxResults was provided, it is possible the number of results to be fewer than maxResults.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. ",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to list. If you do not specify a cluster, the default cluster is assumed."
 }
-
 """
 ListContainerInstances() = ecs("ListContainerInstances")
 ListContainerInstances(args) = ecs("ListContainerInstances", args)
 
 """
-    PutClusterCapacityProviders
+    PutClusterCapacityProviders()
 
 Modifies the available capacity providers and the default capacity provider strategy for a cluster. You must specify both the available capacity providers and a default capacity provider strategy for the cluster. If the specified cluster has existing capacity providers associated with it, you must specify all existing capacity providers in addition to any new ones you want to add. Any existing capacity providers associated with a cluster that are omitted from a PutClusterCapacityProviders API call will be disassociated with the cluster. You can only disassociate an existing capacity provider from a cluster if it's not being used by any existing tasks. When creating a service or running a task on a cluster, if no capacity provider or launch type is specified, then the cluster's default capacity provider strategy is used. It is recommended to define a default capacity provider strategy for your cluster, however you may specify an empty array ([]) to bypass defining a default strategy.
 
-Required Parameters:
+Required Parameters
 {
   "defaultCapacityProviderStrategy": "The capacity provider strategy to use by default for the cluster. When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then the default capacity provider strategy for the cluster is used. A capacity provider strategy consists of one or more capacity providers along with the base and weight to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an ACTIVE or UPDATING status can be used. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.",
   "capacityProviders": "The name of one or more capacity providers to associate with the cluster. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the CreateCapacityProvider API operation. To use a AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster to modify the capacity provider settings for. If you do not specify a cluster, the default cluster is assumed."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 PutClusterCapacityProviders(args) = ecs("PutClusterCapacityProviders", args)
+
 """
-    DeregisterTaskDefinition
+    DeregisterTaskDefinition()
 
 Deregisters the specified task definition by family and revision. Upon deregistration, the task definition is marked as INACTIVE. Existing tasks and services that reference an INACTIVE task definition continue to run without disruption. Existing services that reference an INACTIVE task definition can still scale up or down by modifying the service's desired count. You cannot use an INACTIVE task definition to run new tasks or create new services, and you cannot update an existing service to reference an INACTIVE task definition. However, there may be up to a 10-minute window following deregistration where these restrictions have not yet taken effect.  At this time, INACTIVE task definitions remain discoverable in your account indefinitely. However, this behavior is subject to change in the future, so you should not rely on INACTIVE task definitions persisting beyond the lifecycle of any associated tasks and services. 
 
-Required Parameters:
+Required Parameters
 {
   "taskDefinition": "The family and revision (family:revision) or full Amazon Resource Name (ARN) of the task definition to deregister. You must specify a revision."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeregisterTaskDefinition(args) = ecs("DeregisterTaskDefinition", args)
+
 """
-    DescribeContainerInstances
+    DescribeContainerInstances()
 
 Describes Amazon Elastic Container Service container instances. Returns metadata about registered and remaining resources on each container instance requested.
 
-Required Parameters:
+Required Parameters
 {
   "containerInstances": "A list of up to 100 container instance IDs or full Amazon Resource Name (ARN) entries."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "include": "Specifies whether you want to see the resource tags for the container instance. If TAGS is specified, the tags are included in the response. If this field is omitted, tags are not included in the response.",
   "cluster": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to describe. If you do not specify a cluster, the default cluster is assumed. This parameter is required if the container instance or container instances you are describing were launched in any cluster other than the default cluster."
 }
-
 """
-
 DescribeContainerInstances(args) = ecs("DescribeContainerInstances", args)
+
 """
-    ListClusters
+    ListClusters()
 
 Returns a list of existing clusters.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "maxResults": "The maximum number of cluster results returned by ListClusters in paginated output. When this parameter is used, ListClusters only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListClusters request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListClusters returns up to 100 results and a nextToken value if applicable.",
   "nextToken": "The nextToken value returned from a ListClusters request indicating that more results are available to fulfill the request and further calls will be needed. If maxResults was provided, it is possible the number of results to be fewer than maxResults.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. "
 }
-
 """
 ListClusters() = ecs("ListClusters")
 ListClusters(args) = ecs("ListClusters", args)

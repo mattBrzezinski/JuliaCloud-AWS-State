@@ -2,156 +2,117 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: s3_control
 
 """
-    GetPublicAccessBlock
+    GetPublicAccessBlock()
 
 Retrieves the PublicAccessBlock configuration for an Amazon Web Services account.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The account ID for the Amazon Web Services account whose PublicAccessBlock configuration you want to retrieve."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-GetPublicAccessBlock(AccountId) = s3_control("GET", "/v20180820/configuration/publicAccessBlock")
+"""GetPublicAccessBlock(AccountId) = s3_control("GET", "/v20180820/configuration/publicAccessBlock")
 GetPublicAccessBlock(AccountId, args) = s3_control("GET", "/v20180820/configuration/publicAccessBlock", args)
 GetPublicAccessBlock(a...; b...) = GetPublicAccessBlock(a..., b)
 
 """
-    CreateAccessPoint
+    CreateAccessPoint()
 
 Creates an access point and associates it with the specified bucket.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The AWS account ID for the owner of the bucket for which you want to create an access point.",
   "Bucket": "The name of the bucket that you want to associate this access point with.",
   "Name": "The name you want to assign to this access point."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "PublicAccessBlockConfiguration": "",
   "VpcConfiguration": "If you include this field, Amazon S3 restricts access to this access point to requests from the specified Virtual Private Cloud (VPC)."
 }
-
-"""
-CreateAccessPoint(AccountId, Bucket, Name) = s3_control("PUT", "/v20180820/accesspoint/{name}")
+"""CreateAccessPoint(AccountId, Bucket, Name) = s3_control("PUT", "/v20180820/accesspoint/{name}")
 CreateAccessPoint(AccountId, Bucket, Name, args) = s3_control("PUT", "/v20180820/accesspoint/{name}", args)
 CreateAccessPoint(a...; b...) = CreateAccessPoint(a..., b)
 
 """
-    GetAccessPointPolicy
+    GetAccessPointPolicy()
 
 Returns the access point policy associated with the specified access point.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The account ID for the account that owns the specified access point.",
   "Name": "The name of the access point whose policy you want to retrieve."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-GetAccessPointPolicy(AccountId, Name) = s3_control("GET", "/v20180820/accesspoint/{name}/policy")
+"""GetAccessPointPolicy(AccountId, Name) = s3_control("GET", "/v20180820/accesspoint/{name}/policy")
 GetAccessPointPolicy(AccountId, Name, args) = s3_control("GET", "/v20180820/accesspoint/{name}/policy", args)
 GetAccessPointPolicy(a...; b...) = GetAccessPointPolicy(a..., b)
 
 """
-    PutAccessPointPolicy
+    PutAccessPointPolicy()
 
 Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The AWS account ID for owner of the bucket associated with the specified access point.",
   "Policy": "The policy that you want to apply to the specified access point. For more information about access point policies, see Managing Data Access with Amazon S3 Access Points in the Amazon Simple Storage Service Developer Guide.",
   "Name": "The name of the access point that you want to associate with the specified policy."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-PutAccessPointPolicy(AccountId, Policy, Name) = s3_control("PUT", "/v20180820/accesspoint/{name}/policy")
+"""PutAccessPointPolicy(AccountId, Policy, Name) = s3_control("PUT", "/v20180820/accesspoint/{name}/policy")
 PutAccessPointPolicy(AccountId, Policy, Name, args) = s3_control("PUT", "/v20180820/accesspoint/{name}/policy", args)
 PutAccessPointPolicy(a...; b...) = PutAccessPointPolicy(a..., b)
 
 """
-    DeleteAccessPoint
+    DeleteAccessPoint()
 
 Deletes the specified access point.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The account ID for the account that owns the specified access point.",
   "Name": "The name of the access point you want to delete."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-DeleteAccessPoint(AccountId, Name) = s3_control("DELETE", "/v20180820/accesspoint/{name}")
+"""DeleteAccessPoint(AccountId, Name) = s3_control("DELETE", "/v20180820/accesspoint/{name}")
 DeleteAccessPoint(AccountId, Name, args) = s3_control("DELETE", "/v20180820/accesspoint/{name}", args)
 DeleteAccessPoint(a...; b...) = DeleteAccessPoint(a..., b)
 
 """
-    GetAccessPoint
+    GetAccessPoint()
 
 Returns configuration information about the specified access point.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The account ID for the account that owns the specified access point.",
   "Name": "The name of the access point whose configuration information you want to retrieve."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-GetAccessPoint(AccountId, Name) = s3_control("GET", "/v20180820/accesspoint/{name}")
+"""GetAccessPoint(AccountId, Name) = s3_control("GET", "/v20180820/accesspoint/{name}")
 GetAccessPoint(AccountId, Name, args) = s3_control("GET", "/v20180820/accesspoint/{name}", args)
 GetAccessPoint(a...; b...) = GetAccessPoint(a..., b)
 
 """
-    UpdateJobPriority
+    UpdateJobPriority()
 
 Updates an existing job's priority.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "",
   "Priority": "The priority you want to assign to this job.",
   "JobId": "The ID for the job whose priority you want to update."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-UpdateJobPriority(AccountId, Priority, JobId) = s3_control("POST", "/v20180820/jobs/{id}/priority")
+"""UpdateJobPriority(AccountId, Priority, JobId) = s3_control("POST", "/v20180820/jobs/{id}/priority")
 UpdateJobPriority(AccountId, Priority, JobId, args) = s3_control("POST", "/v20180820/jobs/{id}/priority", args)
 UpdateJobPriority(a...; b...) = UpdateJobPriority(a..., b)
 
 """
-    CreateJob
+    CreateJob()
 
 Creates an Amazon S3 batch operations job.
 
-Required Parameters:
+Required Parameters
 {
   "Report": "Configuration parameters for the optional job-completion report.",
   "ClientRequestToken": "An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.",
@@ -162,182 +123,140 @@ Required Parameters:
   "RoleArn": "The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.",
   "ConfirmationRequired": "Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console."
 }
-
-"""
-CreateJob(Report, ClientRequestToken, AccountId, Operation, Manifest, Priority, RoleArn) = s3_control("POST", "/v20180820/jobs")
+"""CreateJob(Report, ClientRequestToken, AccountId, Operation, Manifest, Priority, RoleArn) = s3_control("POST", "/v20180820/jobs")
 CreateJob(Report, ClientRequestToken, AccountId, Operation, Manifest, Priority, RoleArn, args) = s3_control("POST", "/v20180820/jobs", args)
 CreateJob(a...; b...) = CreateJob(a..., b)
 
 """
-    ListAccessPoints
+    ListAccessPoints()
 
 Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1000 access points (or the number specified in maxResults, whichever is less), then the response will include a continuation token that you can use to list the additional access points.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The AWS account ID for owner of the bucket whose access points you want to list."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of access points that you want to include in the list. If the specified bucket has more than this number of access points, then the response will include a continuation token in the NextToken field that you can use to retrieve the next page of access points.",
   "NextToken": "A continuation token. If a previous call to ListAccessPoints returned a continuation token in the NextToken field, then providing that value here causes Amazon S3 to retrieve the next page of results.",
   "Bucket": "The name of the bucket whose associated access points you want to list."
 }
-
-"""
-ListAccessPoints(AccountId) = s3_control("GET", "/v20180820/accesspoint")
+"""ListAccessPoints(AccountId) = s3_control("GET", "/v20180820/accesspoint")
 ListAccessPoints(AccountId, args) = s3_control("GET", "/v20180820/accesspoint", args)
 ListAccessPoints(a...; b...) = ListAccessPoints(a..., b)
 
 """
-    DeleteAccessPointPolicy
+    DeleteAccessPointPolicy()
 
 Deletes the access point policy for the specified access point.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The account ID for the account that owns the specified access point.",
   "Name": "The name of the access point whose policy you want to delete."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-DeleteAccessPointPolicy(AccountId, Name) = s3_control("DELETE", "/v20180820/accesspoint/{name}/policy")
+"""DeleteAccessPointPolicy(AccountId, Name) = s3_control("DELETE", "/v20180820/accesspoint/{name}/policy")
 DeleteAccessPointPolicy(AccountId, Name, args) = s3_control("DELETE", "/v20180820/accesspoint/{name}/policy", args)
 DeleteAccessPointPolicy(a...; b...) = DeleteAccessPointPolicy(a..., b)
 
 """
-    GetAccessPointPolicyStatus
+    GetAccessPointPolicyStatus()
 
 Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see Managing Data Access with Amazon S3 Access Points in the Amazon Simple Storage Service Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The account ID for the account that owns the specified access point.",
   "Name": "The name of the access point whose policy status you want to retrieve."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-GetAccessPointPolicyStatus(AccountId, Name) = s3_control("GET", "/v20180820/accesspoint/{name}/policyStatus")
+"""GetAccessPointPolicyStatus(AccountId, Name) = s3_control("GET", "/v20180820/accesspoint/{name}/policyStatus")
 GetAccessPointPolicyStatus(AccountId, Name, args) = s3_control("GET", "/v20180820/accesspoint/{name}/policyStatus", args)
 GetAccessPointPolicyStatus(a...; b...) = GetAccessPointPolicyStatus(a..., b)
 
 """
-    DescribeJob
+    DescribeJob()
 
 Retrieves the configuration parameters and status for a batch operations job.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "",
   "JobId": "The ID for the job whose information you want to retrieve."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-DescribeJob(AccountId, JobId) = s3_control("GET", "/v20180820/jobs/{id}")
+"""DescribeJob(AccountId, JobId) = s3_control("GET", "/v20180820/jobs/{id}")
 DescribeJob(AccountId, JobId, args) = s3_control("GET", "/v20180820/jobs/{id}", args)
 DescribeJob(a...; b...) = DescribeJob(a..., b)
 
 """
-    DeletePublicAccessBlock
+    DeletePublicAccessBlock()
 
 Removes the PublicAccessBlock configuration for an Amazon Web Services account.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": "The account ID for the Amazon Web Services account whose PublicAccessBlock configuration you want to remove."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-DeletePublicAccessBlock(AccountId) = s3_control("DELETE", "/v20180820/configuration/publicAccessBlock")
+"""DeletePublicAccessBlock(AccountId) = s3_control("DELETE", "/v20180820/configuration/publicAccessBlock")
 DeletePublicAccessBlock(AccountId, args) = s3_control("DELETE", "/v20180820/configuration/publicAccessBlock", args)
 DeletePublicAccessBlock(a...; b...) = DeletePublicAccessBlock(a..., b)
 
 """
-    ListJobs
+    ListJobs()
 
 Lists current jobs and jobs that have ended within the last 30 days for the AWS account making the request.
 
-Required Parameters:
+Required Parameters
 {
   "AccountId": ""
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of jobs that Amazon S3 will include in the List Jobs response. If there are more jobs than this number, the response will include a pagination token in the NextToken field to enable you to retrieve the next page of results.",
   "NextToken": "A pagination token to request the next page of results. Use the token that Amazon S3 returned in the NextToken element of the ListJobsResult from the previous List Jobs request.",
   "JobStatuses": "The List Jobs request returns jobs that match the statuses listed in this element."
 }
-
-"""
-ListJobs(AccountId) = s3_control("GET", "/v20180820/jobs")
+"""ListJobs(AccountId) = s3_control("GET", "/v20180820/jobs")
 ListJobs(AccountId, args) = s3_control("GET", "/v20180820/jobs", args)
 ListJobs(a...; b...) = ListJobs(a..., b)
 
 """
-    PutPublicAccessBlock
+    PutPublicAccessBlock()
 
 Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account.
 
-Required Parameters:
+Required Parameters
 {
   "PublicAccessBlockConfiguration": "The PublicAccessBlock configuration that you want to apply to the specified Amazon Web Services account.",
   "AccountId": "The account ID for the Amazon Web Services account whose PublicAccessBlock configuration you want to set."
 }
-
-
-Optional Parameters:
-{}
-
-"""
-PutPublicAccessBlock(PublicAccessBlockConfiguration, AccountId) = s3_control("PUT", "/v20180820/configuration/publicAccessBlock")
+"""PutPublicAccessBlock(PublicAccessBlockConfiguration, AccountId) = s3_control("PUT", "/v20180820/configuration/publicAccessBlock")
 PutPublicAccessBlock(PublicAccessBlockConfiguration, AccountId, args) = s3_control("PUT", "/v20180820/configuration/publicAccessBlock", args)
 PutPublicAccessBlock(a...; b...) = PutPublicAccessBlock(a..., b)
 
 """
-    UpdateJobStatus
+    UpdateJobStatus()
 
 Updates the status for the specified job. Use this operation to confirm that you want to run a job or to cancel an existing job.
 
-Required Parameters:
+Required Parameters
 {
   "RequestedJobStatus": "The status that you want to move the specified job to.",
   "AccountId": "",
   "JobId": "The ID of the job whose status you want to update."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "StatusUpdateReason": "A description of the reason why you want to change the specified job's status. This field can be any string up to the maximum length."
 }
-
-"""
-UpdateJobStatus(RequestedJobStatus, AccountId, JobId) = s3_control("POST", "/v20180820/jobs/{id}/status")
+"""UpdateJobStatus(RequestedJobStatus, AccountId, JobId) = s3_control("POST", "/v20180820/jobs/{id}/status")
 UpdateJobStatus(RequestedJobStatus, AccountId, JobId, args) = s3_control("POST", "/v20180820/jobs/{id}/status", args)
 UpdateJobStatus(a...; b...) = UpdateJobStatus(a..., b)

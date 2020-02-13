@@ -88,7 +88,7 @@
     "version": "2017-10-25"
   },
   "chime-2018-05-01.normal.json": {
-    "sha": "d58f9cde8da221669eb76d6e3631e9a8e5e64219",
+    "sha": "5fd5e1d92aacf9715f840c0e0b4bb836d1e3e3ca",
     "version": "2018-05-01"
   },
   "cloud9-2017-09-23.normal.json": {
@@ -248,7 +248,7 @@
     "version": "2014-10-31"
   },
   "ds-2015-04-16.normal.json": {
-    "sha": "8187df37db114fe87bbb8abe7ee77945892efefe",
+    "sha": "2228818bb61306502727ebd50e6c2257fffd3972",
     "version": "2015-04-16"
   },
   "dynamodb-2011-12-05.normal.json": {
@@ -260,7 +260,7 @@
     "version": "2019-11-02"
   },
   "ec2-2016-11-15.normal.json": {
-    "sha": "076eb4f2cd935c027017a3fca9a1ce3fea64385e",
+    "sha": "9c435052b9b7dcd03cf8d3e305bca81687ecf2c8",
     "version": "2016-11-15"
   },
   "ec2-instance-connect-2018-04-02.normal.json": {
@@ -320,7 +320,7 @@
     "version": "2017-01-11"
   },
   "es-2015-01-01.normal.json": {
-    "sha": "40f9af2a501ce83a85ef0825c9ab8d5422113300",
+    "sha": "259370706d8d1178a9810e34a19deeacc34aec5e",
     "version": "2015-01-01"
   },
   "eventbridge-2015-10-07.normal.json": {
@@ -368,7 +368,7 @@
     "version": "2018-08-08"
   },
   "glue-2017-03-31.normal.json": {
-    "sha": "0d8c67e31020bfb0eaf08990d79773863432837a",
+    "sha": "2b6c94edc8c73d21967784729c83582c3d009512",
     "version": "2017-03-31"
   },
   "greengrass-2017-06-07.normal.json": {
@@ -588,7 +588,7 @@
     "version": "2017-01-17"
   },
   "neptune-2014-10-31.normal.json": {
-    "sha": "0d46cc08e3238893fe7f466c6a82f98b6a322b43",
+    "sha": "6134e7f95f3498701955545ba365064872157ef8",
     "version": "2014-10-31"
   },
   "networkmanager-2019-07-05.normal.json": {
@@ -864,7 +864,7 @@
     "version": "2018-09-25"
   },
   "workmail-2017-10-01.normal.json": {
-    "sha": "9ca11e43e5ec1517ad9663a305fc360586978f6b",
+    "sha": "49f48b3b62ce372bfc7051272ac7bb16b45b2573",
     "version": "2017-10-01"
   },
   "workmailmessageflow-2019-05-01.normal.json": {

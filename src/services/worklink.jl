@@ -2,564 +2,452 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: worklink
 
 """
-    DisassociateDomain
+    DisassociateDomain()
 
 Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. 
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The name of the domain.",
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DisassociateDomain(args) = worklink("POST", "/disassociateDomain", args)
+
 """
-    AssociateWebsiteCertificateAuthority
+    AssociateWebsiteCertificateAuthority()
 
 Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet.",
   "Certificate": "The root certificate of the CA."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DisplayName": "The certificate name to display."
 }
-
 """
-
 AssociateWebsiteCertificateAuthority(args) = worklink("POST", "/associateWebsiteCertificateAuthority", args)
+
 """
-    UpdateCompanyNetworkConfiguration
+    UpdateCompanyNetworkConfiguration()
 
 Updates the company network configuration for the fleet.
 
-Required Parameters:
+Required Parameters
 {
   "SecurityGroupIds": "The security groups associated with access to the provided subnets.",
   "SubnetIds": "The subnets used for X-ENI connections from Amazon WorkLink rendering containers.",
   "FleetArn": "The ARN of the fleet.",
   "VpcId": "The VPC with connectivity to associated websites."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UpdateCompanyNetworkConfiguration(args) = worklink("POST", "/updateCompanyNetworkConfiguration", args)
+
 """
-    ListDevices
+    ListDevices()
 
 Retrieves a list of devices registered with the specified fleet.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results to be included in the next page.",
   "NextToken": "The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page."
 }
-
 """
-
 ListDevices(args) = worklink("POST", "/listDevices", args)
+
 """
-    DescribeDevicePolicyConfiguration
+    DescribeDevicePolicyConfiguration()
 
 Describes the device policy configuration for the specified fleet.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeDevicePolicyConfiguration(args) = worklink("POST", "/describeDevicePolicyConfiguration", args)
+
 """
-    UpdateDevicePolicyConfiguration
+    UpdateDevicePolicyConfiguration()
 
 Updates the device policy configuration for the fleet.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DeviceCaCertificate": "The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates."
 }
-
 """
-
 UpdateDevicePolicyConfiguration(args) = worklink("POST", "/updateDevicePolicyConfiguration", args)
+
 """
-    DescribeDomain
+    DescribeDomain()
 
 Provides information about the domain.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The name of the domain.",
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeDomain(args) = worklink("POST", "/describeDomain", args)
+
 """
-    RestoreDomainAccess
+    RestoreDomainAccess()
 
 Moves a domain to ACTIVE status if it was in the INACTIVE status.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The name of the domain.",
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 RestoreDomainAccess(args) = worklink("POST", "/restoreDomainAccess", args)
+
 """
-    DisassociateWebsiteCertificateAuthority
+    DisassociateWebsiteCertificateAuthority()
 
 Removes a certificate authority (CA).
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet.",
   "WebsiteCaId": "A unique identifier for the CA."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DisassociateWebsiteCertificateAuthority(args) = worklink("POST", "/disassociateWebsiteCertificateAuthority", args)
+
 """
-    RevokeDomainAccess
+    RevokeDomainAccess()
 
 Moves a domain to INACTIVE status if it was in the ACTIVE status.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The name of the domain.",
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 RevokeDomainAccess(args) = worklink("POST", "/revokeDomainAccess", args)
+
 """
-    ListDomains
+    ListDomains()
 
 Retrieves a list of domains associated to a specified fleet.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results to be included in the next page.",
   "NextToken": "The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page."
 }
-
 """
-
 ListDomains(args) = worklink("POST", "/listDomains", args)
+
 """
-    UpdateDomainMetadata
+    UpdateDomainMetadata()
 
 Updates domain metadata, such as DisplayName.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The name of the domain.",
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DisplayName": "The name to display."
 }
-
 """
-
 UpdateDomainMetadata(args) = worklink("POST", "/updateDomainMetadata", args)
+
 """
-    DescribeFleetMetadata
+    DescribeFleetMetadata()
 
 Provides basic information for the specified fleet, excluding identity provider, networking, and device configuration details.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeFleetMetadata(args) = worklink("POST", "/describeFleetMetadata", args)
+
 """
-    ListFleets
+    ListFleets()
 
 Retrieves a list of fleets for the current account and Region.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results to be included in the next page.",
   "NextToken": "The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page."
 }
-
 """
 ListFleets() = worklink("POST", "/listFleets")
 ListFleets(args) = worklink("POST", "/listFleets", args)
 
 """
-    DescribeWebsiteCertificateAuthority
+    DescribeWebsiteCertificateAuthority()
 
 Provides information about the certificate authority.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet.",
   "WebsiteCaId": "A unique identifier for the certificate authority."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeWebsiteCertificateAuthority(args) = worklink("POST", "/describeWebsiteCertificateAuthority", args)
+
 """
-    AssociateDomain
+    AssociateDomain()
 
 Specifies a domain to be associated to Amazon WorkLink.
 
-Required Parameters:
+Required Parameters
 {
   "DomainName": "The fully qualified domain name (FQDN).",
   "AcmCertificateArn": "The ARN of an issued ACM certificate that is valid for the domain being associated.",
   "FleetArn": "The Amazon Resource Name (ARN) of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DisplayName": "The name to display."
 }
-
 """
-
 AssociateDomain(args) = worklink("POST", "/associateDomain", args)
+
 """
-    DisassociateWebsiteAuthorizationProvider
+    DisassociateWebsiteAuthorizationProvider()
 
 Disassociates a website authorization provider from a specified fleet. After the disassociation, users can't load any associated websites that require this authorization provider.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet.",
   "AuthorizationProviderId": "A unique identifier for the authorization provider."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DisassociateWebsiteAuthorizationProvider(args) = worklink("POST", "/disassociateWebsiteAuthorizationProvider", args)
+
 """
-    UpdateAuditStreamConfiguration
+    UpdateAuditStreamConfiguration()
 
 Updates the audit stream configuration for the fleet.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "AuditStreamArn": "The ARN of the Amazon Kinesis data stream that receives the audit events."
 }
-
 """
-
 UpdateAuditStreamConfiguration(args) = worklink("POST", "/updateAuditStreamConfiguration", args)
+
 """
-    UpdateFleetMetadata
+    UpdateFleetMetadata()
 
 Updates fleet metadata, such as DisplayName.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DisplayName": "The fleet name to display. The existing DisplayName is unset if null is passed.",
   "OptimizeForEndUserLocation": "The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region."
 }
-
 """
-
 UpdateFleetMetadata(args) = worklink("POST", "/UpdateFleetMetadata", args)
+
 """
-    ListWebsiteCertificateAuthorities
+    ListWebsiteCertificateAuthorities()
 
 Retrieves a list of certificate authorities added for the current account and Region.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results to be included in the next page.",
   "NextToken": "The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page."
 }
-
 """
-
 ListWebsiteCertificateAuthorities(args) = worklink("POST", "/listWebsiteCertificateAuthorities", args)
+
 """
-    ListWebsiteAuthorizationProviders
+    ListWebsiteAuthorizationProviders()
 
 Retrieves a list of website authorization providers associated with a specified fleet.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of results to be included in the next page.",
   "NextToken": "The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page."
 }
-
 """
-
 ListWebsiteAuthorizationProviders(args) = worklink("POST", "/listWebsiteAuthorizationProviders", args)
+
 """
-    DeleteFleet
+    DeleteFleet()
 
 Deletes a fleet. Prevents users from accessing previously associated websites. 
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteFleet(args) = worklink("POST", "/deleteFleet", args)
+
 """
-    DescribeDevice
+    DescribeDevice()
 
 Provides information about a user's device.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet.",
   "DeviceId": "A unique identifier for a registered user's device."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeDevice(args) = worklink("POST", "/describeDevice", args)
+
 """
-    AssociateWebsiteAuthorizationProvider
+    AssociateWebsiteAuthorizationProvider()
 
 Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet.",
   "AuthorizationProviderType": "The authorization provider type."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DomainName": "The domain name of the authorization provider. This applies only to SAML-based authorization providers."
 }
-
 """
-
 AssociateWebsiteAuthorizationProvider(args) = worklink("POST", "/associateWebsiteAuthorizationProvider", args)
+
 """
-    SignOutUser
+    SignOutUser()
 
 Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet.",
   "Username": "The name of the user."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 SignOutUser(args) = worklink("POST", "/signOutUser", args)
+
 """
-    UpdateIdentityProviderConfiguration
+    UpdateIdentityProviderConfiguration()
 
 Updates the identity provider configuration for the fleet.
 
-Required Parameters:
+Required Parameters
 {
   "IdentityProviderType": "The type of identity provider.",
   "FleetArn": "The ARN of the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "IdentityProviderSamlMetadata": "The SAML metadata document provided by the customer’s identity provider. The existing IdentityProviderSamlMetadata is unset if null is passed."
 }
-
 """
-
 UpdateIdentityProviderConfiguration(args) = worklink("POST", "/updateIdentityProviderConfiguration", args)
+
 """
-    DescribeAuditStreamConfiguration
+    DescribeAuditStreamConfiguration()
 
 Describes the configuration for delivering audit streams to the customer account.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeAuditStreamConfiguration(args) = worklink("POST", "/describeAuditStreamConfiguration", args)
+
 """
-    CreateFleet
+    CreateFleet()
 
 Creates a fleet. A fleet consists of resources and the configuration that delivers associated websites to authorized users who download and set up the Amazon WorkLink app.
 
-Required Parameters:
+Required Parameters
 {
   "FleetName": "A unique name for the fleet."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "DisplayName": "The fleet name to display.",
   "OptimizeForEndUserLocation": "The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region."
 }
-
 """
-
 CreateFleet(args) = worklink("POST", "/createFleet", args)
+
 """
-    DescribeCompanyNetworkConfiguration
+    DescribeCompanyNetworkConfiguration()
 
 Describes the networking configuration to access the internal websites associated with the specified fleet.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeCompanyNetworkConfiguration(args) = worklink("POST", "/describeCompanyNetworkConfiguration", args)
+
 """
-    DescribeIdentityProviderConfiguration
+    DescribeIdentityProviderConfiguration()
 
 Describes the identity provider configuration of the specified fleet.
 
-Required Parameters:
+Required Parameters
 {
   "FleetArn": "The ARN of the fleet."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeIdentityProviderConfiguration(args) = worklink("POST", "/describeIdentityProviderConfiguration", args)

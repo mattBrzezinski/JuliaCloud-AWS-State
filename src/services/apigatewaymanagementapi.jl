@@ -2,54 +2,38 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: apigatewaymanagementapi
 
 """
-    GetConnection
+    GetConnection()
 
 Get information about the connection with the provided id.
 
-Required Parameters:
+Required Parameters
 {
   "ConnectionId": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetConnection(args) = apigatewaymanagementapi("GET", "/@connections/{connectionId}", args)
+
 """
-    PostToConnection
+    PostToConnection()
 
 Sends the provided data to the specified connection.
 
-Required Parameters:
+Required Parameters
 {
   "ConnectionId": "The identifier of the connection that a specific client is using.",
   "Data": "The data to be sent to the client specified by its connection id."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 PostToConnection(args) = apigatewaymanagementapi("POST", "/@connections/{connectionId}", args)
+
 """
-    DeleteConnection
+    DeleteConnection()
 
 Delete the connection with the provided id.
 
-Required Parameters:
+Required Parameters
 {
   "ConnectionId": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteConnection(args) = apigatewaymanagementapi("DELETE", "/@connections/{connectionId}", args)

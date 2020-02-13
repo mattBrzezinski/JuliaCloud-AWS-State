@@ -2,74 +2,56 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: iot_data_plane
 
 """
-    GetThingShadow
+    GetThingShadow()
 
 Gets the thing shadow for the specified thing. For more information, see GetThingShadow in the AWS IoT Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "thingName": "The name of the thing."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetThingShadow(args) = iot_data_plane("GET", "/things/{thingName}/shadow", args)
+
 """
-    DeleteThingShadow
+    DeleteThingShadow()
 
 Deletes the thing shadow for the specified thing. For more information, see DeleteThingShadow in the AWS IoT Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "thingName": "The name of the thing."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteThingShadow(args) = iot_data_plane("DELETE", "/things/{thingName}/shadow", args)
+
 """
-    Publish
+    Publish()
 
 Publishes state information. For more information, see HTTP Protocol in the AWS IoT Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "topic": "The name of the MQTT topic."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "qos": "The Quality of Service (QoS) level.",
   "payload": "The state information, in JSON format."
 }
-
 """
-
 Publish(args) = iot_data_plane("POST", "/topics/{topic}", args)
+
 """
-    UpdateThingShadow
+    UpdateThingShadow()
 
 Updates the thing shadow for the specified thing. For more information, see UpdateThingShadow in the AWS IoT Developer Guide.
 
-Required Parameters:
+Required Parameters
 {
   "thingName": "The name of the thing.",
   "payload": "The state information, in JSON format."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UpdateThingShadow(args) = iot_data_plane("POST", "/things/{thingName}/shadow", args)

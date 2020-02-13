@@ -2,73 +2,57 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: auto_scaling_plans
 
 """
-    CreateScalingPlan
+    CreateScalingPlan()
 
 Creates a scaling plan.
 
-Required Parameters:
+Required Parameters
 {
   "ScalingPlanName": "The name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes.",
   "ApplicationSource": "A CloudFormation stack or set of tags. You can create one scaling plan per application source.",
   "ScalingInstructions": "The scaling instructions."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateScalingPlan(args) = auto_scaling_plans("CreateScalingPlan", args)
+
 """
-    DeleteScalingPlan
+    DeleteScalingPlan()
 
 Deletes the specified scaling plan. Deleting a scaling plan deletes the underlying ScalingInstruction for all of the scalable resources that are covered by the plan. If the plan has launched resources or has scaling activities in progress, you must delete those resources separately.
 
-Required Parameters:
+Required Parameters
 {
   "ScalingPlanName": "The name of the scaling plan.",
   "ScalingPlanVersion": "The version number of the scaling plan."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteScalingPlan(args) = auto_scaling_plans("DeleteScalingPlan", args)
+
 """
-    DescribeScalingPlanResources
+    DescribeScalingPlanResources()
 
 Describes the scalable resources in the specified scaling plan.
 
-Required Parameters:
+Required Parameters
 {
   "ScalingPlanName": "The name of the scaling plan.",
   "ScalingPlanVersion": "The version number of the scaling plan."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of scalable resources to return. The value must be between 1 and 50. The default value is 50.",
   "NextToken": "The token for the next set of results."
 }
-
 """
-
 DescribeScalingPlanResources(args) = auto_scaling_plans("DescribeScalingPlanResources", args)
+
 """
-    DescribeScalingPlans
+    DescribeScalingPlans()
 
 Describes one or more of your scaling plans.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.",
   "ScalingPlanNames": "The names of the scaling plans (up to 10). If you specify application sources, you cannot specify scaling plan names.",
@@ -76,17 +60,16 @@ Optional Parameters:
   "ApplicationSources": "The sources for the applications (up to 10). If you specify scaling plan names, you cannot specify application sources.",
   "NextToken": "The token for the next set of results."
 }
-
 """
 DescribeScalingPlans() = auto_scaling_plans("DescribeScalingPlans")
 DescribeScalingPlans(args) = auto_scaling_plans("DescribeScalingPlans", args)
 
 """
-    GetScalingPlanResourceForecastData
+    GetScalingPlanResourceForecastData()
 
 Retrieves the forecast data for a scalable resource. Capacity forecasts are represented as predicted values, or data points, that are calculated using historical data points from a specified CloudWatch load metric. Data points are available for up to 56 days. 
 
-Required Parameters:
+Required Parameters
 {
   "ScalingPlanName": "The name of the scaling plan.",
   "StartTime": "The inclusive start time of the time range for the forecast data to get. The date and time can be at most 56 days before the current date and time. ",
@@ -97,32 +80,24 @@ Required Parameters:
   "ServiceNamespace": "The namespace of the AWS service.",
   "ScalableDimension": "The scalable dimension for the resource."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetScalingPlanResourceForecastData(args) = auto_scaling_plans("GetScalingPlanResourceForecastData", args)
+
 """
-    UpdateScalingPlan
+    UpdateScalingPlan()
 
 Updates the specified scaling plan. You cannot update a scaling plan if it is in the process of being created, updated, or deleted.
 
-Required Parameters:
+Required Parameters
 {
   "ScalingPlanName": "The name of the scaling plan.",
   "ScalingPlanVersion": "The version number of the scaling plan."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ApplicationSource": "A CloudFormation stack or set of tags.",
   "ScalingInstructions": "The scaling instructions."
 }
-
 """
-
 UpdateScalingPlan(args) = auto_scaling_plans("UpdateScalingPlan", args)

@@ -2,17 +2,16 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: mq
 
 """
-    UpdateBroker
+    UpdateBroker()
 
 Adds a pending configuration change to a broker.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Configuration": "A list of information about the configuration.",
   "EngineVersion": "The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
@@ -21,196 +20,152 @@ Optional Parameters:
   "Logs": "Enables Amazon CloudWatch logging for brokers.",
   "AutoMinorVersionUpgrade": "Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot."
 }
-
 """
-
 UpdateBroker(args) = mq("PUT", "/v1/brokers/{broker-id}", args)
+
 """
-    CreateUser
+    CreateUser()
 
 Creates an ActiveMQ user.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The unique ID that Amazon MQ generates for the broker.",
   "Username": "The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Password": "Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.",
   "ConsoleAccess": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
   "Groups": "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
 }
-
 """
-
 CreateUser(args) = mq("POST", "/v1/brokers/{broker-id}/users/{username}", args)
+
 """
-    DescribeBrokerEngineTypes
+    DescribeBrokerEngineTypes()
 
 Describe available engine types and versions.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
   "NextToken": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
   "EngineType": "Filter response by engine type."
 }
-
 """
 DescribeBrokerEngineTypes() = mq("GET", "/v1/broker-engine-types")
 DescribeBrokerEngineTypes(args) = mq("GET", "/v1/broker-engine-types", args)
 
 """
-    DescribeConfigurationRevision
+    DescribeConfigurationRevision()
 
 Returns the specified configuration revision for the specified configuration.
 
-Required Parameters:
+Required Parameters
 {
   "ConfigurationId": "The unique ID that Amazon MQ generates for the configuration.",
   "ConfigurationRevision": "The revision of the configuration."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeConfigurationRevision(args) = mq("GET", "/v1/configurations/{configuration-id}/revisions/{configuration-revision}", args)
+
 """
-    DescribeBroker
+    DescribeBroker()
 
 Returns information about the specified broker.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeBroker(args) = mq("GET", "/v1/brokers/{broker-id}", args)
+
 """
-    ListBrokers
+    ListBrokers()
 
 Returns a list of all brokers.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
   "NextToken": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
 }
-
 """
 ListBrokers() = mq("GET", "/v1/brokers")
 ListBrokers(args) = mq("GET", "/v1/brokers", args)
 
 """
-    UpdateUser
+    UpdateUser()
 
 Updates the information for an ActiveMQ user.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The unique ID that Amazon MQ generates for the broker.",
   "Username": "Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Password": "The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.",
   "ConsoleAccess": "Enables access to the the ActiveMQ Web Console for the ActiveMQ user.",
   "Groups": "The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
 }
-
 """
-
 UpdateUser(args) = mq("PUT", "/v1/brokers/{broker-id}/users/{username}", args)
+
 """
-    ListConfigurations
+    ListConfigurations()
 
 Returns a list of all configurations.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
   "NextToken": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
 }
-
 """
 ListConfigurations() = mq("GET", "/v1/configurations")
 ListConfigurations(args) = mq("GET", "/v1/configurations", args)
 
 """
-    DeleteUser
+    DeleteUser()
 
 Deletes an ActiveMQ user.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The unique ID that Amazon MQ generates for the broker.",
   "Username": "The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteUser(args) = mq("DELETE", "/v1/brokers/{broker-id}/users/{username}", args)
+
 """
-    CreateConfiguration
+    CreateConfiguration()
 
 Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "Tags": "Create tags when creating the configuration.",
   "EngineVersion": "Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html",
   "EngineType": "Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.",
   "Name": "Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long."
 }
-
 """
 CreateConfiguration() = mq("POST", "/v1/configurations")
 CreateConfiguration(args) = mq("POST", "/v1/configurations", args)
 
 """
-    DescribeBrokerInstanceOptions
+    DescribeBrokerInstanceOptions()
 
 Describe available broker instance options.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
   "NextToken": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.",
@@ -218,78 +173,64 @@ Optional Parameters:
   "StorageType": "Filter response by storage type.",
   "EngineType": "Filter response by engine type."
 }
-
 """
 DescribeBrokerInstanceOptions() = mq("GET", "/v1/broker-instance-options")
 DescribeBrokerInstanceOptions(args) = mq("GET", "/v1/broker-instance-options", args)
 
 """
-    ListUsers
+    ListUsers()
 
 Returns a list of all ActiveMQ users.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The unique ID that Amazon MQ generates for the broker."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.",
   "NextToken": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
 }
-
 """
-
 ListUsers(args) = mq("GET", "/v1/brokers/{broker-id}/users", args)
+
 """
-    UpdateConfiguration
+    UpdateConfiguration()
 
 Updates the specified configuration.
 
-Required Parameters:
+Required Parameters
 {
   "ConfigurationId": "The unique ID that Amazon MQ generates for the configuration."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "The description of the configuration.",
   "Data": "Required. The base64-encoded XML configuration."
 }
-
 """
-
 UpdateConfiguration(args) = mq("PUT", "/v1/configurations/{configuration-id}", args)
+
 """
-    DeleteBroker
+    DeleteBroker()
 
 Deletes a broker. Note: This API is asynchronous.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteBroker(args) = mq("DELETE", "/v1/brokers/{broker-id}", args)
+
 """
-    CreateBroker
+    CreateBroker()
 
 Creates a broker. Note: This API is asynchronous.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "PubliclyAccessible": "Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.",
   "MaintenanceWindowStartTime": "The parameters that determine the WeeklyStartTime.",
@@ -309,134 +250,103 @@ Optional Parameters:
   "StorageType": "The broker's storage type.",
   "Logs": "Enables Amazon CloudWatch logging for brokers."
 }
-
 """
 CreateBroker() = mq("POST", "/v1/brokers")
 CreateBroker(args) = mq("POST", "/v1/brokers", args)
 
 """
-    ListTags
+    ListTags()
 
 Lists tags for a resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) of the resource tag."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTags(args) = mq("GET", "/v1/tags/{resource-arn}", args)
+
 """
-    DeleteTags
+    DeleteTags()
 
 Removes a tag from a resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) of the resource tag.",
   "TagKeys": "An array of tag keys to delete"
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteTags(args) = mq("DELETE", "/v1/tags/{resource-arn}", args)
+
 """
-    CreateTags
+    CreateTags()
 
 Add a tag to a resource.
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "The Amazon Resource Name (ARN) of the resource tag."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Tags": "The key-value pair for the resource tag."
 }
-
 """
-
 CreateTags(args) = mq("POST", "/v1/tags/{resource-arn}", args)
+
 """
-    DescribeConfiguration
+    DescribeConfiguration()
 
 Returns information about the specified configuration.
 
-Required Parameters:
+Required Parameters
 {
   "ConfigurationId": "The unique ID that Amazon MQ generates for the configuration."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeConfiguration(args) = mq("GET", "/v1/configurations/{configuration-id}", args)
+
 """
-    ListConfigurationRevisions
+    ListConfigurationRevisions()
 
 Returns a list of all revisions for the specified configuration.
 
-Required Parameters:
+Required Parameters
 {
   "ConfigurationId": "The unique ID that Amazon MQ generates for the configuration."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.",
   "NextToken": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
 }
-
 """
-
 ListConfigurationRevisions(args) = mq("GET", "/v1/configurations/{configuration-id}/revisions", args)
+
 """
-    DescribeUser
+    DescribeUser()
 
 Returns information about an ActiveMQ user.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The unique ID that Amazon MQ generates for the broker.",
   "Username": "The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeUser(args) = mq("GET", "/v1/brokers/{broker-id}/users/{username}", args)
+
 """
-    RebootBroker
+    RebootBroker()
 
 Reboots a broker. Note: This API is asynchronous.
 
-Required Parameters:
+Required Parameters
 {
   "BrokerId": "The unique ID that Amazon MQ generates for the broker."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 RebootBroker(args) = mq("POST", "/v1/brokers/{broker-id}/reboot", args)

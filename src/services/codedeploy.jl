@@ -2,196 +2,148 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: codedeploy
 
 """
-    GetDeploymentTarget
+    GetDeploymentTarget()
 
  Returns information about a deployment target. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "targetId": " The unique ID of a deployment target. ",
   "deploymentId": " The unique ID of a deployment. "
 }
-
 """
 GetDeploymentTarget() = codedeploy("GetDeploymentTarget")
 GetDeploymentTarget(args) = codedeploy("GetDeploymentTarget", args)
 
 """
-    GetDeploymentConfig
+    GetDeploymentConfig()
 
 Gets information about a deployment configuration.
 
-Required Parameters:
+Required Parameters
 {
   "deploymentConfigName": "The name of a deployment configuration associated with the IAM user or AWS account."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetDeploymentConfig(args) = codedeploy("GetDeploymentConfig", args)
+
 """
-    DeleteApplication
+    DeleteApplication()
 
 Deletes an application.
 
-Required Parameters:
+Required Parameters
 {
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteApplication(args) = codedeploy("DeleteApplication", args)
+
 """
-    DeleteGitHubAccountToken
+    DeleteGitHubAccountToken()
 
 Deletes a GitHub account connection.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "tokenName": "The name of the GitHub account connection to delete."
 }
-
 """
 DeleteGitHubAccountToken() = codedeploy("DeleteGitHubAccountToken")
 DeleteGitHubAccountToken(args) = codedeploy("DeleteGitHubAccountToken", args)
 
 """
-    DeregisterOnPremisesInstance
+    DeregisterOnPremisesInstance()
 
 Deregisters an on-premises instance.
 
-Required Parameters:
+Required Parameters
 {
   "instanceName": "The name of the on-premises instance to deregister."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeregisterOnPremisesInstance(args) = codedeploy("DeregisterOnPremisesInstance", args)
+
 """
-    CreateApplication
+    CreateApplication()
 
 Creates an application.
 
-Required Parameters:
+Required Parameters
 {
   "applicationName": "The name of the application. This name must be unique with the applicable IAM user or AWS account."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "computePlatform": " The destination platform type for the deployment (Lambda, Server, or ECS).",
   "tags": " The metadata that you apply to CodeDeploy applications to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. "
 }
-
 """
-
 CreateApplication(args) = codedeploy("CreateApplication", args)
+
 """
-    TagResource
+    TagResource()
 
  Associates the list of tags in the input Tags parameter with the resource identified by the ResourceArn input parameter. 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": " The ARN of a resource, such as a CodeDeploy application or deployment group. ",
   "Tags": " A list of tags that TagResource associates with a resource. The resource is identified by the ResourceArn input parameter. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 TagResource(args) = codedeploy("TagResource", args)
+
 """
-    ListDeploymentConfigs
+    ListDeploymentConfigs()
 
 Lists the deployment configurations with the IAM user or AWS account.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "nextToken": "An identifier returned from the previous ListDeploymentConfigs call. It can be used to return the next set of deployment configurations in the list. "
 }
-
 """
 ListDeploymentConfigs() = codedeploy("ListDeploymentConfigs")
 ListDeploymentConfigs(args) = codedeploy("ListDeploymentConfigs", args)
 
 """
-    ListDeploymentGroups
+    ListDeploymentGroups()
 
 Lists the deployment groups for an application registered with the IAM user or AWS account.
 
-Required Parameters:
+Required Parameters
 {
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "nextToken": "An identifier returned from the previous list deployment groups call. It can be used to return the next set of deployment groups in the list."
 }
-
 """
-
 ListDeploymentGroups(args) = codedeploy("ListDeploymentGroups", args)
+
 """
-    ListGitHubAccountTokenNames
+    ListGitHubAccountTokenNames()
 
 Lists the names of stored connections to GitHub accounts.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "nextToken": "An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list. "
 }
-
 """
 ListGitHubAccountTokenNames() = codedeploy("ListGitHubAccountTokenNames")
 ListGitHubAccountTokenNames(args) = codedeploy("ListGitHubAccountTokenNames", args)
 
 """
-    ListDeployments
+    ListDeployments()
 
 Lists the deployments in a deployment group for an application registered with the IAM user or AWS account.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "createTimeRange": "A time range (start and end) for returning a subset of the list of deployments.",
   "includeOnlyStatuses": "A subset of deployments to list by status:   Created: Include created deployments in the resulting list.   Queued: Include queued deployments in the resulting list.   In Progress: Include in-progress deployments in the resulting list.   Succeeded: Include successful deployments in the resulting list.   Failed: Include failed deployments in the resulting list.   Stopped: Include stopped deployments in the resulting list.  ",
@@ -199,76 +151,59 @@ Optional Parameters:
   "nextToken": "An identifier returned from the previous list deployments call. It can be used to return the next set of deployments in the list.",
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account.  If applicationName is specified, then deploymentGroupName must be specified. If it is not specified, then deploymentGroupName must not be specified.  "
 }
-
 """
 ListDeployments() = codedeploy("ListDeployments")
 ListDeployments(args) = codedeploy("ListDeployments", args)
 
 """
-    RemoveTagsFromOnPremisesInstances
+    RemoveTagsFromOnPremisesInstances()
 
 Removes one or more tags from one or more on-premises instances.
 
-Required Parameters:
+Required Parameters
 {
   "instanceNames": "The names of the on-premises instances from which to remove tags.",
   "tags": "The tag key-value pairs to remove from the on-premises instances."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 RemoveTagsFromOnPremisesInstances(args) = codedeploy("RemoveTagsFromOnPremisesInstances", args)
+
 """
-    GetDeploymentInstance
+    GetDeploymentInstance()
 
 Gets information about an instance as part of a deployment.
 
-Required Parameters:
+Required Parameters
 {
   "instanceId": " The unique ID of an instance in the deployment group. ",
   "deploymentId": " The unique ID of a deployment. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetDeploymentInstance(args) = codedeploy("GetDeploymentInstance", args)
+
 """
-    GetDeployment
+    GetDeployment()
 
 Gets information about a deployment.   The content property of the appSpecContent object in the returned revision is always null. Use GetApplicationRevision and the sha256 property of the returned appSpecContent object to get the content of the deployment’s AppSpec file.  
 
-Required Parameters:
+Required Parameters
 {
   "deploymentId": " The unique ID of a deployment associated with the IAM user or AWS account. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetDeployment(args) = codedeploy("GetDeployment", args)
+
 """
-    CreateDeployment
+    CreateDeployment()
 
 Deploys an application revision through the specified deployment group.
 
-Required Parameters:
+Required Parameters
 {
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ignoreApplicationStopFailures": " If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic deployment lifecycle event to an instance fails, then the deployment continues to the next deployment lifecycle event. For example, if ApplicationStop fails, the deployment continues with DownloadBundle. If BeforeBlockTraffic fails, the deployment continues with BlockTraffic. If AfterBlockTraffic fails, the deployment continues with ApplicationStop.   If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, then a deployment to the next instance is attempted.   During a deployment, the AWS CodeDeploy agent runs the scripts specified for ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic in the AppSpec file from the previous successful deployment. (All other scripts are run from the AppSpec file in the current deployment.) If one of these scripts contains an error and does not run successfully, the deployment can fail.   If the cause of the failure is a script from the last successful deployment that will never run successfully, create a new deployment and use ignoreApplicationStopFailures to specify that the ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures should be ignored. ",
   "updateOutdatedInstancesOnly": " Indicates whether to deploy to all instances or only to instances that are not running the latest application revision. ",
@@ -280,244 +215,188 @@ Optional Parameters:
   "autoRollbackConfiguration": "Configuration information for an automatic rollback that is added when a deployment is created.",
   "targetInstances": " Information about the instances that belong to the replacement environment in a blue/green deployment. "
 }
-
 """
-
 CreateDeployment(args) = codedeploy("CreateDeployment", args)
+
 """
-    AddTagsToOnPremisesInstances
+    AddTagsToOnPremisesInstances()
 
 Adds tags to on-premises instances.
 
-Required Parameters:
+Required Parameters
 {
   "instanceNames": "The names of the on-premises instances to which to add tags.",
   "tags": "The tag key-value pairs to add to the on-premises instances. Keys and values are both required. Keys cannot be null or empty strings. Value-only tags are not allowed."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 AddTagsToOnPremisesInstances(args) = codedeploy("AddTagsToOnPremisesInstances", args)
+
 """
-    BatchGetDeploymentTargets
+    BatchGetDeploymentTargets()
 
  Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances. The maximum number of targets that can be returned is 25.  The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "targetIds": " The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. The maximum number of deployment target IDs you can specify is 25.    For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs, and their target type is instanceTarget.     For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions, and their target type is instanceTarget.     For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format &lt;clustername&gt;:&lt;servicename&gt;. Their target type is ecsTarget.   ",
   "deploymentId": " The unique ID of a deployment. "
 }
-
 """
 BatchGetDeploymentTargets() = codedeploy("BatchGetDeploymentTargets")
 BatchGetDeploymentTargets(args) = codedeploy("BatchGetDeploymentTargets", args)
 
 """
-    BatchGetOnPremisesInstances
+    BatchGetOnPremisesInstances()
 
 Gets information about one or more on-premises instances. The maximum number of on-premises instances that can be returned is 25.
 
-Required Parameters:
+Required Parameters
 {
   "instanceNames": "The names of the on-premises instances about which to get information. The maximum number of instance names you can specify is 25."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 BatchGetOnPremisesInstances(args) = codedeploy("BatchGetOnPremisesInstances", args)
+
 """
-    UntagResource
+    UntagResource()
 
  Disassociates a resource from a list of tags. The resource is identified by the ResourceArn input parameter. The tags are identfied by the list of keys in the TagKeys input parameter. 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": " The ARN that specifies from which resource to disassociate the tags with the keys in the TagKeys input paramter. ",
   "TagKeys": " A list of keys of Tag objects. The Tag objects identified by the keys are disassociated from the resource specified by the ResourceArn input parameter. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = codedeploy("UntagResource", args)
+
 """
-    GetApplicationRevision
+    GetApplicationRevision()
 
 Gets information about an application revision.
 
-Required Parameters:
+Required Parameters
 {
   "revision": "Information about the application revision to get, including type and location.",
   "applicationName": "The name of the application that corresponds to the revision."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetApplicationRevision(args) = codedeploy("GetApplicationRevision", args)
+
 """
-    SkipWaitTimeForInstanceTermination
+    SkipWaitTimeForInstanceTermination()
 
 In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is complete.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "deploymentId": " The unique ID of a blue/green deployment for which you want to skip the instance termination wait time. "
 }
-
 """
 SkipWaitTimeForInstanceTermination() = codedeploy("SkipWaitTimeForInstanceTermination")
 SkipWaitTimeForInstanceTermination(args) = codedeploy("SkipWaitTimeForInstanceTermination", args)
 
 """
-    ContinueDeployment
+    ContinueDeployment()
 
 For a blue/green deployment, starts the process of rerouting traffic from instances in the original environment to instances in the replacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.) 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "deploymentWaitType": " The status of the deployment's waiting period. READY_WAIT indicates the deployment is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic is shifted, but the original target is not terminated. ",
   "deploymentId": " The unique ID of a blue/green deployment for which you want to start rerouting traffic to the replacement environment. "
 }
-
 """
 ContinueDeployment() = codedeploy("ContinueDeployment")
 ContinueDeployment(args) = codedeploy("ContinueDeployment", args)
 
 """
-    DeleteDeploymentGroup
+    DeleteDeploymentGroup()
 
 Deletes a deployment group.
 
-Required Parameters:
+Required Parameters
 {
   "deploymentGroupName": "The name of a deployment group for the specified application.",
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDeploymentGroup(args) = codedeploy("DeleteDeploymentGroup", args)
+
 """
-    ListDeploymentTargets
+    ListDeploymentTargets()
 
  Returns an array of target IDs that are associated a deployment. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "targetFilters": " A key used to filter the returned targets. The two valid values are:    TargetStatus - A TargetStatus filter string can be Failed, InProgress, Pending, Ready, Skipped, Succeeded, or Unknown.     ServerInstanceLabel - A ServerInstanceLabel filter string can be Blue or Green.   ",
   "nextToken": " A token identifier returned from the previous ListDeploymentTargets call. It can be used to return the next set of deployment targets in the list. ",
   "deploymentId": " The unique ID of a deployment. "
 }
-
 """
 ListDeploymentTargets() = codedeploy("ListDeploymentTargets")
 ListDeploymentTargets(args) = codedeploy("ListDeploymentTargets", args)
 
 """
-    ListTagsForResource
+    ListTagsForResource()
 
  Returns a list of tags for the resource identified by a specified ARN. Tags are used to organize and categorize your CodeDeploy resources. 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": " The ARN of a CodeDeploy resource. ListTagsForResource returns all the tags associated with the resource that is identified by the ResourceArn. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "NextToken": "An identifier returned from the previous ListTagsForResource call. It can be used to return the next set of applications in the list."
 }
-
 """
-
 ListTagsForResource(args) = codedeploy("ListTagsForResource", args)
+
 """
-    StopDeployment
+    StopDeployment()
 
 Attempts to stop an ongoing deployment.
 
-Required Parameters:
+Required Parameters
 {
   "deploymentId": " The unique ID of a deployment. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "autoRollbackEnabled": " Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision. "
 }
-
 """
-
 StopDeployment(args) = codedeploy("StopDeployment", args)
+
 """
-    GetApplication
+    GetApplication()
 
 Gets information about an application.
 
-Required Parameters:
+Required Parameters
 {
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetApplication(args) = codedeploy("GetApplication", args)
+
 """
-    CreateDeploymentGroup
+    CreateDeploymentGroup()
 
 Creates a deployment group to which application revisions are deployed.
 
-Required Parameters:
+Required Parameters
 {
   "serviceRoleArn": "A service role ARN that allows AWS CodeDeploy to act on the user's behalf when interacting with AWS services.",
   "deploymentGroupName": "The name of a new deployment group for the specified application.",
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "alarmConfiguration": "Information to add about Amazon CloudWatch alarms when the deployment group is created.",
   "autoScalingGroups": "A list of associated Amazon EC2 Auto Scaling groups.",
@@ -534,156 +413,125 @@ Optional Parameters:
   "autoRollbackConfiguration": "Configuration information for an automatic rollback that is added when a deployment group is created.",
   "tags": " The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. "
 }
-
 """
-
 CreateDeploymentGroup(args) = codedeploy("CreateDeploymentGroup", args)
+
 """
-    UpdateApplication
+    UpdateApplication()
 
 Changes the name of an application.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "newApplicationName": "The new name to give the application.",
   "applicationName": "The current name of the application you want to change."
 }
-
 """
 UpdateApplication() = codedeploy("UpdateApplication")
 UpdateApplication(args) = codedeploy("UpdateApplication", args)
 
 """
-    ListDeploymentInstances
+    ListDeploymentInstances()
 
   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or AWS Lambda.    Lists the instance for a deployment associated with the IAM user or AWS account. 
 
-Required Parameters:
+Required Parameters
 {
   "deploymentId": " The unique ID of a deployment. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "instanceStatusFilter": "A subset of instances to list by status:   Pending: Include those instances with pending deployments.   InProgress: Include those instances where deployments are still in progress.   Succeeded: Include those instances with successful deployments.   Failed: Include those instances with failed deployments.   Skipped: Include those instances with skipped deployments.   Unknown: Include those instances with deployments in an unknown state.  ",
   "instanceTypeFilter": "The set of instances in a blue/green deployment, either those in the original environment (\"BLUE\") or those in the replacement environment (\"GREEN\"), for which you want to view instance information.",
   "nextToken": "An identifier returned from the previous list deployment instances call. It can be used to return the next set of deployment instances in the list."
 }
-
 """
-
 ListDeploymentInstances(args) = codedeploy("ListDeploymentInstances", args)
+
 """
-    PutLifecycleEventHookExecutionStatus
+    PutLifecycleEventHookExecutionStatus()
 
  Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed. 
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "status": "The result of a Lambda function that validates a deployment lifecycle event (Succeeded or Failed).",
   "lifecycleEventHookExecutionId": " The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook is specified in the hooks section of the AppSpec file. ",
   "deploymentId": " The unique ID of a deployment. Pass this ID to a Lambda function that validates a deployment lifecycle event. "
 }
-
 """
 PutLifecycleEventHookExecutionStatus() = codedeploy("PutLifecycleEventHookExecutionStatus")
 PutLifecycleEventHookExecutionStatus(args) = codedeploy("PutLifecycleEventHookExecutionStatus", args)
 
 """
-    ListApplications
+    ListApplications()
 
 Lists the applications registered with the IAM user or AWS account.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "nextToken": "An identifier returned from the previous list applications call. It can be used to return the next set of applications in the list."
 }
-
 """
 ListApplications() = codedeploy("ListApplications")
 ListApplications(args) = codedeploy("ListApplications", args)
 
 """
-    BatchGetApplications
+    BatchGetApplications()
 
 Gets information about one or more applications. The maximum number of applications that can be returned is 25.
 
-Required Parameters:
+Required Parameters
 {
   "applicationNames": "A list of application names separated by spaces. The maximum number of application names you can specify is 25."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 BatchGetApplications(args) = codedeploy("BatchGetApplications", args)
+
 """
-    CreateDeploymentConfig
+    CreateDeploymentConfig()
 
  Creates a deployment configuration. 
 
-Required Parameters:
+Required Parameters
 {
   "deploymentConfigName": "The name of the deployment configuration to create."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "computePlatform": "The destination platform type for the deployment (Lambda, Server, or ECS).",
   "trafficRoutingConfig": "The configuration that specifies how the deployment traffic is routed.",
   "minimumHealthyHosts": "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value. The type parameter takes either of the following values:   HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.   FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.   The value parameter takes an integer. For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95."
 }
-
 """
-
 CreateDeploymentConfig(args) = codedeploy("CreateDeploymentConfig", args)
+
 """
-    BatchGetDeployments
+    BatchGetDeployments()
 
 Gets information about one or more deployments. The maximum number of deployments that can be returned is 25.
 
-Required Parameters:
+Required Parameters
 {
   "deploymentIds": " A list of deployment IDs, separated by spaces. The maximum number of deployment IDs you can specify is 25."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 BatchGetDeployments(args) = codedeploy("BatchGetDeployments", args)
+
 """
-    UpdateDeploymentGroup
+    UpdateDeploymentGroup()
 
 Changes information about a deployment group.
 
-Required Parameters:
+Required Parameters
 {
   "currentDeploymentGroupName": "The current name of the deployment group.",
   "applicationName": "The application name that corresponds to the deployment group to update."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "newDeploymentGroupName": "The new name of the deployment group, if you want to change it.",
   "alarmConfiguration": "Information to add or change about Amazon CloudWatch alarms when the deployment group is updated.",
@@ -701,152 +549,121 @@ Optional Parameters:
   "loadBalancerInfo": "Information about the load balancer used in a deployment.",
   "autoRollbackConfiguration": "Information for an automatic rollback configuration that is added or changed when a deployment group is updated."
 }
-
 """
-
 UpdateDeploymentGroup(args) = codedeploy("UpdateDeploymentGroup", args)
+
 """
-    RegisterApplicationRevision
+    RegisterApplicationRevision()
 
 Registers with AWS CodeDeploy a revision for the specified application.
 
-Required Parameters:
+Required Parameters
 {
   "revision": "Information about the application revision to register, including type and location.",
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "description": "A comment about the revision."
 }
-
 """
-
 RegisterApplicationRevision(args) = codedeploy("RegisterApplicationRevision", args)
+
 """
-    DeleteDeploymentConfig
+    DeleteDeploymentConfig()
 
 Deletes a deployment configuration.  A deployment configuration cannot be deleted if it is currently in use. Predefined configurations cannot be deleted. 
 
-Required Parameters:
+Required Parameters
 {
   "deploymentConfigName": "The name of a deployment configuration associated with the IAM user or AWS account."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteDeploymentConfig(args) = codedeploy("DeleteDeploymentConfig", args)
+
 """
-    ListOnPremisesInstances
+    ListOnPremisesInstances()
 
 Gets a list of names for one or more on-premises instances. Unless otherwise specified, both registered and deregistered on-premises instance names are listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "tagFilters": "The on-premises instance tags that are used to restrict the on-premises instance names returned.",
   "nextToken": "An identifier returned from the previous list on-premises instances call. It can be used to return the next set of on-premises instances in the list.",
   "registrationStatus": "The registration status of the on-premises instances:   Deregistered: Include deregistered on-premises instances in the resulting list.   Registered: Include registered on-premises instances in the resulting list.  "
 }
-
 """
 ListOnPremisesInstances() = codedeploy("ListOnPremisesInstances")
 ListOnPremisesInstances(args) = codedeploy("ListOnPremisesInstances", args)
 
 """
-    BatchGetDeploymentGroups
+    BatchGetDeploymentGroups()
 
 Gets information about one or more deployment groups.
 
-Required Parameters:
+Required Parameters
 {
   "deploymentGroupNames": "The names of the deployment groups.",
   "applicationName": "The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 BatchGetDeploymentGroups(args) = codedeploy("BatchGetDeploymentGroups", args)
+
 """
-    RegisterOnPremisesInstance
+    RegisterOnPremisesInstance()
 
 Registers an on-premises instance.  Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both. 
 
-Required Parameters:
+Required Parameters
 {
   "instanceName": "The name of the on-premises instance to register."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "iamUserArn": "The ARN of the IAM user to associate with the on-premises instance.",
   "iamSessionArn": "The ARN of the IAM session to associate with the on-premises instance."
 }
-
 """
-
 RegisterOnPremisesInstance(args) = codedeploy("RegisterOnPremisesInstance", args)
+
 """
-    BatchGetDeploymentInstances
+    BatchGetDeploymentInstances()
 
   This method works, but is deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of one or more instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. The maximum number of instances that can be returned is 25.
 
-Required Parameters:
+Required Parameters
 {
   "instanceIds": "The unique IDs of instances used in the deployment. The maximum number of instance IDs you can specify is 25.",
   "deploymentId": " The unique ID of a deployment. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 BatchGetDeploymentInstances(args) = codedeploy("BatchGetDeploymentInstances", args)
+
 """
-    GetOnPremisesInstance
+    GetOnPremisesInstance()
 
  Gets information about an on-premises instance. 
 
-Required Parameters:
+Required Parameters
 {
   "instanceName": " The name of the on-premises instance about which to get information. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetOnPremisesInstance(args) = codedeploy("GetOnPremisesInstance", args)
+
 """
-    ListApplicationRevisions
+    ListApplicationRevisions()
 
 Lists information about revisions for an application.
 
-Required Parameters:
+Required Parameters
 {
   "applicationName": " The name of an AWS CodeDeploy application associated with the IAM user or AWS account. "
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "deployed": " Whether to list revisions based on whether the revision is the target revision of an deployment group:    include: List revisions that are target revisions of a deployment group.   exclude: Do not list revisions that are target revisions of a deployment group.   ignore: List all revisions.  ",
   "sortBy": "The column name to use to sort the list results:   registerTime: Sort by the time the revisions were registered with AWS CodeDeploy.   firstUsedTime: Sort by the time the revisions were first used in a deployment.   lastUsedTime: Sort by the time the revisions were last used in a deployment.    If not specified or set to null, the results are returned in an arbitrary order. ",
@@ -855,43 +672,31 @@ Optional Parameters:
   "s3Bucket": " An Amazon S3 bucket name to limit the search for revisions.   If set to null, all of the user's buckets are searched. ",
   "nextToken": "An identifier returned from the previous ListApplicationRevisions call. It can be used to return the next set of applications in the list."
 }
-
 """
-
 ListApplicationRevisions(args) = codedeploy("ListApplicationRevisions", args)
+
 """
-    BatchGetApplicationRevisions
+    BatchGetApplicationRevisions()
 
 Gets information about one or more application revisions. The maximum number of application revisions that can be returned is 25.
 
-Required Parameters:
+Required Parameters
 {
   "revisions": "An array of RevisionLocation objects that specify information to get about the application revisions, including type and location. The maximum number of RevisionLocation objects you can specify is 25.",
   "applicationName": "The name of an AWS CodeDeploy application about which to get revision information."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 BatchGetApplicationRevisions(args) = codedeploy("BatchGetApplicationRevisions", args)
+
 """
-    GetDeploymentGroup
+    GetDeploymentGroup()
 
 Gets information about a deployment group.
 
-Required Parameters:
+Required Parameters
 {
   "deploymentGroupName": "The name of a deployment group for the specified application.",
   "applicationName": "The name of an AWS CodeDeploy application associated with the IAM user or AWS account."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetDeploymentGroup(args) = codedeploy("GetDeploymentGroup", args)

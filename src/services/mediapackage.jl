@@ -2,110 +2,87 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: mediapackage
 
 """
-    ListTagsForResource
+    ListTagsForResource()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 ListTagsForResource(args) = mediapackage("GET", "/tags/{resource-arn}", args)
+
 """
-    DescribeOriginEndpoint
+    DescribeOriginEndpoint()
 
 Gets details about an existing OriginEndpoint.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the OriginEndpoint."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeOriginEndpoint(args) = mediapackage("GET", "/origin_endpoints/{id}", args)
+
 """
-    ListChannels
+    ListChannels()
 
 Returns a collection of Channels.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "Upper bound on number of records to return.",
   "NextToken": "A token used to resume pagination from the end of a previous request."
 }
-
 """
 ListChannels() = mediapackage("GET", "/channels")
 ListChannels(args) = mediapackage("GET", "/channels", args)
 
 """
-    ListHarvestJobs
+    ListHarvestJobs()
 
 Returns a collection of HarvestJob records.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The upper bound on the number of records to return.",
   "NextToken": "A token used to resume pagination from the end of a previous request.",
   "IncludeChannelId": "When specified, the request will return only HarvestJobs associated with the given Channel ID.",
   "IncludeStatus": "When specified, the request will return only HarvestJobs in the given status."
 }
-
 """
 ListHarvestJobs() = mediapackage("GET", "/harvest_jobs")
 ListHarvestJobs(args) = mediapackage("GET", "/harvest_jobs", args)
 
 """
-    UpdateChannel
+    UpdateChannel()
 
 Updates an existing Channel.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the Channel to update."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "A short text description of the Channel."
 }
-
 """
-
 UpdateChannel(args) = mediapackage("PUT", "/channels/{id}", args)
+
 """
-    UpdateOriginEndpoint
+    UpdateOriginEndpoint()
 
 Updates an existing OriginEndpoint.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the OriginEndpoint to update."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ManifestName": "A short string that will be appended to the end of the Endpoint URL.",
   "Authorization": "",
@@ -119,36 +96,33 @@ Optional Parameters:
   "HlsPackage": "",
   "Origination": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint\nmay by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be\nrequested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination\n"
 }
-
 """
-
 UpdateOriginEndpoint(args) = mediapackage("PUT", "/origin_endpoints/{id}", args)
+
 """
-    CreateChannel
+    CreateChannel()
 
 Creates a new Channel.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the Channel. The ID must be unique within the region and it\ncannot be changed after a Channel is created.\n"
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Description": "A short text description of the Channel.",
   "Tags": ""
 }
-
 """
-
 CreateChannel(args) = mediapackage("POST", "/channels", args)
+
 """
-    CreateHarvestJob
+    CreateHarvestJob()
 
 Creates a new HarvestJob record.
 
-Required Parameters:
+Required Parameters
 {
   "StartTime": "The start of the time-window which will be harvested\n",
   "Id": "The ID of the HarvestJob. The ID must be unique within the region\nand it cannot be changed after the HarvestJob is submitted\n",
@@ -156,131 +130,95 @@ Required Parameters:
   "OriginEndpointId": "The ID of the OriginEndpoint that the HarvestJob will harvest from.\nThis cannot be changed after the HarvestJob is submitted.\n",
   "S3Destination": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 CreateHarvestJob(args) = mediapackage("POST", "/harvest_jobs", args)
+
 """
-    DeleteOriginEndpoint
+    DeleteOriginEndpoint()
 
 Deletes an existing OriginEndpoint.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the OriginEndpoint to delete."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteOriginEndpoint(args) = mediapackage("DELETE", "/origin_endpoints/{id}", args)
+
 """
-    DescribeChannel
+    DescribeChannel()
 
 Gets details about a Channel.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of a Channel."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeChannel(args) = mediapackage("GET", "/channels/{id}", args)
+
 """
-    DeleteChannel
+    DeleteChannel()
 
 Deletes an existing Channel.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the Channel to delete."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteChannel(args) = mediapackage("DELETE", "/channels/{id}", args)
+
 """
-    TagResource
+    TagResource()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "",
   "Tags": ""
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 TagResource(args) = mediapackage("POST", "/tags/{resource-arn}", args)
+
 """
-    DescribeHarvestJob
+    DescribeHarvestJob()
 
 Gets details about an existing HarvestJob.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the HarvestJob."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DescribeHarvestJob(args) = mediapackage("GET", "/harvest_jobs/{id}", args)
+
 """
-    UntagResource
+    UntagResource()
 
 
 
-Required Parameters:
+Required Parameters
 {
   "ResourceArn": "",
   "TagKeys": "The key(s) of tag to be deleted"
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 UntagResource(args) = mediapackage("DELETE", "/tags/{resource-arn}", args)
+
 """
-    CreateOriginEndpoint
+    CreateOriginEndpoint()
 
 Creates a new OriginEndpoint record.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the OriginEndpoint.  The ID must be unique within the region\nand it cannot be changed after the OriginEndpoint is created.\n",
   "ChannelId": "The ID of the Channel that the OriginEndpoint will be associated with.\nThis cannot be changed after the OriginEndpoint is created.\n"
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "ManifestName": "A short string that will be used as the filename of the OriginEndpoint URL (defaults to \"index\").",
   "Authorization": "",
@@ -295,61 +233,45 @@ Optional Parameters:
   "HlsPackage": "",
   "Origination": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint\nmay by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be\nrequested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination\n"
 }
-
 """
-
 CreateOriginEndpoint(args) = mediapackage("POST", "/origin_endpoints", args)
+
 """
-    RotateChannelCredentials
+    RotateChannelCredentials()
 
 Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the channel to update."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 RotateChannelCredentials(args) = mediapackage("PUT", "/channels/{id}/credentials", args)
+
 """
-    RotateIngestEndpointCredentials
+    RotateIngestEndpointCredentials()
 
 Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
 
-Required Parameters:
+Required Parameters
 {
   "Id": "The ID of the channel the IngestEndpoint is on.",
   "IngestEndpointId": "The id of the IngestEndpoint whose credentials should be rotated"
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 RotateIngestEndpointCredentials(args) = mediapackage("PUT", "/channels/{id}/ingest_endpoints/{ingest_endpoint_id}/credentials", args)
+
 """
-    ListOriginEndpoints
+    ListOriginEndpoints()
 
 Returns a collection of OriginEndpoint records.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The upper bound on the number of records to return.",
   "NextToken": "A token used to resume pagination from the end of a previous request.",
   "ChannelId": "When specified, the request will return only OriginEndpoints associated with the given Channel ID."
 }
-
 """
 ListOriginEndpoints() = mediapackage("GET", "/origin_endpoints")
 ListOriginEndpoints(args) = mediapackage("GET", "/origin_endpoints", args)

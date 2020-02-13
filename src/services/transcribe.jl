@@ -2,173 +2,141 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: transcribe
 
 """
-    GetTranscriptionJob
+    GetTranscriptionJob()
 
 Returns information about a transcription job. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptionFileUri field.
 
-Required Parameters:
+Required Parameters
 {
   "TranscriptionJobName": "The name of the job."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetTranscriptionJob(args) = transcribe("GetTranscriptionJob", args)
+
 """
-    GetVocabularyFilter
+    GetVocabularyFilter()
 
 Returns information about a vocabulary filter.
 
-Required Parameters:
+Required Parameters
 {
   "VocabularyFilterName": "The name of the vocabulary filter for which to return information."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetVocabularyFilter(args) = transcribe("GetVocabularyFilter", args)
+
 """
-    UpdateVocabularyFilter
+    UpdateVocabularyFilter()
 
 Updates a vocabulary filter with a new list of filtered words.
 
-Required Parameters:
+Required Parameters
 {
   "VocabularyFilterName": "The name of the vocabulary filter to update."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Words": "The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. If you provide a list of words in the Words parameter, you can't use the VocabularyFilterFileUri parameter.",
   "VocabularyFilterFileUri": "The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. The specified file must be less than 50 KB of UTF-8 characters. If you provide the location of a list of words in the VocabularyFilterFileUri parameter, you can't use the Words parameter."
 }
-
 """
-
 UpdateVocabularyFilter(args) = transcribe("UpdateVocabularyFilter", args)
+
 """
-    DeleteVocabularyFilter
+    DeleteVocabularyFilter()
 
 Removes a vocabulary filter.
 
-Required Parameters:
+Required Parameters
 {
   "VocabularyFilterName": "The name of the vocabulary filter to remove."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteVocabularyFilter(args) = transcribe("DeleteVocabularyFilter", args)
+
 """
-    CreateVocabulary
+    CreateVocabulary()
 
 Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. 
 
-Required Parameters:
+Required Parameters
 {
   "LanguageCode": "The language code of the vocabulary entries.",
   "VocabularyName": "The name of the vocabulary. The name must be unique within an AWS account. The name is case-sensitive."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Phrases": "An array of strings that contains the vocabulary entries. ",
   "VocabularyFileUri": "The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is    https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;   For example:  https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom Vocabularies."
 }
-
 """
-
 CreateVocabulary(args) = transcribe("CreateVocabulary", args)
+
 """
-    ListTranscriptionJobs
+    ListTranscriptionJobs()
 
 Lists transcription jobs with the specified status.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of jobs to return in the response. If there are fewer results in the list, this response contains only the actual results.",
   "NextToken": "If the result of the previous request to ListTranscriptionJobs was truncated, include the NextToken to fetch the next set of jobs.",
   "Status": "When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date. ",
   "JobNameContains": "When specified, the jobs returned in the list are limited to jobs whose name contains the specified string."
 }
-
 """
 ListTranscriptionJobs() = transcribe("ListTranscriptionJobs")
 ListTranscriptionJobs(args) = transcribe("ListTranscriptionJobs", args)
 
 """
-    UpdateVocabulary
+    UpdateVocabulary()
 
 Updates an existing vocabulary with new values. The UpdateVocabulary operation overwrites all of the existing information with the values that you provide in the request. 
 
-Required Parameters:
+Required Parameters
 {
   "LanguageCode": "The language code of the vocabulary entries.",
   "VocabularyName": "The name of the vocabulary to update. The name is case-sensitive."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Phrases": "An array of strings containing the vocabulary entries.",
   "VocabularyFileUri": "The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is    https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;   For example:  https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom Vocabularies."
 }
-
 """
-
 UpdateVocabulary(args) = transcribe("UpdateVocabulary", args)
+
 """
-    ListVocabularyFilters
+    ListVocabularyFilters()
 
 Gets information about vocabulary filters.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of filters to return in the response. If there are fewer results in the list, this response contains only the actual results.",
   "NameContains": "Filters the response so that it only contains vocabulary filters whose name contains the specified string.",
   "NextToken": "If the result of the previous request to ListVocabularyFilters was truncated, include the NextToken to fetch the next set of collections."
 }
-
 """
 ListVocabularyFilters() = transcribe("ListVocabularyFilters")
 ListVocabularyFilters(args) = transcribe("ListVocabularyFilters", args)
 
 """
-    StartTranscriptionJob
+    StartTranscriptionJob()
 
 Starts an asynchronous job to transcribe speech to text. 
 
-Required Parameters:
+Required Parameters
 {
   "Media": "An object that describes the input media for a transcription job.",
   "LanguageCode": "The language code for the language used in the input media file.",
   "TranscriptionJobName": "The name of the job. Note that you can't use the strings \".\" or \"..\" by themselves as the job name. The name must also be unique within an AWS account."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "MediaSampleRateHertz": "The sample rate, in Hertz, of the audio track in the input media file.  If you do not specify the media sample rate, Amazon Transcribe determines the sample rate. If you specify the sample rate, it must match the sample rate detected by Amazon Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank and let Amazon Transcribe determine the sample rate.",
   "OutputBucketName": "The location where the transcription is stored. If you set the OutputBucketName, Amazon Transcribe puts the transcription in the specified S3 bucket. When you call the GetTranscriptionJob operation, the operation returns this location in the TranscriptFileUri field. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see Permissions Required for IAM User Roles. You can specify an AWS Key Management Service (KMS) key to encrypt the output of your transcription using the OutputEncryptionKMSKeyId parameter. If you don't specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket. If you don't set the OutputBucketName, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the TranscriptFileUri field. Use this URL to download the transcription.",
@@ -177,100 +145,76 @@ Optional Parameters:
   "MediaFormat": "The format of the input media file.",
   "Settings": "A Settings object that provides optional settings for a transcription job."
 }
-
 """
-
 StartTranscriptionJob(args) = transcribe("StartTranscriptionJob", args)
+
 """
-    DeleteVocabulary
+    DeleteVocabulary()
 
 Deletes a vocabulary from Amazon Transcribe. 
 
-Required Parameters:
+Required Parameters
 {
   "VocabularyName": "The name of the vocabulary to delete. "
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteVocabulary(args) = transcribe("DeleteVocabulary", args)
+
 """
-    DeleteTranscriptionJob
+    DeleteTranscriptionJob()
 
 Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
 
-Required Parameters:
+Required Parameters
 {
   "TranscriptionJobName": "The name of the transcription job to be deleted."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 DeleteTranscriptionJob(args) = transcribe("DeleteTranscriptionJob", args)
+
 """
-    ListVocabularies
+    ListVocabularies()
 
 Returns a list of vocabularies that match the specified criteria. If no criteria are specified, returns the entire list of vocabularies.
 
-Required Parameters:
-{}
-
-
-Optional Parameters:
+Optional Parameters
 {
   "MaxResults": "The maximum number of vocabularies to return in the response. If there are fewer results in the list, this response contains only the actual results.",
   "NameContains": "When specified, the vocabularies returned in the list are limited to vocabularies whose name contains the specified string. The search is case-insensitive, ListVocabularies will return both \"vocabularyname\" and \"VocabularyName\" in the response list.",
   "NextToken": "If the result of the previous request to ListVocabularies was truncated, include the NextToken to fetch the next set of jobs.",
   "StateEquals": "When specified, only returns vocabularies with the VocabularyState field equal to the specified state."
 }
-
 """
 ListVocabularies() = transcribe("ListVocabularies")
 ListVocabularies(args) = transcribe("ListVocabularies", args)
 
 """
-    CreateVocabularyFilter
+    CreateVocabularyFilter()
 
 Creates a new vocabulary filter that you can use to filter words, such as profane words, from the output of a transcription job.
 
-Required Parameters:
+Required Parameters
 {
   "VocabularyFilterName": "The vocabulary filter name. The name must be unique within the account that contains it.",
   "LanguageCode": "The language code of the words in the vocabulary filter. All words in the filter must be in the same language. The vocabulary filter can only be used with transcription jobs in the specified language."
 }
 
-
-Optional Parameters:
+Optional Parameters
 {
   "Words": "The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. If you provide a list of words in the Words parameter, you can't use the VocabularyFilterFileUri parameter.",
   "VocabularyFilterFileUri": "The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. The specified file must be less than 50 KB of UTF-8 characters. If you provide the location of a list of words in the VocabularyFilterFileUri parameter, you can't use the Words parameter."
 }
-
 """
-
 CreateVocabularyFilter(args) = transcribe("CreateVocabularyFilter", args)
+
 """
-    GetVocabulary
+    GetVocabulary()
 
 Gets information about a vocabulary. 
 
-Required Parameters:
+Required Parameters
 {
   "VocabularyName": "The name of the vocabulary to return information about. The name is case-sensitive."
 }
-
-
-Optional Parameters:
-{}
-
 """
-
 GetVocabulary(args) = transcribe("GetVocabulary", args)
