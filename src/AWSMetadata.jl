@@ -15,12 +15,18 @@ if the service SHA hash matches what we keep on file, if they differ then the AP
 updated and we need to re-generate low and high level wrappers for the service.
 """
 function parse_aws_metadata()
+    """
+
+    """
     function _process_service(file, version)
         data_changed = true
         push!(metadata, file["name"] => Dict("version" => version, "sha" => file["sha"]))
         push!(services_modified, file)
     end
 
+    """
+    Only get the latest version of a Service, we don't care for supporting older ones
+    """
     function _filter_latest_service_version(services)
         seen_services = String[]
         new_list = OrderedDict{String, Any}[]
@@ -37,6 +43,9 @@ function parse_aws_metadata()
         return new_list
     end
 
+    """
+    Get the service name and its version
+    """
     function _get_service_info(service)
         filename = join(split(service["name"], '.')[1:end-2],'.')
         filename = split(filename, '-')
@@ -46,6 +55,9 @@ function parse_aws_metadata()
         return (service_name, version)
     end
 
+    """
+    Get a list of all full Service files from the AWS SDK JS GitHub repository
+    """
     function _get_aws_sdk_js_files()
         headers = ["User-Agent" => "JuliaCloud/AWSCore.jl"]
         url = "https://api.github.com/repos/aws/aws-sdk-js/contents/apis"
@@ -65,6 +77,7 @@ function parse_aws_metadata()
     data_changed = false
     services_modified = OrderedDict{String, Any}[]
 
+    # Loop through all Service files, if its a new service or the SHA hashes do not match add them to a Dictionary to have their definitions (re)generated
     for file in files
         service_name, version = _get_service_info(file)
         filename = file["name"]
@@ -80,6 +93,7 @@ function parse_aws_metadata()
         end
     end
 
+    # Regenerate all low level definitions, and only modified/new high level definitions
     if data_changed
         _generate_low_level_wrapper(files)
         _generate_high_level_wrapper(services_modified)
@@ -151,10 +165,6 @@ function _generate_service_definition(service::Dict{String, Any})
 end
 
 function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
-    # TODO:
-    # - Create functions for query, rest-json, and json protocols
-    #   These only seem to differ from rest-xml with how their shapes are defined
-    #   We only need to pull the required uri params down for function definitions
     for service in services
         service_name = service["name"]
         println("Generating high level wrapper for $service_name")
@@ -178,6 +188,9 @@ function _generate_high_level_wrapper(services::Array{OrderedDict{String, Any}})
 end
 
 function _generate_wrapper(service_name::String, protocol::String, operations::Dict{String, Any}, shapes::Dict{String, Any})
+    """
+    Clean up the documentation by removing any HTML tags, and Julia escaping characters
+    """
     function _documentation_cleaning(documentation)
         documentation = replace(documentation, r"\<.*?\>" => "")
         documentation = replace(documentation, '$' => ' ')
@@ -186,6 +199,9 @@ function _generate_wrapper(service_name::String, protocol::String, operations::D
         return documentation
     end
 
+    """
+    Get the required and optional parameters for a given operation
+    """
     function _get_parameters(input, shapes)
         required_parameters = Dict()
         optional_parameters = Dict()
@@ -211,6 +227,9 @@ function _generate_wrapper(service_name::String, protocol::String, operations::D
         return (required_parameters, optional_parameters)
     end
 
+    """
+    Generate the high level definition for a given operation
+    """
     function _generate_operation_definition(name, protocol, method, request_uri, required_parameters, optional_parameters, documentation)
         required_param_keys = collect(keys(required_parameters))
 
@@ -221,6 +240,7 @@ function _generate_wrapper(service_name::String, protocol::String, operations::D
         $documentation
         """
 
+        # Add in the required parameters if applicable
         if !isempty(required_parameters)
             operation_definition = operation_definition * """
 
@@ -228,6 +248,7 @@ function _generate_wrapper(service_name::String, protocol::String, operations::D
             $(json(required_parameters, 2))"""
         end
 
+        # Add in the optional parameters if applicable
         if !isempty(optional_parameters)
             operation_definition = operation_definition * """
 
@@ -237,6 +258,7 @@ function _generate_wrapper(service_name::String, protocol::String, operations::D
 
         operation_definition = operation_definition * "\"\"\""
 
+        # Depending on the protocol type of the operation we need to generate a different definition
         if protocol in ["json", "query", "ec2"]
             if !isempty(required_parameters)
                 operation_definition = operation_definition * "\n$name(args) = $service_name(\"$name\", args)\n"
