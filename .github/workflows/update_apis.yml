@@ -1,14 +1,14 @@
-name: AWSMetadata
-
-# Change this to daily cron in prod
-# on: [push]
+name: AWS
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6 a.m. UTC 
 
 jobs:
-  AWSCorePrototype:
+  AWS:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        julia-version: [1.3.0]
+        julia-version: [1] 
         julia-arch: [x86]
         os: [ubuntu-latest]
     steps:
@@ -16,9 +16,10 @@ jobs:
         with:
           version: ${{ matrix.julia-version }}
       - name: UpdateAPI
-        run: julia -e 'import Pkg; Pkg.develop(Pkg.PackageSpec(url="https://github.com/mattBrzezinski/JuliaCloud-AWS-State.git")); using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata()'
+        # Run against the latest version, since everything merged into master will be tagged.
+        run: julia -e 'import Pkg; Pkg.add(Pkg.PackageSpec(url="https://github.com/JuliaCloud/AWS.jl.git", rev="master")); using AWS; AWS.AWSMetadata.parse_aws_metadata();'
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
-         path: "~/.julia/dev/AWSCorePrototype/"
+         path: "~/.julia/dev/AWS/"
          token: ${{ secrets.GITHUB_TOKEN }}
