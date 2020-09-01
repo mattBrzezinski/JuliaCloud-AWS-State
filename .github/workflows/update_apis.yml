@@ -16,10 +16,10 @@ jobs:
       - uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.julia-version }}
+      - uses: julia-actions/julia-buildpkg@latest
       - name: UpdateAPI
-        run: cd $GITHUB_WORKPLACE/JuliaCloud-AWS-State && sudo julia -e 'using AWSCorePrototype; AWSMetadata.parse_aws_metadata();'
+        run: sudo julia --project -e 'using AWSCorePrototype; AWSCorePrototype.AWSMetadata.parse_aws_metadata();'
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
-         path: "~/.julia/dev/AWS/"
          token: ${{ secrets.GITHUB_TOKEN }}
