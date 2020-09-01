@@ -2,6 +2,23 @@ include("../AWSCorePrototypeServices.jl")
 using .Services: xray
 
 """
+    ListTagsForResource()
+
+
+
+Required Parameters
+{
+  "ResourceARN": ""
+}
+
+Optional Parameters
+{
+  "NextToken": ""
+}
+"""
+ListTagsForResource(args) = xray("POST", "/ListTagsForResource", args)
+
+"""
     DeleteGroup()
 
 Deletes a group resource.
@@ -12,6 +29,7 @@ Optional Parameters
   "GroupName": "The case-sensitive name of the group."
 }
 """
+
 DeleteGroup() = xray("POST", "/DeleteGroup")
 DeleteGroup(args) = xray("POST", "/DeleteGroup", args)
 
@@ -38,6 +56,7 @@ Optional Parameters
   "GroupName": "The case-sensitive name of the group."
 }
 """
+
 GetGroup() = xray("POST", "/GetGroup")
 GetGroup(args) = xray("POST", "/GetGroup", args)
 
@@ -46,6 +65,7 @@ GetGroup(args) = xray("POST", "/GetGroup", args)
 
 Retrieves the current encryption configuration for X-Ray data.
 """
+
 GetEncryptionConfig() = xray("POST", "/EncryptionConfig")
 GetEncryptionConfig(args) = xray("POST", "/EncryptionConfig", args)
 
@@ -74,6 +94,11 @@ Creates a rule to control sampling behavior for instrumented applications. Servi
 Required Parameters
 {
   "SamplingRule": "The rule definition."
+}
+
+Optional Parameters
+{
+  "Tags": ""
 }
 """
 CreateSamplingRule(args) = xray("POST", "/CreateSamplingRule", args)
@@ -113,6 +138,32 @@ Optional Parameters
 }
 """
 PutTelemetryRecords(args) = xray("POST", "/TelemetryRecords", args)
+
+"""
+    TagResource()
+
+
+
+Required Parameters
+{
+  "ResourceARN": "",
+  "Tags": ""
+}
+"""
+TagResource(args) = xray("POST", "/TagResource", args)
+
+"""
+    UntagResource()
+
+
+
+Required Parameters
+{
+  "ResourceARN": "",
+  "TagKeys": ""
+}
+"""
+UntagResource(args) = xray("POST", "/UntagResource", args)
 
 """
     GetTimeSeriesServiceStatistics()
@@ -189,6 +240,7 @@ Required Parameters
 
 Optional Parameters
 {
+  "Tags": "",
   "FilterExpression": "The filter expression defining criteria by which to group traces."
 }
 """
@@ -204,6 +256,7 @@ Optional Parameters
   "NextToken": "Pagination token."
 }
 """
+
 GetSamplingRules() = xray("POST", "/GetSamplingRules")
 GetSamplingRules(args) = xray("POST", "/GetSamplingRules", args)
 
@@ -218,6 +271,7 @@ Optional Parameters
   "RuleName": "The name of the sampling rule. Specify a rule by either name or ARN, but not both."
 }
 """
+
 DeleteSamplingRule() = xray("POST", "/DeleteSamplingRule")
 DeleteSamplingRule(args) = xray("POST", "/DeleteSamplingRule", args)
 
@@ -231,6 +285,7 @@ Optional Parameters
   "NextToken": "Pagination token."
 }
 """
+
 GetGroups() = xray("POST", "/Groups")
 GetGroups(args) = xray("POST", "/Groups", args)
 
@@ -244,6 +299,7 @@ Optional Parameters
   "NextToken": "Pagination token."
 }
 """
+
 GetSamplingStatisticSummaries() = xray("POST", "/SamplingStatisticSummaries")
 GetSamplingStatisticSummaries(args) = xray("POST", "/SamplingStatisticSummaries", args)
 
@@ -301,5 +357,6 @@ Optional Parameters
   "GroupName": "The case-sensitive name of the group."
 }
 """
+
 UpdateGroup() = xray("POST", "/UpdateGroup")
 UpdateGroup(args) = xray("POST", "/UpdateGroup", args)

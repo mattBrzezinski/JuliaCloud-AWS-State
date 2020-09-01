@@ -325,5 +325,4 @@ function _generate_wrapper(service_name::String, protocol::String, operations::D
     return operation_definitions
 end
 
-parse_aws_metadata()
 end

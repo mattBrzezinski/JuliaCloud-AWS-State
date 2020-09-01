@@ -10,12 +10,14 @@ jobs:
         julia-arch: [x86]
         os: [ubuntu-latest]
     steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: mattBrzezinski/JuliaCloud-AWS-State
       - uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.julia-version }}
       - name: UpdateAPI
-        # Run against the latest version, since everything merged into master will be tagged.
-        run: sudo julia -e 'import Pkg; Pkg.add(Pkg.PackageSpec(url="https://github.com/JuliaCloud/AWS.jl.git", rev="master")); using AWS; AWS.AWSMetadata.parse_aws_metadata();'
+        run: cd $GITHUB_WORKPLACE/JuliaCloud-AWS-State && sudo julia -e 'using AWSCorePrototype; AWSMetadata.parse_aws_metadata();'
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:

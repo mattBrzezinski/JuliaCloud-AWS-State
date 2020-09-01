@@ -5,7 +5,8 @@ export @service, Services
 using AWSCore
 using Retry
 
-include("AWSCorePrototypeServices.jl")
+#include("AWSCorePrototypeServices.jl")
+include("AWSMetadata.jl")
 
 macro service(module_name::Symbol)
     service_name = "services/" * lowercase(string(module_name)) * ".jl"
