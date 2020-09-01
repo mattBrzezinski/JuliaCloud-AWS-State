@@ -11,8 +11,6 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
-        with:
-          repository: mattBrzezinski/JuliaCloud-AWS-State
       - uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.julia-version }}
