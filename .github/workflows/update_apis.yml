@@ -23,3 +23,7 @@ jobs:
         uses: peter-evans/create-pull-request@v2
         with:
          token: ${{ secrets.GITHUB_TOKEN }}
+         title: AWS API Definitions Updated
+         assignees: mattBrzezinski
+         author: Matt Brzezinski <mattBrzezinski@invenia.ca>
+         commit-message: AWS API Definitions Updated
